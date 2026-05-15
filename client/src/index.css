@@ -1,0 +1,256 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --primary: #E60000;
+  --primary-foreground: #FFFFFF;
+  --sidebar-primary: #E60000;
+  --sidebar-primary-foreground: #FFFFFF;
+  --chart-1: #FF4444;
+  --chart-2: #E60000;
+  --chart-3: #CC0000;
+  --chart-4: #990000;
+  --chart-5: #660000;
+  --radius: 0.65rem;
+  --background: #0A0A0A;
+  --foreground: #FFFFFF;
+  --card: #1A1A1A;
+  --card-foreground: #FFFFFF;
+  --popover: #1A1A1A;
+  --popover-foreground: #FFFFFF;
+  --secondary: #333333;
+  --secondary-foreground: #FFFFFF;
+  --muted: #555555;
+  --muted-foreground: #CCCCCC;
+  --accent: #E60000;
+  --accent-foreground: #FFFFFF;
+  --destructive: #E60000;
+  --destructive-foreground: #FFFFFF;
+  --border: #333333;
+  --input: #1A1A1A;
+  --ring: #E60000;
+  --sidebar: #0A0A0A;
+  --sidebar-foreground: #FFFFFF;
+  --sidebar-accent: #E60000;
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: #333333;
+  --sidebar-ring: #E60000;
+}
+
+.dark {
+  --primary: #E60000;
+  --primary-foreground: #FFFFFF;
+  --sidebar-primary: #E60000;
+  --sidebar-primary-foreground: #FFFFFF;
+  --background: #0A0A0A;
+  --foreground: #FFFFFF;
+  --card: #1A1A1A;
+  --card-foreground: #FFFFFF;
+  --popover: #1A1A1A;
+  --popover-foreground: #FFFFFF;
+  --secondary: #333333;
+  --secondary-foreground: #FFFFFF;
+  --muted: #555555;
+  --muted-foreground: #CCCCCC;
+  --accent: #E60000;
+  --accent-foreground: #FFFFFF;
+  --destructive: #E60000;
+  --destructive-foreground: #FFFFFF;
+  --border: #333333;
+  --input: #1A1A1A;
+  --ring: #E60000;
+  --chart-1: #FF4444;
+  --chart-2: #E60000;
+  --chart-3: #CC0000;
+  --chart-4: #990000;
+  --chart-5: #660000;
+  --sidebar: #0A0A0A;
+  --sidebar-foreground: #FFFFFF;
+  --sidebar-accent: #E60000;
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: #333333;
+  --sidebar-ring: #E60000;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  [type="reset"]:not(:disabled),
+  a[href],
+  select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  /**
+   * Custom container utility that centers content and adds responsive padding.
+   *
+   * This overrides Tailwind's default container behavior to:
+   * - Auto-center content (mx-auto)
+   * - Add responsive horizontal padding
+   * - Set max-width for large screens
+   *
+   * Usage: <div className="container">...</div>
+   *
+   * For custom widths, use max-w-* utilities directly:
+   * <div className="max-w-6xl mx-auto px-4">...</div>
+   */
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem; /* 16px - mobile padding */
+    padding-right: 1rem;
+  }
+
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem; /* 24px - tablet padding */
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2rem; /* 32px - desktop padding */
+      padding-right: 2rem;
+      max-width: 1280px; /* Standard content width */
+    }
+  }
+
+  /* Rock Industrial Typography */
+  .font-display {
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .font-heading {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+
+  .font-body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  /* Card Hover Effect */
+  .card-hover {
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .card-hover:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(230, 0, 0, 0.3);
+  }
+
+  /* Glitch Effect */
+  @keyframes glitch {
+    0% {
+      text-shadow: -2px 0 #E60000, 2px 0 #00FFFF;
+    }
+    20% {
+      text-shadow: -2px 0 #E60000, 2px 0 #00FFFF;
+    }
+    40% {
+      text-shadow: -2px 0 #00FFFF, 2px 0 #E60000;
+    }
+    60% {
+      text-shadow: -2px 0 #E60000, 2px 0 #00FFFF;
+    }
+    80% {
+      text-shadow: -2px 0 #00FFFF, 2px 0 #E60000;
+    }
+    100% {
+      text-shadow: -2px 0 #E60000, 2px 0 #00FFFF;
+    }
+  }
+
+  .glitch {
+    animation: glitch 0.3s infinite;
+  }
+
+  /* Red Overlay on Hover */
+  .overlay-red {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .overlay-red::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(230, 0, 0, 0.2);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .overlay-red:hover::before {
+    opacity: 1;
+  }
+}
