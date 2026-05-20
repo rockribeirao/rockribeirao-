@@ -66,8 +66,8 @@ const upcomingShows: Show[] = [
   { id: 35, name: "MOVE OVER", date: "20/11", month: "Novembro", time: "21h", venue: "Hard Rock Cafe" },
   { id: 36, name: "RADIO SHOW", date: "21/11", month: "Novembro", time: "21h", venue: "Hard Rock Cafe" },
   { id: 37, name: "DECK 66", subtitle: "ROCK DE PESO", date: "03/06", month: "Junho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/deck66-rock-de-peso-no-hard-rock-cafe-ribeirao-preto/3432663", image: "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public/Deck%2066.jpeg" },
-{ id: 38, name: "U2 COVER RIBEIRÃO", subtitle: "JOGO DO BRASIL + SHOW", date: "13/06", month: "Junho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/jogo-do-brasil-e-u2-cover-ribeirao-no-hard-rock-cafe-ribeirao/3432680", image: "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public/U2.jpeg" },
-{ id: 39, name: "FAIXA ADICIONAL", subtitle: "FLASHBACK", date: "19/06", month: "Junho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/jogo-do-brasil-e-faixa-adicional-flashback-no-hard-rock-cafe-ribeirao/3432705", image: "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public/Faixa%20Adicional.jpeg" },
+  { id: 38, name: "U2 COVER RIBEIRÃO", subtitle: "JOGO DO BRASIL + SHOW", date: "13/06", month: "Junho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/jogo-do-brasil-e-u2-cover-ribeirao-no-hard-rock-cafe-ribeirao/3432680", image: "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public/U2.jpeg" },
+  { id: 39, name: "FAIXA ADICIONAL", subtitle: "FLASHBACK", date: "19/06", month: "Junho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/jogo-do-brasil-e-faixa-adicional-flashback-no-hard-rock-cafe-ribeirao/3432705", image: "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public/Faixa%20Adicional.jpeg" },
 ];
 
 // Shows Realizados 2026 (Janeiro a Março)
