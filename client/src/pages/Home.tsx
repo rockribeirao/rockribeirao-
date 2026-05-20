@@ -87,6 +87,11 @@ const realizedShows2026: Show[] = [
   { id: 15, name: "FENÍCIA", subtitle: "ESPECIAL DIA DAS MULHERES", date: "08/03", month: "Março", time: "21h", venue: "Hard Rock Cafe", realized: true },
   { id: 16, name: "MR. DAM", subtitle: "ESPECIAL QUEEN", date: "14/03", month: "Março", time: "21h", venue: "Hard Rock Cafe", realized: true },
   { id: 17, name: "NIRVANA COVER BRASIL", subtitle: "NORTH STAR", date: "29/03", month: "Março", time: "21h", venue: "Hard Rock Cafe", realized: true, partnership: true, partnerName: "North Star Concerts" },
+  { id: 18, name: "ECHOS", subtitle: "PINK FLOYD EXPERIENCE", date: "09/05", month: "Maio", time: "21h", venue: "Hard Rock Cafe", realized: true, partnership: true, partnerName: "North Star Concerts" },
+  { id: 19, name: "FEVER", date: "09/05", month: "Maio", time: "21h", venue: "Hard Rock Cafe", realized: true, partnership: true, partnerName: "North Star Concerts" }, 
+  { id: 20, name: "HEY JUDE", date: "09/05", month: "Maio", time: "21h", venue: "Hard Rock Cafe", realized: true, partnership: true, partnerName: "North Star Concerts" }, 
+  { id: 21, name: "OZZMOZZY", subtitle: "OZZY COVER", date: "01/08", month: "Agosto", time: "21h", venue: "Hard Rock Cafe", realized: true, partnership: true, partnerName: "North Star Concerts" },
+  { id: 22, name: "PURPLE BRAZIL TRIBUTE", subtitle: "DEEP PURPLE", date: "19/09", month: "Setembro", time: "21h", venue: "Hard Rock Cafe", realized: true, partnership: true, partnerName: "North Star Concerts" },
 ];
 
 // Prova Social - Shows que já passaram
