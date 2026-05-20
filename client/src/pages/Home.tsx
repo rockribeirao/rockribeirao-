@@ -112,6 +112,7 @@ const northStarArtists = new Set([
   "MALVADA",
   "ECHOS",
   "OZZMOZZY",
+  "COLDPLAYERS",
 ]);
 
 const proofOfWork = [
