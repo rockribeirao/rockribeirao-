@@ -71,6 +71,15 @@ const upcomingShows: Show[] = [
   { id: 40, name: "JACK TEKILA", subtitle: "POP ROCK NACIONAL", date: "20/06", month: "Junho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/jack-tequila-os-hits-do-pop-rock-nacional-no-hard-rock-cafe-rp/3442280", image: "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public/JT-Jun.jpeg", partnership: true, partnerName: "Hotel JP" },
   { id: 41, name: "PARADISE", subtitle: "POP ROCK", date: "26/06", month: "Junho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/paradise-pop-rock-eletrizante-no-hard-rock-cafe-ribeirao-preto/3442288", image: "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public/Paradise-Jun.jpeg" },
   { id: 42, name: "BLACK JACK", subtitle: "A ENERGIA DO HARD ROCK", date: "27/06", month: "Junho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/black-jack-a-energia-do-hard-rock-no-hard-rock-cafe-ribeirao/3442174", image: "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public/BJ-Jun.jpeg", partnership: true, partnerName: "Matiz Hotel Vilabom" },
+  { id: 43, name: "LIVE BY NIGHT", date: "03/07", month: "Julho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/live-by-night-no-hard-rock-cafe-ribeirao-preto/3469487", image: "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public/Live%20By%20NIght202607.jpeg", partnership: true, partnerName: "Hotel JP" },
+  { id: 44, name: "BLAYMORPHED", subtitle: "TRIBUTO PEARL JAM", date: "04/07", month: "Julho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/blaymorphed-a-voz-de-eddie-vedder-no-hard-rock-cafe-ribeirao/3469786", image: "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public/Blay202607.jpeg", partnership: true, partnerName: "North Star" },
+  { id: 45, name: "HARD STAFF", subtitle: "CLASSIC ROCK", date: "10/07", month: "Julho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/hardstuff-classic-rock-no-hard-rock-cafe-ribeirao-preto/3469430", image: "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public/Hard%20Staff202607.jpeg" },
+  { id: 46, name: "RAMONES", subtitle: "BANDA TEENAGE LOBOTOMY", date: "12/07", month: "Julho", time: "19h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/teenage-lobotomy-dia-mundial-do-rock-no-hard-rock-cafe-ribeirao/3469799", image: "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public/Ramones202607.jpeg", partnership: true, partnerName: "North Star" },
+  { id: 47, name: "CAARU", subtitle: "ROCK XAMÂNICO", date: "17/07", month: "Julho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/caaru-rock-xamanico-no-hard-rock-cafe-ribeirao-preto/3469532", image: "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public/Caaru202607.jpeg" },
+  { id: 48, name: "AURAH", date: "18/07", month: "Julho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/aurah-rock-hits-no-hard-rock-cafe-ribeirao-preto/3469549", image: "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public/Aurah202607.jpeg", partnership: true, partnerName: "Hotel JP" },
+  { id: 49, name: "BLACK DOG", subtitle: "TRIBUTO LED ZEPPELIN - ATRAÇÃO INTERNACIONAL", date: "24/07", month: "Julho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/black-dog-tributo-led-zeppelin-no-hard-rock-cafe-ribeirao-preto/3469712", image: "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public/Black%20Dog202607.jpeg", partnership: true, partnerName: "Hotel JP" },
+  { id: 50, name: "OS VIRGENS", date: "25/07", month: "Julho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/os-virgens-uma-viagem-musical-no-hard-rock-cafe-ribeirao-preto/3469816", image: "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public/Os%20virgens202607.jpeg" },
+  { id: 51, name: "MACH 5", date: "31/07", month: "Julho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/mach5-os-classicos-do-pop-rock-no-hard-rock-cafe-ribeirao/3469728", image: "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public/Mach%205202607.jpeg", partnership: true, partnerName: "Taiwan Hotel" },
 ];
 
 // Shows Realizados 2026 (Janeiro a Março)
@@ -115,6 +124,8 @@ const northStarArtists = new Set([
   "ECHOS",
   "OZZMOZZY",
   "COLDPLAYERS",
+  "BLAYMORPHED",
+  
 ]);
 
 const proofOfWork = [
