@@ -79,6 +79,7 @@ const upcomingShows: Show[] = [
   { id: 49, name: "BLACK DOG", subtitle: "TRIBUTO LED ZEPPELIN - ATRAÇÃO INTERNACIONAL", date: "24/07", month: "Julho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/black-dog-tributo-led-zeppelin-no-hard-rock-cafe-ribeirao-preto/3469712", image: "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public/Black%20Dog202607.jpeg", partnership: true, partnerName: "Hotel JP" },
   { id: 50, name: "OS VIRGENS", date: "25/07", month: "Julho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/os-virgens-uma-viagem-musical-no-hard-rock-cafe-ribeirao-preto/3469816", image: "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public/Os%20virgens202607.jpeg" },
   { id: 51, name: "MACH 5", date: "31/07", month: "Julho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/mach5-os-classicos-do-pop-rock-no-hard-rock-cafe-ribeirao/3469728", image: "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public/Mach%205202607.jpeg", partnership: true, partnerName: "Taiwan Hotel" },
+{ id: 52, name: "MR DAM", subtitle: "ESPECIAL QUEEN", date: "11/07", month: "Julho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/mr-dam-especial-queen-no-hard-rock-cafe-ribeirao-preto/3490022", image: "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public/MrDam20260711.png" },
 ];
 
 // Shows Realizados 2026 (Janeiro a Março)
