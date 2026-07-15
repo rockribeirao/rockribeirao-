@@ -15,6 +15,7 @@ interface Show {
   realized?: boolean;
   partnership?: boolean;
   partnerName?: string;
+  hotelPartner?: string;
   link?: string;
   image?: string;
   free?: boolean;
@@ -81,10 +82,10 @@ const upcomingShows: Show[] = [
   { id: 51, name: "MACH 5", date: "31/07", month: "Julho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/mach5-os-classicos-do-pop-rock-no-hard-rock-cafe-ribeirao/3469728", image: "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public/Mach%205202607.jpeg", partnership: true, partnerName: "Taiwan Hotel" },
 { id: 52, name: "MR DAM", subtitle: "ESPECIAL QUEEN", date: "11/07", month: "Julho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/mr-dam-especial-queen-no-hard-rock-cafe-ribeirao-preto/3490022", image: "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public/MrDam20260711.png" },
 { id: 53, name: "WHISKEY RIVER", date: "01/08", month: "Agosto", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/whiskey-river-no-hard-rock-cafe-ribeirao-preto/3504573", image: "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public/Whiskey%20River%2020260801.jpeg" },
-{ id: 54, name: "ROCKERS23", subtitle: "ESPECIAL ROLLING STONES E BARÃO VERMELHO", date: "08/08", month: "Agosto", time: "21h30", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/rockers23-especial-rolling-stones-e-barao-vermelho-no-hard-rock-cafe-ribeirao/3504683", image: "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public/Rockers23%2020260808.jpeg", partnership: true, partnerName: "North Star" },
+{ id: 54, name: "ROCKERS23", subtitle: "ESPECIAL ROLLING STONES E BARÃO VERMELHO", date: "08/08", month: "Agosto", time: "21h30", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/rockers23-especial-rolling-stones-e-barao-vermelho-no-hard-rock-cafe-ribeirao/3504683", image: "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public/Rockers23%2020260808.jpeg", partnership: true, partnerName: "North Star", hotelPartner: "Hotel Transamerica" },
 { id: 55, name: "U2 COVER RIBEIRÃO", subtitle: "ONE NIGHT OF U2", date: "15/08", month: "Agosto", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/u2-cover-ribeirao-one-night-of-u2-no-hard-rock-cafe-ribeirao/3504601", image: "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public/U2%20Cover%20Ribeirao%2020260815.jpeg" },
 { id: 56, name: "PARADISE", subtitle: "POP ROCK", date: "28/08", month: "Agosto", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/paradise-coldplay-imagine-dragons-e-mais-no-hard-rock-cafe-rp/3504631", image: "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public/Paradise%2020260828.jpeg" },
-{ id: 57, name: "MANCHESTER", subtitle: "OASIS COVER", date: "29/08", month: "Agosto", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/manchester-oasis-cover-o-maior-tributo-ao-oasis-no-hrc-ribeirao/3504705", image: "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public/Manchester%20Oasis%2020260829.jpeg", partnership: true, partnerName: "North Star" },
+{ id: 57, name: "MANCHESTER", subtitle: "OASIS COVER", date: "29/08", month: "Agosto", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/manchester-oasis-cover-o-maior-tributo-ao-oasis-no-hrc-ribeirao/3504705", image: "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public/Manchester%20Oasis%2020260829.jpeg", partnership: true, partnerName: "North Star", hotelPartner: "Hotel JP" },
 ];
 
 // Shows Realizados 2026 (Janeiro a Março)
@@ -438,6 +439,11 @@ export default function Home() {
                         {show.partnership && (
                           <span className="text-xs font-heading bg-primary/20 text-primary px-2 py-1 whitespace-nowrap">
                             {show.partnerName}
+                          </span>
+                        )}
+                        {show.hotelPartner && (
+                          <span className="text-xs font-heading bg-yellow-500/20 text-yellow-400 px-2 py-1 whitespace-nowrap">
+                            {show.hotelPartner}
                           </span>
                         )}
                       </div>
