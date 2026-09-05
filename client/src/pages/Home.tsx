@@ -232,7 +232,7 @@ export default function Home() {
       <header className="sticky top-0 z-50 bg-background border-b border-border">
         <div className="container flex items-center justify-between py-4">
           <img
-            src="https://d2xsxph8kpxj0f.cloudfront.net/310519663433848442/RA9zFqFvaxS54sdTqfZAdD/LOGOCABECA_1b2ef8ec.png"
+            src="https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public/Logo%20do%20header.png"
             alt="Rock Ribeirão"
             className="h-16 w-auto object-contain"
           />
@@ -256,7 +256,7 @@ export default function Home() {
         <div className="container relative z-10 text-center">
           <div className="mb-8 flex justify-center">
             <img
-              src="https://d2xsxph8kpxj0f.cloudfront.net/310519663433848442/RA9zFqFvaxS54sdTqfZAdD/Designsemnome_1edd7884.webp"
+              src="https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public/Logo%20do%20hero.png"
               alt="Rock Ribeirão Logo"
               className="h-32 md:h-40 object-contain drop-shadow-lg"
             />
