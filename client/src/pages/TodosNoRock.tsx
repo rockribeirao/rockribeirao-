@@ -472,7 +472,7 @@ export default function TodosNoRock() {
         <div style={{ maxWidth: 960, margin: "0 auto" }}>
           <p style={{ ...s.secLabel, textAlign: "center", marginBottom: 20 }}>Edição Sertãozinho</p>
 
-          <div style={{ textAlign: "center", marginBottom: 32 }}>
+          <div style={{ display: "flex", justifyContent: "center", marginBottom: 32 }}>
             <img src={`${BASE}/rouanet.png`} alt="Lei Rouanet" style={{ height: 56, objectFit: "contain" }} />
           </div>
 
@@ -523,7 +523,7 @@ export default function TodosNoRock() {
 
       {/* FOOTER */}
       <footer style={s.footer}>
-        <img src={`${BASE}/Logo%20do%20header.png`} alt="Rock Ribeirão" style={{ height: 40, marginBottom: 12, opacity: 0.7 }} />
+        <img src={`${BASE}/Logo%20do%20header.png`} alt="Rock Ribeirão" style={{ display: "block", margin: "0 auto 12px", height: 40, opacity: 0.7 }} />
         <p style={{ fontSize: 12, color: "#a190c4", marginBottom: 4 }}>© 2026 Festival Todos no Rock · Rock Ribeirão Produções</p>
         <p style={{ fontSize: 12, color: "#a190c4", marginBottom: 12 }}>CNPJ: 48.549.855/0001-00</p>
         <a href={rockRibeiraoHref} style={{ fontSize: 12, color: "#a190c4", textDecoration: "none" }}>{footerLinkLabel}</a>
