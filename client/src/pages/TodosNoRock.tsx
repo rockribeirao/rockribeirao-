@@ -212,7 +212,7 @@ export default function TodosNoRock() {
       {/* HERO */}
       <section style={s.hero}>
         <img src={`${BASE}/mic.png`} alt="Ministério da Cultura" style={{ height: 34, objectFit: "contain", marginBottom: 14, opacity: 0.9 }} />
-        <p style={{ ...s.heroMin, marginBottom: 14 }}>apresenta</p>
+        <p style={{ ...s.heroMin, marginBottom: 14, color: "#ffffff" }}>apresenta</p>
         <img src={`${BASE}/tnr-logo-oficial.png`} alt="Festival Todos no Rock" style={s.heroImg} />
         <p style={s.heroSub}>Rock ao vivo, gratuito e itinerante no interior paulista</p>
         <div style={s.tagsWrap}>
