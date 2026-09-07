@@ -1,49 +1,56 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { AlertCircle, Home } from "lucide-react";
-import { useLocation } from "wouter";
+
+const FESTIVAL_HOSTS = ["todosnorock.com.br", "www.todosnorock.com.br"];
 
 export default function NotFound() {
-  const [, setLocation] = useLocation();
+  const isFestivalDomain =
+    typeof window !== "undefined" && FESTIVAL_HOSTS.includes(window.location.hostname);
 
-  const handleGoHome = () => {
-    setLocation("/");
-  };
+  const accent = isFestivalDomain ? "#b98af0" : "#cc2200";
+  const buttonText = isFestivalDomain ? "#140e20" : "#ffffff";
+  const bg = isFestivalDomain ? "#0a0415" : "#06020e";
+  const cardBg = isFestivalDomain ? "#140e20" : "#0a0415";
+  const border = isFestivalDomain ? "#3a2c52" : "#2a1050";
+  const muted = "#a190c4";
+  const homeHref = "/";
+  const homeLabel = isFestivalDomain ? "Voltar ao início do festival" : "Voltar ao início";
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100">
-      <Card className="w-full max-w-lg mx-4 shadow-lg border-0 bg-white/80 backdrop-blur-sm">
-        <CardContent className="pt-8 pb-8 text-center">
-          <div className="flex justify-center mb-6">
-            <div className="relative">
-              <div className="absolute inset-0 bg-red-100 rounded-full animate-pulse" />
-              <AlertCircle className="relative h-16 w-16 text-red-500" />
-            </div>
-          </div>
+    <div style={{
+      minHeight: "100vh", width: "100%", display: "flex", alignItems: "center",
+      justifyContent: "center", background: bg, padding: 20,
+    }}>
+      <div style={{
+        width: "100%", maxWidth: 480, background: cardBg, border: `0.5px solid ${border}`,
+        borderRadius: 16, padding: "48px 32px", textAlign: "center",
+      }}>
+        <div style={{ display: "flex", justifyContent: "center", marginBottom: 24 }}>
+          <AlertCircle size={56} color={accent} strokeWidth={1.5} />
+        </div>
 
-          <h1 className="text-4xl font-bold text-slate-900 mb-2">404</h1>
+        <h1 style={{ fontSize: 56, fontWeight: 700, color: accent, marginBottom: 4, lineHeight: 1 }}>404</h1>
 
-          <h2 className="text-xl font-semibold text-slate-700 mb-4">
-            Page Not Found
-          </h2>
+        <h2 style={{ fontSize: 20, fontWeight: 600, color: "#efe6fb", marginBottom: 16 }}>
+          Página não encontrada
+        </h2>
 
-          <p className="text-slate-600 mb-8 leading-relaxed">
-            Sorry, the page you are looking for doesn't exist.
-            <br />
-            It may have been moved or deleted.
-          </p>
+        <p style={{ fontSize: 15, color: muted, lineHeight: 1.6, marginBottom: 32 }}>
+          A página que você procura não existe.
+          <br />
+          Ela pode ter sido movida ou removida.
+        </p>
 
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Button
-              onClick={handleGoHome}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg"
-            >
-              <Home className="w-4 h-4 mr-2" />
-              Go Home
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+        <a
+          href={homeHref}
+          style={{
+            display: "inline-flex", alignItems: "center", gap: 8,
+            background: accent, color: buttonText, padding: "12px 24px",
+            borderRadius: 10, textDecoration: "none", fontWeight: 600, fontSize: 15,
+          }}
+        >
+          <Home size={16} /> {homeLabel}
+        </a>
+      </div>
     </div>
   );
 }
