@@ -497,6 +497,7 @@ export default function TodosNoRock() {
         <p style={{ fontSize: 12, color: "#a190c4", marginBottom: 4 }}>© 2026 Festival Todos no Rock · Rock Ribeirão Produções</p>
         <p style={{ fontSize: 12, color: "#a190c4", marginBottom: 12 }}>CNPJ: 48.549.855/0001-00</p>
         <a href={rockRibeiraoHref} style={{ fontSize: 12, color: "#a190c4", textDecoration: "none" }}>{footerLinkLabel}</a>
+        <p style={{ marginTop: 10 }}><a href="/acessibilidade" style={{ fontSize: 12, color: "#a190c4", textDecoration: "underline" }}>Declaração de Acessibilidade</a></p>
       </footer>
     </div>
   );
