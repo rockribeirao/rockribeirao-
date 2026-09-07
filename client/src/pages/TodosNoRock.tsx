@@ -69,6 +69,15 @@ const edicoes = [
 export default function TodosNoRock() {
   const [countdown, setCountdown] = useState({ dias: 0, horas: 0, min: 0, seg: 0 });
 
+  const isFestivalDomain =
+    typeof window !== "undefined" &&
+    ["todosnorock.com.br", "www.todosnorock.com.br"].includes(window.location.hostname);
+
+  // When this page is served on todosnorock.com.br, "/" resolves back to this
+  // same page on that domain (see App.tsx), so the link back to the main site
+  // needs to be an absolute URL instead of a relative one.
+  const rockRibeiraoHref = isFestivalDomain ? "https://www.rockribeirao.com.br" : "/";
+
   useEffect(() => {
     const script = document.createElement("script");
     script.type = "module";
@@ -82,10 +91,6 @@ export default function TodosNoRock() {
   // On the festival's own domain, use the festival's title and favicon
   // instead of the ones set for rockribeirao.com.br in index.html.
   useEffect(() => {
-    const isFestivalDomain =
-      typeof window !== "undefined" &&
-      ["todosnorock.com.br", "www.todosnorock.com.br"].includes(window.location.hostname);
-
     if (!isFestivalDomain) return;
 
     const previousTitle = document.title;
@@ -108,7 +113,7 @@ export default function TodosNoRock() {
       document.title = previousTitle;
       if (icon) icon.href = previousHref;
     };
-  }, []);
+  }, [isFestivalDomain]);
 
   useEffect(() => {
     const target = new Date("2026-09-26T13:00:00-03:00").getTime();
@@ -190,7 +195,7 @@ export default function TodosNoRock() {
     <div style={s.page}>
       {/* NAV */}
       <nav style={s.nav}>
-        <a href="/" style={s.navBack}><ArrowLeft size={16} /> rockribeirao.com.br</a>
+        <a href={rockRibeiraoHref} style={s.navBack}><ArrowLeft size={16} /> rockribeirao.com.br</a>
         <a href="https://www.instagram.com/todosnorock/" target="_blank" rel="noopener noreferrer" style={s.navIg}>
           <Instagram size={14} /> @todosnorock
         </a>
@@ -479,7 +484,7 @@ export default function TodosNoRock() {
         <img src={`${BASE}/Logo%20do%20header.png`} alt="Rock Ribeirão" style={{ height: 40, marginBottom: 12, opacity: 0.7 }} />
         <p style={{ fontSize: 12, color: "#3a1a60", marginBottom: 4 }}>© 2026 Festival Todos no Rock · Rock Ribeirão Produções</p>
         <p style={{ fontSize: 12, color: "#3a1a60", marginBottom: 12 }}>RST Soluções Ltda. · CNPJ: 48.549.855/0001-00</p>
-        <a href="/" style={{ fontSize: 12, color: "#6040a0", textDecoration: "none" }}>← Voltar para rockribeirao.com.br</a>
+        <a href={rockRibeiraoHref} style={{ fontSize: 12, color: "#6040a0", textDecoration: "none" }}>← Voltar para rockribeirao.com.br</a>
       </footer>
     </div>
   );
