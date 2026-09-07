@@ -79,6 +79,37 @@ export default function TodosNoRock() {
     };
   }, []);
 
+  // On the festival's own domain, use the festival's title and favicon
+  // instead of the ones set for rockribeirao.com.br in index.html.
+  useEffect(() => {
+    const isFestivalDomain =
+      typeof window !== "undefined" &&
+      ["todosnorock.com.br", "www.todosnorock.com.br"].includes(window.location.hostname);
+
+    if (!isFestivalDomain) return;
+
+    const previousTitle = document.title;
+    document.title = "Festival Todos no Rock";
+
+    const iconHref = "/favicon-todosnorock.ico";
+    const existingIcon = document.querySelector<HTMLLinkElement>("link[rel='icon']");
+    const previousHref = existingIcon?.getAttribute("href") ?? "/favicon.ico";
+
+    let icon = existingIcon;
+    if (!icon) {
+      icon = document.createElement("link");
+      icon.rel = "icon";
+      document.head.appendChild(icon);
+    }
+    icon.type = "image/x-icon";
+    icon.href = iconHref;
+
+    return () => {
+      document.title = previousTitle;
+      if (icon) icon.href = previousHref;
+    };
+  }, []);
+
   useEffect(() => {
     const target = new Date("2026-09-26T13:00:00-03:00").getTime();
     const tick = () => {
@@ -312,9 +343,10 @@ export default function TodosNoRock() {
             <p style={{ fontSize: 11, color: "#5030a0", marginBottom: 20 }}>
               ⚠️ A entrada ao festival é gratuita. O camarote é um produto pago à parte.
             </p>
-            <span style={{ display: "inline-block", background: "#3a1060", color: "#c090f0", fontSize: 13, padding: "8px 20px", borderRadius: 8, cursor: "pointer" }}>
-              Em breve no Sympla
-            </span>
+            <a href="https://www.sympla.com.br/evento/todos-no-rock-marquesa-open-bar/3569023" target="_blank" rel="noopener noreferrer"
+              style={{ display: "inline-block", background: "#6030b0", color: "#f0e0ff", fontSize: 13, fontWeight: 500, padding: "8px 20px", borderRadius: 8, textDecoration: "none" }}>
+              Comprar no Sympla →
+            </a>
           </div>
         </div>
       </section>
