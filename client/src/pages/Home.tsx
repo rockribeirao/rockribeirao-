@@ -487,6 +487,7 @@ export default function Home() {
           </div>
           <div className="pt-8 text-center text-sm" style={{ borderTop: "0.5px solid #1a0a2e", color: "#3a1a60" }}>
             <p>© 2026 Rock Ribeirão Produções. Todos os direitos reservados.</p>
+            <p className="mt-1">CNPJ: 48.549.855/0001-00</p>
           </div>
         </div>
       </footer>

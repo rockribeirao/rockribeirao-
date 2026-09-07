@@ -491,7 +491,7 @@ export default function TodosNoRock() {
       <footer style={s.footer}>
         <img src={`${BASE}/Logo%20do%20header.png`} alt="Rock Ribeirão" style={{ height: 40, marginBottom: 12, opacity: 0.7 }} />
         <p style={{ fontSize: 12, color: "#3a1a60", marginBottom: 4 }}>© 2026 Festival Todos no Rock · Rock Ribeirão Produções</p>
-        <p style={{ fontSize: 12, color: "#3a1a60", marginBottom: 12 }}>RST Soluções Ltda. · CNPJ: 48.549.855/0001-00</p>
+        <p style={{ fontSize: 12, color: "#3a1a60", marginBottom: 12 }}>CNPJ: 48.549.855/0001-00</p>
         <a href={rockRibeiraoHref} style={{ fontSize: 12, color: "#6040a0", textDecoration: "none" }}>{footerLinkLabel}</a>
       </footer>
     </div>
