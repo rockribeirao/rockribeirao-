@@ -6,6 +6,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import TodosNoRock from "./pages/TodosNoRock";
+import Acessibilidade from "./pages/Acessibilidade";
 
 const FESTIVAL_HOSTS = ["todosnorock.com.br", "www.todosnorock.com.br"];
 
@@ -15,6 +16,7 @@ function Router() {
   if (typeof window !== "undefined" && FESTIVAL_HOSTS.includes(window.location.hostname)) {
     return (
       <Switch>
+        <Route path={"/acessibilidade"} component={Acessibilidade} />
         <Route component={TodosNoRock} />
       </Switch>
     );
