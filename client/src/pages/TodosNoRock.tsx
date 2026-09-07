@@ -50,14 +50,17 @@ const lineup = [
   },
 ];
 
-const apoiadores = [
-  { src: `${BASE}/mic.png`, alt: "Ministério da Cultura", label: "" },
-  { src: `${BASE}/rouanet.png`, alt: "Lei Rouanet", label: "" },
-  { src: `${BASE}/governo-sertaozinho.png`, alt: "Governo de Sertãozinho", label: "" },
-  { src: `${BASE}/marquesa.png`, alt: "Cervejaria Marquesa", label: "" },
-  { src: `${BASE}/kiss.png`, alt: "Kiss FM 105.3", label: "" },
-  { src: `${BASE}/dritto.png`, alt: "Dritto Mídia", label: "" },
-  { src: `${BASE}/school.png`, alt: "School of Rock Ribeirão Preto", label: "" },
+const apoio = [
+  { src: `${BASE}/marquesa.png`, alt: "Cervejaria Marquesa" },
+  { src: `${BASE}/governo-sertaozinho.png`, alt: "Governo de Sertãozinho" },
+];
+const promocao = [
+  { src: `${BASE}/kiss.png`, alt: "Kiss FM 105.3" },
+  { src: `${BASE}/dritto.png`, alt: "Dritto Mídia" },
+];
+const realizacao = [
+  { src: `${BASE}/Logo%20do%20header.png`, alt: "Rock Ribeirão Produções" },
+  { src: `${BASE}/mic.png`, alt: "Ministério da Cultura" },
 ];
 
 const edicoes = [
@@ -150,16 +153,17 @@ export default function TodosNoRock() {
     heroImg: { width: 280, maxWidth: "90%", marginBottom: 24 },
     heroSub: { fontSize: 15, color: "#9070c0", marginBottom: 24 },
     tagsWrap: { display: "flex", flexWrap: "wrap", gap: 10, justifyContent: "center", marginBottom: 32 },
-    tag: { display: "flex", alignItems: "center", gap: 6, fontSize: 13, padding: "5px 14px", borderRadius: 20, border: "0.5px solid #5030a0", color: "#c4a0ff", background: "#1a0a2e" },
+    tag: { display: "flex", alignItems: "center", gap: 6, fontSize: 13, padding: "5px 14px", borderRadius: 20, border: "0.5px solid #a190c4", color: "#c4a0ff", background: "#1a0a2e" },
     tagGreen: { display: "flex", alignItems: "center", gap: 6, fontSize: 13, padding: "5px 14px", borderRadius: 20, border: "0.5px solid #0F6E56", color: "#5DCAA5", background: "#04342C" },
     btn: { background: "#6030b0", color: "#f0e0ff", fontSize: 14, fontWeight: 500, padding: "10px 28px", borderRadius: 8, textDecoration: "none", display: "inline-block" },
     countdown: { background: "#0d0618", borderTop: "2px solid #a190c4", borderBottom: "2px solid #a190c4", padding: "1.5rem", display: "flex", justifyContent: "center", gap: "2.5rem", flexWrap: "wrap" },
     countBox: { textAlign: "center" },
     countNum: { display: "block", fontSize: 44, fontWeight: 500, color: "#d0a0ff", lineHeight: 1 },
-    countLabel: { fontSize: 11, color: "#5030a0", letterSpacing: "0.08em" },
+    countLabel: { fontSize: 11, color: "#a190c4", letterSpacing: "0.08em" },
     section: { padding: "4rem 1.5rem", maxWidth: 960, margin: "0 auto" },
     sectionAlt: { background: "#0a0415", borderTop: "0.5px solid #2a1050", padding: "4rem 1.5rem" },
-    secLabel: { fontSize: 11, color: "#5030a0", textTransform: "uppercase" as const, letterSpacing: "0.1em", marginBottom: 12 },
+    secLabel: { fontSize: 11, color: "#a190c4", textTransform: "uppercase" as const, letterSpacing: "0.1em", marginBottom: 12 },
+    partnerGroupLabel: { fontSize: 12, color: "#a190c4", textTransform: "uppercase" as const, letterSpacing: "0.12em", textAlign: "center" as const, marginBottom: 14, fontWeight: 700 },
     secTitle: { fontSize: 28, fontWeight: 500, color: "#e0c0ff", marginBottom: 16, lineHeight: 1.2 },
     pillares: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 12 },
     pilar: { background: "#1a0a2e", border: "0.5px solid #a190c4", borderRadius: 10, padding: "1rem" },
@@ -296,7 +300,7 @@ export default function TodosNoRock() {
                 <span style={{ fontSize: 14, fontWeight: item.dj ? 400 : 600, color: item.dj ? "#a190c4" : "#f0e0ff" }}>
                   {item.dj ? <em>{item.nome}</em> : item.nome}
                 </span>
-                <span style={{ fontSize: 13, color: "#5030a0", textAlign: "right" }}>{item.duracao}</span>
+                <span style={{ fontSize: 13, color: "#a190c4", textAlign: "right" }}>{item.duracao}</span>
               </div>
             ))}
           </div>
@@ -355,7 +359,7 @@ export default function TodosNoRock() {
             <p style={{ fontSize: 13, color: "#8060a0", lineHeight: 1.6, marginBottom: 12 }}>
               Vista privilegiada do palco com open bar e open food da Cervejaria Marquesa.
             </p>
-            <p style={{ fontSize: 11, color: "#5030a0", marginBottom: 20 }}>
+            <p style={{ fontSize: 11, color: "#a190c4", marginBottom: 20 }}>
               ⚠️ A entrada ao festival é gratuita. O camarote é um produto pago à parte.
             </p>
             <a href="https://www.sympla.com.br/evento/todos-no-rock-marquesa-open-bar/3569023" target="_blank" rel="noopener noreferrer"
@@ -386,7 +390,7 @@ export default function TodosNoRock() {
               <div style={{ ...s.dot, background: e.done ? "#5DCAA5" : "#7F77DD" }} />
               <div style={{ flex: 1 }}>
                 <p style={{ fontSize: 15, fontWeight: 500, color: "#e0c0ff", marginBottom: 3 }}>{e.city}</p>
-                <p style={{ fontSize: 12, color: "#5030a0" }}>{e.meta}</p>
+                <p style={{ fontSize: 12, color: "#a190c4" }}>{e.meta}</p>
               </div>
               <span style={{ fontSize: 10, padding: "3px 10px", borderRadius: 20, background: e.done ? "#085041" : "#26215C", color: e.done ? "#5DCAA5" : "#AFA9EC" }}>
                 {e.status}
@@ -466,11 +470,37 @@ export default function TodosNoRock() {
       {/* PARCEIROS */}
       <section style={s.sectionAlt}>
         <div style={{ maxWidth: 960, margin: "0 auto" }}>
-          <p style={s.secLabel}>Parceiros · Edição Sertãozinho</p>
-          <div style={s.logoGrid}>
-            {apoiadores.map((logo, i) => (
-              <img key={i} src={logo.src} alt={logo.alt} style={s.logoImg} />
-            ))}
+          <p style={{ ...s.secLabel, textAlign: "center", marginBottom: 20 }}>Edição Sertãozinho</p>
+
+          <div style={{ textAlign: "center", marginBottom: 32 }}>
+            <img src={`${BASE}/rouanet.png`} alt="Lei Rouanet" style={{ height: 56, objectFit: "contain" }} />
+          </div>
+
+          <div style={{ marginBottom: 32 }}>
+            <p style={s.partnerGroupLabel}>Apoio</p>
+            <div style={s.logoGrid}>
+              {apoio.map((logo, i) => (
+                <img key={i} src={logo.src} alt={logo.alt} style={s.logoImg} />
+              ))}
+            </div>
+          </div>
+
+          <div style={{ marginBottom: 32 }}>
+            <p style={s.partnerGroupLabel}>Promoção</p>
+            <div style={s.logoGrid}>
+              {promocao.map((logo, i) => (
+                <img key={i} src={logo.src} alt={logo.alt} style={s.logoImg} />
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <p style={s.partnerGroupLabel}>Realização</p>
+            <div style={s.logoGrid}>
+              {realizacao.map((logo, i) => (
+                <img key={i} src={logo.src} alt={logo.alt} style={s.logoImg} />
+              ))}
+            </div>
           </div>
         </div>
       </section>
