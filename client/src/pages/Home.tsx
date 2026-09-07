@@ -212,6 +212,7 @@ export default function Home() {
         </div>
       </header>
 
+      <main>
       {/* Hero */}
       <section className="relative py-40 overflow-hidden" style={{
         backgroundImage: `linear-gradient(135deg, rgba(6,2,14,0.78) 0%, rgba(40,0,80,0.55) 50%, rgba(6,2,14,0.82) 100%), url(${BASE}/rr-hero-bg.jpg.jpg)`,
@@ -239,14 +240,14 @@ export default function Home() {
               COMPRAR INGRESSOS
             </a>
           </div>
-          <p className="text-sm mt-8" style={{ color: "#7040a0" }}>⭐ Experiências musicais autênticas em Ribeirão Preto e região</p>
+          <p className="text-sm mt-8" style={{ color: "#a190c4" }}>⭐ Experiências musicais autênticas em Ribeirão Preto e região</p>
         </div>
       </section>
 
       {/* FESTIVAL DESTAQUE */}
       <section style={{ background: "#12071f", borderTop: "2px solid #6030b0", borderBottom: "2px solid #6030b0", padding: "1.5rem" }}>
         <div className="container">
-          <p style={{ fontSize: 10, letterSpacing: "0.1em", color: "#7040a0", marginBottom: 12, display: "flex", alignItems: "center", gap: 8 }}>
+          <p style={{ fontSize: 10, letterSpacing: "0.1em", color: "#a190c4", marginBottom: 12, display: "flex", alignItems: "center", gap: 8 }}>
             <span style={{ display: "inline-block", width: 24, height: "0.5px", background: "#5030a0" }}></span>
             FESTIVAL
             <span style={{ display: "inline-block", width: 24, height: "0.5px", background: "#5030a0" }}></span>
@@ -256,7 +257,7 @@ export default function Home() {
               <img src={`${BASE}/Todos%20no%20Rock%2020260926.png`} alt="Festival Todos no Rock" style={{ width: "100%", height: "100%", objectFit: "cover", minHeight: 180 }} />
             </div>
             <div style={{ padding: "1.25rem", flex: 1, minWidth: 240 }}>
-              <p style={{ fontSize: 9, letterSpacing: "0.1em", color: "#6040a0", marginBottom: 6 }}>O MINISTÉRIO DA CULTURA APRESENTA</p>
+              <p style={{ fontSize: 9, letterSpacing: "0.1em", color: "#a190c4", marginBottom: 6 }}>O MINISTÉRIO DA CULTURA APRESENTA</p>
               <h3 style={{ fontSize: 20, fontWeight: 500, color: "#e0c0ff", marginBottom: 10 }}>Festival Todos no Rock</h3>
               <div style={{ display: "flex", flexDirection: "column", gap: 5, marginBottom: 12 }}>
                 <span style={{ fontSize: 13, color: "#8060a0" }}>📅 26 de setembro de 2026</span>
@@ -286,11 +287,12 @@ export default function Home() {
           <div className="mb-12 flex gap-3 overflow-x-auto pb-4">
             {months.map((month) => (
               <button key={month} onClick={() => setSelectedMonth(month)}
+                aria-pressed={selectedMonth === month}
                 className="px-6 py-3 font-heading text-sm whitespace-nowrap transition rounded-none"
                 style={{
                   background: selectedMonth === month ? "#cc2200" : "#1a0a2e",
                   color: selectedMonth === month ? "#fff" : "#b090e0",
-                  border: selectedMonth === month ? "none" : "0.5px solid #3a1a60",
+                  border: selectedMonth === month ? "none" : "0.5px solid #a190c4",
                 }}>
                 {month}
               </button>
@@ -299,9 +301,9 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {finalShows.map((show) => (
               <div key={show.id} className="group relative overflow-hidden flex flex-col h-full"
-                style={{ background: "#1a0a2e", border: "0.5px solid #3a1a60", borderRadius: 8, transition: "border-color 0.2s" }}
+                style={{ background: "#1a0a2e", border: "0.5px solid #a190c4", borderRadius: 8, transition: "border-color 0.2s" }}
                 onMouseEnter={e => (e.currentTarget.style.borderColor = "#cc2200")}
-                onMouseLeave={e => (e.currentTarget.style.borderColor = "#3a1a60")}>
+                onMouseLeave={e => (e.currentTarget.style.borderColor = "#a190c4")}>
                 {show.image && (
                   <div className="w-full h-80 flex items-center justify-center overflow-hidden" style={{ background: "#12071f" }}>
                     <img src={show.image} alt={show.name} className="w-full h-full object-contain group-hover:scale-105 transition-transform" />
@@ -312,7 +314,7 @@ export default function Home() {
                     <div className="flex items-start justify-between mb-3">
                       <div>
                         <h3 className="font-display text-lg mb-1 leading-tight" style={{ color: "#cc2200" }}>{show.name}</h3>
-                        {show.subtitle && <p className="font-heading text-xs" style={{ color: "#7040a0" }}>{show.subtitle}</p>}
+                        {show.subtitle && <p className="font-heading text-xs" style={{ color: "#a190c4" }}>{show.subtitle}</p>}
                       </div>
                       <div className="flex flex-col gap-1">
                         {show.free && !show.hideFreeBadge && (
@@ -392,7 +394,7 @@ export default function Home() {
         <div className="container">
           <div className="mb-12">
             <h2 className="font-display text-5xl mb-4" style={{ color: "#cc2200" }}>GALERIA</h2>
-            <p style={{ color: "#7040a0" }}>Crédito: Rafael Cautella</p>
+            <p style={{ color: "#a190c4" }}>Crédito: Rafael Cautella</p>
             <div className="w-24 h-1 mt-4" style={{ background: "linear-gradient(to right, #cc2200, #6030b0)" }} />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -413,10 +415,10 @@ export default function Home() {
         <div className="container max-w-2xl">
           <div className="text-center mb-12">
             <h2 className="font-display text-5xl mb-4" style={{ color: "#cc2200" }}>RECEBA ANTES OS PRÓXIMOS SHOWS</h2>
-            <p style={{ color: "#7040a0" }} className="text-lg">Inscreva-se na newsletter e fique por dentro de todas as novidades</p>
+            <p style={{ color: "#a190c4" }} className="text-lg">Inscreva-se na newsletter e fique por dentro de todas as novidades</p>
           </div>
           <form onSubmit={handleNewsletterSubmit} className="flex flex-col md:flex-row gap-3">
-            <Input type="email" placeholder="Seu email" value={email} onChange={(e) => setEmail(e.target.value)} className="flex-1 py-3 px-4 text-base" />
+            <Input type="email" placeholder="Seu email" aria-label="Seu email" value={email} onChange={(e) => setEmail(e.target.value)} className="flex-1 py-3 px-4 text-base" />
             <button type="submit" className="text-white font-heading py-3 px-8 transition text-lg font-bold whitespace-nowrap"
               style={{ background: "#cc2200" }}>
               QUERO RECEBER
@@ -438,7 +440,7 @@ export default function Home() {
       </section>
 
       {/* CTA Final */}
-      <section className="py-20" style={{ background: "rgba(96,48,176,0.1)", borderTop: "0.5px solid #3a1a60" }}>
+      <section className="py-20" style={{ background: "rgba(96,48,176,0.1)", borderTop: "0.5px solid #a190c4" }}>
         <div className="container text-center">
           <h2 className="font-display text-5xl mb-8" style={{ color: "#cc2200" }}>GARANTA SEU INGRESSO ANTES DE ESGOTAR</h2>
           <Button onClick={() => document.getElementById("shows")?.scrollIntoView({ behavior: "smooth" })}
@@ -467,25 +469,27 @@ export default function Home() {
         </div>
       </section>
 
+      </main>
+
       {/* Footer */}
       <footer id="contact" className="py-12" style={{ background: "#06020e", borderTop: "0.5px solid #1a0a2e" }}>
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-8">
             <div>
               <h3 className="font-display text-2xl mb-4" style={{ color: "#cc2200" }}>CONTATO</h3>
-              <a href="mailto:sac@rockribeirao.com.br" className="transition flex items-center gap-2" style={{ color: "#7040a0" }}>
+              <a href="mailto:sac@rockribeirao.com.br" className="transition flex items-center gap-2" style={{ color: "#a190c4" }}>
                 <Mail className="w-4 h-4" /> sac@rockribeirao.com.br
               </a>
             </div>
             <div>
               <h3 className="font-display text-2xl mb-4" style={{ color: "#cc2200" }}>REDES SOCIAIS</h3>
               <a href="https://instagram.com/rockribeirao" target="_blank" rel="noopener noreferrer"
-                className="transition flex items-center gap-2" style={{ color: "#7040a0" }}>
+                className="transition flex items-center gap-2" style={{ color: "#a190c4" }}>
                 <Instagram className="w-4 h-4" /> @rockribeirao
               </a>
             </div>
           </div>
-          <div className="pt-8 text-center text-sm" style={{ borderTop: "0.5px solid #1a0a2e", color: "#3a1a60" }}>
+          <div className="pt-8 text-center text-sm" style={{ borderTop: "0.5px solid #1a0a2e", color: "#a190c4" }}>
             <p>© 2026 Rock Ribeirão Produções. Todos os direitos reservados.</p>
             <p className="mt-1">CNPJ: 48.549.855/0001-00</p>
           </div>
