@@ -205,7 +205,7 @@ export default function Home() {
             <a href="#shows" style={{ color: "#cc2200" }} className="hover:opacity-80 transition">PRÓXIMOS</a>
             <a href="#proof" style={{ color: "#cc2200" }} className="hover:opacity-80 transition">CREDIBILIDADE</a>
             <a href="#gallery" style={{ color: "#cc2200" }} className="hover:opacity-80 transition">GALERIA</a>
-            <a href="https://todosnorock.com.br" target="_blank" rel="noopener noreferrer" style={{ color: "#b090e0", border: "0.5px solid #6030b0", padding: "4px 12px", borderRadius: 20, fontSize: 12 }} className="hover:opacity-80 transition">TODOS NO ROCK</a>
+            <a href="https://todosnorock.com.br" style={{ color: "#b090e0", border: "0.5px solid #6030b0", padding: "4px 12px", borderRadius: 20, fontSize: 12 }} className="hover:opacity-80 transition">TODOS NO ROCK</a>
             <a href="#about" style={{ color: "#cc2200" }} className="hover:opacity-80 transition">SOBRE</a>
             <a href="#contact" style={{ color: "#cc2200" }} className="hover:opacity-80 transition">CONTATO</a>
           </nav>
@@ -267,7 +267,7 @@ export default function Home() {
                 <span style={{ fontSize: 11, padding: "3px 10px", borderRadius: 20, border: "0.5px solid #0F6E56", color: "#5DCAA5", background: "#04342C" }}>Entrada gratuita</span>
                 <span style={{ fontSize: 11, padding: "3px 10px", borderRadius: 20, border: "0.5px solid #5030a0", color: "#b090e0", background: "#12071f" }}>Lei Rouanet</span>
               </div>
-              <a href="https://todosnorock.com.br" target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", background: "#6030b0", color: "#f0e0ff", fontSize: 13, fontWeight: 500, padding: "8px 20px", borderRadius: 8, textDecoration: "none" }}>
+              <a href="https://todosnorock.com.br" style={{ display: "inline-block", background: "#6030b0", color: "#f0e0ff", fontSize: 13, fontWeight: 500, padding: "8px 20px", borderRadius: 8, textDecoration: "none" }}>
                 Ver o festival completo →
               </a>
             </div>
