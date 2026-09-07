@@ -54,6 +54,9 @@ export default async function middleware(request: Request) {
     <meta property="og:title" content="Festival Todos no Rock — Sertãozinho 2026" />
     <meta property="og:description" content="Festival gratuito de rock em Sertãozinho, 26 de setembro de 2026. Viabilizado pela Lei Federal de Incentivo à Cultura (Lei Rouanet)." />
     <meta property="og:image" content="${FESTIVAL_OG_IMAGE}" />
+    <meta property="og:image:width" content="1424" />
+    <meta property="og:image:height" content="752" />
+    <meta property="og:image:alt" content="Festival Todos no Rock — Sertãozinho" />
     <meta property="og:url" content="https://todosnorock.com.br" />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
