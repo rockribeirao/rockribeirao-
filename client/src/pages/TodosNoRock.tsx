@@ -78,6 +78,14 @@ export default function TodosNoRock() {
   // needs to be an absolute URL instead of a relative one.
   const rockRibeiraoHref = isFestivalDomain ? "https://www.rockribeirao.com.br" : "/";
 
+  // "Voltar" only makes sense if the visitor actually came from rockribeirao.com.br.
+  // Someone landing directly on todosnorock.com.br (ad, social media, direct link)
+  // never left that site, so we frame the link as a credit/intro instead of a return.
+  const navLinkLabel = isFestivalDomain ? "Uma produção Rock Ribeirão" : "rockribeirao.com.br";
+  const footerLinkLabel = isFestivalDomain
+    ? "Conheça a Rock Ribeirão Produções →"
+    : "← Voltar para rockribeirao.com.br";
+
   useEffect(() => {
     const script = document.createElement("script");
     script.type = "module";
@@ -195,7 +203,7 @@ export default function TodosNoRock() {
     <div style={s.page}>
       {/* NAV */}
       <nav style={s.nav}>
-        <a href={rockRibeiraoHref} style={s.navBack}><ArrowLeft size={16} /> rockribeirao.com.br</a>
+        <a href={rockRibeiraoHref} style={s.navBack}>{!isFestivalDomain && <ArrowLeft size={16} />} {navLinkLabel}</a>
         <a href="https://www.instagram.com/todosnorock/" target="_blank" rel="noopener noreferrer" style={s.navIg}>
           <Instagram size={14} /> @todosnorock
         </a>
@@ -484,7 +492,7 @@ export default function TodosNoRock() {
         <img src={`${BASE}/Logo%20do%20header.png`} alt="Rock Ribeirão" style={{ height: 40, marginBottom: 12, opacity: 0.7 }} />
         <p style={{ fontSize: 12, color: "#3a1a60", marginBottom: 4 }}>© 2026 Festival Todos no Rock · Rock Ribeirão Produções</p>
         <p style={{ fontSize: 12, color: "#3a1a60", marginBottom: 12 }}>RST Soluções Ltda. · CNPJ: 48.549.855/0001-00</p>
-        <a href={rockRibeiraoHref} style={{ fontSize: 12, color: "#6040a0", textDecoration: "none" }}>← Voltar para rockribeirao.com.br</a>
+        <a href={rockRibeiraoHref} style={{ fontSize: 12, color: "#6040a0", textDecoration: "none" }}>{footerLinkLabel}</a>
       </footer>
     </div>
   );
