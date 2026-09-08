@@ -376,7 +376,7 @@ export default function TodosNoRock() {
           <p style={s.secLabel}>Estrutura do evento</p>
           <h2 style={s.secTitle}>Layout — Sertãozinho 2026</h2>
           <p style={{ fontSize: 13, color: "#a190c4", marginBottom: 24 }}>Av. Nelson Benedito Machado, 512 — Distrito Industrial, Sertãozinho — SP</p>
-          <img src={`${BASE}/tnr-layout-sertaozinho.jpg.jpg`} alt="Layout do evento" style={{ width: "100%", borderRadius: 10, border: "0.5px solid #a190c4" }} />
+          <img src={`${BASE}/tnr-layout-sertaozinho.jpg`} alt="Layout do evento" style={{ width: "100%", borderRadius: 10, border: "0.5px solid #a190c4" }} />
         </div>
       </section>
 
