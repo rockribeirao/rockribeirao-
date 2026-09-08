@@ -49,6 +49,7 @@ const upcomingShows: Show[] = [
   { id: 57, name: "MANCHESTER", subtitle: "OASIS COVER", date: "29/08", month: "Agosto", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/manchester-oasis-cover-o-maior-tributo-ao-oasis-no-hrc-ribeirao/3504705", image: `${BASE}/Manchester%20Oasis%2020260829.jpeg`, partnership: true, partnerName: "North Star", hotelPartner: "Hotel JP" },
   { id: 59, name: "MAD HOUDINI", subtitle: "ESPECIAL DURAN DURAN E A-HA", date: "05/09", month: "Setembro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/mad-houdini-especial-duran-duran-e-a-ha-no-hard-rock-cafe-ribeirao/3541489", image: `${BASE}/MadHoudini%2020260905.jpeg`, partnership: true, partnerName: "Hotel JP" },
   { id: 60, name: "OS VIRGENS", subtitle: "SHOW ACÚSTICO", date: "11/09", month: "Setembro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/os-virgens-show-acustico-no-hard-rock-cafe-ribeirao-preto/3541514", image: `${BASE}/Os%20Virgens%2020260911.jpeg` },
+  { id: 64, name: "FIUK III", subtitle: "SHOW DE RELANÇAMENTO", date: "12/09", month: "Setembro", time: "20h30", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/fiuk-iii-----hard-rock-cafe-ribeirao-preto/3505874", image: `${BASE}/FIUK%20III%2020260912.jpg`, partnership: true, partnerName: "North Star", hotelPartner: "Ibis Ribeirão Preto Shopping" },
   { id: 61, name: "DIRTY JACK", subtitle: "TRIBUTO AC/DC", date: "25/09", month: "Setembro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/dirty-jack-tributo-acdc-no-hard-rock-cafe-ribeirao-preto/3541500", image: `${BASE}/DirtyJack%2020260925.jpeg`, partnership: true, partnerName: "Taiwan Hotel" },
   { id: 62, name: "FESTIVAL TODOS NO ROCK", subtitle: "SCHOOL OF ROCK, ROTOR, DIRTY JACK, O ÉPICCO E SANTÍSSIMA TRINDADE", date: "26/09", month: "Setembro", time: "13h", venue: "Sertãozinho", image: `${BASE}/Todos%20no%20Rock%2020260926.png`, free: true, hideFreeBadge: true },
   { id: 63, name: "DYNAMITE", subtitle: "TRIBUTO SCORPIONS", date: "26/09", month: "Setembro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/dynamite-tributo-scorpions-no-hard-rock-cafe-ribeirao-preto/3541522", image: `${BASE}/Dynamite%2020260926.jpeg`, partnership: true, partnerName: "Hotel JP" },
@@ -248,9 +249,9 @@ export default function Home() {
       <section style={{ background: "#12071f", borderTop: "2px solid #6030b0", borderBottom: "2px solid #6030b0", padding: "1.5rem" }}>
         <div className="container">
           <p style={{ fontSize: 10, letterSpacing: "0.1em", color: "#a190c4", marginBottom: 12, display: "flex", alignItems: "center", gap: 8 }}>
-            <span style={{ display: "inline-block", width: 24, height: "0.5px", background: "#5030a0" }}></span>
+            <span style={{ display: "inline-block", width: 24, height: "0.5px", background: "#a190c4" }}></span>
             FESTIVAL
-            <span style={{ display: "inline-block", width: 24, height: "0.5px", background: "#5030a0" }}></span>
+            <span style={{ display: "inline-block", width: 24, height: "0.5px", background: "#a190c4" }}></span>
           </p>
           <div style={{ background: "#1a0a2e", border: "0.5px solid #6030b0", borderRadius: 12, overflow: "hidden", display: "flex", flexWrap: "wrap" }}>
             <div style={{ width: 180, flexShrink: 0, overflow: "hidden" }}>
@@ -266,7 +267,7 @@ export default function Home() {
               </div>
               <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 14 }}>
                 <span style={{ fontSize: 11, padding: "3px 10px", borderRadius: 20, border: "0.5px solid #0F6E56", color: "#5DCAA5", background: "#04342C" }}>Entrada gratuita</span>
-                <span style={{ fontSize: 11, padding: "3px 10px", borderRadius: 20, border: "0.5px solid #5030a0", color: "#b090e0", background: "#12071f" }}>Lei Rouanet</span>
+                <span style={{ fontSize: 11, padding: "3px 10px", borderRadius: 20, border: "0.5px solid #a190c4", color: "#b090e0", background: "#12071f" }}>Lei Rouanet</span>
               </div>
               <a href="https://todosnorock.com.br" style={{ display: "inline-block", background: "#6030b0", color: "#f0e0ff", fontSize: 13, fontWeight: 500, padding: "8px 20px", borderRadius: 8, textDecoration: "none" }}>
                 Ver o festival completo →
@@ -454,7 +455,7 @@ export default function Home() {
       {/* PARCEIROS */}
       <section style={{ background: "#0a0415", borderTop: "0.5px solid #2a1050", padding: "3rem 1.5rem" }}>
         <div className="container">
-          <p style={{ fontSize: 11, color: "#5030a0", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 24, textAlign: "center" }}>Parceiros e apoiadores</p>
+          <p style={{ fontSize: 11, color: "#a190c4", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 24, textAlign: "center" }}>Parceiros e apoiadores</p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 32, alignItems: "center", justifyContent: "center" }}>
             {[
               { src: `${BASE}/kiss.png`, alt: "Kiss FM 105.3" },
