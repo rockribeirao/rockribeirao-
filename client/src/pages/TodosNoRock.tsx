@@ -53,6 +53,11 @@ const lineup = [
 const apoio = [
   { src: `${BASE}/marquesa.png`, alt: "Cervejaria Marquesa" },
   { src: `${BASE}/governo-sertaozinho.png`, alt: "Governo de Sertãozinho" },
+  { src: `${BASE}/apoio-iron.png`, alt: "Iron Suplementos" },
+  { src: `${BASE}/apoio-memo.png`, alt: "Choppeiras Memo" },
+];
+const hotelOficial = [
+  { src: `${BASE}/hotel-comfort.png`, alt: "Comfort Hotel Sertãozinho" },
 ];
 const promocao = [
   { src: `${BASE}/kiss.png`, alt: "Kiss FM 105.3" },
@@ -480,6 +485,15 @@ export default function TodosNoRock() {
             <p style={s.partnerGroupLabel}>Apoio</p>
             <div style={s.logoGrid}>
               {apoio.map((logo, i) => (
+                <img key={i} src={logo.src} alt={logo.alt} style={s.logoImg} />
+              ))}
+            </div>
+          </div>
+
+          <div style={{ marginBottom: 32 }}>
+            <p style={s.partnerGroupLabel}>Hotel Oficial</p>
+            <div style={s.logoGrid}>
+              {hotelOficial.map((logo, i) => (
                 <img key={i} src={logo.src} alt={logo.alt} style={s.logoImg} />
               ))}
             </div>
