@@ -200,7 +200,7 @@ export default function TodosNoRock() {
     leiDesc: { fontSize: 12, color: "#a190c4", lineHeight: 1.5 },
     leiBanner: { background: "#12071f", border: "0.5px solid #a190c4", borderRadius: 8, padding: "1rem 1.25rem", fontSize: 13, color: "#a190c4", lineHeight: 1.6 },
     logoGrid: { display: "flex", flexWrap: "wrap" as const, gap: 24, alignItems: "center", justifyContent: "center", padding: "2rem 0" },
-    logoImg: { height: 40, maxWidth: 140, objectFit: "contain" as const, opacity: 0.85,  },
+    logoImg: { height: 56, maxWidth: 180, objectFit: "contain" as const, opacity: 0.95,  },
     igSection: { background: "#0a0415", borderTop: "0.5px solid #2a1050", padding: "4rem 1.5rem", textAlign: "center" as const },
     igBox: { background: "#1a0a2e", border: "0.5px solid #6030b0", borderRadius: 12, padding: "2rem", maxWidth: 500, margin: "0 auto" },
     igHandle: { fontSize: 22, fontWeight: 500, color: "#e0c0ff", marginBottom: 8 },
