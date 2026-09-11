@@ -51,17 +51,17 @@ const lineup = [
 ];
 
 const apoio = [
-  { src: `${BASE}/marquesa.png`, alt: "Cervejaria Marquesa", link: "https://www.instagram.com/marquesacervejaria/" },
-  { src: `${BASE}/governo-sertaozinho.png`, alt: "Governo de Sertãozinho" },
+  { src: `${BASE}/marquesa.png`, alt: "Cervejaria Marquesa", link: "https://www.instagram.com/marquesacervejaria/", height: 76 },
+  { src: `${BASE}/governo-sertaozinho.png`, alt: "Governo de Sertãozinho", height: 76 },
   { src: `${BASE}/apoio-iron.png`, alt: "Iron Suplementos", link: "https://www.instagram.com/iron.suplementos25/" },
-  { src: `${BASE}/apoio-memo.png`, alt: "Choppeiras Memo", link: "https://www.instagram.com/chopeirasmemo/" },
+  { src: `${BASE}/apoio-memo.png`, alt: "Choppeiras Memo", link: "https://www.instagram.com/chopeirasmemo/", height: 38 },
 ];
 const hotelOficial = [
   { src: `${BASE}/hotel-comfort.png`, alt: "Comfort Hotel Sertãozinho", link: "https://www.instagram.com/comfortsertaozinho/" },
 ];
 const promocao = [
-  { src: `${BASE}/kiss.png`, alt: "Kiss FM 105.3", link: "https://www.instagram.com/kissfmribeirao/" },
-  { src: `${BASE}/dritto.png`, alt: "Dritto Mídia", link: "https://www.instagram.com/drittomidiaooh/" },
+  { src: `${BASE}/kiss.png`, alt: "Kiss FM 105.3", link: "https://www.instagram.com/kissfmribeirao/", height: 76 },
+  { src: `${BASE}/dritto.png`, alt: "Dritto Mídia", link: "https://www.instagram.com/drittomidiaooh/", height: 38 },
 ];
 const realizacao = [
   { src: `${BASE}/Logo%20do%20header.png`, alt: "Rock Ribeirão Produções", link: "https://www.instagram.com/rockribeirao/" },
@@ -487,10 +487,10 @@ export default function TodosNoRock() {
               {apoio.map((logo, i) => (
                 logo.link ? (
                   <a key={i} href={logo.link} target="_blank" rel="noopener noreferrer">
-                    <img src={logo.src} alt={logo.alt} style={s.logoImg} />
+                    <img src={logo.src} alt={logo.alt} style={{ ...s.logoImg, height: logo.height || s.logoImg.height }} />
                   </a>
                 ) : (
-                  <img key={i} src={logo.src} alt={logo.alt} style={s.logoImg} />
+                  <img key={i} src={logo.src} alt={logo.alt} style={{ ...s.logoImg, height: logo.height || s.logoImg.height }} />
                 )
               ))}
             </div>
@@ -517,10 +517,10 @@ export default function TodosNoRock() {
               {promocao.map((logo, i) => (
                 logo.link ? (
                   <a key={i} href={logo.link} target="_blank" rel="noopener noreferrer">
-                    <img src={logo.src} alt={logo.alt} style={s.logoImg} />
+                    <img src={logo.src} alt={logo.alt} style={{ ...s.logoImg, height: logo.height || s.logoImg.height }} />
                   </a>
                 ) : (
-                  <img key={i} src={logo.src} alt={logo.alt} style={s.logoImg} />
+                  <img key={i} src={logo.src} alt={logo.alt} style={{ ...s.logoImg, height: logo.height || s.logoImg.height }} />
                 )
               ))}
             </div>
