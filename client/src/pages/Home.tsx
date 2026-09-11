@@ -51,7 +51,7 @@ const upcomingShows: Show[] = [
   { id: 60, name: "OS VIRGENS", subtitle: "SHOW ACÚSTICO", date: "11/09", month: "Setembro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/os-virgens-show-acustico-no-hard-rock-cafe-ribeirao-preto/3541514", image: `${BASE}/Os%20Virgens%2020260911.jpeg` },
   { id: 65, name: "CREEDENCE 4EVER", subtitle: "TRIBUTO CREEDENCE CLEARWATER REVIVAL", date: "12/09", month: "Setembro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/creedence-4ever-tributo-creedence-clearwater-revival-no-hard-rock-cafe-ribeirao-preto/3571530", image: `${BASE}/Creedence4Ever%2020260912.jpg`, partnership: true, partnerName: "North Star" },
   { id: 61, name: "DIRTY JACK", subtitle: "TRIBUTO AC/DC", date: "25/09", month: "Setembro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/dirty-jack-tributo-acdc-no-hard-rock-cafe-ribeirao-preto/3541500", image: `${BASE}/DirtyJack%2020260925.jpeg`, partnership: true, partnerName: "Taiwan Hotel" },
-  { id: 66, name: "POP MIND", subtitle: "HITS DO POP ROCK", date: "02/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/pop-mind-hits-do-pop-rock-no-hard-rock-cafe-ribeirao-preto/3575880", image: `${BASE}/PopMind%2020261002.jpg`, partnership: true, partnerName: "Hotel IP" },
+  { id: 66, name: "POP MIND", subtitle: "HITS DO POP ROCK", date: "02/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/pop-mind-hits-do-pop-rock-no-hard-rock-cafe-ribeirao-preto/3575880", image: `${BASE}/PopMind%2020261002.jpg`, partnership: true, partnerName: "Hotel JP" },
   { id: 67, name: "JACK FAST", subtitle: "DE VOLTA AO HARD ROCK CAFE", date: "03/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/jack-fast-de-volta-ao-hard-rock-cafe-ribeirao-preto/3575885", image: `${BASE}/JackFast%2020261003.jpg`, partnership: true, partnerName: "Hotel JP" },
   { id: 68, name: "OÁZ", subtitle: "", date: "09/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/oAz-no-hard-rock-cafe-ribeirao-preto/3575893", image: `${BASE}/Oaz%2020261009.jpg`, partnership: true, partnerName: "Taiwan Hotel" },
   { id: 62, name: "FESTIVAL TODOS NO ROCK", subtitle: "SCHOOL OF ROCK, ROTOR, DIRTY JACK, O ÉPICCO E SANTÍSSIMA TRINDADE", date: "26/09", month: "Setembro", time: "13h", venue: "Sertãozinho", image: `${BASE}/Todos%20no%20Rock%2020260926.png`, free: true, hideFreeBadge: true },
@@ -315,12 +315,12 @@ export default function Home() {
                 )}
                 <div className="p-6 flex-1 flex flex-col">
                   <div className="flex-1">
-                    <div className="flex items-start justify-between mb-3">
-                      <div>
+                    <div className="flex items-start justify-between gap-2 mb-3">
+                      <div className="flex-1 min-w-0">
                         <h3 className="font-display text-lg mb-1 leading-tight" style={{ color: "#cc2200" }}>{show.name}</h3>
                         {show.subtitle && <p className="font-heading text-xs" style={{ color: "#a190c4" }}>{show.subtitle}</p>}
                       </div>
-                      <div className="flex flex-col gap-1">
+                      <div className="flex flex-col gap-1 flex-shrink-0">
                         {show.free && !show.hideFreeBadge && (
                           <span className="text-xs font-heading px-2 py-1 whitespace-nowrap rounded" style={{ background: "rgba(93,202,165,0.15)", color: "#5DCAA5" }}>GRATUITO</span>
                         )}
