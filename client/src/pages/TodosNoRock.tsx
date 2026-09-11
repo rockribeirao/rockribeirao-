@@ -51,20 +51,20 @@ const lineup = [
 ];
 
 const apoio = [
-  { src: `${BASE}/marquesa.png`, alt: "Cervejaria Marquesa" },
+  { src: `${BASE}/marquesa.png`, alt: "Cervejaria Marquesa", link: "https://www.instagram.com/marquesacervejaria/" },
   { src: `${BASE}/governo-sertaozinho.png`, alt: "Governo de Sertãozinho" },
-  { src: `${BASE}/apoio-iron.png`, alt: "Iron Suplementos" },
-  { src: `${BASE}/apoio-memo.png`, alt: "Choppeiras Memo" },
+  { src: `${BASE}/apoio-iron.png`, alt: "Iron Suplementos", link: "https://www.instagram.com/iron.suplementos25/" },
+  { src: `${BASE}/apoio-memo.png`, alt: "Choppeiras Memo", link: "https://www.instagram.com/chopeirasmemo/" },
 ];
 const hotelOficial = [
-  { src: `${BASE}/hotel-comfort.png`, alt: "Comfort Hotel Sertãozinho" },
+  { src: `${BASE}/hotel-comfort.png`, alt: "Comfort Hotel Sertãozinho", link: "https://www.instagram.com/comfortsertaozinho/" },
 ];
 const promocao = [
-  { src: `${BASE}/kiss.png`, alt: "Kiss FM 105.3" },
-  { src: `${BASE}/dritto.png`, alt: "Dritto Mídia" },
+  { src: `${BASE}/kiss.png`, alt: "Kiss FM 105.3", link: "https://www.instagram.com/kissfmribeirao/" },
+  { src: `${BASE}/dritto.png`, alt: "Dritto Mídia", link: "https://www.instagram.com/drittomidiaooh/" },
 ];
 const realizacao = [
-  { src: `${BASE}/Logo%20do%20header.png`, alt: "Rock Ribeirão Produções" },
+  { src: `${BASE}/Logo%20do%20header.png`, alt: "Rock Ribeirão Produções", link: "https://www.instagram.com/rockribeirao/" },
   { src: `${BASE}/mic.png`, alt: "Ministério da Cultura" },
 ];
 
@@ -485,7 +485,13 @@ export default function TodosNoRock() {
             <p style={s.partnerGroupLabel}>Apoio</p>
             <div style={s.logoGrid}>
               {apoio.map((logo, i) => (
-                <img key={i} src={logo.src} alt={logo.alt} style={s.logoImg} />
+                logo.link ? (
+                  <a key={i} href={logo.link} target="_blank" rel="noopener noreferrer">
+                    <img src={logo.src} alt={logo.alt} style={s.logoImg} />
+                  </a>
+                ) : (
+                  <img key={i} src={logo.src} alt={logo.alt} style={s.logoImg} />
+                )
               ))}
             </div>
           </div>
@@ -494,7 +500,13 @@ export default function TodosNoRock() {
             <p style={s.partnerGroupLabel}>Hotel Oficial</p>
             <div style={s.logoGrid}>
               {hotelOficial.map((logo, i) => (
-                <img key={i} src={logo.src} alt={logo.alt} style={s.logoImg} />
+                logo.link ? (
+                  <a key={i} href={logo.link} target="_blank" rel="noopener noreferrer">
+                    <img src={logo.src} alt={logo.alt} style={{ ...s.logoImg, height: 90, maxWidth: 260 }} />
+                  </a>
+                ) : (
+                  <img key={i} src={logo.src} alt={logo.alt} style={{ ...s.logoImg, height: 90, maxWidth: 260 }} />
+                )
               ))}
             </div>
           </div>
@@ -503,7 +515,13 @@ export default function TodosNoRock() {
             <p style={s.partnerGroupLabel}>Promoção</p>
             <div style={s.logoGrid}>
               {promocao.map((logo, i) => (
-                <img key={i} src={logo.src} alt={logo.alt} style={s.logoImg} />
+                logo.link ? (
+                  <a key={i} href={logo.link} target="_blank" rel="noopener noreferrer">
+                    <img src={logo.src} alt={logo.alt} style={s.logoImg} />
+                  </a>
+                ) : (
+                  <img key={i} src={logo.src} alt={logo.alt} style={s.logoImg} />
+                )
               ))}
             </div>
           </div>
@@ -512,7 +530,13 @@ export default function TodosNoRock() {
             <p style={s.partnerGroupLabel}>Realização</p>
             <div style={s.logoGrid}>
               {realizacao.map((logo, i) => (
-                <img key={i} src={logo.src} alt={logo.alt} style={s.logoImg} />
+                logo.link ? (
+                  <a key={i} href={logo.link} target="_blank" rel="noopener noreferrer">
+                    <img src={logo.src} alt={logo.alt} style={s.logoImg} />
+                  </a>
+                ) : (
+                  <img key={i} src={logo.src} alt={logo.alt} style={s.logoImg} />
+                )
               ))}
             </div>
           </div>
