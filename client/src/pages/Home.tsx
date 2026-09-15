@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Calendar, MapPin, Mail, Instagram, ArrowRight, Star } from "lucide-react";
-import { useState } from "react";
+import { Calendar, MapPin, Mail, Instagram, ArrowRight, Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 
 const BASE = "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public";
@@ -10,6 +10,7 @@ interface Show {
   id: number;
   name: string;
   subtitle?: string;
+  subtitleColor?: string;
   date: string;
   month: string;
   time: string;
@@ -20,6 +21,7 @@ interface Show {
   hotelPartner?: string;
   link?: string;
   image?: string;
+  bannerImage?: string;
   free?: boolean;
   hideFreeBadge?: boolean;
 }
@@ -50,17 +52,18 @@ const upcomingShows: Show[] = [
   { id: 59, name: "MAD HOUDINI", subtitle: "ESPECIAL DURAN DURAN E A-HA", date: "05/09", month: "Setembro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/mad-houdini-especial-duran-duran-e-a-ha-no-hard-rock-cafe-ribeirao/3541489", image: `${BASE}/MadHoudini%2020260905.jpeg`, partnership: true, partnerName: "Hotel JP" },
   { id: 60, name: "OS VIRGENS", subtitle: "SHOW ACÚSTICO", date: "11/09", month: "Setembro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/os-virgens-show-acustico-no-hard-rock-cafe-ribeirao-preto/3541514", image: `${BASE}/Os%20Virgens%2020260911.jpeg` },
   { id: 65, name: "CREEDENCE 4EVER", subtitle: "TRIBUTO CREEDENCE CLEARWATER REVIVAL", date: "12/09", month: "Setembro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/creedence-4ever-tributo-creedence-clearwater-revival-no-hard-rock-cafe-ribeirao-preto/3571530", image: `${BASE}/Creedence4Ever%2020260912.jpg`, partnership: true, partnerName: "North Star" },
-  { id: 61, name: "DIRTY JACK", subtitle: "TRIBUTO AC/DC", date: "25/09", month: "Setembro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/dirty-jack-tributo-acdc-no-hard-rock-cafe-ribeirao-preto/3541500", image: `${BASE}/DirtyJack%2020260925.jpeg`, partnership: true, partnerName: "Taiwan Hotel" },
-  { id: 66, name: "POP MIND", subtitle: "HITS DO POP ROCK", date: "02/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/pop-mind-hits-do-pop-rock-no-hard-rock-cafe-ribeirao-preto/3575880", image: `${BASE}/PopMind%2020261002.jpg`, partnership: true, partnerName: "Hotel JP" },
-  { id: 67, name: "JACK FAST", subtitle: "DE VOLTA AO HARD ROCK CAFE", date: "03/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/jack-fast-de-volta-ao-hard-rock-cafe-ribeirao-preto/3575885", image: `${BASE}/JackFast%2020261003.jpg`, partnership: true, partnerName: "Hotel JP" },
-  { id: 68, name: "OÁZ", subtitle: "", date: "09/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/oAz-no-hard-rock-cafe-ribeirao-preto/3575893", image: `${BASE}/Oaz%2020261009.jpg`, partnership: true, partnerName: "Taiwan Hotel" },
-  { id: 69, name: "U2 COVER RIBEIRÃO", subtitle: "TRIBUTO U2", date: "10/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/u2-cover-ribeirao-one-night-of-u2-no-hard-rock-cafe-ribeirao/3576564", image: `${BASE}/U2CoverRibeirao%2020261010.jpg` },
+  { id: 61, name: "DIRTY JACK", subtitle: "TRIBUTO AC/DC", date: "25/09", month: "Setembro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/dirty-jack-tributo-acdc-no-hard-rock-cafe-ribeirao-preto/3541500", image: `${BASE}/DirtyJack%2020260925.jpeg`, bannerImage: `${BASE}/DirtyJack-banner%2020260925.jpg`, partnership: true, partnerName: "Taiwan Hotel" },
+  { id: 131, name: "DYNAMITE", subtitle: "TRIBUTO SCORPIONS", date: "26/09", month: "Setembro", time: "21h", venue: "Hard Rock Cafe", image: `${BASE}/Dynamite-banner%2020260926.jpg`, bannerImage: `${BASE}/Dynamite-banner%2020260926.jpg`, partnership: true, partnerName: "Hotel JP" },
+  { id: 66, name: "POP MIND", subtitle: "HITS DO POP ROCK", date: "02/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/pop-mind-hits-do-pop-rock-no-hard-rock-cafe-ribeirao-preto/3575880", image: `${BASE}/PopMind%2020261002.jpg`, bannerImage: `${BASE}/PopMind-banner%2020261002.jpg`, partnership: true, partnerName: "Hotel JP" },
+  { id: 67, name: "JACK FAST", subtitle: "DE VOLTA AO HARD ROCK CAFE", date: "03/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/jack-fast-de-volta-ao-hard-rock-cafe-ribeirao-preto/3575885", image: `${BASE}/JackFast%2020261003.jpg`, bannerImage: `${BASE}/JackFast-banner%2020261003.jpg`, partnership: true, partnerName: "Hotel JP" },
+  { id: 68, name: "OÁZ", subtitle: "", date: "09/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/oAz-no-hard-rock-cafe-ribeirao-preto/3575893", image: `${BASE}/Oaz%2020261009.jpg`, bannerImage: `${BASE}/Oaz-banner%2020261009.jpg`, partnership: true, partnerName: "Taiwan Hotel" },
+  { id: 69, name: "U2 COVER RIBEIRÃO", subtitle: "TRIBUTO U2", date: "10/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/u2-cover-ribeirao-one-night-of-u2-no-hard-rock-cafe-ribeirao/3576564", image: `${BASE}/U2CoverRibeirao%2020261010.jpg`, bannerImage: `${BASE}/U2CoverRibeirao-banner%2020261010.jpg` },
   { id: 70, name: "CHILDREN OF THE BEAST", subtitle: "TRIBUTO IRON MAIDEN", date: "16/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/children-of-the-beast-o-tributo-oficial-do-iron-maiden-no-hrc-ribeirao/3576580", image: `${BASE}/ChildrenOfTheBeast%2020261016.jpg`, partnership: true, partnerName: "Taiwan Hotel" },
-  { id: 71, name: "RENATO QUASE RUSSO", subtitle: "TRIBUTO LEGIÃO URBANA — ESPECIAL 30 ANOS RENATO RUSSO", date: "17/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/tributo-legiao-urbana-por-renato-quase-russo-no-hard-rock-cafe-ribeirao-preto/3576573", image: `${BASE}/RenatoQuaseRusso%2020261017.jpg`, partnership: true, partnerName: "Matiz Hotel" },
+  { id: 71, name: "RENATO QUASE RUSSO", subtitle: "TRIBUTO LEGIÃO URBANA — ESPECIAL 30 ANOS RENATO RUSSO", subtitleColor: "#d4a017", date: "17/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/tributo-legiao-urbana-por-renato-quase-russo-no-hard-rock-cafe-ribeirao-preto/3576573", image: `${BASE}/RenatoQuaseRusso%2020261017.jpg`, bannerImage: `${BASE}/RenatoQuaseRusso-banner%2020261017.jpg`, partnership: true, partnerName: "Matiz Hotel" },
   { id: 72, name: "AURAH", subtitle: "POP ROCK", date: "23/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/aurah-rock-hits-no-hard-rock-cafe-ribeirao-preto/3576598", image: `${BASE}/Aurah%2020261023.jpg`, partnership: true, partnerName: "Hotel JP" },
-  { id: 73, name: "LITHIUM", subtitle: "ESPECIAL HALLOWEEN", date: "30/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/lithium-com-dri-santana-no-hard-rock-cafe-ribeirao-preto/3576546", image: `${BASE}/Lithium%2020261030.jpg` },
-  { id: 74, name: "CAARU", subtitle: "ROCK XAMÂNICO — ESPECIAL HALLOWEEN", date: "31/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/caaru-rock-xamanico-no-hard-rock-cafe-ribeirao-preto/3576589", image: `${BASE}/Caaru%2020261031.jpg`, partnership: true, partnerName: "Transamerica" },
-  { id: 62, name: "FESTIVAL TODOS NO ROCK", subtitle: "SCHOOL OF ROCK, ROTOR, DIRTY JACK, O ÉPICCO E SANTÍSSIMA TRINDADE", date: "26/09", month: "Setembro", time: "13h", venue: "Sertãozinho", image: `${BASE}/Todos%20no%20Rock%2020260926.png`, free: true, hideFreeBadge: true },
+  { id: 73, name: "LITHIUM", subtitle: "ESPECIAL HALLOWEEN", subtitleColor: "#ff8c00", date: "30/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/lithium-com-dri-santana-no-hard-rock-cafe-ribeirao-preto/3576546", image: `${BASE}/Lithium%2020261030.jpg`, bannerImage: `${BASE}/Lithium-banner%2020261030.jpg` },
+  { id: 74, name: "CAARU", subtitle: "ROCK XAMÂNICO — ESPECIAL HALLOWEEN", subtitleColor: "#ff8c00", date: "31/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/caaru-rock-xamanico-no-hard-rock-cafe-ribeirao-preto/3576589", image: `${BASE}/Caaru%2020261031.jpg`, partnership: true, partnerName: "Transamerica" },
+  { id: 62, name: "FESTIVAL TODOS NO ROCK", subtitle: "SCHOOL OF ROCK, ROTOR, DIRTY JACK, O ÉPICCO E SANTÍSSIMA TRINDADE", date: "26/09", month: "Setembro", time: "13h", venue: "Sertãozinho", image: `${BASE}/TodosNoRock-banner%2020260926.jpg`, free: true, hideFreeBadge: true },
   { id: 63, name: "DYNAMITE", subtitle: "TRIBUTO SCORPIONS", date: "26/09", month: "Setembro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/dynamite-tributo-scorpions-no-hard-rock-cafe-ribeirao-preto/3541522", image: `${BASE}/Dynamite%2020260926.jpeg`, partnership: true, partnerName: "Hotel JP" },
 ];
 
@@ -196,6 +199,21 @@ export default function Home() {
     return dateA.day - dateB.day;
   });
 
+  const featuredShows = sortedShows.filter(show => show.bannerImage);
+  const [carouselIndex, setCarouselIndex] = useState(0);
+
+  useEffect(() => {
+    if (featuredShows.length <= 1) return;
+    const timer = setInterval(() => {
+      setCarouselIndex(i => (i + 1) % featuredShows.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [featuredShows.length]);
+
+  const goToSlide = (i: number) => setCarouselIndex(i);
+  const goPrev = () => setCarouselIndex(i => (i - 1 + featuredShows.length) % featuredShows.length);
+  const goNext = () => setCarouselIndex(i => (i + 1) % featuredShows.length);
+
   const finalShows = selectedMonth === "Todos"
     ? sortedShows
     : sortedShows.filter(show => show.month === selectedMonth).sort((a, b) => {
@@ -264,7 +282,7 @@ export default function Home() {
           </p>
           <div style={{ background: "#1a0a2e", border: "0.5px solid #6030b0", borderRadius: 12, overflow: "hidden", display: "flex", flexWrap: "wrap" }}>
             <div style={{ width: 180, flexShrink: 0, overflow: "hidden" }}>
-              <img src={`${BASE}/Todos%20no%20Rock%2020260926.png`} alt="Festival Todos no Rock" style={{ width: "100%", height: "100%", objectFit: "cover", minHeight: 180 }} />
+              <img src={`${BASE}/TodosNoRock-banner%2020260926.jpg`} alt="Festival Todos no Rock" style={{ width: "100%", height: "100%", objectFit: "cover", minHeight: 180 }} />
             </div>
             <div style={{ padding: "1.25rem", flex: 1, minWidth: 240 }}>
               <p style={{ fontSize: 9, letterSpacing: "0.1em", color: "#a190c4", marginBottom: 6 }}>O MINISTÉRIO DA CULTURA APRESENTA</p>
@@ -285,6 +303,69 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Carrossel de Destaques */}
+      {featuredShows.length > 0 && (
+        <section className="py-16" style={{ background: "#06020e" }}>
+          <div className="container">
+            <div style={{ position: "relative", maxWidth: 1100, margin: "0 auto" }}>
+              <div style={{ overflow: "hidden", borderRadius: 16 }}>
+                <div style={{
+                  display: "flex",
+                  transform: `translateX(-${carouselIndex * 100}%)`,
+                  transition: "transform 0.5s ease",
+                }}>
+                  {featuredShows.map((show) => (
+                    <a
+                      key={show.id}
+                      href={show.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ flex: "0 0 100%", position: "relative", display: "block", aspectRatio: "1600 / 838" }}
+                    >
+                      <img src={show.bannerImage} alt={show.name} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {featuredShows.length > 1 && (
+                <>
+                  <button onClick={goPrev} aria-label="Show anterior"
+                    style={{
+                      position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)",
+                      width: 44, height: 44, borderRadius: "50%", background: "rgba(6,2,14,0.7)",
+                      border: "0.5px solid #a190c4", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center",
+                      cursor: "pointer",
+                    }}>
+                    <ChevronLeft size={22} />
+                  </button>
+                  <button onClick={goNext} aria-label="Próximo show"
+                    style={{
+                      position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)",
+                      width: 44, height: 44, borderRadius: "50%", background: "rgba(6,2,14,0.7)",
+                      border: "0.5px solid #a190c4", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center",
+                      cursor: "pointer",
+                    }}>
+                    <ChevronRight size={22} />
+                  </button>
+
+                  <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 16 }}>
+                    {featuredShows.map((_, i) => (
+                      <button key={i} onClick={() => goToSlide(i)} aria-label={`Ir para o destaque ${i + 1}`}
+                        style={{
+                          width: i === carouselIndex ? 24 : 8, height: 8, borderRadius: 4,
+                          background: i === carouselIndex ? "#cc2200" : "#a190c4",
+                          border: "none", cursor: "pointer", transition: "all 0.3s",
+                        }} />
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Próximos Shows */}
       <section id="shows" className="py-24" style={{ background: "linear-gradient(to bottom, #0a0020, #06020e)" }}>
@@ -324,7 +405,7 @@ export default function Home() {
                     <div className="flex items-start justify-between gap-2 mb-3">
                       <div className="flex-1 min-w-0">
                         <h3 className="font-display text-lg mb-1 leading-tight" style={{ color: "#cc2200" }}>{show.name}</h3>
-                        {show.subtitle && <p className="font-heading text-xs" style={{ color: "#a190c4" }}>{show.subtitle}</p>}
+                        {show.subtitle && <p className="font-heading text-xs" style={{ color: show.subtitleColor || "#a190c4", fontWeight: show.subtitleColor ? 700 : 400 }}>{show.subtitle}</p>}
                       </div>
                       <div className="flex flex-col gap-1 flex-shrink-0">
                         {show.free && !show.hideFreeBadge && (
