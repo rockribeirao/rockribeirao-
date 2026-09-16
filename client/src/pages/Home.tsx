@@ -281,11 +281,9 @@ export default function Home() {
             FESTIVAL
             <span style={{ display: "inline-block", width: 24, height: "0.5px", background: "#a190c4" }}></span>
           </p>
-          <div style={{ background: "#1a0a2e", border: "0.5px solid #6030b0", borderRadius: 12, overflow: "hidden", display: "flex", flexWrap: "wrap" }}>
-            <div style={{ width: 180, flexShrink: 0, overflow: "hidden" }}>
-              <img src={`${BASE}/Todos%20no%20Rock%2020260926.png`} alt="Festival Todos no Rock" style={{ width: "100%", height: "100%", objectFit: "cover", minHeight: 180 }} />
-            </div>
-            <div style={{ padding: "1.25rem", flex: 1, minWidth: 240 }}>
+          <div style={{ background: "#1a0a2e", border: "0.5px solid #6030b0", borderRadius: 12, overflow: "hidden", maxWidth: 780, margin: "0 auto" }}>
+            <img src={`${BASE}/TodosNoRock-festival-destaque%2020260926.jpg`} alt="Festival Todos no Rock" style={{ width: "100%", aspectRatio: "1600 / 650", objectFit: "cover", display: "block" }} />
+            <div style={{ padding: "1.5rem" }}>
               <p style={{ fontSize: 9, letterSpacing: "0.1em", color: "#a190c4", marginBottom: 6 }}>O MINISTÉRIO DA CULTURA APRESENTA</p>
               <h3 style={{ fontSize: 20, fontWeight: 500, color: "#e0c0ff", marginBottom: 10 }}>Festival Todos no Rock</h3>
               <div style={{ display: "flex", flexDirection: "column", gap: 5, marginBottom: 12 }}>
