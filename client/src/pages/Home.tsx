@@ -20,6 +20,7 @@ interface Show {
   partnerName?: string;
   hotelPartner?: string;
   link?: string;
+  carouselLink?: string;
   image?: string;
   bannerImage?: string;
   free?: boolean;
@@ -62,7 +63,7 @@ const upcomingShows: Show[] = [
   { id: 72, name: "AURAH", subtitle: "POP ROCK", date: "23/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/aurah-rock-hits-no-hard-rock-cafe-ribeirao-preto/3576598", image: `${BASE}/Aurah%2020261023.jpg`, partnership: true, partnerName: "Hotel JP" },
   { id: 73, name: "LITHIUM", subtitle: "ESPECIAL HALLOWEEN", subtitleColor: "#ff8c00", date: "30/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/lithium-com-dri-santana-no-hard-rock-cafe-ribeirao-preto/3576546", image: `${BASE}/Lithium%2020261030.jpg`, bannerImage: `${BASE}/Lithium-banner%2020261030.jpg` },
   { id: 74, name: "CAARU", subtitle: "ROCK XAMÂNICO — ESPECIAL HALLOWEEN", subtitleColor: "#ff8c00", date: "31/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/caaru-rock-xamanico-no-hard-rock-cafe-ribeirao-preto/3576589", image: `${BASE}/Caaru%2020261031.jpg`, partnership: true, partnerName: "Transamerica" },
-  { id: 62, name: "FESTIVAL TODOS NO ROCK", subtitle: "SCHOOL OF ROCK, ROTOR, DIRTY JACK, O ÉPICCO E SANTÍSSIMA TRINDADE", date: "26/09", month: "Setembro", time: "13h", venue: "Sertãozinho", image: `${BASE}/TodosNoRock-banner%2020260926.jpg`, free: true, hideFreeBadge: true },
+  { id: 62, name: "FESTIVAL TODOS NO ROCK", subtitle: "SCHOOL OF ROCK, ROTOR, DIRTY JACK, O ÉPICCO E SANTÍSSIMA TRINDADE", date: "26/09", month: "Setembro", time: "13h", venue: "Sertãozinho", image: `${BASE}/Todos%20no%20Rock%2020260926.png`, bannerImage: `${BASE}/TodosNoRock-banner%2020260926.jpg`, carouselLink: "https://www.sympla.com.br/evento/todos-no-rock-marquesa-open-bar/3569023", free: true, hideFreeBadge: true },
   { id: 63, name: "DYNAMITE", subtitle: "TRIBUTO SCORPIONS", date: "26/09", month: "Setembro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/dynamite-tributo-scorpions-no-hard-rock-cafe-ribeirao-preto/3541522", image: `${BASE}/Dynamite%2020260926.jpeg`, bannerImage: `${BASE}/Dynamite-banner%2020260926.jpg`, partnership: true, partnerName: "Hotel JP" },
 ];
 
@@ -317,7 +318,7 @@ export default function Home() {
                   {featuredShows.map((show) => (
                     <a
                       key={show.id}
-                      href={show.link}
+                      href={show.carouselLink || show.link}
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{ flex: "0 0 100%", position: "relative", display: "block", aspectRatio: "1600 / 838" }}
