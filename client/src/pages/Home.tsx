@@ -309,20 +309,31 @@ export default function Home() {
       {featuredShows.length > 0 && (
         <section className="py-16" style={{ background: "#06020e" }}>
           <div className="container">
-            <div style={{ position: "relative", maxWidth: 1100, margin: "0 auto" }}>
-              <div style={{ overflow: "hidden", borderRadius: 16 }}>
+            <div style={{ position: "relative", maxWidth: 1400, margin: "0 auto" }}>
+              <div style={{ overflow: "hidden" }}>
                 <div style={{
                   display: "flex",
-                  transform: `translateX(-${carouselIndex * 100}%)`,
+                  transform: `translateX(calc(-${carouselIndex * 80}% + 11%))`,
                   transition: "transform 0.5s ease",
                 }}>
-                  {featuredShows.map((show) => (
+                  {featuredShows.map((show, i) => (
                     <a
                       key={show.id}
                       href={show.carouselLink || show.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{ flex: "0 0 100%", position: "relative", display: "block", aspectRatio: "1600 / 838" }}
+                      style={{
+                        flex: "0 0 78%",
+                        marginRight: "2%",
+                        position: "relative",
+                        display: "block",
+                        aspectRatio: "1600 / 838",
+                        borderRadius: 16,
+                        overflow: "hidden",
+                        opacity: i === carouselIndex ? 1 : 0.4,
+                        transform: i === carouselIndex ? "scale(1)" : "scale(0.94)",
+                        transition: "opacity 0.5s ease, transform 0.5s ease",
+                      }}
                     >
                       <img src={show.bannerImage} alt={show.name} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
                     </a>
