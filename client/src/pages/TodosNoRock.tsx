@@ -68,6 +68,13 @@ const realizacao = [
   { src: `${BASE}/mic.png`, alt: "Ministério da Cultura" },
 ];
 
+const economiaCriativa = [
+  { src: `${BASE}/tnr-economia-checkers-revenge.jpg`, name: "Checker's Revenge", segment: "Camisas pintadas à mão", link: "https://www.instagram.com/checkersrevenge/" },
+  { src: `${BASE}/tnr-economia-sol-tattoo.jpg`, name: "Sol Tattoo e Art", segment: "Estúdio de tatuagem", link: "https://www.instagram.com/soltattoo.ink/" },
+  { src: `${BASE}/tnr-economia-parpi-art.jpg`, name: "Parpi Art", segment: "Artesanato", link: "https://www.instagram.com/parpiart/" },
+  { src: `${BASE}/tnr-economia-dona-nilce.jpg`, name: "Dona Nilce", segment: "Crochê", link: "https://www.instagram.com/nilcerochastz/" },
+];
+
 const edicoes = [
   { city: "Sertãozinho — SP", meta: "26 set 2026 · Cervejaria Marquesa · Lei Rouanet", status: "Em breve", done: false },
   { city: "Ribeirão Preto — SP", meta: "Data a confirmar · ProAC aprovado", status: "Captação em andamento", done: false },
@@ -349,6 +356,35 @@ export default function TodosNoRock() {
                 <span style={s.bandIg}><Instagram size={12} /> Ver no Instagram</span>
               </div>
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* VITRINE DA ECONOMIA CRIATIVA */}
+      <section style={{ background: "#0d0618", borderTop: "0.5px solid #2a1050", borderBottom: "0.5px solid #2a1050", padding: "4rem 1.5rem" }}>
+        <div style={{ maxWidth: 960, margin: "0 auto" }}>
+          <p style={s.secLabel}>Vitrine da Economia Criativa</p>
+          <h2 style={s.secTitle}>Quem empreende com criatividade também sobe ao palco</h2>
+          <p style={{ fontSize: 14, color: "#a190c4", lineHeight: 1.7, marginBottom: 12 }}>
+            O Festival Todos no Rock reserva um espaço especial para valorizar esse universo: a <strong style={{ color: "#e0c0ff" }}>Vitrine da Economia Criativa</strong>. Nela, empreendedores locais expõem e vendem seus produtos gratuitamente, sem cobrança de taxas, em um ambiente pensado para dar visibilidade ao talento da nossa região — moda, produtos culturais, instrumentos musicais feitos por luthiers locais e gastronomia autoral, entre outros segmentos.
+          </p>
+          <p style={{ fontSize: 14, color: "#a190c4", lineHeight: 1.7, marginBottom: 32 }}>
+            Mais do que um festival de música, o Todos no Rock é também uma plataforma para fortalecer quem empreende com criatividade em Sertãozinho e região.
+          </p>
+          <p style={s.partnerGroupLabel}>Expositores 2026</p>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 16 }}>
+            {economiaCriativa.map((ex) => (
+              <a key={ex.name} href={ex.link} target="_blank" rel="noopener noreferrer" style={s.bandCard}
+                onMouseEnter={e => (e.currentTarget.style.borderColor = "#5DCAA5")}
+                onMouseLeave={e => (e.currentTarget.style.borderColor = "#a190c4")}>
+                <img src={ex.src} alt={`${ex.name} — ${ex.segment}`} loading="lazy" style={{ width: "100%", aspectRatio: "800 / 1131", objectFit: "cover", display: "block" }} />
+                <div style={s.bandBody}>
+                  <p style={{ ...s.bandName, fontSize: 16 }}>{ex.name}</p>
+                  <p style={{ fontSize: 12, color: "#a190c4", marginTop: 4 }}>{ex.segment}</p>
+                  <span style={s.bandIg}><Instagram size={12} /> Ver no Instagram</span>
+                </div>
+              </a>
+            ))}
           </div>
         </div>
       </section>
