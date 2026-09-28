@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 declare global {
   interface Window { __bhldScript?: boolean; }
@@ -82,8 +82,6 @@ const edicoes = [
 ];
 
 export default function TodosNoRock() {
-  const [countdown, setCountdown] = useState({ dias: 0, horas: 0, min: 0, seg: 0 });
-
   const isFestivalDomain =
     typeof window !== "undefined" &&
     ["todosnorock.com.br", "www.todosnorock.com.br"].includes(window.location.hostname);
@@ -138,23 +136,6 @@ export default function TodosNoRock() {
     };
   }, [isFestivalDomain]);
 
-  useEffect(() => {
-    const target = new Date("2026-09-26T13:00:00-03:00").getTime();
-    const tick = () => {
-      const diff = target - Date.now();
-      if (diff <= 0) { setCountdown({ dias: 0, horas: 0, min: 0, seg: 0 }); return; }
-      setCountdown({
-        dias: Math.floor(diff / 86400000),
-        horas: Math.floor((diff % 86400000) / 3600000),
-        min: Math.floor((diff % 3600000) / 60000),
-        seg: Math.floor((diff % 60000) / 1000),
-      });
-    };
-    tick();
-    const id = setInterval(tick, 1000);
-    return () => clearInterval(id);
-  }, []);
-
   const s: Record<string, React.CSSProperties> = {
     page: { minHeight: "100vh", backgroundColor: "#06020e", color: "#f0e0ff", fontFamily: "var(--font-sans)" },
     nav: { background: "#08030f", borderBottom: "0.5px solid #2a1050", padding: "12px 24px", display: "flex", justifyContent: "space-between", alignItems: "center", position: "sticky", top: 0, zIndex: 50 },
@@ -168,10 +149,6 @@ export default function TodosNoRock() {
     tag: { display: "flex", alignItems: "center", gap: 6, fontSize: 13, padding: "5px 14px", borderRadius: 20, border: "0.5px solid #a190c4", color: "#c4a0ff", background: "#1a0a2e" },
     tagGreen: { display: "flex", alignItems: "center", gap: 6, fontSize: 13, padding: "5px 14px", borderRadius: 20, border: "0.5px solid #0F6E56", color: "#5DCAA5", background: "#04342C" },
     btn: { background: "#6030b0", color: "#f0e0ff", fontSize: 14, fontWeight: 500, padding: "10px 28px", borderRadius: 8, textDecoration: "none", display: "inline-block" },
-    countdown: { background: "#0d0618", borderTop: "2px solid #a190c4", borderBottom: "2px solid #a190c4", padding: "1.5rem", display: "flex", justifyContent: "center", gap: "2.5rem", flexWrap: "wrap" },
-    countBox: { textAlign: "center" },
-    countNum: { display: "block", fontSize: 44, fontWeight: 500, color: "#d0a0ff", lineHeight: 1 },
-    countLabel: { fontSize: 11, color: "#a190c4", letterSpacing: "0.08em" },
     section: { padding: "4rem 1.5rem", maxWidth: 960, margin: "0 auto" },
     sectionAlt: { background: "#0a0415", borderTop: "0.5px solid #2a1050", padding: "4rem 1.5rem" },
     secLabel: { fontSize: 11, color: "#a190c4", textTransform: "uppercase" as const, letterSpacing: "0.1em", marginBottom: 12 },
@@ -194,9 +171,6 @@ export default function TodosNoRock() {
     suppBody: { padding: "1rem" },
     suppOrder: { fontSize: 11, color: "#a190c4", marginBottom: 6 },
     suppName: { fontSize: 16, fontWeight: 500, color: "#f0e0ff", marginBottom: 6 },
-    camaroteCard: { background: "#1a0a2e", border: "0.5px solid #6030b0", borderRadius: 12, overflow: "hidden", display: "grid", gridTemplateColumns: "1fr 1fr", minHeight: 280 },
-    camaroteImg: { width: "100%", height: "100%", objectFit: "cover" as const },
-    camaroteBody: { padding: "2rem" },
     edicaoList: { display: "flex", flexDirection: "column" as const, gap: 12 },
     edicaoItem: { background: "#1a0a2e", border: "0.5px solid #a190c4", borderRadius: 10, padding: "1rem 1.25rem", display: "flex", alignItems: "center", gap: 16 },
     dot: { width: 10, height: 10, borderRadius: "50%", flexShrink: 0 },
@@ -239,16 +213,6 @@ export default function TodosNoRock() {
           <span style={s.tagGreen}>🎟 Entrada gratuita</span>
         </div>
         <a href="#lineup" style={s.btn}>Ver line-up ↓</a>
-      </section>
-
-      {/* COUNTDOWN */}
-      <section style={s.countdown}>
-        {[{ val: countdown.dias, label: "DIAS" }, { val: countdown.horas, label: "HORAS" }, { val: countdown.min, label: "MIN" }, { val: countdown.seg, label: "SEG" }].map((c, i) => (
-          <div key={i} style={s.countBox}>
-            <span style={s.countNum}>{String(c.val).padStart(2, "0")}</span>
-            <span style={s.countLabel}>{c.label}</span>
-          </div>
-        ))}
       </section>
 
       {/* O FESTIVAL */}
@@ -385,28 +349,6 @@ export default function TodosNoRock() {
                 </div>
               </a>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CAMAROTE */}
-      <section style={s.section}>
-        <p style={s.secLabel}>Experiência VIP</p>
-        <div style={s.camaroteCard}>
-          <img src={`${BASE}/tnr-camarote-marquesa.jpg.jpg`} alt="Camarote Marquesa" style={s.camaroteImg} />
-          <div style={s.camaroteBody}>
-            <span style={{ fontSize: 10, padding: "3px 10px", borderRadius: 20, background: "#3a1060", color: "#c090f0", display: "inline-block", marginBottom: 12 }}>PAGO · INGRESSO SEPARADO</span>
-            <h3 style={{ fontSize: 22, fontWeight: 500, color: "#f0d0ff", marginBottom: 8 }}>Camarote Marquesa</h3>
-            <p style={{ fontSize: 13, color: "#8060a0", lineHeight: 1.6, marginBottom: 12 }}>
-              Vista privilegiada do palco com open bar e open food da Cervejaria Marquesa.
-            </p>
-            <p style={{ fontSize: 11, color: "#a190c4", marginBottom: 20 }}>
-              ⚠️ A entrada ao festival é gratuita. O camarote é um produto pago à parte.
-            </p>
-            <a href="https://www.sympla.com.br/evento/todos-no-rock-marquesa-open-bar/3569023" target="_blank" rel="noopener noreferrer"
-              style={{ display: "inline-block", background: "#6030b0", color: "#f0e0ff", fontSize: 13, fontWeight: 500, padding: "8px 20px", borderRadius: 8, textDecoration: "none" }}>
-              Comprar no Sympla →
-            </a>
           </div>
         </div>
       </section>
