@@ -273,36 +273,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FESTIVAL DESTAQUE */}
-      <section style={{ background: "#12071f", borderTop: "2px solid #6030b0", borderBottom: "2px solid #6030b0", padding: "1.5rem" }}>
-        <div className="container">
-          <p style={{ fontSize: 10, letterSpacing: "0.1em", color: "#a190c4", marginBottom: 12, display: "flex", alignItems: "center", gap: 8 }}>
-            <span style={{ display: "inline-block", width: 24, height: "0.5px", background: "#a190c4" }}></span>
-            FESTIVAL
-            <span style={{ display: "inline-block", width: 24, height: "0.5px", background: "#a190c4" }}></span>
-          </p>
-          <div style={{ background: "#1a0a2e", border: "0.5px solid #6030b0", borderRadius: 12, overflow: "hidden", maxWidth: 780, margin: "0 auto" }}>
-            <img src={`${BASE}/TodosNoRock-festival-destaque%2020260926.jpg`} alt="Festival Todos no Rock" style={{ width: "100%", aspectRatio: "1600 / 650", objectFit: "cover", display: "block" }} />
-            <div style={{ padding: "1.5rem" }}>
-              <p style={{ fontSize: 9, letterSpacing: "0.1em", color: "#a190c4", marginBottom: 6 }}>O MINISTÉRIO DA CULTURA APRESENTA</p>
-              <h3 style={{ fontSize: 20, fontWeight: 500, color: "#e0c0ff", marginBottom: 10 }}>Festival Todos no Rock</h3>
-              <div style={{ display: "flex", flexDirection: "column", gap: 5, marginBottom: 12 }}>
-                <span style={{ fontSize: 13, color: "#8060a0" }}>📅 26 de setembro de 2026</span>
-                <span style={{ fontSize: 13, color: "#8060a0" }}>🕐 A partir das 13h</span>
-                <span style={{ fontSize: 13, color: "#8060a0" }}>📍 Sertãozinho — SP · Em frente à Cervejaria Marquesa</span>
-              </div>
-              <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 14 }}>
-                <span style={{ fontSize: 11, padding: "3px 10px", borderRadius: 20, border: "0.5px solid #0F6E56", color: "#5DCAA5", background: "#04342C" }}>Entrada gratuita</span>
-                <span style={{ fontSize: 11, padding: "3px 10px", borderRadius: 20, border: "0.5px solid #a190c4", color: "#b090e0", background: "#12071f" }}>Lei Rouanet</span>
-              </div>
-              <a href="https://todosnorock.com.br" style={{ display: "inline-block", background: "#6030b0", color: "#f0e0ff", fontSize: 13, fontWeight: 500, padding: "8px 20px", borderRadius: 8, textDecoration: "none" }}>
-                Ver o festival completo →
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Carrossel de Destaques */}
       {featuredShows.length > 0 && (
         <section className="py-16" style={{ background: "#06020e" }}>
