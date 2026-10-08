@@ -8,7 +8,7 @@ declare global {
     }
   }
 }
-import { MapPin, Clock, Calendar, ArrowLeft, Instagram, Music, Users, Route, Building } from "lucide-react";
+import { MapPin, Calendar, ArrowLeft, Instagram, Music, Users, Route, Building } from "lucide-react";
 
 const BASE = "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public";
 
@@ -75,8 +75,29 @@ const economiaCriativa = [
   { src: `${BASE}/tnr-economia-dona-nilce.jpg`, name: "Dona Nilce", segment: "Crochê", link: "https://www.instagram.com/nilcerochastz/" },
 ];
 
+const galeria = [
+  { src: `${BASE}/tnr-galeria-01.jpg`, alt: "Intérprete de Libras traduzindo o show no palco" },
+  { src: `${BASE}/tnr-galeria-02.jpg`, alt: "Tatuadora trabalhando na Vitrine da Economia Criativa" },
+  { src: `${BASE}/tnr-galeria-03.jpg`, alt: "Crochê e panos de prato bordados na Vitrine da Economia Criativa" },
+  { src: `${BASE}/tnr-galeria-04.jpg`, alt: "Bolsas e necessaires artesanais na Vitrine da Economia Criativa" },
+  { src: `${BASE}/tnr-galeria-05.jpg`, alt: "Público no Festival Todos no Rock" },
+  { src: `${BASE}/tnr-galeria-06.jpg`, alt: "Público no Festival Todos no Rock" },
+  { src: `${BASE}/tnr-galeria-07.jpg`, alt: "Público no Festival Todos no Rock" },
+  { src: `${BASE}/tnr-galeria-08.jpg`, alt: "Público no Festival Todos no Rock" },
+  { src: `${BASE}/tnr-galeria-09.jpg`, alt: "Público no Festival Todos no Rock" },
+  { src: `${BASE}/tnr-galeria-10.jpg`, alt: "Público no Festival Todos no Rock" },
+  { src: `${BASE}/tnr-galeria-11.jpg`, alt: "Público no Festival Todos no Rock" },
+  { src: `${BASE}/tnr-galeria-12.jpg`, alt: "Público no Festival Todos no Rock" },
+  { src: `${BASE}/tnr-galeria-13.jpg`, alt: "Público no Festival Todos no Rock" },
+  { src: `${BASE}/tnr-galeria-14.jpg`, alt: "Público no Festival Todos no Rock" },
+  { src: `${BASE}/tnr-galeria-15.jpg`, alt: "Público no Festival Todos no Rock" },
+  { src: `${BASE}/tnr-galeria-16.jpg`, alt: "Público no Festival Todos no Rock" },
+  { src: `${BASE}/tnr-galeria-17.jpg`, alt: "Público no Festival Todos no Rock" },
+  { src: `${BASE}/tnr-galeria-18.jpg`, alt: "Público no Festival Todos no Rock" },
+];
+
 const edicoes = [
-  { city: "Sertãozinho — SP", meta: "26 set 2026 · Cervejaria Marquesa · Lei Rouanet", status: "Em breve", done: false },
+  { city: "Sertãozinho — SP", meta: "26 set 2026 · Cervejaria Marquesa · Lei Rouanet", status: "Realizada", done: true },
   { city: "Ribeirão Preto — SP", meta: "Data a confirmar · ProAC aprovado", status: "Captação em andamento", done: false },
   { city: "Monte Alto — SP", meta: "Data a confirmar · Lei Rouanet aprovada", status: "Captação em andamento", done: false },
 ];
@@ -171,6 +192,8 @@ export default function TodosNoRock() {
     suppBody: { padding: "1rem" },
     suppOrder: { fontSize: 11, color: "#a190c4", marginBottom: 6 },
     suppName: { fontSize: 16, fontWeight: 500, color: "#f0e0ff", marginBottom: 6 },
+    galGrid: { columns: "3 220px", columnGap: 12 },
+    galImg: { width: "100%", display: "block", marginBottom: 12, borderRadius: 10, border: "0.5px solid #2a1050", breakInside: "avoid" as const },
     edicaoList: { display: "flex", flexDirection: "column" as const, gap: 12 },
     edicaoItem: { background: "#1a0a2e", border: "0.5px solid #a190c4", borderRadius: 10, padding: "1rem 1.25rem", display: "flex", alignItems: "center", gap: 16 },
     dot: { width: 10, height: 10, borderRadius: "50%", flexShrink: 0 },
@@ -207,12 +230,12 @@ export default function TodosNoRock() {
         <img src={`${BASE}/tnr-logo-oficial.png`} alt="Festival Todos no Rock" style={s.heroImg} />
         <p style={s.heroSub}>Rock ao vivo, gratuito e itinerante no interior paulista</p>
         <div style={s.tagsWrap}>
-          <span style={s.tag}><Calendar size={13} /> 26 de setembro de 2026</span>
-          <span style={s.tag}><Clock size={13} /> A partir das 13h</span>
+          <span style={s.tag}><Calendar size={13} /> Realizado em 26 de setembro de 2026</span>
           <span style={s.tag}><MapPin size={13} /> Sertãozinho — SP</span>
           <span style={s.tagGreen}>🎟 Entrada gratuita</span>
         </div>
-        <a href="#lineup" style={s.btn}>Ver line-up ↓</a>
+        <p style={{ fontSize: 15, color: "#d0b0f0", marginBottom: 24 }}>Obrigado a todos que fizeram a edição Sertãozinho acontecer!</p>
+        <a href="#galeria" style={s.btn}>Ver como foi ↓</a>
       </section>
 
       {/* O FESTIVAL */}
@@ -241,45 +264,9 @@ export default function TodosNoRock() {
       {/* LINE-UP */}
       <section id="lineup" style={s.sectionAlt}>
         <div style={{ maxWidth: 960, margin: "0 auto" }}>
-          <p style={s.secLabel}>Line-up · Sertãozinho 2026</p>
-          <h2 style={{ ...s.secTitle, marginBottom: 8 }}>As atrações do festival</h2>
-          <p style={{ fontSize: 13, color: "#a190c4", marginBottom: 32 }}>Abertura às 13h · Encerramento às 00h</p>
-
-          {/* TABELA DE PROGRAMAÇÃO */}
-          <div style={{ background: "#12071f", border: "0.5px solid #a190c4", borderRadius: 12, overflow: "hidden", marginBottom: 40 }}>
-            {/* Header */}
-            <div style={{ display: "grid", gridTemplateColumns: "100px 1fr 100px", background: "#6030b0", padding: "10px 20px" }}>
-              <span style={{ fontSize: 11, fontWeight: 500, color: "#e0c0ff", letterSpacing: "0.08em" }}>HORÁRIO</span>
-              <span style={{ fontSize: 11, fontWeight: 500, color: "#e0c0ff", letterSpacing: "0.08em" }}>ATRAÇÃO</span>
-              <span style={{ fontSize: 11, fontWeight: 500, color: "#e0c0ff", letterSpacing: "0.08em", textAlign: "right" }}>DURAÇÃO</span>
-            </div>
-            {[
-              { hora: "13h00", nome: "DJ Rod Mac", duracao: "30 min", dj: true },
-              { hora: "13h30", nome: "School of Rock", duracao: "40 min", dj: false },
-              { hora: "14h10", nome: "DJ Rod Mac", duracao: "45 min", dj: true },
-              { hora: "14h55", nome: "Santíssima Trindade", duracao: "1h30", dj: false },
-              { hora: "16h25", nome: "DJ Rod Mac", duracao: "45 min", dj: true },
-              { hora: "17h10", nome: "O Épicco", duracao: "1h20", dj: false },
-              { hora: "18h30", nome: "DJ Rod Mac", duracao: "45 min", dj: true },
-              { hora: "19h15", nome: "Dirty Jack", duracao: "2h00", dj: false },
-              { hora: "21h15", nome: "DJ Rod Mac", duracao: "45 min", dj: true },
-              { hora: "22h00", nome: "Rotor", duracao: "2h00", dj: false },
-              { hora: "00h00", nome: "Encerramento", duracao: "—", dj: true },
-            ].map((item, i) => (
-              <div key={i} style={{
-                display: "grid", gridTemplateColumns: "100px 1fr 100px",
-                padding: "12px 20px",
-                background: i % 2 === 0 ? "#0d0618" : "#12071f",
-                borderBottom: "0.5px solid #1a0a2e",
-              }}>
-                <span style={{ fontSize: 14, fontWeight: 500, color: "#b090e0" }}>{item.hora}</span>
-                <span style={{ fontSize: 14, fontWeight: item.dj ? 400 : 600, color: item.dj ? "#a190c4" : "#f0e0ff" }}>
-                  {item.dj ? <em>{item.nome}</em> : item.nome}
-                </span>
-                <span style={{ fontSize: 13, color: "#a190c4", textAlign: "right" }}>{item.duracao}</span>
-              </div>
-            ))}
-          </div>
+          <p style={s.secLabel}>Quem tocou · Sertãozinho 2026</p>
+          <h2 style={{ ...s.secTitle, marginBottom: 8 }}>As atrações da edição Sertãozinho</h2>
+          <p style={{ fontSize: 13, color: "#a190c4", marginBottom: 32 }}>26 de setembro de 2026 · Cinco bandas, DJ e muito rock</p>
 
           {/* CARDS DAS BANDAS */}
           <div style={s.bandGrid}>
@@ -353,13 +340,34 @@ export default function TodosNoRock() {
         </div>
       </section>
 
-      {/* LAYOUT DO EVENTO */}
-      <section style={s.sectionAlt}>
+      {/* GALERIA */}
+      <section id="galeria" style={s.sectionAlt}>
         <div style={{ maxWidth: 960, margin: "0 auto" }}>
-          <p style={s.secLabel}>Estrutura do evento</p>
-          <h2 style={s.secTitle}>Layout — Sertãozinho 2026</h2>
-          <p style={{ fontSize: 13, color: "#a190c4", marginBottom: 24 }}>Av. Nelson Benedito Machado, 512 — Distrito Industrial, Sertãozinho — SP</p>
-          <img src={`${BASE}/tnr-layout-sertaozinho.jpg`} alt="Layout do evento" style={{ width: "100%", borderRadius: 10, border: "0.5px solid #a190c4" }} />
+          <p style={s.secLabel}>Como foi · Sertãozinho 2026</p>
+          <h2 style={{ ...s.secTitle, marginBottom: 8 }}>Um dia inteiro de rock</h2>
+          <p style={{ fontSize: 14, color: "#a190c4", lineHeight: 1.7, marginBottom: 32 }}>
+            Show ao vivo com tradução em Libras, Vitrine da Economia Criativa e um público que fez a festa. Veja alguns dos melhores momentos.
+          </p>
+          <div style={s.galGrid}>
+            {galeria.map((f, i) => (
+              <img key={i} src={f.src} alt={f.alt} loading="lazy" style={s.galImg} />
+            ))}
+          </div>
+          <p style={{ fontSize: 12, color: "#a190c4", marginTop: 16, textAlign: "center" }}>
+            Siga <a href="https://www.instagram.com/todosnorock/" target="_blank" rel="noopener noreferrer" style={{ color: "#c4a0ff" }}>@todosnorock</a> para ver mais fotos e vídeos.
+          </p>
+        </div>
+      </section>
+
+      {/* LEVE O FESTIVAL */}
+      <section style={{ ...s.section, textAlign: "center" }}>
+        <div style={{ maxWidth: 600, margin: "0 auto" }}>
+          <p style={s.secLabel}>Próximas edições</p>
+          <h2 style={{ ...s.secTitle, textAlign: "center" }}>Leve o festival para sua cidade</h2>
+          <p style={{ fontSize: 14, color: "#a190c4", lineHeight: 1.6, marginBottom: 28 }}>
+            O Todos no Rock é gratuito, itinerante e viabilizado por incentivo cultural. Prefeituras, secretarias de cultura e empresas interessadas em trazer o festival para sua cidade ou em apoiar as próximas edições (Lei Rouanet e ProAC) podem entrar em contato.
+          </p>
+          <a href="mailto:rtodeschini@rockribeirao.com.br" style={s.btn}>Fale com a gente →</a>
         </div>
       </section>
 
@@ -406,17 +414,6 @@ export default function TodosNoRock() {
         </div>
       </section>
 
-      {/* LEVE O FESTIVAL */}
-      <section style={{ ...s.section, textAlign: "center" }}>
-        <div style={{ maxWidth: 600, margin: "0 auto" }}>
-          <h2 style={{ ...s.secTitle, textAlign: "center" }}>Leve o festival para sua cidade</h2>
-          <p style={{ fontSize: 14, color: "#a190c4", lineHeight: 1.6, marginBottom: 28 }}>
-            Prefeituras, secretarias de cultura e empresas interessadas em trazer o Festival Todos no Rock para sua cidade podem entrar em contato.
-          </p>
-          <a href="mailto:rtodeschini@rockribeirao.com.br" style={s.btn}>Fale com a gente →</a>
-        </div>
-      </section>
-
       {/* É TUDO TOISS */}
       <section style={{ background: "linear-gradient(135deg, #1a0a2e 0%, #0d0618 100%)", borderTop: "2px solid #6030b0", borderBottom: "2px solid #6030b0", padding: "4rem 1.5rem" }}>
         <div style={{ maxWidth: 960, margin: "0 auto" }}>
@@ -432,13 +429,13 @@ export default function TodosNoRock() {
                 </div>
               </div>
               <p style={{ fontSize: 15, color: "#9070c0", lineHeight: 1.8, marginBottom: 24 }}>
-                É com enorme satisfação e orgulho que o Festival Todos no Rock Sertãozinho apoia a Instituição É Tudo Toiss, que há <strong style={{ color: "#d0a0ff" }}>11 anos</strong> atua em benefício de crianças e famílias carentes na cidade. Contribuir para uma causa tão importante é o que move o espírito de mudança para uma sociedade melhor e mais justa.
+                O Festival Todos no Rock Sertãozinho teve a satisfação e o orgulho de apoiar a Instituição É Tudo Toiss, que há <strong style={{ color: "#d0a0ff" }}>11 anos</strong> atua em benefício de crianças e famílias carentes na cidade. Contribuir para uma causa tão importante é o que move o espírito de mudança para uma sociedade melhor e mais justa.
               </p>
               <div style={{ background: "#1a0a2e", border: "0.5px solid #8040d0", borderRadius: 12, padding: "1.25rem 1.5rem", display: "flex", alignItems: "center", gap: 16, marginBottom: 24, flexWrap: "wrap" }}>
                 <span style={{ fontSize: 36 }}>🛒</span>
                 <div>
-                  <p style={{ fontSize: 16, fontWeight: 500, color: "#f0e0ff", marginBottom: 4 }}>Traga 1kg de alimento no dia 26/09</p>
-                  <p style={{ fontSize: 13, color: "#8060a0" }}>Você garante a alegria de quem mais precisa. A entrada é gratuita — o alimento é o seu ingresso solidário.</p>
+                  <p style={{ fontSize: 16, fontWeight: 500, color: "#f0e0ff", marginBottom: 4 }}>Obrigado a quem trouxe 1kg de alimento!</p>
+                  <p style={{ fontSize: 13, color: "#8060a0" }}>Cada quilo arrecadado no ingresso solidário ajuda quem mais precisa. Gratidão a todo o público de Sertãozinho.</p>
                 </div>
               </div>
               <a href="https://www.instagram.com/etudo_toiss/" target="_blank" rel="noopener noreferrer"
