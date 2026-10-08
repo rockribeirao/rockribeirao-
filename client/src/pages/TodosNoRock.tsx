@@ -76,6 +76,22 @@ const economiaCriativa = [
 ];
 
 const galeria = [
+  { src: `${BASE}/tnr-galeria-19.jpg`, alt: "Banda e equipe posando para a foto com o público ao fundo" },
+  { src: `${BASE}/tnr-galeria-20.jpg`, alt: "Vista do palco e do público à noite" },
+  { src: `${BASE}/tnr-galeria-21.jpg`, alt: "Vocalista cantando no palco do festival" },
+  { src: `${BASE}/tnr-galeria-22.jpg`, alt: "Baixista no palco do festival" },
+  { src: `${BASE}/tnr-galeria-23.jpg`, alt: "Baixista da banda Dirty Jack no palco" },
+  { src: `${BASE}/tnr-galeria-24.jpg`, alt: "Guitarrista da banda Dirty Jack em ação" },
+  { src: `${BASE}/tnr-galeria-25.jpg`, alt: "Vocalista da banda Dirty Jack no palco" },
+  { src: `${BASE}/tnr-galeria-26.jpg`, alt: "Banda tocando sob as luzes roxas do palco" },
+  { src: `${BASE}/tnr-galeria-27.jpg`, alt: "Guitarrista no palco do festival" },
+  { src: `${BASE}/tnr-galeria-28.jpg`, alt: "Vocalista cantando no palco do festival" },
+  { src: `${BASE}/tnr-galeria-29.jpg`, alt: "Trombonista em apresentação no festival" },
+  { src: `${BASE}/tnr-galeria-30.jpg`, alt: "Vocalista cantando no palco do festival" },
+  { src: `${BASE}/tnr-galeria-31.jpg`, alt: "Guitarrista e vocalista no palco do festival" },
+  { src: `${BASE}/tnr-galeria-32.jpg`, alt: "DJ com disco de vinil na cabine" },
+  { src: `${BASE}/tnr-galeria-33.jpg`, alt: "Apresentador do festival com o microfone no palco" },
+  { src: `${BASE}/tnr-galeria-34.jpg`, alt: "Coruja em atração do festival" },
   { src: `${BASE}/tnr-galeria-01.jpg`, alt: "Intérprete de Libras traduzindo o show no palco" },
   { src: `${BASE}/tnr-galeria-02.jpg`, alt: "Tatuadora trabalhando na Vitrine da Economia Criativa" },
   { src: `${BASE}/tnr-galeria-03.jpg`, alt: "Crochê e panos de prato bordados na Vitrine da Economia Criativa" },
@@ -346,7 +362,7 @@ export default function TodosNoRock() {
           <p style={s.secLabel}>Como foi · Sertãozinho 2026</p>
           <h2 style={{ ...s.secTitle, marginBottom: 8 }}>Um dia inteiro de rock</h2>
           <p style={{ fontSize: 14, color: "#a190c4", lineHeight: 1.7, marginBottom: 32 }}>
-            Show ao vivo com tradução em Libras, Vitrine da Economia Criativa e um público que fez a festa. Veja alguns dos melhores momentos.
+            Bandas no palco, tradução em Libras, Vitrine da Economia Criativa e um público que fez a festa. Veja alguns dos melhores momentos.
           </p>
           <div style={s.galGrid}>
             {galeria.map((f, i) => (
