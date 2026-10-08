@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 declare global {
   interface Window { __bhldScript?: boolean; }
@@ -94,6 +94,16 @@ const galeria = [
   { src: `${BASE}/tnr-galeria-31.jpg`, alt: "Guitarrista e vocalista no palco do festival" },
   { src: `${BASE}/tnr-galeria-32.jpg`, alt: "DJ com disco de vinil na cabine" },
   { src: `${BASE}/tnr-galeria-33.jpg`, alt: "Apresentador do festival com o microfone no palco" },
+  { src: `${BASE}/tnr-galeria-38.jpg`, alt: "Vocalista e guitarrista lado a lado no palco" },
+  { src: `${BASE}/tnr-galeria-39.jpg`, alt: "Guitarrista da banda Dirty Jack em ação" },
+  { src: `${BASE}/tnr-galeria-40.jpg`, alt: "Guitarrista da banda Dirty Jack no palco" },
+  { src: `${BASE}/tnr-galeria-41.jpg`, alt: "Vocalista cantando no palco do festival" },
+  { src: `${BASE}/tnr-galeria-42.jpg`, alt: "Baixista no palco do festival" },
+  { src: `${BASE}/tnr-galeria-43.jpg`, alt: "Vocalista com o braço erguido no palco" },
+  { src: `${BASE}/tnr-galeria-44.jpg`, alt: "Baixista e vocalista no palco do festival" },
+  { src: `${BASE}/tnr-galeria-45.jpg`, alt: "DJ na cabine durante o festival" },
+  { src: `${BASE}/tnr-galeria-46.jpg`, alt: "Comida servida na área de gastronomia do festival" },
+  { src: `${BASE}/tnr-galeria-47.jpg`, alt: "Visitante com uma coruja em atração do festival" },
   { src: `${BASE}/tnr-galeria-34.jpg`, alt: "Coruja em atração do festival" },
   { src: `${BASE}/tnr-galeria-01.jpg`, alt: "Intérprete de Libras traduzindo o show no palco" },
   { src: `${BASE}/tnr-galeria-02.jpg`, alt: "Tatuadora trabalhando na Vitrine da Economia Criativa" },
@@ -113,6 +123,19 @@ const galeria = [
   { src: `${BASE}/tnr-galeria-16.jpg`, alt: "Público no Festival Todos no Rock" },
   { src: `${BASE}/tnr-galeria-17.jpg`, alt: "Público no Festival Todos no Rock" },
   { src: `${BASE}/tnr-galeria-18.jpg`, alt: "Público no Festival Todos no Rock" },
+  { src: `${BASE}/tnr-galeria-48.jpg`, alt: "Criança curtindo o show na grade" },
+  { src: `${BASE}/tnr-galeria-49.jpg`, alt: "Família com a filha pequena no festival" },
+  { src: `${BASE}/tnr-galeria-50.jpg`, alt: "Pai e filha posando no festival" },
+  { src: `${BASE}/tnr-galeria-51.jpg`, alt: "Pai, mãe e filha posando no festival" },
+  { src: `${BASE}/tnr-galeria-52.jpg`, alt: "Casal brindando com canecas no festival" },
+  { src: `${BASE}/tnr-galeria-53.jpg`, alt: "Casal sorrindo no festival" },
+  { src: `${BASE}/tnr-galeria-54.jpg`, alt: "Casal posando no meio do público" },
+  { src: `${BASE}/tnr-galeria-55.jpg`, alt: "Público acompanhando o show" },
+  { src: `${BASE}/tnr-galeria-56.jpg`, alt: "Amigos acompanhando o show" },
+  { src: `${BASE}/tnr-galeria-57.jpg`, alt: "Amigas posando no festival" },
+  { src: `${BASE}/tnr-galeria-58.jpg`, alt: "Amigas sorrindo no festival" },
+  { src: `${BASE}/tnr-galeria-59.jpg`, alt: "Amigos posando no festival" },
+  { src: `${BASE}/tnr-galeria-60.jpg`, alt: "Jovem e adulto fazendo o sinal do rock na grade" },
 ];
 
 const edicoes = [
@@ -122,6 +145,8 @@ const edicoes = [
 ];
 
 export default function TodosNoRock() {
+  const [verTodas, setVerTodas] = useState(false);
+  const fotosVisiveis = verTodas ? galeria : galeria.slice(0, 30);
   const isFestivalDomain =
     typeof window !== "undefined" &&
     ["todosnorock.com.br", "www.todosnorock.com.br"].includes(window.location.hostname);
@@ -368,10 +393,17 @@ export default function TodosNoRock() {
             Bandas no palco, tradução em Libras, Vitrine da Economia Criativa e um público que fez a festa. Veja alguns dos melhores momentos.
           </p>
           <div style={s.galGrid}>
-            {galeria.map((f, i) => (
+            {fotosVisiveis.map((f, i) => (
               <img key={i} src={f.src} alt={f.alt} loading="lazy" style={s.galImg} />
             ))}
           </div>
+          {!verTodas && galeria.length > 30 && (
+            <div style={{ textAlign: "center", marginTop: 8 }}>
+              <button type="button" onClick={() => setVerTodas(true)} style={{ ...s.btn, border: "none", cursor: "pointer", fontFamily: "inherit" }}>
+                Ver mais fotos ({galeria.length - 30})
+              </button>
+            </div>
+          )}
           <p style={{ fontSize: 12, color: "#a190c4", marginTop: 16, textAlign: "center" }}>
             Siga <a href="https://www.instagram.com/todosnorock/" target="_blank" rel="noopener noreferrer" style={{ color: "#c4a0ff" }}>@todosnorock</a> para ver mais fotos e vídeos.
           </p>
