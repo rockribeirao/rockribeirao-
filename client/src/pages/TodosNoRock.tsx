@@ -78,6 +78,7 @@ const economiaCriativa = [
 const galeria = [
   { src: `${BASE}/tnr-galeria-19.jpg`, alt: "Banda e equipe posando para a foto com o público ao fundo" },
   { src: `${BASE}/tnr-galeria-20.jpg`, alt: "Vista do palco e do público à noite" },
+  { src: `${BASE}/tnr-galeria-62.jpg`, alt: "Vocalista cantando de braços abertos no palco do festival" },
   { src: `${BASE}/tnr-galeria-35.jpg`, alt: "Banda da School of Rock posando no palco do festival" },
   { src: `${BASE}/tnr-galeria-36.jpg`, alt: "Guitarrista da School of Rock no palco" },
   { src: `${BASE}/tnr-galeria-37.jpg`, alt: "Vocalista da School of Rock cantando no palco" },
@@ -92,7 +93,7 @@ const galeria = [
   { src: `${BASE}/tnr-galeria-29.jpg`, alt: "Trombonista em apresentação no festival" },
   { src: `${BASE}/tnr-galeria-30.jpg`, alt: "Vocalista cantando no palco do festival" },
   { src: `${BASE}/tnr-galeria-31.jpg`, alt: "Guitarrista e vocalista no palco do festival" },
-  { src: `${BASE}/tnr-galeria-32.jpg`, alt: "DJ com disco de vinil na cabine" },
+  { src: `${BASE}/tnr-galeria-61.jpg`, alt: "DJ segurando um disco de vinil diante do palco" },
   { src: `${BASE}/tnr-galeria-33.jpg`, alt: "Apresentador do festival com o microfone no palco" },
   { src: `${BASE}/tnr-galeria-38.jpg`, alt: "Vocalista e guitarrista lado a lado no palco" },
   { src: `${BASE}/tnr-galeria-39.jpg`, alt: "Guitarrista da banda Dirty Jack em ação" },
