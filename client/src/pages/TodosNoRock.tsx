@@ -78,6 +78,9 @@ const economiaCriativa = [
 const galeria = [
   { src: `${BASE}/tnr-galeria-19.jpg`, alt: "Banda e equipe posando para a foto com o público ao fundo" },
   { src: `${BASE}/tnr-galeria-20.jpg`, alt: "Vista do palco e do público à noite" },
+  { src: `${BASE}/tnr-galeria-35.jpg`, alt: "Banda da School of Rock posando no palco do festival" },
+  { src: `${BASE}/tnr-galeria-36.jpg`, alt: "Guitarrista da School of Rock no palco" },
+  { src: `${BASE}/tnr-galeria-37.jpg`, alt: "Vocalista da School of Rock cantando no palco" },
   { src: `${BASE}/tnr-galeria-21.jpg`, alt: "Vocalista cantando no palco do festival" },
   { src: `${BASE}/tnr-galeria-22.jpg`, alt: "Baixista no palco do festival" },
   { src: `${BASE}/tnr-galeria-23.jpg`, alt: "Baixista da banda Dirty Jack no palco" },
