@@ -349,24 +349,20 @@ export default function Home() {
       )}
 
       {/* HALLOWEEN DESTAQUE */}
-      <section style={{ background: "#140a1f", borderTop: "2px solid #ff8c00", borderBottom: "2px solid #ff8c00", padding: "1.5rem" }}>
+      <section className="py-12" style={{ background: "#140a1f", borderTop: "2px solid #ff8c00", borderBottom: "2px solid #ff8c00" }}>
         <div className="container">
-          <p style={{ fontSize: 10, letterSpacing: "0.1em", color: "#c9a0e0", marginBottom: 12, display: "flex", alignItems: "center", gap: 8 }}>
-            <span style={{ display: "inline-block", width: 24, height: "0.5px", background: "#c9a0e0" }}></span>
-            ESPECIAL
-            <span style={{ display: "inline-block", width: 24, height: "0.5px", background: "#c9a0e0" }}></span>
-          </p>
-          <a href="/halloween" style={{ display: "block", background: "#1a0a2e", border: "0.5px solid #ff8c00", borderRadius: 12, overflow: "hidden", maxWidth: 780, margin: "0 auto", textDecoration: "none" }}>
+          <h2 className="font-display text-4xl mb-6" style={{ color: "#ff8c00" }}>ESPECIAL</h2>
+          <a href="/halloween" style={{ display: "flex", flexWrap: "wrap", background: "#1a0a2e", border: "0.5px solid #ff8c00", borderRadius: 12, overflow: "hidden", maxWidth: 620, margin: "0 auto", textDecoration: "none" }}>
             <img src="/halloween/halloween-destaque-home.jpg" alt="Halloween no Hard Rock Cafe Ribeirão Preto" style={{ width: "100%", aspectRatio: "1600 / 838", objectFit: "cover", display: "block" }} />
-            <div style={{ padding: "1.5rem" }}>
-              <p style={{ fontSize: 9, letterSpacing: "0.1em", color: "#ff8c00", marginBottom: 6 }}>30 E 31 DE OUTUBRO</p>
-              <h3 style={{ fontSize: 20, fontWeight: 500, color: "#ffb84d", marginBottom: 10 }}>Halloween no Hard Rock Cafe</h3>
-              <div style={{ display: "flex", flexDirection: "column", gap: 5, marginBottom: 12 }}>
-                <span style={{ fontSize: 13, color: "#a08cc0" }}>📅 30 e 31 de outubro de 2026</span>
-                <span style={{ fontSize: 13, color: "#a08cc0" }}>🕐 A partir das 21h</span>
-                <span style={{ fontSize: 13, color: "#a08cc0" }}>📍 Hard Rock Cafe Ribeirão Preto</span>
+            <div style={{ padding: "1.1rem 1.25rem" }}>
+              <p style={{ fontSize: 9, letterSpacing: "0.1em", color: "#ff8c00", marginBottom: 4 }}>30 E 31 DE OUTUBRO</p>
+              <h3 style={{ fontSize: 17, fontWeight: 500, color: "#ffb84d", marginBottom: 8 }}>Halloween no Hard Rock Cafe</h3>
+              <div style={{ display: "flex", flexDirection: "column", gap: 3, marginBottom: 10 }}>
+                <span style={{ fontSize: 12, color: "#a08cc0" }}>📅 30 e 31 de outubro de 2026</span>
+                <span style={{ fontSize: 12, color: "#a08cc0" }}>🕐 A partir das 21h</span>
+                <span style={{ fontSize: 12, color: "#a08cc0" }}>📍 Hard Rock Cafe Ribeirão Preto</span>
               </div>
-              <span style={{ display: "inline-block", background: "#ff8c00", color: "#140a1f", fontSize: 13, fontWeight: 600, padding: "8px 20px", borderRadius: 8 }}>
+              <span style={{ display: "inline-block", background: "#ff8c00", color: "#140a1f", fontSize: 12, fontWeight: 600, padding: "7px 16px", borderRadius: 8 }}>
                 Ver programação completa →
               </span>
             </div>
