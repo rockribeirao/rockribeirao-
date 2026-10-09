@@ -274,6 +274,32 @@ export default function Home() {
         </div>
       </section>
 
+      {/* HALLOWEEN DESTAQUE */}
+      <section style={{ background: "#140a1f", borderTop: "2px solid #ff8c00", borderBottom: "2px solid #ff8c00", padding: "1.5rem" }}>
+        <div className="container">
+          <p style={{ fontSize: 10, letterSpacing: "0.1em", color: "#c9a0e0", marginBottom: 12, display: "flex", alignItems: "center", gap: 8 }}>
+            <span style={{ display: "inline-block", width: 24, height: "0.5px", background: "#c9a0e0" }}></span>
+            ESPECIAL
+            <span style={{ display: "inline-block", width: 24, height: "0.5px", background: "#c9a0e0" }}></span>
+          </p>
+          <a href="/halloween" style={{ display: "block", background: "#1a0a2e", border: "0.5px solid #ff8c00", borderRadius: 12, overflow: "hidden", maxWidth: 780, margin: "0 auto", textDecoration: "none" }}>
+            <img src="/halloween/halloween-hero-desktop.jpg" alt="Halloween no Hard Rock Cafe Ribeirão Preto" style={{ width: "100%", aspectRatio: "1600 / 838", objectFit: "cover", display: "block" }} />
+            <div style={{ padding: "1.5rem" }}>
+              <p style={{ fontSize: 9, letterSpacing: "0.1em", color: "#ff8c00", marginBottom: 6 }}>30 E 31 DE OUTUBRO</p>
+              <h3 style={{ fontSize: 20, fontWeight: 500, color: "#ffb84d", marginBottom: 10 }}>Halloween no Hard Rock Cafe</h3>
+              <div style={{ display: "flex", flexDirection: "column", gap: 5, marginBottom: 12 }}>
+                <span style={{ fontSize: 13, color: "#a08cc0" }}>📅 30 e 31 de outubro de 2026</span>
+                <span style={{ fontSize: 13, color: "#a08cc0" }}>🕐 A partir das 21h</span>
+                <span style={{ fontSize: 13, color: "#a08cc0" }}>📍 Hard Rock Cafe Ribeirão Preto</span>
+              </div>
+              <span style={{ display: "inline-block", background: "#ff8c00", color: "#140a1f", fontSize: 13, fontWeight: 600, padding: "8px 20px", borderRadius: 8 }}>
+                Ver programação completa →
+              </span>
+            </div>
+          </a>
+        </div>
+      </section>
+
       {/* Carrossel de Destaques */}
       {featuredShows.length > 0 && (
         <section className="py-16" style={{ background: "#06020e" }}>
