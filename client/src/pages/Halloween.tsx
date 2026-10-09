@@ -270,14 +270,14 @@ const CSS = `
 .hw .navlinks .on{color:var(--pumpkin);border-bottom:2px solid var(--pumpkin)}
 .hw .hero{padding-block:72px 64px;display:grid;gap:22px;position:relative;isolation:isolate;min-height:min(640px,82vh);align-content:center}
 .hw .hero>*:not(.sky){position:relative;z-index:1;max-width:620px}
-.hw .hero>.titlerow{max-width:900px}
+.hw .hero>.titlerow{max-width:1060px}
 .hw .sky{position:absolute;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);z-index:0;pointer-events:none;overflow:hidden}
 .hw .sky img{width:100%;height:100%;max-width:none;object-fit:cover;object-position:70% 50%;display:block}
 .hw .sky::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,11,20,.92) 0%,rgba(15,11,20,.55) 45%,rgba(15,11,20,0) 75%),linear-gradient(0deg,var(--night) 0%,rgba(15,11,20,0) 25%)}
 .hw .eyebrow{text-transform:uppercase;letter-spacing:.14em;font-weight:600;font-size:13px;color:var(--ash)}
 .hw .titlerow{display:flex;align-items:center;gap:clamp(16px,3vw,32px)}
 .hw .titlerow h1{min-width:0}
-.hw .hrwrap{flex:none;order:2;position:relative;isolation:isolate;display:block}
+.hw .hrwrap{flex:none;order:2;position:relative;isolation:isolate;display:block;margin-left:clamp(0px,6vw,110px)}
 .hw .hrwrap::before,.hw .hrwrap::after{content:"";position:absolute;z-index:-1;border-radius:50%;pointer-events:none}
 .hw .hrwrap::before{inset:-35% -30%;background:radial-gradient(ellipse at 50% 50%,rgba(0,0,0,.85) 0%,rgba(0,0,0,.6) 35%,rgba(0,0,0,0) 70%);filter:blur(14px)}
 .hw .hrwrap::after{inset:-15% -45% -25% -10%;background:radial-gradient(ellipse 45% 40% at 35% 60%,rgba(0,0,0,.55),transparent 70%),radial-gradient(ellipse 40% 35% at 70% 35%,rgba(0,0,0,.45),transparent 70%);filter:blur(18px)}
