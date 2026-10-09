@@ -256,7 +256,7 @@ export default function Home() {
             OS MAIORES SHOWS DE ROCK DE RIBEIRÃO PRETO
           </h1>
           <p className="font-heading text-xl md:text-2xl text-white mb-8 max-w-3xl mx-auto">
-            Os maiores nomes do rock passam por aqui
+            Os principais nomes do rock passam por aqui
           </p>
           <div className="flex flex-col md:flex-row gap-4 justify-center items-center mb-6">
             <Button onClick={() => document.getElementById("shows")?.scrollIntoView({ behavior: "smooth" })}
