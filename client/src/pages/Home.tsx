@@ -351,7 +351,7 @@ export default function Home() {
       {/* HALLOWEEN DESTAQUE */}
       <section className="py-12" style={{ background: "#140a1f", borderTop: "2px solid #ff8c00", borderBottom: "2px solid #ff8c00" }}>
         <div className="container">
-          <h2 className="font-display text-4xl mb-6" style={{ color: "#ff8c00" }}>ESPECIAL</h2>
+          <h2 className="font-display text-4xl mb-6" style={{ color: "#ff8c00" }}>ESPECIAL HALLOWEEN</h2>
           <a href="/halloween" style={{ display: "flex", flexWrap: "wrap", background: "#1a0a2e", border: "0.5px solid #ff8c00", borderRadius: 12, overflow: "hidden", maxWidth: 620, margin: "0 auto", textDecoration: "none" }}>
             <img src="/halloween/halloween-destaque-home.jpg" alt="Halloween no Hard Rock Cafe Ribeirão Preto" style={{ width: "100%", aspectRatio: "1600 / 838", objectFit: "cover", display: "block" }} />
             <div style={{ padding: "1.1rem 1.25rem" }}>
