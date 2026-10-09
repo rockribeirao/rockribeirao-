@@ -107,7 +107,7 @@ export default function Halloween() {
               <span className="sub">Duas noites de rock no Hard Rock Cafe Ribeirão Preto</span>
             </h1>
           </div>
-          <p className="lede">Sexta tem Lithium com Dri Santana. Sábado, na noite do Halloween, tem o rock xamânico do Caaru e concurso de fantasias com R$ 600 em prêmios. Venha fantasiado.</p>
+          <p className="lede">Sexta tem Lithium com Dri Santana, e os 30 primeiros a chegar fantasiados até as 19h30 ganham ingresso para o sábado. Sábado, na noite do Halloween, tem o rock xamânico do Caaru e concurso de fantasias com R$ 600 em prêmios. Venha fantasiado.</p>
           <div className="count" aria-live="polite">
             <div><b>{cd.d}</b><small>dias</small></div>
             <div><b>{cd.h}</b><small>horas</small></div>
@@ -130,6 +130,7 @@ export default function Halloween() {
                 <h3>Lithium <small>com Dri Santana</small></h3>
                 <ul className="perks">
                   <li><span>Totem</span>Totem fotográfico da Yupi para levar a foto da noite.</li>
+                  <li><span>Fantasia</span>Os 30 primeiros que chegarem fantasiados até as 19h30 ganham um ingresso para o show do Caaru no sábado, 31/10.</li>
                 </ul>
                 <a className="btn" href={SYMPLA_LITHIUM} target="_blank" rel="noopener noreferrer">Comprar ingresso · 30/10</a>
               </div>
@@ -197,6 +198,7 @@ export default function Halloween() {
             <div>
               <h4>Horários</h4>
               <p>Shows a partir das 21h nas duas noites.</p>
+              <p>Na sexta, chegue fantasiado até as 19h30 para garantir um dos 30 ingressos para o sábado.</p>
               <p>Classificação livre. Crianças de até 6 anos, acompanhadas, não pagam.</p>
             </div>
             <div>
@@ -209,7 +211,7 @@ export default function Halloween() {
 
         <section>
           <h2>Perguntas frequentes</h2>
-          <details><summary>Preciso ir fantasiado?</summary><p>Não é obrigatório, mas a noite fica melhor assim. Para concorrer aos prêmios, só no sábado, 31/10.</p></details>
+          <details><summary>Preciso ir fantasiado?</summary><p>Não é obrigatório, mas a noite fica melhor assim. Na sexta, 30/10, os 30 primeiros que chegarem fantasiados até as 19h30 ganham um ingresso para o sábado. No sábado, 31/10, quem vier fantasiado concorre aos gift cards do concurso.</p></details>
           <details><summary>Posso reservar mesa sem ingresso?</summary><p>Não. A reserva é feita pelo WhatsApp somente depois da compra do ingresso e fica mantida até 19h30.</p></details>
           <details><summary>Posso levar as crianças?</summary><p>Pode. A classificação é livre nas duas noites, e crianças de até 6 anos, acompanhadas, não pagam. Venda e consumo de bebidas alcoólicas proibidos para menores de 18 anos.</p></details>
         </section>
