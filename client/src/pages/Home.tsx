@@ -357,7 +357,7 @@ export default function Home() {
             <span style={{ display: "inline-block", width: 24, height: "0.5px", background: "#c9a0e0" }}></span>
           </p>
           <a href="/halloween" style={{ display: "block", background: "#1a0a2e", border: "0.5px solid #ff8c00", borderRadius: 12, overflow: "hidden", maxWidth: 780, margin: "0 auto", textDecoration: "none" }}>
-            <img src="/halloween/halloween-hero-desktop.jpg" alt="Halloween no Hard Rock Cafe Ribeirão Preto" style={{ width: "100%", aspectRatio: "1600 / 838", objectFit: "cover", display: "block" }} />
+            <img src="/halloween/halloween-destaque-home.jpg" alt="Halloween no Hard Rock Cafe Ribeirão Preto" style={{ width: "100%", aspectRatio: "1600 / 838", objectFit: "cover", display: "block" }} />
             <div style={{ padding: "1.5rem" }}>
               <p style={{ fontSize: 9, letterSpacing: "0.1em", color: "#ff8c00", marginBottom: 6 }}>30 E 31 DE OUTUBRO</p>
               <h3 style={{ fontSize: 20, fontWeight: 500, color: "#ffb84d", marginBottom: 10 }}>Halloween no Hard Rock Cafe</h3>
