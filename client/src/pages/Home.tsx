@@ -62,8 +62,8 @@ const upcomingShows: Show[] = [
   { id: 70, name: "CHILDREN OF THE BEAST", subtitle: "TRIBUTO IRON MAIDEN", date: "16/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/children-of-the-beast-o-tributo-oficial-do-iron-maiden-no-hrc-ribeirao/3576580", image: `${BASE}/ChildrenOfTheBeast%2020261016.jpg`, bannerImage: `${BASE}/ChildrenOfTheBeast-banner%2020261016.jpg`, partnership: true, partnerName: "Taiwan Hotel" },
   { id: 71, name: "RENATO QUASE RUSSO", subtitle: "TRIBUTO LEGIÃO URBANA — ESPECIAL 30 ANOS RENATO RUSSO", subtitleColor: "#d4a017", date: "17/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/tributo-legiao-urbana-por-renato-quase-russo-no-hard-rock-cafe-ribeirao-preto/3576573", image: `${BASE}/RenatoQuaseRusso%2020261017.jpg`, bannerImage: `${BASE}/RenatoQuaseRusso-banner%2020261017.jpg`, partnership: true, partnerName: "Matiz Hotel" },
   { id: 72, name: "AURAH", subtitle: "POP ROCK", date: "23/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/aurah-rock-hits-no-hard-rock-cafe-ribeirao-preto/3576598", image: `${BASE}/Aurah%2020261023.jpg`, bannerImage: `${BASE}/Aurah-banner%2020261023.jpg`, partnership: true, partnerName: "Hotel JP" },
-  { id: 73, name: "LITHIUM", subtitle: "ESPECIAL HALLOWEEN", subtitleColor: "#ff8c00", date: "30/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/lithium-com-dri-santana-no-hard-rock-cafe-ribeirao-preto/3576546", image: `${BASE}/Lithium%2020261030.jpg`, bannerImage: `${BASE}/Lithium-banner%2020261030.jpg` },
-  { id: 74, name: "CAARU", subtitle: "ROCK XAMÂNICO — ESPECIAL HALLOWEEN", subtitleColor: "#ff8c00", date: "31/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/caaru-rock-xamanico-no-hard-rock-cafe-ribeirao-preto/3576589", image: `${BASE}/Caaru%2020261031.jpg`, bannerImage: `${BASE}/Caaru-banner%2020261031.jpg`, partnership: true, partnerName: "Transamerica" },
+  { id: 73, name: "LITHIUM", subtitle: "ESPECIAL HALLOWEEN", subtitleColor: "#ff8c00", date: "30/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/lithium-com-dri-santana-no-hard-rock-cafe-ribeirao-preto/3576546", image: `${BASE}/Lithium%2020261030.jpg`, bannerImage: `${BASE}/Lithium-banner%2020261030.jpg`, carouselLink: "/halloween" },
+  { id: 74, name: "CAARU", subtitle: "ROCK XAMÂNICO — ESPECIAL HALLOWEEN", subtitleColor: "#ff8c00", date: "31/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/caaru-rock-xamanico-no-hard-rock-cafe-ribeirao-preto/3576589", image: `${BASE}/Caaru%2020261031.jpg`, bannerImage: `${BASE}/Caaru-banner%2020261031.jpg`, partnership: true, partnerName: "Transamerica", carouselLink: "/halloween" },
   { id: 62, name: "FESTIVAL TODOS NO ROCK", subtitle: "SCHOOL OF ROCK, ROTOR, DIRTY JACK, O ÉPICCO E SANTÍSSIMA TRINDADE", date: "26/09", month: "Setembro", time: "13h", venue: "Sertãozinho", image: `${BASE}/TodosNoRock-card%2020260926.jpg`, bannerImage: `${BASE}/TodosNoRock-banner%2020260926.jpg`, link: "https://www.sympla.com.br/evento/todos-no-rock-marquesa-open-bar/3569023", linkLabel: "COMPRAR CAMAROTE", carouselLink: "https://www.sympla.com.br/evento/todos-no-rock-marquesa-open-bar/3569023", free: true, hideFreeBadge: true },
   { id: 63, name: "DYNAMITE", subtitle: "TRIBUTO SCORPIONS", date: "26/09", month: "Setembro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/dynamite-tributo-scorpions-no-hard-rock-cafe-ribeirao-preto/3541522", image: `${BASE}/Dynamite%2020260926.jpeg`, bannerImage: `${BASE}/Dynamite-banner%2020260926.jpg`, partnership: true, partnerName: "Hotel JP" },
 ];
@@ -235,6 +235,7 @@ export default function Home() {
             <a href="#proof" style={{ color: "#cc2200" }} className="hover:opacity-80 transition">CREDIBILIDADE</a>
             <a href="#gallery" style={{ color: "#cc2200" }} className="hover:opacity-80 transition">GALERIA</a>
             <a href="https://todosnorock.com.br" style={{ color: "#b090e0", border: "0.5px solid #6030b0", padding: "4px 12px", borderRadius: 20, fontSize: 12 }} className="hover:opacity-80 transition">TODOS NO ROCK</a>
+            <a href="/halloween" style={{ color: "#ff8c00", border: "0.5px solid #ff8c00", padding: "4px 12px", borderRadius: 20, fontSize: 12 }} className="hover:opacity-80 transition">HALLOWEEN</a>
             <a href="#about" style={{ color: "#cc2200" }} className="hover:opacity-80 transition">SOBRE</a>
             <a href="#contact" style={{ color: "#cc2200" }} className="hover:opacity-80 transition">CONTATO</a>
           </nav>
@@ -288,7 +289,7 @@ export default function Home() {
                     <a
                       key={show.id}
                       href={show.carouselLink || show.link}
-                      target="_blank"
+                      target={show.carouselLink?.startsWith("/") ? undefined : "_blank"}
                       rel="noopener noreferrer"
                       style={{
                         flex: "0 0 78%",

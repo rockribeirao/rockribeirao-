@@ -7,6 +7,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import TodosNoRock from "./pages/TodosNoRock";
 import Acessibilidade from "./pages/Acessibilidade";
+import Halloween from "./pages/Halloween";
 
 const FESTIVAL_HOSTS = ["todosnorock.com.br", "www.todosnorock.com.br"];
 
@@ -26,6 +27,7 @@ function Router() {
     <Switch>
       <Route path={"/"} component={Home} />
       <Route path={"/todos-no-rock"} component={TodosNoRock} />
+      <Route path={"/halloween"} component={Halloween} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>

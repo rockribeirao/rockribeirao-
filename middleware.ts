@@ -26,6 +26,31 @@ export default async function middleware(request: Request) {
   const response = await fetch(request);
   const contentType = response.headers.get("content-type") || "";
 
+  // Halloween page on rockribeirao.com.br gets its own link preview.
+  const pathname = new URL(request.url).pathname.replace(/\/+$/, "");
+  if (!isFestivalDomain && pathname === "/halloween" && contentType.includes("text/html")) {
+    let page = await response.text();
+    const title = "Halloween no Hard Rock Cafe Ribeirão Preto — 30 e 31/10";
+    const desc = "Duas noites de rock no Hard Rock Cafe Ribeirão Preto: Lithium com Dri Santana (30/10) e Caaru (31/10), com concurso de fantasias.";
+    const img = "https://www.rockribeirao.com.br/halloween/halloween-share.jpg";
+    page = page.replace(/<title>.*?<\/title>/i, `<title>${title}</title>`);
+    page = page.replace(/<meta[^>]+(?:property="og:|name="twitter:)[^>]*>\s*/gi, "");
+    page = page.replace(/<\/head>/i, `
+    <meta property="og:title" content="${title}" />
+    <meta property="og:description" content="${desc}" />
+    <meta property="og:image" content="${img}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="634" />
+    <meta property="og:url" content="https://www.rockribeirao.com.br/halloween" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="${title}" />
+    <meta name="twitter:description" content="${desc}" />
+    <meta name="twitter:image" content="${img}" />
+  </head>`);
+    return new Response(page, { status: response.status, headers: response.headers });
+  }
+
   // Only touch actual HTML documents, pass everything else through untouched.
   if (!isFestivalDomain || !contentType.includes("text/html")) {
     return response;
