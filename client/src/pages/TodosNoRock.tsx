@@ -197,9 +197,11 @@ export default function TodosNoRock() {
 
   const s: Record<string, React.CSSProperties> = {
     page: { minHeight: "100vh", backgroundColor: "#06020e", color: "#f0e0ff", fontFamily: "var(--font-sans)" },
-    nav: { background: "#08030f", borderBottom: "0.5px solid #2a1050", padding: "12px 24px", display: "flex", justifyContent: "space-between", alignItems: "center", position: "sticky", top: 0, zIndex: 50 },
+    nav: { background: "#08030f", borderBottom: "0.5px solid #2a1050", padding: "12px 16px", gap: 12, display: "flex", justifyContent: "space-between", alignItems: "center", position: "sticky", top: 0, zIndex: 50 },
     navBack: { display: "flex", alignItems: "center", gap: 8, color: "#9070c0", fontSize: 13, textDecoration: "none" },
     navIg: { display: "flex", alignItems: "center", gap: 6, color: "#b090e0", fontSize: 12, textDecoration: "none" },
+    menuBar: { background: "#0a0415", borderBottom: "0.5px solid #2a1050", display: "flex", gap: 8, overflowX: "auto", padding: "8px 16px", position: "sticky", top: 47, zIndex: 49, WebkitOverflowScrolling: "touch" },
+    menuLink: { flexShrink: 0, whiteSpace: "nowrap", color: "#c4a0ff", fontSize: 13, textDecoration: "none", padding: "6px 14px", borderRadius: 20, border: "0.5px solid #3a1a70", background: "#1a0a2e" },
     hero: { position: "relative", minHeight: 580, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", padding: "4rem 1.5rem", backgroundImage: `linear-gradient(to bottom, rgba(6,2,14,0.5) 0%, rgba(6,2,14,0.88) 100%), url(${BASE}/tnr-hero-bg.jpg.jpg)`, backgroundSize: "cover", backgroundPosition: "center" },
     heroMin: { fontSize: 11, letterSpacing: "0.12em", color: "#a190c4", marginBottom: 16 },
     heroImg: { width: 280, maxWidth: "90%", marginBottom: 24 },
@@ -252,6 +254,7 @@ export default function TodosNoRock() {
 
   return (
     <div style={s.page}>
+      <style>{`html{scroll-behavior:smooth}section[id]{scroll-margin-top:100px}.tnr-menu::-webkit-scrollbar{display:none}`}</style>
       {/* NAV */}
       <nav style={s.nav}>
         <a href={rockRibeiraoHref} style={s.navBack}>{!isFestivalDomain && <ArrowLeft size={16} />} {navLinkLabel}</a>
@@ -259,6 +262,11 @@ export default function TodosNoRock() {
           <Instagram size={14} /> @todosnorock
         </a>
       </nav>
+      <div style={s.menuBar} className="tnr-menu">
+        {[["festival", "O festival"], ["lineup", "Quem tocou"], ["galeria", "Fotos"], ["edicoes", "Edições"], ["parceiros", "Parceiros"], ["instagram", "Instagram"]].map(([id, label]) => (
+          <a key={id} href={`#${id}`} style={s.menuLink}>{label}</a>
+        ))}
+      </div>
 
       <main>
       {/* HERO */}
@@ -277,7 +285,7 @@ export default function TodosNoRock() {
       </section>
 
       {/* O FESTIVAL */}
-      <section style={s.section}>
+      <section id="festival" style={s.section}>
         <p style={s.secLabel}>O festival</p>
         <h2 style={s.secTitle}>Rock ao vivo para todo mundo</h2>
         <p style={{ fontSize: 15, color: "#8060a0", lineHeight: 1.7, marginBottom: 32, maxWidth: 640 }}>
@@ -417,7 +425,7 @@ export default function TodosNoRock() {
       </section>
 
       {/* EDIÇÕES */}
-      <section style={s.section}>
+      <section id="edicoes" style={s.section}>
         <p style={s.secLabel}>Festival itinerante</p>
         <h2 style={{ ...s.secTitle, marginBottom: 32 }}>Edições</h2>
         <div style={s.edicaoList}>
@@ -493,7 +501,7 @@ export default function TodosNoRock() {
       </section>
 
       {/* PARCEIROS */}
-      <section style={s.sectionAlt}>
+      <section id="parceiros" style={s.sectionAlt}>
         <div style={{ maxWidth: 960, margin: "0 auto" }}>
           <p style={{ ...s.secLabel, textAlign: "center", marginBottom: 20 }}>Edição Sertãozinho</p>
 
@@ -564,7 +572,7 @@ export default function TodosNoRock() {
       </section>
 
       {/* INSTAGRAM FEED */}
-      <section style={s.igSection}>
+      <section id="instagram" style={s.igSection}>
         <p style={{ ...s.secLabel, textAlign: "center" }}>Acompanhe o festival</p>
         <p style={{ fontSize: 20, fontWeight: 500, color: "#e0c0ff", marginBottom: 8 }}>@todosnorock</p>
         <p style={{ fontSize: 14, color: "#a190c4", marginBottom: 32 }}>Novidades, bastidores e chamadas das bandas</p>
