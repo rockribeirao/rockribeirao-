@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
 
 // Página especial: Halloween do Hard Rock Cafe Ribeirão Preto (30 e 31/10/2026).
 // Visual próprio, separado do resto do site. Imagens em client/public/halloween/.
@@ -50,6 +51,7 @@ export default function Halloween() {
   const cd = useCountdown(SHOW_START);
   const [foto, setFoto] = useState<string | null>(null);
   const [copiado, setCopiado] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const prevTitle = document.title;
@@ -88,7 +90,18 @@ export default function Halloween() {
             <a href="https://todosnorock.com.br">Todos no Rock</a>
             <span className="on">Halloween</span>
           </div>
+          <button type="button" className="menubtn" aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((o) => !o)}>
+            {menuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
         </nav>
+        {menuOpen && (
+          <div className="mobilemenu" onClick={() => setMenuOpen(false)}>
+            <a href="/">Início</a>
+            <a href="/#shows">Shows</a>
+            <a href="https://todosnorock.com.br">Todos no Rock</a>
+            <a href="#noites" className="on">Halloween</a>
+          </div>
+        )}
 
         <header className="hero">
           <div className="sky" aria-hidden="true">
@@ -266,6 +279,8 @@ const CSS = `
 .hw .navlinks{display:flex;gap:18px;flex-wrap:wrap;font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:.06em;color:var(--ash)}
 .hw .navlinks a{text-decoration:none}.hw .navlinks a:hover{color:var(--bone)}
 .hw .navlinks .on{color:var(--pumpkin);border-bottom:2px solid var(--pumpkin)}
+.hw .menubtn{display:none;background:transparent;border:0;color:var(--pumpkin);padding:8px;cursor:pointer;line-height:0}
+.hw .mobilemenu{display:none}
 .hw .hero{padding-block:72px 64px;display:grid;gap:22px;position:relative;isolation:isolate;min-height:min(640px,82vh);align-content:center}
 .hw .hero>*:not(.sky){position:relative;z-index:1;max-width:620px}
 .hw .hero>.titlerow{max-width:1060px}
@@ -351,6 +366,11 @@ const CSS = `
 @media (max-width:560px){
   .hw .prizes{grid-template-columns:1fr}
   .hw .navlinks{display:none}
+  .hw .menubtn{display:block}
+  .hw .mobilemenu{display:flex;flex-direction:column;position:relative;z-index:3;margin-inline:-20px;background:var(--crypt);border-bottom:1px solid var(--fog)}
+  .hw .mobilemenu a{padding:14px 20px;font-weight:600;font-size:15px;text-transform:uppercase;letter-spacing:.06em;color:var(--bone);text-decoration:none;border-top:1px solid var(--fog)}
+  .hw .mobilemenu a:first-child{border-top:0}
+  .hw .mobilemenu a.on{color:var(--pumpkin)}
   .hw .gal{grid-template-columns:repeat(2,1fr);grid-auto-rows:120px}
   .hw .logos{grid-template-columns:1fr 1fr}
   .hw .lg.wide{grid-column:span 2}
