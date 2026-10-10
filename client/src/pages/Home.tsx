@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Calendar, MapPin, Mail, Instagram, ArrowRight, Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { Calendar, MapPin, Mail, Instagram, ArrowRight, Star, ChevronLeft, ChevronRight, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 
@@ -202,6 +202,7 @@ export default function Home() {
 
   const featuredShows = sortedShows.filter(show => show.bannerImage);
   const [carouselIndex, setCarouselIndex] = useState(0);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     if (featuredShows.length <= 1) return;
@@ -239,7 +240,21 @@ export default function Home() {
             <a href="#about" style={{ color: "#cc2200" }} className="hover:opacity-80 transition">SOBRE</a>
             <a href="#contact" style={{ color: "#cc2200" }} className="hover:opacity-80 transition">CONTATO</a>
           </nav>
+          <button type="button" className="md:hidden p-2" style={{ color: "#ff6644" }} aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((o) => !o)}>
+            {menuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
+          </button>
         </div>
+        {menuOpen && (
+          <nav className="md:hidden flex flex-col font-heading text-base border-t" style={{ borderColor: "#2a1050", background: "#08030f" }} onClick={() => setMenuOpen(false)}>
+            <a href="#shows" style={{ color: "#cc2200" }} className="container py-3">PRÓXIMOS</a>
+            <a href="#proof" style={{ color: "#cc2200" }} className="container py-3">CREDIBILIDADE</a>
+            <a href="#gallery" style={{ color: "#cc2200" }} className="container py-3">GALERIA</a>
+            <a href="https://todosnorock.com.br" style={{ color: "#b090e0" }} className="container py-3">TODOS NO ROCK</a>
+            <a href="/halloween" style={{ color: "#ff8c00" }} className="container py-3">HALLOWEEN</a>
+            <a href="#about" style={{ color: "#cc2200" }} className="container py-3">SOBRE</a>
+            <a href="#contact" style={{ color: "#cc2200" }} className="container py-3">CONTATO</a>
+          </nav>
+        )}
       </header>
 
       <main>
