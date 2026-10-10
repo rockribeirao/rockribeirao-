@@ -264,6 +264,7 @@ export default function TodosNoRock() {
             <img src={`${BASE}/Logo%20do%20header.png`} alt="Rock Ribeirão" className="h-16 w-auto object-contain" />
           </a>
           <nav className="hidden md:flex items-center gap-8 font-heading text-sm">
+            <a href={rockRibeiraoHref} style={{ color: "#cc2200" }} className="hover:opacity-80 transition">ROCK RIBEIRÃO</a>
             {menuItens.map(([id, label]) => (
               <a key={id} href={`#${id}`} style={{ color: "#cc2200" }} className="hover:opacity-80 transition">{label}</a>
             ))}
@@ -276,6 +277,7 @@ export default function TodosNoRock() {
         </div>
         {menuOpen && (
           <nav className="md:hidden flex flex-col font-heading text-base border-t" style={{ borderColor: "#2a1050", background: "#08030f" }} onClick={() => setMenuOpen(false)}>
+            <a href={rockRibeiraoHref} style={{ color: "#cc2200" }} className="container py-3">ROCK RIBEIRÃO</a>
             {menuItens.map(([id, label]) => (
               <a key={id} href={`#${id}`} style={{ color: "#cc2200" }} className="container py-3">{label}</a>
             ))}
