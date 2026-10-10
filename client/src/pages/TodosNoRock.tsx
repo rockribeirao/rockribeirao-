@@ -153,6 +153,7 @@ export default function TodosNoRock() {
   // "Voltar" only makes sense if the visitor actually came from rockribeirao.com.br.
   // Someone landing directly on todosnorock.com.br (ad, social media, direct link)
   // never left that site, so we frame the link as a credit/intro instead of a return.
+  const halloweenHref = isFestivalDomain ? "https://www.rockribeirao.com.br/halloween" : "/halloween";
   const navLinkLabel = isFestivalDomain ? "Uma produção Rock Ribeirão" : "rockribeirao.com.br";
   const footerLinkLabel = isFestivalDomain
     ? "Conheça a Rock Ribeirão Produções →"
@@ -267,8 +268,9 @@ export default function TodosNoRock() {
               <a key={id} href={`#${id}`} style={{ color: "#cc2200" }} className="hover:opacity-80 transition">{label}</a>
             ))}
             <a href="https://www.instagram.com/todosnorock/" target="_blank" rel="noopener noreferrer" style={{ color: "#b090e0", border: "0.5px solid #6030b0", padding: "4px 12px", borderRadius: 20, fontSize: 12 }} className="hover:opacity-80 transition">@TODOSNOROCK</a>
+            <a href={halloweenHref} style={{ color: "#ff8c00", border: "0.5px solid #ff8c00", padding: "4px 12px", borderRadius: 20, fontSize: 12 }} className="hover:opacity-80 transition">HALLOWEEN</a>
           </nav>
-          <button type="button" className="md:hidden p-2" style={{ color: "#ff6644" }} aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((o) => !o)}>
+          <button type="button" className="md:hidden p-2" style={{ color: "#c4a0ff" }} aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((o) => !o)}>
             {menuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
           </button>
         </div>
@@ -278,6 +280,7 @@ export default function TodosNoRock() {
               <a key={id} href={`#${id}`} style={{ color: "#cc2200" }} className="container py-3">{label}</a>
             ))}
             <a href="https://www.instagram.com/todosnorock/" target="_blank" rel="noopener noreferrer" style={{ color: "#b090e0" }} className="container py-3">@TODOSNOROCK</a>
+            <a href={halloweenHref} style={{ color: "#ff8c00" }} className="container py-3">HALLOWEEN</a>
           </nav>
         )}
       </header>
