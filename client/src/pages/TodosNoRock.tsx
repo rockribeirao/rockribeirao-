@@ -8,7 +8,7 @@ declare global {
     }
   }
 }
-import { MapPin, Calendar, ArrowLeft, Instagram, Music, Users, Route, Building } from "lucide-react";
+import { MapPin, Calendar, ArrowLeft, Instagram, Menu, X, Music, Users, Route, Building } from "lucide-react";
 
 const BASE = "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public";
 
@@ -195,13 +195,14 @@ export default function TodosNoRock() {
     };
   }, [isFestivalDomain]);
 
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuItens = [["festival", "O FESTIVAL"], ["lineup", "QUEM TOCOU"], ["galeria", "FOTOS"], ["edicoes", "EDIÇÕES"], ["parceiros", "PARCEIROS"], ["instagram", "INSTAGRAM"]];
+
   const s: Record<string, React.CSSProperties> = {
     page: { minHeight: "100vh", backgroundColor: "#06020e", color: "#f0e0ff", fontFamily: "var(--font-sans)" },
     nav: { background: "#08030f", borderBottom: "0.5px solid #2a1050", padding: "12px 16px", gap: 12, display: "flex", justifyContent: "space-between", alignItems: "center", position: "sticky", top: 0, zIndex: 50 },
     navBack: { display: "flex", alignItems: "center", gap: 8, color: "#9070c0", fontSize: 13, textDecoration: "none" },
     navIg: { display: "flex", alignItems: "center", gap: 6, color: "#b090e0", fontSize: 12, textDecoration: "none" },
-    menuBar: { background: "#0a0415", borderBottom: "0.5px solid #2a1050", display: "flex", gap: 8, overflowX: "auto", padding: "8px 16px", position: "sticky", top: 47, zIndex: 49, WebkitOverflowScrolling: "touch" },
-    menuLink: { flexShrink: 0, whiteSpace: "nowrap", color: "#c4a0ff", fontSize: 13, textDecoration: "none", padding: "6px 14px", borderRadius: 20, border: "0.5px solid #3a1a70", background: "#1a0a2e" },
     hero: { position: "relative", minHeight: 580, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", padding: "4rem 1.5rem", backgroundImage: `linear-gradient(to bottom, rgba(6,2,14,0.5) 0%, rgba(6,2,14,0.88) 100%), url(${BASE}/tnr-hero-bg.jpg.jpg)`, backgroundSize: "cover", backgroundPosition: "center" },
     heroMin: { fontSize: 11, letterSpacing: "0.12em", color: "#a190c4", marginBottom: 16 },
     heroImg: { width: 280, maxWidth: "90%", marginBottom: 24 },
@@ -254,19 +255,32 @@ export default function TodosNoRock() {
 
   return (
     <div style={s.page}>
-      <style>{`html{scroll-behavior:smooth}section[id]{scroll-margin-top:100px}.tnr-menu::-webkit-scrollbar{display:none}`}</style>
+      <style>{`html{scroll-behavior:smooth}section[id]{scroll-margin-top:100px}`}</style>
       {/* NAV */}
-      <nav style={s.nav}>
-        <a href={rockRibeiraoHref} style={s.navBack}>{!isFestivalDomain && <ArrowLeft size={16} />} {navLinkLabel}</a>
-        <a href="https://www.instagram.com/todosnorock/" target="_blank" rel="noopener noreferrer" style={s.navIg}>
-          <Instagram size={14} /> @todosnorock
-        </a>
-      </nav>
-      <div style={s.menuBar} className="tnr-menu">
-        {[["festival", "O festival"], ["lineup", "Quem tocou"], ["galeria", "Fotos"], ["edicoes", "Edições"], ["parceiros", "Parceiros"], ["instagram", "Instagram"]].map(([id, label]) => (
-          <a key={id} href={`#${id}`} style={s.menuLink}>{label}</a>
-        ))}
-      </div>
+      <header className="sticky top-0 z-50 border-b" style={{ background: "#08030f", borderColor: "#2a1050" }}>
+        <div className="container flex items-center justify-between py-4">
+          <a href={rockRibeiraoHref} aria-label={navLinkLabel}>
+            <img src={`${BASE}/Logo%20do%20header.png`} alt="Rock Ribeirão" className="h-16 w-auto object-contain" />
+          </a>
+          <nav className="hidden md:flex items-center gap-8 font-heading text-sm">
+            {menuItens.map(([id, label]) => (
+              <a key={id} href={`#${id}`} style={{ color: "#cc2200" }} className="hover:opacity-80 transition">{label}</a>
+            ))}
+            <a href="https://www.instagram.com/todosnorock/" target="_blank" rel="noopener noreferrer" style={{ color: "#b090e0", border: "0.5px solid #6030b0", padding: "4px 12px", borderRadius: 20, fontSize: 12 }} className="hover:opacity-80 transition">@TODOSNOROCK</a>
+          </nav>
+          <button type="button" className="md:hidden p-2" style={{ color: "#ff6644" }} aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((o) => !o)}>
+            {menuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
+          </button>
+        </div>
+        {menuOpen && (
+          <nav className="md:hidden flex flex-col font-heading text-base border-t" style={{ borderColor: "#2a1050", background: "#08030f" }} onClick={() => setMenuOpen(false)}>
+            {menuItens.map(([id, label]) => (
+              <a key={id} href={`#${id}`} style={{ color: "#cc2200" }} className="container py-3">{label}</a>
+            ))}
+            <a href="https://www.instagram.com/todosnorock/" target="_blank" rel="noopener noreferrer" style={{ color: "#b090e0" }} className="container py-3">@TODOSNOROCK</a>
+          </nav>
+        )}
+      </header>
 
       <main>
       {/* HERO */}
