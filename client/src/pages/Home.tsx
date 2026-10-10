@@ -240,7 +240,7 @@ export default function Home() {
             <a href="#about" style={{ color: "#cc2200" }} className="hover:opacity-80 transition">SOBRE</a>
             <a href="#contact" style={{ color: "#cc2200" }} className="hover:opacity-80 transition">CONTATO</a>
           </nav>
-          <button type="button" className="md:hidden p-2" style={{ color: "#ff6644" }} aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((o) => !o)}>
+          <button type="button" className="md:hidden p-2" style={{ color: "#cc2200" }} aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((o) => !o)}>
             {menuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
           </button>
         </div>
