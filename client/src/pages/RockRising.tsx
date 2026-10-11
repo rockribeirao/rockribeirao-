@@ -15,18 +15,18 @@ const INSCRICOES_ABREM = new Date("2027-01-15T00:00:00-03:00").getTime();
 
 const passos = [
   { n: "01", titulo: "Inscreva", texto: "De 15/01 a 14/02, sua banda envia uma música autoral pelo site. É gratuito." },
-  { n: "02", titulo: "Conquiste", texto: "O público ouve e vota aqui no site. As músicas ganham espaço na programação da Kiss FM." },
+  { n: "02", titulo: "Conquiste", texto: "O público ouve e vota aqui no site. As músicas ganham espaço na programação da Kiss FM Ribeirão Preto." },
   { n: "03", titulo: "Suba no palco", texto: "As 5 mais votadas tocam na grande final, onde um júri técnico escolhe a vencedora." },
 ];
 
 const etapas = [
   { data: "15/01", titulo: "Inscrições abertas", texto: "Até 14/02, aqui no site." },
   { data: "15/02", titulo: "Votação popular", texto: "Somente no site, até 14/03." },
-  { data: "15/03", titulo: "Os 5 finalistas", texto: "Anúncio na Kiss FM e nas redes." },
+  { data: "15/03", titulo: "Os 5 finalistas", texto: "Anúncio na Kiss FM Ribeirão Preto e nas redes." },
   { data: "21/03", titulo: "Grande final", texto: "Ao vivo, júri técnico e entrada gratuita." },
 ];
 
-const faixaBase = ["Inscrições 15/01", "Grave sua música", "Toque na Kiss FM", "Grande final 21/03", "Entrada gratuita", "Bandas de todo o estado"];
+const faixaBase = ["Inscrições 15/01", "Grave sua música", "Toque na Kiss FM Ribeirão Preto", "Grande final 21/03", "Entrada gratuita", "Bandas de todo o estado"];
 
 const logos = [
   { titulo: "Realização", src: `${IMG}/logo-rockribeirao.png`, alt: "Rock Ribeirão Produções", href: "https://www.instagram.com/rockribeirao/", cls: "lg-rr" },
@@ -139,7 +139,7 @@ export default function RockRising() {
                 <img src={`${IMG}/logo-kiss.png`} alt="Kiss FM 105.3" />
               </a>
             </div>
-            <p className="hero-lead">Sua banda no ar na <b>Kiss FM 105.3</b>. Inscreva-se, conquiste o voto do público e suba no palco da grande final em Ribeirão Preto.</p>
+            <p className="hero-lead">Sua banda no ar na <b>Kiss FM 105.3 Ribeirão Preto</b>. Inscreva-se, conquiste o voto do público e suba no palco da grande final em Ribeirão Preto.</p>
             <div className="cd">
               <div className="eyebrow">As inscrições abrem em</div>
               <div role="timer" aria-label="Contagem regressiva para a abertura das inscrições" className="cd-row">
@@ -171,11 +171,11 @@ export default function RockRising() {
           <div className="split">
             <div className="col">
               <div className="disp txt-stroke-red big-ghost">O prêmio</div>
-              <h2 className="h2-sans">Sua música produzida por profissionais e tocando na Kiss FM.</h2>
-              <p className="lead">A banda vencedora ganha a produção de uma música inédita com Fábio Fonzare, da Fonzare Produções, e a Rock Ribeirão. Depois, a música toca de 1 a 2 vezes por dia na programação da Kiss FM 105.3, durante 3 meses.</p>
+              <h2 className="h2-sans">Sua música produzida por profissionais e tocando na Kiss FM Ribeirão Preto.</h2>
+              <p className="lead">A banda vencedora ganha a produção de uma música inédita com Fábio Fonzare, da Fonzare Produções, e a Rock Ribeirão. Depois, a música toca de 1 a 2 vezes por dia na programação local da Kiss FM 105.3 Ribeirão Preto, durante 3 meses.</p>
               <div className="stats">
                 <div><div className="disp stat-v">1</div><div className="stat-r">Música produzida</div></div>
-                <div><div className="disp stat-v">3</div><div className="stat-r">Meses na Kiss FM</div></div>
+                <div><div className="disp stat-v">3</div><div className="stat-r">Meses na Kiss FM Ribeirão Preto</div></div>
                 <div><div className="disp stat-v">2x</div><div className="stat-r">Por dia no ar</div></div>
               </div>
               <div className="fz-card">
@@ -309,7 +309,7 @@ export default function RockRising() {
           <div className="wrap patro-in">
             <div className="eyebrow">Para marcas · Patrocínios até 15/12/2026</div>
             <h2 className="disp h2-disp">Sua marca <span className="red">no volume máximo.</span></h2>
-            <p className="lead">Rádio, Instagram da Kiss FM e presença na grande final, de janeiro a março de 2027. Baixe a apresentação com todas as informações para patrocinadores.</p>
+            <p className="lead">Rádio e Instagram da Kiss FM Ribeirão Preto e presença na grande final, de janeiro a março de 2027. Baixe a apresentação com todas as informações para patrocinadores.</p>
             <a href={PROPOSTA} download className="btn"><DownloadIcon />Baixar apresentação para patrocinadores (PDF)</a>
 
             <div id="contato-patrocinio" className="contato">
