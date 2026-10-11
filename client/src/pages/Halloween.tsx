@@ -136,7 +136,13 @@ export default function Halloween() {
               <span className="tbtn">Comprar ingresso · Sábado</span>
             </a>
           </div>
-          <p className="hint">{cd.d > 0 ? `Faltam ${cd.d} dias · ` : ""}Classificação livre · Até 6 anos não paga</p>
+          <div className="count" aria-live="polite">
+            <span className="clabel">Faltam</span>
+            <div><b>{cd.d}</b><small>dias</small></div>
+            <div><b>{cd.h}</b><small>horas</small></div>
+            <div><b>{cd.m}</b><small>min</small></div>
+          </div>
+          <p className="hint">Classificação livre · Até 6 anos não paga</p>
         </header>
 
         <section id="noites">
@@ -315,6 +321,11 @@ const CSS = `
 .hw .tbtn{display:flex;align-items:center;justify-content:center;margin-top:auto;background:var(--blood);color:#fff;font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:15px;min-height:48px;padding:10px 12px;border-radius:5px;text-align:center}
 .hw .ticket:hover .tbtn{filter:brightness(1.12)}
 .hw .hint{margin:0;font-size:13px;color:var(--ash);letter-spacing:.02em}
+.hw .count{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hw .clabel{font-family:var(--f-display);text-transform:uppercase;letter-spacing:.06em;font-size:15px;color:var(--ash);margin-right:2px}
+.hw .count div{display:flex;align-items:baseline;gap:5px;background:rgba(26,20,34,.88);border:1px solid var(--fog);border-radius:6px;padding:6px 10px}
+.hw .count b{font-family:var(--f-display);font-weight:400;font-size:24px;line-height:1;color:var(--pumpkin);font-variant-numeric:tabular-nums}
+.hw .count small{text-transform:uppercase;letter-spacing:.08em;font-size:11px;color:var(--ash)}
 .hw .btn{display:inline-flex;align-items:center;justify-content:center;background:var(--blood);color:#fff;font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:14px;padding:14px 22px;border-radius:4px;text-decoration:none;border:0;cursor:pointer}
 .hw .btn:hover{filter:brightness(1.12)}
 .hw .btn:focus-visible,.hw a:focus-visible,.hw button:focus-visible{outline:3px solid var(--pumpkin);outline-offset:2px}
@@ -374,6 +385,11 @@ const CSS = `
   .hw .sky img{object-position:50% 35%}
   .hw .sky::after{background:linear-gradient(180deg,rgba(15,11,20,.25) 0%,rgba(15,11,20,.5) 30%,rgba(15,11,20,.85) 60%,var(--night) 100%)}
   .hw .tickets{grid-template-columns:1fr;gap:10px}
+  .hw .count{flex-wrap:nowrap;gap:6px}
+  .hw .count div{padding:5px 8px;gap:4px}
+  .hw .count b{font-size:21px}
+  .hw .count small{font-size:10px;letter-spacing:.04em}
+  .hw .clabel{font-size:13px}
   .hw .titlerow{gap:12px}
   .hw h1 .spook{font-size:13vw}
   .hw .hrlogo{width:21vw}
