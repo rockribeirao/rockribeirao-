@@ -365,25 +365,47 @@ export default function Home() {
         </section>
       )}
 
-      {/* HALLOWEEN DESTAQUE */}
-      <section className="py-12" style={{ background: "#140a1f", borderTop: "2px solid #ff8c00", borderBottom: "2px solid #ff8c00" }}>
+      {/* DESTAQUES */}
+      <section className="py-12" style={{ background: "#0d0614", borderTop: "2px solid #cc2200", borderBottom: "2px solid #cc2200" }}>
         <div className="container">
-          <h2 className="font-display text-4xl mb-6" style={{ color: "#ff8c00" }}>ESPECIAL HALLOWEEN</h2>
-          <a href="/halloween" style={{ display: "flex", flexWrap: "wrap", background: "#1a0a2e", border: "0.5px solid #ff8c00", borderRadius: 12, overflow: "hidden", maxWidth: 620, margin: "0 auto", textDecoration: "none" }}>
-            <img src="/halloween/halloween-destaque-home.jpg" alt="Halloween no Hard Rock Cafe Ribeirão Preto" style={{ width: "100%", aspectRatio: "1600 / 838", objectFit: "cover", display: "block" }} />
-            <div style={{ padding: "1.1rem 1.25rem" }}>
-              <p style={{ fontSize: 9, letterSpacing: "0.1em", color: "#ff8c00", marginBottom: 4 }}>30 E 31 DE OUTUBRO</p>
-              <h3 style={{ fontSize: 17, fontWeight: 500, color: "#ffb84d", marginBottom: 8 }}>Halloween no Hard Rock Cafe</h3>
-              <div style={{ display: "flex", flexDirection: "column", gap: 3, marginBottom: 10 }}>
-                <span style={{ fontSize: 12, color: "#a08cc0" }}>📅 30 e 31 de outubro de 2026</span>
-                <span style={{ fontSize: 12, color: "#a08cc0" }}>🕐 A partir das 21h</span>
-                <span style={{ fontSize: 12, color: "#a08cc0" }}>📍 Hard Rock Cafe Ribeirão Preto</span>
+          <h2 className="font-display text-4xl mb-6" style={{ color: "#cc2200" }}>DESTAQUES</h2>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 20, maxWidth: 1100, margin: "0 auto" }}>
+
+            {/* Rock Rising */}
+            <a href="/rockrising" style={{ display: "flex", flexDirection: "column", background: "#140a0c", border: "0.5px solid #e8173a", borderRadius: 12, overflow: "hidden", textDecoration: "none" }}>
+              <img src="/rockrising/rockrising-destaque-home.jpg" alt="Rock Rising 2027, festival de novos talentos do rock, em parceria com a Kiss FM" style={{ width: "100%", aspectRatio: "1584 / 672", objectFit: "cover", display: "block" }} />
+              <div style={{ padding: "1.1rem 1.25rem", display: "flex", flexDirection: "column", flex: 1 }}>
+                <p style={{ fontSize: 9, letterSpacing: "0.1em", color: "#ff4d63", marginBottom: 4 }}>INSCRIÇÕES A PARTIR DE 15/01 · GRANDE FINAL 21/03/2027</p>
+                <h3 style={{ fontSize: 17, fontWeight: 500, color: "#ffffff", marginBottom: 8 }}>Rock Rising 2027</h3>
+                <div style={{ display: "flex", flexDirection: "column", gap: 3, marginBottom: 10 }}>
+                  <span style={{ fontSize: 12, color: "#bdbdbd" }}>🎸 Festival de novos talentos do rock</span>
+                  <span style={{ fontSize: 12, color: "#bdbdbd" }}>🏆 Música produzida por Fábio Fonzare, tocando na Kiss FM Ribeirão Preto</span>
+                  <span style={{ fontSize: 12, color: "#bdbdbd" }}>📍 Grande final em Ribeirão Preto · entrada gratuita</span>
+                </div>
+                <span style={{ display: "inline-block", alignSelf: "flex-start", marginTop: "auto", background: "#e8173a", color: "#fff", fontSize: 12, fontWeight: 600, padding: "7px 16px", borderRadius: 8 }}>
+                  Conhecer o festival →
+                </span>
               </div>
-              <span style={{ display: "inline-block", background: "#ff8c00", color: "#140a1f", fontSize: 12, fontWeight: 600, padding: "7px 16px", borderRadius: 8 }}>
-                Ver programação completa →
-              </span>
-            </div>
-          </a>
+            </a>
+
+            {/* Halloween */}
+            <a href="/halloween" style={{ display: "flex", flexDirection: "column", background: "#1a0a2e", border: "0.5px solid #ff8c00", borderRadius: 12, overflow: "hidden", textDecoration: "none" }}>
+              <img src="/halloween/halloween-destaque-home.jpg" alt="Halloween no Hard Rock Cafe Ribeirão Preto" style={{ width: "100%", aspectRatio: "1584 / 672", objectFit: "cover", objectPosition: "center 40%", display: "block" }} />
+              <div style={{ padding: "1.1rem 1.25rem", display: "flex", flexDirection: "column", flex: 1 }}>
+                <p style={{ fontSize: 9, letterSpacing: "0.1em", color: "#ff8c00", marginBottom: 4 }}>30 E 31 DE OUTUBRO</p>
+                <h3 style={{ fontSize: 17, fontWeight: 500, color: "#ffb84d", marginBottom: 8 }}>Halloween no Hard Rock Cafe</h3>
+                <div style={{ display: "flex", flexDirection: "column", gap: 3, marginBottom: 10 }}>
+                  <span style={{ fontSize: 12, color: "#a08cc0" }}>📅 30 e 31 de outubro de 2026</span>
+                  <span style={{ fontSize: 12, color: "#a08cc0" }}>🕐 A partir das 21h</span>
+                  <span style={{ fontSize: 12, color: "#a08cc0" }}>📍 Hard Rock Cafe Ribeirão Preto</span>
+                </div>
+                <span style={{ display: "inline-block", alignSelf: "flex-start", marginTop: "auto", background: "#ff8c00", color: "#140a1f", fontSize: 12, fontWeight: 600, padding: "7px 16px", borderRadius: 8 }}>
+                  Ver programação completa →
+                </span>
+              </div>
+            </a>
+
+          </div>
         </div>
       </section>
 
