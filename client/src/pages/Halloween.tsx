@@ -56,10 +56,11 @@ export default function Halloween() {
   useEffect(() => {
     const prevTitle = document.title;
     document.title = "Halloween no Hard Rock Cafe Ribeirão Preto | Rock Ribeirão";
+    const FONTS = "https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;600;700&family=Creepster&display=swap";
     const link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = "https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Creepster&display=swap";
-    document.head.appendChild(link);
+    link.href = FONTS;
+    if (!document.querySelector(`link[href="${FONTS}"]`)) document.head.appendChild(link);
     window.scrollTo(0, 0);
     return () => { document.title = prevTitle; link.remove(); };
   }, []);
@@ -106,34 +107,40 @@ export default function Halloween() {
         <header className="hero">
           <div className="sky" aria-hidden="true">
             <picture>
+              <source media="(max-width:700px)" type="image/webp" srcSet={`${IMG}/halloween-hero-mobile.webp`} />
               <source media="(max-width:700px)" srcSet={`${IMG}/halloween-hero-mobile.jpg`} />
-              <img src={`${IMG}/halloween-hero-desktop.jpg`} alt="" />
+              <source type="image/webp" srcSet={`${IMG}/halloween-hero-desktop.webp`} />
+              <img src={`${IMG}/halloween-hero-desktop.jpg`} alt="" fetchPriority="high" />
             </picture>
           </div>
-          <div className="eyebrow">30 e 31 de outubro · a partir das 21h</div>
           <div className="titlerow">
             <a className="hrwrap" href="https://www.instagram.com/hrc.ribeiraopreto/" target="_blank" rel="noopener noreferrer">
-              <img className="hrlogo" src={`${IMG}/logo-hardrock.png`} alt="Hard Rock Cafe Ribeirão Preto" />
+              <img className="hrlogo" src={`${IMG}/logo-hardrock.png`} alt="Hard Rock Cafe Ribeirão Preto" width={240} height={188} />
             </a>
             <h1>
               <span className="spook">Halloween</span>
-              <span className="sub">Duas noites de rock no Hard Rock Cafe Ribeirão Preto</span>
+              <span className="sub">no Hard Rock Cafe Ribeirão Preto</span>
             </h1>
           </div>
-          <p className="lede">Sexta tem Lithium com Dri Santana, e os 30 primeiros a chegar fantasiados até as 19h30 ganham ingresso para o sábado. Sábado, na noite do Halloween, tem o rock xamânico do Caaru e concurso de fantasias com R$ 600 em prêmios. Venha fantasiado.</p>
-          <div className="count" aria-live="polite">
-            <div><b>{cd.d}</b><small>dias</small></div>
-            <div><b>{cd.h}</b><small>horas</small></div>
-            <div><b>{cd.m}</b><small>min</small></div>
+          <div className="tickets">
+            <a className="ticket" href={SYMPLA_LITHIUM} target="_blank" rel="noopener noreferrer">
+              <span className="tdate"><b>30/10</b> Sexta · 21h</span>
+              <span className="tband">Lithium <small>com Dri Santana</small></span>
+              <span className="tperk">30 primeiros fantasiados até 19h30 ganham ingresso para sábado</span>
+              <span className="tbtn">Comprar ingresso · Sexta</span>
+            </a>
+            <a className="ticket" href={SYMPLA_CAARU} target="_blank" rel="noopener noreferrer">
+              <span className="tdate"><b>31/10</b> Sábado · 21h</span>
+              <span className="tband">Caaru <small>Rock xamânico</small></span>
+              <span className="tperk">Concurso de fantasias com R$ 600 em prêmios</span>
+              <span className="tbtn">Comprar ingresso · Sábado</span>
+            </a>
           </div>
-          <div className="ctas">
-            <a className="btn" href="#noites">Comprar ingresso</a>
-            <a className="btn ghost" href="#concurso">Concurso de fantasias</a>
-          </div>
+          <p className="hint">{cd.d > 0 ? `Faltam ${cd.d} dias · ` : ""}Classificação livre · Até 6 anos não paga</p>
         </header>
 
         <section id="noites">
-          <h2>As noites</h2>
+          <h2>Os shows</h2>
           <p className="sec-lede">Shows a partir das 21h. Cada noite tem o seu ingresso no Sympla.</p>
           <div className="nights">
             <article className="night">
@@ -281,33 +288,37 @@ const CSS = `
 .hw .navlinks .on{color:var(--pumpkin);border-bottom:2px solid var(--pumpkin)}
 .hw .menubtn{display:none;background:transparent;border:0;color:var(--pumpkin);padding:8px;cursor:pointer;line-height:0}
 .hw .mobilemenu{display:none}
-.hw .hero{padding-block:72px 64px;display:grid;gap:22px;position:relative;isolation:isolate;min-height:min(640px,82vh);align-content:center}
-.hw .hero>*:not(.sky){position:relative;z-index:1;max-width:620px}
-.hw .hero>.titlerow{max-width:1060px}
+.hw .hero{padding-block:28px 32px;display:grid;gap:18px;position:relative;isolation:isolate;align-content:start}
+.hw .hero>*:not(.sky){position:relative;z-index:1}
 .hw .sky{position:absolute;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);z-index:0;pointer-events:none;overflow:hidden}
 .hw .sky img{width:100%;height:100%;max-width:none;object-fit:cover;object-position:70% 50%;display:block}
-.hw .sky::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,11,20,.92) 0%,rgba(15,11,20,.55) 45%,rgba(15,11,20,0) 75%),linear-gradient(0deg,var(--night) 0%,rgba(15,11,20,0) 25%)}
-.hw .eyebrow{text-transform:uppercase;letter-spacing:.14em;font-weight:600;font-size:13px;color:var(--ash)}
-.hw .titlerow{display:flex;align-items:center;gap:clamp(16px,3vw,32px)}
+.hw .sky::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,11,20,.92) 0%,rgba(15,11,20,.6) 50%,rgba(15,11,20,.15) 85%),linear-gradient(0deg,var(--night) 0%,rgba(15,11,20,0) 30%)}
+.hw .titlerow{display:flex;align-items:center;justify-content:space-between;gap:16px;max-width:1060px}
 .hw .titlerow h1{min-width:0}
-.hw .hrwrap{flex:none;order:2;position:relative;isolation:isolate;display:block;margin-left:clamp(0px,6vw,110px)}
+.hw .hrwrap{flex:none;order:2;position:relative;isolation:isolate;display:block}
 .hw .hrwrap::before,.hw .hrwrap::after{content:"";position:absolute;z-index:-1;border-radius:50%;pointer-events:none}
 .hw .hrwrap::before{inset:-35% -30%;background:radial-gradient(ellipse at 50% 50%,rgba(0,0,0,.85) 0%,rgba(0,0,0,.6) 35%,rgba(0,0,0,0) 70%);filter:blur(14px)}
 .hw .hrwrap::after{inset:-15% -45% -25% -10%;background:radial-gradient(ellipse 45% 40% at 35% 60%,rgba(0,0,0,.55),transparent 70%),radial-gradient(ellipse 40% 35% at 70% 35%,rgba(0,0,0,.45),transparent 70%);filter:blur(18px)}
-.hw .hrlogo{display:block;width:clamp(110px,20vw,240px);height:auto;filter:drop-shadow(0 0 10px rgba(0,0,0,.7))}
+.hw .hrlogo{display:block;width:clamp(84px,16vw,200px);height:auto;filter:drop-shadow(0 0 10px rgba(0,0,0,.7))}
 .hw h1{margin:0;line-height:.9;font-weight:400}
-.hw h1 .spook{font-family:var(--f-spook);color:var(--pumpkin);font-size:clamp(64px,13vw,150px);display:block;letter-spacing:.02em}
-.hw h1 .sub{font-family:var(--f-display);font-size:clamp(28px,5vw,52px);display:block;text-transform:uppercase}
-.hw .lede{max-width:60ch;color:var(--ash);font-size:18px;margin:0}
-.hw .count{display:flex;gap:10px;flex-wrap:wrap}
-.hw .count div{background:var(--crypt);border:1px solid var(--fog);border-radius:6px;padding:10px 14px;min-width:78px;text-align:center}
-.hw .count b{display:block;font-family:var(--f-display);font-weight:400;font-size:34px;font-variant-numeric:tabular-nums;line-height:1}
-.hw .count small{text-transform:uppercase;letter-spacing:.1em;font-size:11px;color:var(--ash)}
+.hw h1 .spook{font-family:var(--f-spook);color:var(--pumpkin);font-size:clamp(54px,11vw,128px);display:block;letter-spacing:.02em}
+.hw h1 .sub{font-family:var(--f-display);font-size:clamp(20px,3.6vw,40px);display:block;text-transform:uppercase;margin-top:6px}
+.hw .tickets{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:900px}
+.hw .ticket{display:flex;flex-direction:column;gap:6px;text-decoration:none;color:var(--bone);background:rgba(26,20,34,.88);border:1px solid var(--fog);border-top:3px solid var(--pumpkin);border-radius:8px;padding:16px 16px 14px;-webkit-tap-highlight-color:transparent;transition:transform .15s,border-color .15s}
+.hw .ticket:hover{border-color:var(--pumpkin);transform:translateY(-2px)}
+.hw .ticket:active{transform:scale(.99)}
+.hw .tdate{font-family:var(--f-display);text-transform:uppercase;font-size:16px;letter-spacing:.04em;color:var(--ash)}
+.hw .tdate b{font-weight:400;color:var(--pumpkin);font-size:30px;line-height:1;margin-right:6px}
+.hw .tband{font-family:var(--f-display);text-transform:uppercase;font-size:clamp(24px,3vw,32px);line-height:1}
+.hw .tband small{font-family:var(--f-body);font-weight:600;font-size:13px;letter-spacing:.08em;color:var(--ash);margin-left:6px}
+.hw .tperk{font-size:14px;line-height:1.35;color:var(--ash);margin-bottom:8px}
+.hw .tbtn{display:flex;align-items:center;justify-content:center;margin-top:auto;background:var(--blood);color:#fff;font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:15px;min-height:48px;padding:10px 12px;border-radius:5px;text-align:center}
+.hw .ticket:hover .tbtn{filter:brightness(1.12)}
+.hw .hint{margin:0;font-size:13px;color:var(--ash);letter-spacing:.02em}
 .hw .btn{display:inline-flex;align-items:center;justify-content:center;background:var(--blood);color:#fff;font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:14px;padding:14px 22px;border-radius:4px;text-decoration:none;border:0;cursor:pointer}
 .hw .btn:hover{filter:brightness(1.12)}
 .hw .btn:focus-visible,.hw a:focus-visible,.hw button:focus-visible{outline:3px solid var(--pumpkin);outline-offset:2px}
 .hw .btn.ghost{background:transparent;border:1.5px solid var(--ash);color:var(--bone)}
-.hw .ctas{display:flex;gap:12px;flex-wrap:wrap}
 .hw section{padding-block:48px;border-top:1px solid var(--fog)}
 .hw h2{font-family:var(--f-display);font-weight:400;text-transform:uppercase;font-size:clamp(30px,5vw,44px);margin:0 0 8px;letter-spacing:.01em;text-wrap:balance}
 .hw .sec-lede{color:var(--ash);margin:0 0 28px;max-width:62ch}
@@ -359,13 +370,26 @@ const CSS = `
 .hw footer{padding-block:32px;color:var(--ash);font-size:13px;border-top:1px solid var(--fog);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .hw footer p{margin:0}
 @media (max-width:700px){
-  .hw .hero{min-height:auto;padding-block:48px 36px}
-  .hw .sky img{object-position:50% 70%}
-  .hw .sky::after{background:linear-gradient(0deg,rgba(15,11,20,.96) 15%,rgba(15,11,20,.55) 60%,rgba(15,11,20,.3) 100%)}
+  .hw .hero{padding-block:14px 22px;gap:12px}
+  .hw .sky img{object-position:50% 35%}
+  .hw .sky::after{background:linear-gradient(180deg,rgba(15,11,20,.25) 0%,rgba(15,11,20,.5) 30%,rgba(15,11,20,.85) 60%,var(--night) 100%)}
+  .hw .tickets{grid-template-columns:1fr;gap:10px}
+  .hw .titlerow{gap:12px}
+  .hw h1 .spook{font-size:13vw}
+  .hw .hrlogo{width:21vw}
+  .hw h1 .sub{font-size:clamp(17px,5.2vw,24px)}
+  .hw .ticket{gap:3px;padding:11px 12px 12px}
+  .hw .tdate{font-size:14px}
+  .hw .tdate b{font-size:24px}
+  .hw .tband{font-size:24px}
+  .hw .tperk{font-size:13px;margin-bottom:4px}
+  .hw .tbtn{min-height:46px;font-size:15px}
 }
 @media (max-width:560px){
   .hw .prizes{grid-template-columns:1fr}
   .hw .navlinks{display:none}
+  .hw .topnav{padding-block:8px}
+  .hw .topnav .logo img{height:38px}
   .hw .menubtn{display:block}
   .hw .mobilemenu{display:flex;flex-direction:column;position:relative;z-index:3;margin-inline:-20px;background:var(--crypt);border-bottom:1px solid var(--fog)}
   .hw .mobilemenu a{padding:14px 20px;font-weight:600;font-size:15px;text-transform:uppercase;letter-spacing:.06em;color:var(--bone);text-decoration:none;border-top:1px solid var(--fog)}

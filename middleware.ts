@@ -35,7 +35,17 @@ export default async function middleware(request: Request) {
     const img = "https://www.rockribeirao.com.br/halloween/halloween-share.jpg";
     page = page.replace(/<title>.*?<\/title>/i, `<title>${title}</title>`);
     page = page.replace(/<meta[^>]+(?:property="og:|name="twitter:)[^>]*>\s*/gi, "");
+    // Speed for ad traffic: skip what this page doesn't use (site fonts, Instagram
+    // widget, unconfigured analytics) and start the hero image and fonts right away.
+    page = page.replace(/<link[^>]+fonts\.googleapis\.com\/css2[^>]*>\s*/gi, "");
+    page = page.replace(/<script[^>]+behold\.so[^>]*><\/script>\s*/gi, "");
+    page = page.replace(/<script[^>]*%VITE_ANALYTICS_ENDPOINT%[\s\S]*?<\/script>\s*/gi, "");
     page = page.replace(/<\/head>/i, `
+    <style>html,body{background:#0f0b14}</style>
+    <link rel="preload" as="image" type="image/webp" href="/halloween/halloween-hero-mobile.webp" media="(max-width:700px)" fetchpriority="high" />
+    <link rel="preload" as="image" type="image/webp" href="/halloween/halloween-hero-desktop.webp" media="(min-width:701px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="/halloween/logo-hardrock.png" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;600;700&family=Creepster&display=swap" />
     <meta property="og:title" content="${title}" />
     <meta property="og:description" content="${desc}" />
     <meta property="og:image" content="${img}" />

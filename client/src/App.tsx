@@ -4,11 +4,15 @@ import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import Home from "./pages/Home";
-import TodosNoRock from "./pages/TodosNoRock";
-import Acessibilidade from "./pages/Acessibilidade";
+import { lazy, Suspense } from "react";
 import Halloween from "./pages/Halloween";
-import RockRising from "./pages/RockRising";
+
+// Halloween stays in the main bundle (ad landing page, must open fast);
+// the other pages load on demand so they don't slow it down.
+const Home = lazy(() => import("./pages/Home"));
+const TodosNoRock = lazy(() => import("./pages/TodosNoRock"));
+const Acessibilidade = lazy(() => import("./pages/Acessibilidade"));
+const RockRising = lazy(() => import("./pages/RockRising"));
 
 const FESTIVAL_HOSTS = ["todosnorock.com.br", "www.todosnorock.com.br"];
 
@@ -42,7 +46,9 @@ function App() {
       <ThemeProvider defaultTheme="dark">
         <TooltipProvider>
           <Toaster />
-          <Router />
+          <Suspense fallback={<div style={{ minHeight: "100vh", background: "#06020e" }} />}>
+            <Router />
+          </Suspense>
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
