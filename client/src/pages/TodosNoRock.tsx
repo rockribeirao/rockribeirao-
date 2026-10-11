@@ -269,7 +269,6 @@ export default function TodosNoRock() {
             {menuItens.map(([id, label]) => (
               <a key={id} href={`#${id}`} style={{ color: "#cc2200" }} className="hover:opacity-80 transition">{label}</a>
             ))}
-            <a href="https://www.instagram.com/todosnorock/" target="_blank" rel="noopener noreferrer" style={{ color: "#b090e0", border: "0.5px solid #6030b0", padding: "4px 12px", borderRadius: 20, fontSize: 12 }} className="hover:opacity-80 transition">@TODOSNOROCK</a>
             <a href={halloweenHref} style={{ color: "#ff8c00", border: "0.5px solid #ff8c00", padding: "4px 12px", borderRadius: 20, fontSize: 12 }} className="hover:opacity-80 transition">HALLOWEEN</a>
             <a href={rockRisingHref} style={{ color: "#ff6644", border: "0.5px solid #cc2200", padding: "4px 12px", borderRadius: 20, fontSize: 12 }} className="hover:opacity-80 transition">ROCK RISING</a>
           </nav>
@@ -283,7 +282,6 @@ export default function TodosNoRock() {
             {menuItens.map(([id, label]) => (
               <a key={id} href={`#${id}`} style={{ color: "#cc2200" }} className="container py-3">{label}</a>
             ))}
-            <a href="https://www.instagram.com/todosnorock/" target="_blank" rel="noopener noreferrer" style={{ color: "#b090e0" }} className="container py-3">@TODOSNOROCK</a>
             <a href={halloweenHref} style={{ color: "#ff8c00" }} className="container py-3">HALLOWEEN</a>
             <a href={rockRisingHref} style={{ color: "#ff6644" }} className="container py-3">ROCK RISING</a>
           </nav>

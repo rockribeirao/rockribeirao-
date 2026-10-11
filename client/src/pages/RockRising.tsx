@@ -100,7 +100,6 @@ export default function RockRising() {
             <a href="/#shows">PRÓXIMOS SHOWS</a>
             <a href="https://todosnorock.com.br" className="pill pill-tnr">TODOS NO ROCK</a>
             <a href="/halloween" className="pill pill-hw">HALLOWEEN</a>
-            <a href="#topo" className="pill pill-on" aria-current="page">ROCK RISING</a>
             <a href="#inscricao">INSCRIÇÃO</a>
             <a href="#patrocinio">PATROCÍNIO</a>
             <a href="/#contact">CONTATO</a>
@@ -115,7 +114,6 @@ export default function RockRising() {
             <a href="/#shows">PRÓXIMOS SHOWS</a>
             <a href="https://todosnorock.com.br" style={{ color: "#b090e0" }}>TODOS NO ROCK</a>
             <a href="/halloween" style={{ color: "#ff8c00" }}>HALLOWEEN</a>
-            <a href="#topo" aria-current="page" className="mnav-on">ROCK RISING</a>
             <a href="#inscricao">INSCRIÇÃO</a>
             <a href="#patrocinio">PATROCÍNIO</a>
             <a href="/#contact">CONTATO</a>
