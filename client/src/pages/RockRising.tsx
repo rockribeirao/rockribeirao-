@@ -2,7 +2,7 @@ import { useEffect, useState, type FormEvent } from "react";
 import { Menu, X, Download } from "lucide-react";
 
 // Página especial: Rock Rising 2027 — festival de novos talentos do rock.
-// Realização Rock Ribeirão Produções, parceria Kiss FM 105.3, apoio Fonzare Produções.
+// Realização Rock Ribeirão Produções, parceria Kiss FM 105.3, apoio Fonzare Produções, School of Rock e Dritto.
 // Imagens e PDFs em client/public/rockrising/.
 
 const IMG = "/rockrising";
@@ -28,10 +28,15 @@ const etapas = [
 
 const faixaBase = ["Inscrições 15/01", "Grave sua música", "Toque na Kiss FM Ribeirão Preto", "Grande final 21/03", "Entrada gratuita", "Bandas de todo o estado"];
 
-const logos = [
-  { titulo: "Realização", src: `${IMG}/logo-rockribeirao.png`, alt: "Rock Ribeirão Produções", href: "https://www.instagram.com/rockribeirao/", cls: "lg-rr" },
-  { titulo: "Parceria", src: `${IMG}/logo-kiss.png`, alt: "Kiss FM 105.3", href: "https://www.instagram.com/kissfmribeirao/", cls: "lg-kiss" },
-  { titulo: "Apoio", src: `${IMG}/logo-fonzare.png`, alt: "Fonzare Produções", href: "https://www.instagram.com/fabiofonzare/", cls: "lg-fz" },
+type Logo = { src: string; alt: string; href: string; cls: string };
+const grupos: { titulo: string; logos: Logo[] }[] = [
+  { titulo: "Realização", logos: [{ src: `${IMG}/logo-rockribeirao.png`, alt: "Rock Ribeirão Produções", href: "https://www.instagram.com/rockribeirao/", cls: "lg-rr" }] },
+  { titulo: "Parceria", logos: [{ src: `${IMG}/logo-kiss.png`, alt: "Kiss FM 105.3 Ribeirão Preto", href: "https://www.instagram.com/kissfmribeirao/", cls: "lg-kiss" }] },
+  { titulo: "Apoio", logos: [
+    { src: `${IMG}/logo-fonzare.png`, alt: "Fonzare Produções", href: "https://www.instagram.com/fabiofonzare/", cls: "lg-fz" },
+    { src: `${IMG}/logo-school.png`, alt: "School of Rock Ribeirão Preto", href: "https://www.instagram.com/schoolofrock_ribeiraopreto/", cls: "lg-sor" },
+    { src: `${IMG}/logo-dritto.png`, alt: "Dritto Mídia Digital OOH", href: "https://www.instagram.com/drittomidiaooh/", cls: "lg-dritto" },
+  ] },
 ];
 
 function useCountdown(target: number) {
@@ -291,12 +296,16 @@ export default function RockRising() {
         {/* REALIZAÇÃO / PARCERIA / APOIO */}
         <section className="logos">
           <div className="logos-in">
-            {logos.map((l) => (
-              <div key={l.titulo} className="logo-col">
-                <div className="logo-t">{l.titulo}</div>
-                <a href={l.href} target="_blank" rel="noopener noreferrer" aria-label={`${l.alt} no Instagram`} className="logo-a">
-                  <img src={l.src} alt={l.alt} className={l.cls} />
-                </a>
+            {grupos.map((g) => (
+              <div key={g.titulo} className={`logo-col ${g.logos.length > 1 ? "logo-col-wide" : ""}`}>
+                <div className="logo-t">{g.titulo}</div>
+                <div className="logo-row">
+                  {g.logos.map((l) => (
+                    <a key={l.alt} href={l.href} target="_blank" rel="noopener noreferrer" aria-label={`${l.alt} no Instagram`} className="logo-a">
+                      <img src={l.src} alt={l.alt} className={l.cls} />
+                    </a>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
@@ -509,13 +518,17 @@ const CSS = `
 
 /* logos */
 .rrs .logos{background:#0a0a0a;border-top:1px solid #1f1f1f;border-bottom:1px solid #1f1f1f}
-.rrs .logos-in{max-width:1000px;margin:0 auto;padding:70px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:40px;text-align:center}
-.rrs .logo-col{display:flex;flex-direction:column;align-items:center;gap:20px}
+.rrs .logos-in{max-width:1180px;margin:0 auto;padding:70px 24px;display:flex;flex-wrap:wrap;justify-content:center;gap:48px 64px;text-align:center}
+.rrs .logo-col{display:flex;flex-direction:column;align-items:center;gap:20px;flex:0 1 auto}
+.rrs .logo-col-wide{flex:1 1 520px}
+.rrs .logo-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:24px 44px}
 .rrs .logo-t{font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#9a9a9a}
-.rrs .logo-a{height:140px;display:flex;align-items:center;justify-content:center}
-.rrs .lg-rr{max-height:140px;max-width:180px;object-fit:contain;display:block}
-.rrs .lg-kiss{width:128px;height:128px;object-fit:contain;display:block}
-.rrs .lg-fz{width:112px;height:112px;object-fit:contain;display:block}
+.rrs .logo-a{height:130px;display:flex;align-items:center;justify-content:center}
+.rrs .lg-rr{max-height:130px;max-width:170px;object-fit:contain;display:block}
+.rrs .lg-kiss{width:120px;height:120px;object-fit:contain;display:block}
+.rrs .lg-fz{width:104px;height:104px;object-fit:contain;display:block}
+.rrs .lg-sor{width:150px;height:auto;object-fit:contain;display:block}
+.rrs .lg-dritto{width:190px;height:auto;object-fit:contain;display:block}
 
 /* patrocínio */
 .rrs .patro{background:#111}
