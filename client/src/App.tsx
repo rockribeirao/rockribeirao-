@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import TodosNoRock from "./pages/TodosNoRock";
 import Acessibilidade from "./pages/Acessibilidade";
 import Halloween from "./pages/Halloween";
+import RockRising from "./pages/RockRising";
 
 const FESTIVAL_HOSTS = ["todosnorock.com.br", "www.todosnorock.com.br"];
 
@@ -28,6 +29,7 @@ function Router() {
       <Route path={"/"} component={Home} />
       <Route path={"/todos-no-rock"} component={TodosNoRock} />
       <Route path={"/halloween"} component={Halloween} />
+      <Route path={"/rockrising"} component={RockRising} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>

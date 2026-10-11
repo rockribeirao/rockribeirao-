@@ -89,6 +89,7 @@ export default function Halloween() {
             <a href="/#shows">Shows</a>
             <a href="https://todosnorock.com.br">Todos no Rock</a>
             <span className="on">Halloween</span>
+            <a href="/rockrising">Rock Rising</a>
           </div>
           <button type="button" className="menubtn" aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((o) => !o)}>
             {menuOpen ? <X size={28} /> : <Menu size={28} />}
@@ -100,6 +101,7 @@ export default function Halloween() {
             <a href="/#shows">Shows</a>
             <a href="https://todosnorock.com.br">Todos no Rock</a>
             <a href="#noites" className="on">Halloween</a>
+            <a href="/rockrising">Rock Rising</a>
           </div>
         )}
 

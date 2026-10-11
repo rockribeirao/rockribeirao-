@@ -237,6 +237,7 @@ export default function Home() {
             <a href="#gallery" style={{ color: "#cc2200" }} className="hover:opacity-80 transition">GALERIA</a>
             <a href="https://todosnorock.com.br" style={{ color: "#b090e0", border: "0.5px solid #6030b0", padding: "4px 12px", borderRadius: 20, fontSize: 12 }} className="hover:opacity-80 transition">TODOS NO ROCK</a>
             <a href="/halloween" style={{ color: "#ff8c00", border: "0.5px solid #ff8c00", padding: "4px 12px", borderRadius: 20, fontSize: 12 }} className="hover:opacity-80 transition">HALLOWEEN</a>
+            <a href="/rockrising" style={{ color: "#ff6644", border: "0.5px solid #cc2200", padding: "4px 12px", borderRadius: 20, fontSize: 12 }} className="hover:opacity-80 transition">ROCK RISING</a>
             <a href="#about" style={{ color: "#cc2200" }} className="hover:opacity-80 transition">SOBRE</a>
             <a href="#contact" style={{ color: "#cc2200" }} className="hover:opacity-80 transition">CONTATO</a>
           </nav>
@@ -251,6 +252,7 @@ export default function Home() {
             <a href="#gallery" style={{ color: "#cc2200" }} className="container py-3">GALERIA</a>
             <a href="https://todosnorock.com.br" style={{ color: "#b090e0" }} className="container py-3">TODOS NO ROCK</a>
             <a href="/halloween" style={{ color: "#ff8c00" }} className="container py-3">HALLOWEEN</a>
+            <a href="/rockrising" style={{ color: "#ff6644" }} className="container py-3">ROCK RISING</a>
             <a href="#about" style={{ color: "#cc2200" }} className="container py-3">SOBRE</a>
             <a href="#contact" style={{ color: "#cc2200" }} className="container py-3">CONTATO</a>
           </nav>

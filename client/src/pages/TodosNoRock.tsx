@@ -154,6 +154,7 @@ export default function TodosNoRock() {
   // Someone landing directly on todosnorock.com.br (ad, social media, direct link)
   // never left that site, so we frame the link as a credit/intro instead of a return.
   const halloweenHref = isFestivalDomain ? "https://www.rockribeirao.com.br/halloween" : "/halloween";
+  const rockRisingHref = isFestivalDomain ? "https://www.rockribeirao.com.br/rockrising" : "/rockrising";
   const navLinkLabel = isFestivalDomain ? "Uma produção Rock Ribeirão" : "rockribeirao.com.br";
   const footerLinkLabel = isFestivalDomain
     ? "Conheça a Rock Ribeirão Produções →"
@@ -260,29 +261,31 @@ export default function TodosNoRock() {
       {/* NAV */}
       <header className="sticky top-0 z-50 border-b" style={{ background: "#08030f", borderColor: "#2a1050" }}>
         <div className="container flex items-center justify-between py-4">
-          <a href={rockRibeiraoHref} aria-label={navLinkLabel}>
+          <a href={rockRibeiraoHref} aria-label={navLinkLabel} className="shrink-0">
             <img src={`${BASE}/Logo%20do%20header.png`} alt="Rock Ribeirão" className="h-16 w-auto object-contain" />
           </a>
-          <nav className="hidden md:flex items-center gap-8 font-heading text-sm">
+          <nav className="hidden xl:flex items-center gap-x-4 font-heading text-sm whitespace-nowrap">
             <a href={rockRibeiraoHref} style={{ color: "#cc2200" }} className="hover:opacity-80 transition">ROCK RIBEIRÃO</a>
             {menuItens.map(([id, label]) => (
               <a key={id} href={`#${id}`} style={{ color: "#cc2200" }} className="hover:opacity-80 transition">{label}</a>
             ))}
             <a href="https://www.instagram.com/todosnorock/" target="_blank" rel="noopener noreferrer" style={{ color: "#b090e0", border: "0.5px solid #6030b0", padding: "4px 12px", borderRadius: 20, fontSize: 12 }} className="hover:opacity-80 transition">@TODOSNOROCK</a>
             <a href={halloweenHref} style={{ color: "#ff8c00", border: "0.5px solid #ff8c00", padding: "4px 12px", borderRadius: 20, fontSize: 12 }} className="hover:opacity-80 transition">HALLOWEEN</a>
+            <a href={rockRisingHref} style={{ color: "#ff6644", border: "0.5px solid #cc2200", padding: "4px 12px", borderRadius: 20, fontSize: 12 }} className="hover:opacity-80 transition">ROCK RISING</a>
           </nav>
-          <button type="button" className="md:hidden p-2" style={{ color: "#c4a0ff" }} aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((o) => !o)}>
+          <button type="button" className="xl:hidden p-2" style={{ color: "#c4a0ff" }} aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((o) => !o)}>
             {menuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
           </button>
         </div>
         {menuOpen && (
-          <nav className="md:hidden flex flex-col font-heading text-base border-t" style={{ borderColor: "#2a1050", background: "#08030f" }} onClick={() => setMenuOpen(false)}>
+          <nav className="xl:hidden flex flex-col font-heading text-base border-t" style={{ borderColor: "#2a1050", background: "#08030f" }} onClick={() => setMenuOpen(false)}>
             <a href={rockRibeiraoHref} style={{ color: "#cc2200" }} className="container py-3">ROCK RIBEIRÃO</a>
             {menuItens.map(([id, label]) => (
               <a key={id} href={`#${id}`} style={{ color: "#cc2200" }} className="container py-3">{label}</a>
             ))}
             <a href="https://www.instagram.com/todosnorock/" target="_blank" rel="noopener noreferrer" style={{ color: "#b090e0" }} className="container py-3">@TODOSNOROCK</a>
             <a href={halloweenHref} style={{ color: "#ff8c00" }} className="container py-3">HALLOWEEN</a>
+            <a href={rockRisingHref} style={{ color: "#ff6644" }} className="container py-3">ROCK RISING</a>
           </nav>
         )}
       </header>

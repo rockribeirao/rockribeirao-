@@ -51,6 +51,30 @@ export default async function middleware(request: Request) {
     return new Response(page, { status: response.status, headers: response.headers });
   }
 
+  // Rock Rising page on rockribeirao.com.br gets its own link preview.
+  if (!isFestivalDomain && pathname === "/rockrising" && contentType.includes("text/html")) {
+    let page = await response.text();
+    const title = "Rock Rising 2027 — Festival de novos talentos do rock";
+    const desc = "Inscrições a partir de 15/01/2027. Votação popular no site e grande final em Ribeirão Preto em 21/03. Realização Rock Ribeirão Produções, parceria Kiss FM 105.3.";
+    const img = "https://www.rockribeirao.com.br/rockrising/rockrising-share.jpg";
+    page = page.replace(/<title>.*?<\/title>/i, `<title>${title}</title>`);
+    page = page.replace(/<meta[^>]+(?:property="og:|name="twitter:)[^>]*>\s*/gi, "");
+    page = page.replace(/<\/head>/i, `
+    <meta property="og:title" content="${title}" />
+    <meta property="og:description" content="${desc}" />
+    <meta property="og:image" content="${img}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="https://www.rockribeirao.com.br/rockrising" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="${title}" />
+    <meta name="twitter:description" content="${desc}" />
+    <meta name="twitter:image" content="${img}" />
+  </head>`);
+    return new Response(page, { status: response.status, headers: response.headers });
+  }
+
   // Only touch actual HTML documents, pass everything else through untouched.
   if (!isFestivalDomain || !contentType.includes("text/html")) {
     return response;
