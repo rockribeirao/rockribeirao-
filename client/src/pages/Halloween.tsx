@@ -47,6 +47,61 @@ function useCountdown(target: number) {
   };
 }
 
+// Halloween decorations: inline SVG, no image downloads, purely decorative.
+const BAT = "M50 22c-3-7-9-10-15-9 3 3 4 6 3 9-5-4-12-5-18-2 4 2 6 5 6 9-6-2-13 0-17 5 8-1 15 2 20 7 2-4 6-6 11-6 2 3 6 5 10 5s8-2 10-5c5 0 9 2 11 6 5-5 12-8 20-7-4-5-11-7-17-5 0-4 2-7 6-9-6-3-13-2-18 2-1-3 0-6 3-9-6-1-12 2-15 9z";
+
+function Bats() {
+  return (
+    <div className="bats" aria-hidden="true">
+      {[0, 1, 2, 3, 4].map((i) => (
+        <svg key={i} className={`bat b${i}`} viewBox="0 0 100 44"><path d={BAT} /></svg>
+      ))}
+    </div>
+  );
+}
+
+function Web() {
+  return (
+    <svg className="web" viewBox="0 0 200 200" aria-hidden="true">
+      <g fill="none" stroke="currentColor" strokeWidth="1">
+        <path d="M200 0 L60 200 M200 0 L0 120 M200 0 L0 20 M200 0 L130 200 M200 0 L0 190" />
+        <path d="M168 0 Q172 18 186 24 Q192 10 200 32" />
+        <path d="M128 0 Q140 34 168 46 Q176 72 200 76" />
+        <path d="M84 0 Q100 46 138 66 Q148 104 200 118" />
+        <path d="M40 0 Q62 60 110 88 Q120 140 200 160" />
+        <path d="M0 18 Q36 70 84 108 Q92 168 170 200" />
+      </g>
+      <g transform="translate(150 124)">
+        <g className="spiderbob">
+          <line x1="0" y1="-84" x2="0" y2="-12" stroke="currentColor" strokeWidth="1" />
+          <ellipse rx="7" ry="8" fill="#0b0810" />
+          <circle cy="-9" r="4.5" fill="#0b0810" />
+          <g stroke="#0b0810" strokeWidth="1.6" fill="none" strokeLinecap="round">
+            <path d="M-6 -4 L-14 -10 L-17 -4 M-6 0 L-15 -1 L-18 5 M-6 3 L-13 8 L-15 14 M-5 6 L-10 13 L-10 19" />
+            <path d="M6 -4 L14 -10 L17 -4 M6 0 L15 -1 L18 5 M6 3 L13 8 L15 14 M5 6 L10 13 L10 19" />
+          </g>
+          <circle cx="-1.6" cy="-10" r=".9" fill="#f07a1a" /><circle cx="1.6" cy="-10" r=".9" fill="#f07a1a" />
+        </g>
+      </g>
+    </svg>
+  );
+}
+
+function Pumpkin({ className = "" }: { className?: string }) {
+  return (
+    <svg className={`pumpkin ${className}`} viewBox="0 0 64 60" aria-hidden="true">
+      <path d="M31 9c1-5 4-8 9-8-3 2-4 5-4 9z" fill="#4a7a2c" />
+      <ellipse cx="20" cy="34" rx="15" ry="22" fill="#d9661a" />
+      <ellipse cx="44" cy="34" rx="15" ry="22" fill="#d9661a" />
+      <ellipse cx="32" cy="34" rx="15" ry="24" fill="#f07a1a" />
+      <g className="face" fill="#ffd36b">
+        <path d="M17 27l8-6 3 9z" /><path d="M47 27l-8-6-3 9z" /><path d="M29 33l3-5 3 5z" />
+        <path d="M14 39c6 8 30 8 36 0l-4 2-3-3-4 4-3-3-4 4-3-3-4 4-3-3-4 3z" />
+      </g>
+    </svg>
+  );
+}
+
 export default function Halloween() {
   const cd = useCountdown(SHOW_START);
   const [foto, setFoto] = useState<string | null>(null);
@@ -113,6 +168,9 @@ export default function Halloween() {
               <img src={`${IMG}/halloween-hero-desktop.jpg`} alt="" fetchPriority="high" />
             </picture>
           </div>
+          <Bats />
+          <Web />
+          <div className="fogband" aria-hidden="true" />
           <div className="titlerow">
             <a className="hrwrap" href="https://www.instagram.com/hrc.ribeiraopreto/" target="_blank" rel="noopener noreferrer">
               <img className="hrlogo" src={`${IMG}/logo-hardrock.png`} alt="Hard Rock Cafe Ribeirão Preto" width={240} height={188} />
@@ -124,12 +182,14 @@ export default function Halloween() {
           </div>
           <div className="tickets">
             <a className="ticket" href={SYMPLA_LITHIUM} target="_blank" rel="noopener noreferrer">
+              <Pumpkin className="tpk" />
               <span className="tdate"><b>30/10</b> Sexta · 21h</span>
               <span className="tband">Lithium <small>com Dri Santana</small></span>
               <span className="tperk">30 primeiros fantasiados até 19h30 ganham ingresso para sábado</span>
               <span className="tbtn">Comprar ingresso · Sexta</span>
             </a>
             <a className="ticket" href={SYMPLA_CAARU} target="_blank" rel="noopener noreferrer">
+              <Pumpkin className="tpk" />
               <span className="tdate"><b>31/10</b> Sábado · 21h</span>
               <span className="tband">Caaru <small>Rock xamânico</small></span>
               <span className="tperk">Concurso de fantasias com R$ 600 em prêmios</span>
@@ -295,7 +355,22 @@ const CSS = `
 .hw .menubtn{display:none;background:transparent;border:0;color:var(--pumpkin);padding:8px;cursor:pointer;line-height:0}
 .hw .mobilemenu{display:none}
 .hw .hero{padding-block:28px 32px;display:grid;gap:18px;position:relative;isolation:isolate;align-content:start}
-.hw .hero>*:not(.sky){position:relative;z-index:1}
+.hw .hero>*:not(.sky):not(.bats):not(.web):not(.fogband){position:relative;z-index:1}
+.hw .bats{position:absolute;top:0;bottom:0;left:calc(50% - 50vw);width:100vw;pointer-events:none;z-index:0;overflow:hidden}
+.hw .bat{position:absolute;fill:#120a18;filter:drop-shadow(0 0 1px rgba(255,170,90,.9)) drop-shadow(0 0 6px rgba(240,122,26,.7))}
+.hw .bat path{transform-box:fill-box;transform-origin:50% 50%}
+.hw .bat.b0{width:44px;top:7%;right:14%}
+.hw .bat.b1{width:28px;top:17%;right:30%}
+.hw .bat.b2{width:20px;top:4%;right:42%}
+.hw .bat.b3{width:32px;top:58%;right:6%}
+.hw .bat.b4{width:18px;top:26%;right:4%}
+.hw .web{position:absolute;top:0;right:calc(50% - 50vw);width:clamp(120px,15vw,210px);color:rgba(241,235,226,.32);pointer-events:none;z-index:0}
+.hw .fogband{position:absolute;left:calc(50% - 50vw);width:100vw;bottom:0;height:120px;pointer-events:none;z-index:0;opacity:.55;background:radial-gradient(ellipse 35% 60% at 20% 80%,rgba(169,159,179,.35),transparent 70%),radial-gradient(ellipse 40% 55% at 70% 85%,rgba(123,75,196,.4),transparent 70%),radial-gradient(ellipse 30% 50% at 45% 95%,rgba(169,159,179,.25),transparent 70%)}
+.hw .ticket{position:relative}
+.hw .tpk{position:absolute;top:-16px;right:12px;width:40px;filter:drop-shadow(0 0 8px rgba(240,122,26,.65))}
+.hw section{position:relative}
+.hw section::before{content:"";position:absolute;top:-1px;left:50%;width:34px;height:16px;transform:translateX(-50%) scaleY(-1);opacity:.85;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 44'%3E%3Cpath fill='%23a99fb3' d='M50 22c-3-7-9-10-15-9 3 3 4 6 3 9-5-4-12-5-18-2 4 2 6 5 6 9-6-2-13 0-17 5 8-1 15 2 20 7 2-4 6-6 11-6 2 3 6 5 10 5s8-2 10-5c5 0 9 2 11 6 5-5 12-8 20-7-4-5-11-7-17-5 0-4 2-7 6-9-6-3-13-2-18 2-1-3 0-6 3-9-6-1-12 2-15 9z'/%3E%3C/svg%3E") center/30px no-repeat}
+.hw section::after{content:"";position:absolute;top:-1px;left:50%;width:1px;height:3px;background:var(--ash);opacity:.5;transform:translateX(-50%)}
 .hw .sky{position:absolute;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);z-index:0;pointer-events:none;overflow:hidden}
 .hw .sky img{width:100%;height:100%;max-width:none;object-fit:cover;object-position:70% 50%;display:block}
 .hw .sky::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,11,20,.92) 0%,rgba(15,11,20,.6) 50%,rgba(15,11,20,.15) 85%),linear-gradient(0deg,var(--night) 0%,rgba(15,11,20,0) 30%)}
@@ -385,6 +460,13 @@ const CSS = `
   .hw .sky img{object-position:50% 35%}
   .hw .sky::after{background:linear-gradient(180deg,rgba(15,11,20,.25) 0%,rgba(15,11,20,.5) 30%,rgba(15,11,20,.85) 60%,var(--night) 100%)}
   .hw .tickets{grid-template-columns:1fr;gap:10px}
+  .hw .tpk{width:32px;top:-13px;right:10px}
+  .hw .web{width:118px;opacity:.8}
+  .hw .bat.b0{width:40px;top:1%;right:33%}
+  .hw .bat.b1{width:26px;top:10%;right:52%}
+  .hw .bat.b2{display:none}
+  .hw .bat.b3{width:24px;top:44%;right:3%}
+  .hw .bat.b4{width:20px;top:4%;right:5%}
   .hw .count{flex-wrap:nowrap;gap:6px}
   .hw .count div{padding:5px 8px;gap:4px}
   .hw .count b{font-size:21px}
@@ -417,9 +499,24 @@ const CSS = `
   .hw .lg img{height:46px}
 }
 @media (prefers-reduced-motion:no-preference){
+  .hw .bat path{animation:hwflap .32s ease-in-out infinite alternate}
+  .hw .bat{animation:hwdrift 7s ease-in-out infinite alternate}
+  .hw .bat.b1{animation-duration:9s;animation-delay:-2s}.hw .bat.b1 path{animation-duration:.28s}
+  .hw .bat.b2{animation-duration:11s;animation-delay:-5s}
+  .hw .bat.b3{animation-duration:8s;animation-delay:-3s}.hw .bat.b3 path{animation-duration:.36s}
+  .hw .bat.b4{animation-duration:10s;animation-delay:-6s}
+  .hw .spiderbob{animation:hwbob 4.5s ease-in-out infinite alternate}
+  .hw .fogband{animation:hwfog 16s ease-in-out infinite alternate}
+  .hw .pumpkin .face{animation:hwcandle 3.2s infinite}
+  .hw .ticket:nth-child(2) .pumpkin .face{animation-delay:-1.4s}
   .hw .spook{animation:hwflick 6s infinite}
   .hw .hrwrap::after{animation:hwsmoke 9s ease-in-out infinite alternate}
 }
+@keyframes hwflap{from{transform:scaleY(1)}to{transform:scaleY(.45)}}
+@keyframes hwdrift{0%{transform:translate(0,0)}50%{transform:translate(-22px,10px)}100%{transform:translate(-40px,-6px)}}
+@keyframes hwbob{from{transform:translateY(0)}to{transform:translateY(10px)}}
+@keyframes hwfog{from{transform:translateX(-4%)}to{transform:translateX(4%)}}
+@keyframes hwcandle{0%,100%{opacity:1}40%{opacity:.82}45%{opacity:1}70%{opacity:.88}72%{opacity:.7}74%{opacity:1}}
 @keyframes hwflick{0%,92%,100%{opacity:1}94%{opacity:.55}96%{opacity:1}97%{opacity:.7}}
 @keyframes hwsmoke{to{transform:translate(-6%,-4%) scale(1.08) rotate(6deg)}}
 `;
