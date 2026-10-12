@@ -8,6 +8,7 @@ declare global {
     }
   }
 }
+import { SiteMenuDesktop, SiteMenuMobile, PAGE_COLOR } from "@/components/SiteMenu";
 import { MapPin, Calendar, ArrowLeft, Instagram, Menu, X, Music, Users, Route, Building } from "lucide-react";
 
 const BASE = "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public";
@@ -198,7 +199,7 @@ export default function TodosNoRock() {
   }, [isFestivalDomain]);
 
   const [menuOpen, setMenuOpen] = useState(false);
-  const menuItens = [["festival", "O FESTIVAL"], ["lineup", "QUEM TOCOU"], ["galeria", "FOTOS"], ["edicoes", "EDIÇÕES"], ["parceiros", "PARCEIROS"], ["instagram", "INSTAGRAM"]];
+  const tnrSections = [["festival", "O festival"], ["lineup", "Quem tocou"], ["galeria", "Fotos"], ["edicoes", "Edições"], ["parceiros", "Parceiros"], ["instagram", "Instagram"]].map(([id, label]) => ({ href: `#${id}`, label }));
 
   const s: Record<string, React.CSSProperties> = {
     page: { minHeight: "100vh", backgroundColor: "#06020e", color: "#f0e0ff", fontFamily: "var(--font-sans)" },
@@ -264,27 +265,13 @@ export default function TodosNoRock() {
           <a href={rockRibeiraoHref} aria-label={navLinkLabel} className="shrink-0">
             <img src={`${BASE}/Logo%20do%20header.png`} alt="Rock Ribeirão" className="h-16 w-auto object-contain" />
           </a>
-          <nav className="hidden xl:flex items-center gap-x-4 font-heading text-sm whitespace-nowrap">
-            <a href={rockRibeiraoHref} style={{ color: "#cc2200" }} className="hover:opacity-80 transition">ROCK RIBEIRÃO</a>
-            {menuItens.map(([id, label]) => (
-              <a key={id} href={`#${id}`} style={{ color: "#cc2200" }} className="hover:opacity-80 transition">{label}</a>
-            ))}
-            <a href={halloweenHref} style={{ color: "#ff8c00", border: "0.5px solid #ff8c00", padding: "4px 12px", borderRadius: 20, fontSize: 12 }} className="hover:opacity-80 transition">HALLOWEEN</a>
-            <a href={rockRisingHref} style={{ color: "#ff6644", border: "0.5px solid #cc2200", padding: "4px 12px", borderRadius: 20, fontSize: 12 }} className="hover:opacity-80 transition">ROCK RISING</a>
-          </nav>
-          <button type="button" className="xl:hidden p-2" style={{ color: "#c4a0ff" }} aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((o) => !o)}>
+          <SiteMenuDesktop current="tnr" sections={tnrSections} className="hidden xl:flex font-heading" />
+          <button type="button" className="xl:hidden p-2" style={{ color: PAGE_COLOR.tnr }} aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((o) => !o)}>
             {menuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
           </button>
         </div>
         {menuOpen && (
-          <nav className="xl:hidden flex flex-col font-heading text-base border-t" style={{ borderColor: "#2a1050", background: "#08030f" }} onClick={() => setMenuOpen(false)}>
-            <a href={rockRibeiraoHref} style={{ color: "#cc2200" }} className="container py-3">ROCK RIBEIRÃO</a>
-            {menuItens.map(([id, label]) => (
-              <a key={id} href={`#${id}`} style={{ color: "#cc2200" }} className="container py-3">{label}</a>
-            ))}
-            <a href={halloweenHref} style={{ color: "#ff8c00" }} className="container py-3">HALLOWEEN</a>
-            <a href={rockRisingHref} style={{ color: "#ff6644" }} className="container py-3">ROCK RISING</a>
-          </nav>
+          <div className="xl:hidden font-heading"><SiteMenuMobile current="tnr" sections={tnrSections} onNavigate={() => setMenuOpen(false)} rowClassName="container" padX={16} /></div>
         )}
       </header>
 

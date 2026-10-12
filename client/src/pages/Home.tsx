@@ -2,6 +2,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Calendar, MapPin, Mail, Instagram, ArrowRight, Star, ChevronLeft, ChevronRight, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
+import { SiteMenuDesktop, SiteMenuMobile, PAGE_COLOR } from "@/components/SiteMenu";
+
+const HOME_SECTIONS = [
+  { href: "#shows", label: "Próximos shows" },
+  { href: "#proof", label: "Credibilidade" },
+  { href: "#gallery", label: "Galeria" },
+  { href: "#about", label: "Sobre" },
+  { href: "#contact", label: "Contato" },
+];
 import { toast } from "sonner";
 
 const BASE = "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public";
@@ -231,31 +240,13 @@ export default function Home() {
       <header className="sticky top-0 z-50 border-b" style={{ background: "#08030f", borderColor: "#2a1050" }}>
         <div className="container flex items-center justify-between py-4">
           <img src={`${BASE}/Logo%20do%20header.png`} alt="Rock Ribeirão" className="h-16 w-auto object-contain" />
-          <nav className="hidden md:flex items-center gap-8 font-heading text-sm">
-            <a href="#shows" style={{ color: "#cc2200" }} className="hover:opacity-80 transition">PRÓXIMOS</a>
-            <a href="#proof" style={{ color: "#cc2200" }} className="hover:opacity-80 transition">CREDIBILIDADE</a>
-            <a href="#gallery" style={{ color: "#cc2200" }} className="hover:opacity-80 transition">GALERIA</a>
-            <a href="https://todosnorock.com.br" style={{ color: "#b090e0", border: "0.5px solid #6030b0", padding: "4px 12px", borderRadius: 20, fontSize: 12 }} className="hover:opacity-80 transition">TODOS NO ROCK</a>
-            <a href="/halloween" style={{ color: "#ff8c00", border: "0.5px solid #ff8c00", padding: "4px 12px", borderRadius: 20, fontSize: 12 }} className="hover:opacity-80 transition">HALLOWEEN</a>
-            <a href="/rockrising" style={{ color: "#ff6644", border: "0.5px solid #cc2200", padding: "4px 12px", borderRadius: 20, fontSize: 12 }} className="hover:opacity-80 transition">ROCK RISING</a>
-            <a href="#about" style={{ color: "#cc2200" }} className="hover:opacity-80 transition">SOBRE</a>
-            <a href="#contact" style={{ color: "#cc2200" }} className="hover:opacity-80 transition">CONTATO</a>
-          </nav>
-          <button type="button" className="md:hidden p-2" style={{ color: "#cc2200" }} aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((o) => !o)}>
+          <SiteMenuDesktop current="rr" sections={HOME_SECTIONS} className="hidden md:flex font-heading" />
+          <button type="button" className="md:hidden p-2" style={{ color: PAGE_COLOR.rr }} aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((o) => !o)}>
             {menuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
           </button>
         </div>
         {menuOpen && (
-          <nav className="md:hidden flex flex-col font-heading text-base border-t" style={{ borderColor: "#2a1050", background: "#08030f" }} onClick={() => setMenuOpen(false)}>
-            <a href="#shows" style={{ color: "#cc2200" }} className="container py-3">PRÓXIMOS</a>
-            <a href="#proof" style={{ color: "#cc2200" }} className="container py-3">CREDIBILIDADE</a>
-            <a href="#gallery" style={{ color: "#cc2200" }} className="container py-3">GALERIA</a>
-            <a href="https://todosnorock.com.br" style={{ color: "#b090e0" }} className="container py-3">TODOS NO ROCK</a>
-            <a href="/halloween" style={{ color: "#ff8c00" }} className="container py-3">HALLOWEEN</a>
-            <a href="/rockrising" style={{ color: "#ff6644" }} className="container py-3">ROCK RISING</a>
-            <a href="#about" style={{ color: "#cc2200" }} className="container py-3">SOBRE</a>
-            <a href="#contact" style={{ color: "#cc2200" }} className="container py-3">CONTATO</a>
-          </nav>
+          <div className="md:hidden font-heading"><SiteMenuMobile current="rr" sections={HOME_SECTIONS} onNavigate={() => setMenuOpen(false)} rowClassName="container" padX={16} /></div>
         )}
       </header>
 

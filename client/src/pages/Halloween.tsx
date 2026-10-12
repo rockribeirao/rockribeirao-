@@ -1,5 +1,13 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import { SiteMenuDesktop, SiteMenuMobile } from "@/components/SiteMenu";
+
+const HW_SECTIONS = [
+  { href: "#ingressos", label: "Ingressos" },
+  { href: "#concurso", label: "Concurso de fantasias" },
+  { href: "#galeria", label: "Fotos" },
+  { href: "#servico", label: "Serviço" },
+];
 
 // Página especial: Halloween do Hard Rock Cafe Ribeirão Preto (30 e 31/10/2026).
 // Visual próprio, separado do resto do site. Imagens em client/public/halloween/.
@@ -140,23 +148,13 @@ export default function Halloween() {
       <div className="wrap">
         <nav className="topnav">
           <a href="/" className="logo"><img src={`${IMG}/logo-rockribeirao.png`} alt="Rock Ribeirão Produções" /></a>
-          <div className="navlinks">
-            <a href="/">Início</a>
-            <a href="/#shows">Shows</a>
-            <a href="https://todosnorock.com.br">Todos no Rock</a>
-            <a href="/rockrising">Rock Rising</a>
-          </div>
+          <SiteMenuDesktop current="hw" sections={HW_SECTIONS} className="navlinks" />
           <button type="button" className="menubtn" aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((o) => !o)}>
             {menuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </nav>
         {menuOpen && (
-          <div className="mobilemenu" onClick={() => setMenuOpen(false)}>
-            <a href="/">Início</a>
-            <a href="/#shows">Shows</a>
-            <a href="https://todosnorock.com.br">Todos no Rock</a>
-            <a href="/rockrising">Rock Rising</a>
-          </div>
+          <div className="mobilemenu"><SiteMenuMobile current="hw" sections={HW_SECTIONS} onNavigate={() => setMenuOpen(false)} /></div>
         )}
 
         <header className="hero">
@@ -180,7 +178,7 @@ export default function Halloween() {
               <span className="sub">no Hard Rock Cafe Ribeirão Preto</span>
             </h1>
           </div>
-          <div className="tickets">
+          <div className="tickets" id="ingressos">
             <a className="ticket" href={SYMPLA_LITHIUM} target="_blank" rel="noopener noreferrer">
               <Pumpkin className="tpk" />
               <span className="tdate"><b>30/10</b> Sexta · 21h</span>
@@ -267,7 +265,7 @@ export default function Halloween() {
           <p className="sec-lede credit">Fotos: Rafael Cautella</p>
         </section>
 
-        <section>
+        <section id="servico">
           <h2>Serviço</h2>
           <div className="info">
             <div>
@@ -349,7 +347,8 @@ const CSS = `
 .hw a{color:inherit}
 .hw .topnav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:14px;border-bottom:1px solid var(--fog);position:relative;z-index:2}
 .hw .topnav .logo img{height:48px;width:auto}
-.hw .navlinks{display:flex;gap:18px;flex-wrap:wrap;font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:.06em;color:var(--ash)}
+.hw .navlinks{display:flex;font-weight:600}
+.hw section[id],.hw #ingressos{scroll-margin-top:16px}
 .hw .navlinks a{text-decoration:none}.hw .navlinks a:hover{color:var(--bone)}
 .hw .navlinks .on{color:var(--pumpkin);border-bottom:2px solid var(--pumpkin)}
 .hw .menubtn{display:none;background:transparent;border:0;color:var(--pumpkin);padding:8px;cursor:pointer;line-height:0}
@@ -485,14 +484,11 @@ const CSS = `
 }
 @media (max-width:560px){
   .hw .prizes{grid-template-columns:1fr}
-  .hw .navlinks{display:none}
+  .hw .navlinks{display:none !important}
   .hw .topnav{padding-block:8px}
   .hw .topnav .logo img{height:38px}
   .hw .menubtn{display:block}
-  .hw .mobilemenu{display:flex;flex-direction:column;position:relative;z-index:3;margin-inline:-20px;background:var(--crypt);border-bottom:1px solid var(--fog)}
-  .hw .mobilemenu a{padding:14px 20px;font-weight:600;font-size:15px;text-transform:uppercase;letter-spacing:.06em;color:var(--bone);text-decoration:none;border-top:1px solid var(--fog)}
-  .hw .mobilemenu a:first-child{border-top:0}
-  .hw .mobilemenu a.on{color:var(--pumpkin)}
+  .hw .mobilemenu{display:block;position:relative;z-index:3;margin-inline:-20px}
   .hw .gal{grid-template-columns:repeat(2,1fr);grid-auto-rows:120px}
   .hw .logos{grid-template-columns:1fr 1fr}
   .hw .lg.wide{grid-column:span 2}

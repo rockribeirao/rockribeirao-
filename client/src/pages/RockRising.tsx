@@ -1,5 +1,14 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { Menu, X, Download } from "lucide-react";
+import { SiteMenuDesktop, SiteMenuMobile } from "@/components/SiteMenu";
+
+const RISE_SECTIONS = [
+  { href: "#inscricao", label: "Inscrição" },
+  { href: "#como", label: "Como funciona" },
+  { href: "#cronograma", label: "Cronograma" },
+  { href: "#premio", label: "Prêmio" },
+  { href: "#patrocinio", label: "Patrocínio" },
+];
 
 // Página especial: Rock Rising 2027 — festival de novos talentos do rock.
 // Realização Rock Ribeirão Produções, parceria Kiss FM 105.3, apoio Fonzare Produções, School of Rock e Dritto.
@@ -100,29 +109,13 @@ export default function RockRising() {
           <a href="/" aria-label="Rock Ribeirão Produções — início" className="head-logo">
             <img src={`${IMG}/logo-rockribeirao-header.png`} alt="Rock Ribeirão Produções" />
           </a>
-          <nav className="nav" aria-label="Menu do site">
-            <a href="/">INÍCIO</a>
-            <a href="/#shows">PRÓXIMOS SHOWS</a>
-            <a href="https://todosnorock.com.br" className="pill pill-tnr">TODOS NO ROCK</a>
-            <a href="/halloween" className="pill pill-hw">HALLOWEEN</a>
-            <a href="#inscricao">INSCRIÇÃO</a>
-            <a href="#patrocinio">PATROCÍNIO</a>
-            <a href="/#contact">CONTATO</a>
-          </nav>
+          <SiteMenuDesktop current="rise" sections={RISE_SECTIONS} className="nav" fontSize={14} />
           <button type="button" className="menubtn" aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((o) => !o)}>
             {menuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
         {menuOpen && (
-          <nav className="mnav" aria-label="Menu do site (celular)" onClick={() => setMenuOpen(false)}>
-            <a href="/">INÍCIO</a>
-            <a href="/#shows">PRÓXIMOS SHOWS</a>
-            <a href="https://todosnorock.com.br" style={{ color: "#b090e0" }}>TODOS NO ROCK</a>
-            <a href="/halloween" style={{ color: "#ff8c00" }}>HALLOWEEN</a>
-            <a href="#inscricao">INSCRIÇÃO</a>
-            <a href="#patrocinio">PATROCÍNIO</a>
-            <a href="/#contact">CONTATO</a>
-          </nav>
+          <div className="mnavwrap"><SiteMenuMobile current="rise" sections={RISE_SECTIONS} onNavigate={() => setMenuOpen(false)} padX={24} /></div>
         )}
       </header>
 
@@ -404,12 +397,12 @@ const CSS = `
 .rrs .nav .pill-tnr{color:#b090e0;border:.5px solid #6030b0}
 .rrs .nav .pill-hw{color:#ff8c00;border:.5px solid #ff8c00}
 .rrs .nav .pill-on{color:#fff;background:#cc2200;border:.5px solid #cc2200}
-.rrs .menubtn{display:none;background:transparent;border:none;color:#cc2200;padding:8px;cursor:pointer;min-width:44px;min-height:44px;align-items:center;justify-content:center}
+.rrs .menubtn{display:none;background:transparent;border:none;color:#ffffff;padding:8px;cursor:pointer;min-width:44px;min-height:44px;align-items:center;justify-content:center}
 .rrs .mnav{display:flex;flex-direction:column;border-top:1px solid #2a1050;background:#08030f;font-family:'Roboto',sans-serif;font-size:16px;font-weight:500}
 .rrs .mnav a{color:#cc2200;text-decoration:none;padding:14px 24px}
 .rrs .mnav .mnav-on{color:#fff;background:#1a0a0a;border-left:3px solid #cc2200}
 @media (max-width:1000px){.rrs .nav{display:none}.rrs .menubtn{display:inline-flex}}
-@media (min-width:1001px){.rrs .mnav{display:none}}
+@media (min-width:1001px){.rrs .mnav,.rrs .mnavwrap{display:none}}
 
 /* hero */
 .rrs .hero{position:relative;min-height:92vh;background:url(${IMG}/palco.jpg) 65% center/cover}
