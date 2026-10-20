@@ -3,7 +3,7 @@ import type { CSSProperties } from "react";
 // Menu padrão das páginas do site.
 // Regra: primeiro as seções da página atual, na cor dela; depois as outras
 // páginas, sempre na mesma ordem e cada uma na sua cor.
-//   Rock Ribeirão = vermelho · Todos no Rock = lilás · Halloween = laranja · Rock Rising = branco
+//   Rock Ribeirão = vermelho · Todos no Rock = lilás · Halloween = laranja · Hard Rock Weekend = rosa · Rock Rising = branco
 
 export type PageKey = "rr" | "tnr" | "hw" | "rise" | "hrw";
 
@@ -23,10 +23,13 @@ const PAGE_LABEL: Record<PageKey, string> = {
   hrw: "Hard Rock Weekend",
 };
 
-const ORDER: PageKey[] = ["rr", "tnr", "hw", "rise"];
+const ORDER: PageKey[] = ["rr", "tnr", "hw", "hrw", "rise"];
 
 // Halloween sai dos menus sozinho depois da última noite (31/10/2026).
 const HALLOWEEN_END = new Date("2026-11-01T06:00:00-03:00").getTime();
+
+// Hard Rock Weekend sai dos menus sozinho depois da última noite (21/11/2026).
+const HRW_END = new Date("2026-11-22T06:00:00-03:00").getTime();
 
 export type MenuSection = { href: string; label: string };
 
@@ -47,7 +50,7 @@ function pageHref(key: PageKey): string {
 }
 
 function otherPages(current: PageKey): PageKey[] {
-  return ORDER.filter((k) => k !== current && (k !== "hw" || Date.now() < HALLOWEEN_END));
+  return ORDER.filter((k) => k !== current && (k !== "hw" || Date.now() < HALLOWEEN_END) && (k !== "hrw" || Date.now() < HRW_END));
 }
 
 const label: CSSProperties = { textTransform: "uppercase", letterSpacing: ".06em", textDecoration: "none", whiteSpace: "nowrap" };

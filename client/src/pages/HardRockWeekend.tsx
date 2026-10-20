@@ -4,9 +4,8 @@ import { SiteMenuDesktop, SiteMenuMobile } from "@/components/SiteMenu";
 
 const SECTIONS = [
   { href: "#ingressos", label: "Ingressos" },
-  { href: "#noites", label: "Os shows" },
-  { href: "#guns", label: "Quem toca" },
-  { href: "#acao", label: "Ação dos 30 primeiros" },
+  { href: "#sobre", label: "O evento" },
+  { href: "#guns", label: "Os shows" },
   { href: "#servico", label: "Serviço" },
 ];
 
@@ -125,6 +124,15 @@ export default function HardRockWeekend() {
           </div>
           <p className="hint">Ingressos pelo Sympla · Casa abre às 18h, shows a partir das 21h</p>
         </header>
+
+        <section id="sobre">
+          <h2>Três noites, três shows</h2>
+          <div className="about">
+            <p>De 19 a 21 de novembro, o Hard Rock Cafe Ribeirão Preto vira o endereço do rock. São três noites seguidas, com três shows ao vivo, e cada uma tem um som diferente: o tributo ao Guns N' Roses na quinta, o glam rock dos anos 80 na sexta e os clássicos do rock no sábado.</p>
+            <p>Chegou cedo, ganhou a próxima noite: os 30 primeiros que chegarem até 19h30 na quinta ganham ingresso para a sexta, e os 30 primeiros da sexta ganham ingresso para o sábado. A casa abre às 18h e os shows começam às 21h.</p>
+            <p>Vem de fora? Os hotéis parceiros têm hospedagem para o fim de semana. Ingressos pelo Sympla, um para cada noite.</p>
+          </div>
+        </section>
 
         <section id="noites">
           <h2>Os shows</h2>
@@ -297,6 +305,7 @@ const CSS = `
 .hrw .facts{margin:0 0 16px;padding-left:20px;display:grid;gap:8px;color:var(--mut);max-width:70ch}
 .hrw .facts li::marker{color:var(--pink)}
 .hrw .atext .hotel{margin-bottom:18px}
+.hrw .about{display:grid;gap:14px;max-width:70ch;color:var(--mut);font-size:17px}.hrw .about p{margin:0}
 .hrw .perk{margin:0;background:var(--line);border-radius:5px;padding:10px 12px;font-size:15px}
 .hrw .night .btn{margin-top:auto;width:100%}
 .hrw .steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:s}
