@@ -24,7 +24,7 @@ type Night = {
 
 const FACTS: Record<string, string[]> = {
   guns: ["Tributo ao Guns N' Roses desde 1991", "Contratado pela Geffen para o show de lançamento dos discos Use Your Illusion, na Avenida Paulista", "Domingão do Faustão: final do quadro O Melhor Imitador do Brasil (2009) e elogio do apresentador (2015)", "Programa da Eliana, Fantástico, SBT, MTV e Band", "Mais de 300 cidades no Brasil e shows na Argentina e no Paraguai", "Show 100% ao vivo"],
-  lost80s: ["Glam rock dos anos 80 ao vivo", "Kiko Shred é de Americana (SP), guitarrista, compositor e professor", "Quatro discos lançados, dois deles solo (The Stride, 2017)", "Conhecido lá fora por tocar com Tim Ripper Owens e Michael Vescera", "Shows no México, Equador, Colômbia, Chile e Peru"],
+  lost80s: ["Banda de hard rock e glam rock com o repertório dos anos 80", "No vocal, Rane Oliveira, vencedor do concurso A Voz do Rock e produtor da banda", "Rane tem quatro discos próprios: Come on Baby, Warriors and Dreamers, Midnight Sun e Dust to Dust", "Primeiro single autoral: You Can't Stop My Rock", "De volta ao Hard Rock Cafe Ribeirão Preto depois do show de dezembro de 2024", "Convidado especial: Kiko Shred, de Americana (SP), que já tocou com Tim Ripper Owens, Blaze Bayley, Udo Dirkschneider e André Matos e fez turnê pela América Latina"],
   radio: ["Clássicos do rock com a voz de Nando Fernandes, de São Paulo", "Ex-vocalista do Hangar, com quem gravou o álbum The Reason of Your Conviction", "Em 2012, à frente do Radio Show, fez a turnê brasileira do baixista Rudy Sarzo", "Vocal nas turnês brasileiras do baterista Vinny Appice (2018, 2019 e 2023)", "Em 2023 cantou Simple Man com o Lynyrd Skynyrd, em São Paulo"],
 };
 

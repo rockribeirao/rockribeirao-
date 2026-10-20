@@ -404,6 +404,23 @@ export default function Home() {
               </div>
             </a>
 
+            {/* Hard Rock Weekend */}
+            <a href="/hardrockweekend" style={{ display: "flex", flexDirection: "column", background: "#140a1f", border: "0.5px solid #ff5caa", borderRadius: 12, overflow: "hidden", textDecoration: "none" }}>
+              <img src="/hardrockweekend/hardrockweekend-destaque-home.jpg" alt="Hard Rock Weekend, 19, 20 e 21 de novembro no Hard Rock Cafe Ribeirão Preto" style={{ width: "100%", aspectRatio: "1584 / 672", objectFit: "cover", display: "block" }} />
+              <div style={{ padding: "1.1rem 1.25rem", display: "flex", flexDirection: "column", flex: 1 }}>
+                <p style={{ fontSize: 9, letterSpacing: "0.1em", color: "#ff5caa", marginBottom: 4 }}>19, 20 E 21 DE NOVEMBRO</p>
+                <h3 style={{ fontSize: 17, fontWeight: 500, color: "#ffffff", marginBottom: 8 }}>Hard Rock Weekend</h3>
+                <div style={{ display: "flex", flexDirection: "column", gap: 3, marginBottom: 10 }}>
+                  <span style={{ fontSize: 12, color: "#c4b3d8" }}>🎸 Guns Cover Brazil · Lost80s · Radio Show</span>
+                  <span style={{ fontSize: 12, color: "#c4b3d8" }}>🕐 Shows a partir das 21h</span>
+                  <span style={{ fontSize: 12, color: "#c4b3d8" }}>📍 Hard Rock Cafe Ribeirão Preto</span>
+                </div>
+                <span style={{ display: "inline-block", alignSelf: "flex-start", marginTop: "auto", background: "#d4204a", color: "#fff", fontSize: 12, fontWeight: 600, padding: "7px 16px", borderRadius: 8 }}>
+                  Garantir ingresso →
+                </span>
+              </div>
+            </a>
+
           </div>
         </div>
       </section>
