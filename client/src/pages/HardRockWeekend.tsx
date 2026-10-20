@@ -147,7 +147,10 @@ export default function HardRockWeekend() {
 
         {NIGHTS.map((n) => (
           <section key={n.key} id={n.key} className="artist">
-            <div className="adate"><b>{n.date}</b><span>{n.weekday}</span></div>
+            <div className="aban">
+              <img src={`${IMG}/banda-${n.key}.webp`} alt="" loading="lazy" />
+              <div className="adate"><b>{n.date}</b><span>{n.weekday}</span></div>
+            </div>
             <div className="atext">
               <h2>{n.band}</h2>
               <p className="asub">{n.sub} · {n.style}</p>
@@ -283,9 +286,13 @@ const CSS = `
 .hrw .night h3 small{display:block;font-family:var(--f-b);font-weight:600;font-size:13px;letter-spacing:.06em;color:var(--mut);text-transform:none;margin-top:3px}
 .hrw .bio{margin:0;color:var(--mut);font-size:15px}
 .hrw .hotel{margin:0;font-size:14px;color:var(--mut);border-left:3px solid var(--pink);padding-left:10px}.hrw .hotel b{color:var(--txt)}
-.hrw .artist{display:grid;grid-template-columns:minmax(120px,220px) 1fr;gap:32px;align-items:start}
-.hrw .adate b{display:block;font-family:var(--f-d);font-weight:400;font-size:clamp(56px,9vw,96px);line-height:.9;color:var(--pink)}
-.hrw .adate span{font-family:var(--f-d);text-transform:uppercase;color:var(--mut);font-size:16px}
+.hrw .artist{display:block}
+.hrw .aban{position:relative;border-radius:10px;overflow:hidden;margin-bottom:24px;aspect-ratio:16/6;background:var(--card)}
+.hrw .aban img{width:100%;height:100%;object-fit:cover;display:block}
+.hrw .aban::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,7,16,.85) 0%,rgba(11,7,16,.3) 45%,rgba(11,7,16,0) 70%),linear-gradient(0deg,rgba(11,7,16,.5),transparent 40%)}
+.hrw .adate{position:absolute;left:24px;bottom:18px;z-index:1}
+.hrw .adate b{display:block;font-family:var(--f-d);font-weight:400;font-size:clamp(48px,9vw,96px);line-height:.9;color:var(--pink)}
+.hrw .adate span{font-family:var(--f-d);text-transform:uppercase;color:var(--txt);font-size:16px}
 .hrw .asub{margin:0 0 16px;color:var(--mut);font-weight:600;letter-spacing:.04em}
 .hrw .facts{margin:0 0 16px;padding-left:20px;display:grid;gap:8px;color:var(--mut);max-width:70ch}
 .hrw .facts li::marker{color:var(--pink)}
@@ -315,7 +322,7 @@ const CSS = `
 .hrw footer{padding-block:32px;color:var(--mut);font-size:13px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .hrw footer p{margin:0}
 @media (max-width:860px){
-  .hrw .artist{grid-template-columns:1fr;gap:12px}
+  .hrw .aban{aspect-ratio:16/9}
   .hrw .nights,.hrw .steps{grid-template-columns:1fr}
   .hrw .night{flex-direction:row}
   .hrw .night>img{width:42%;aspect-ratio:auto;height:auto;flex:none}
