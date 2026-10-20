@@ -54,8 +54,8 @@ const grupos: { titulo: string; wide?: boolean; logos: Logo[] }[] = [
   { titulo: "Local", logos: [{ src: `${IMG}/logo-hardrock.png`, alt: "Hard Rock Cafe Ribeirão Preto", href: "https://www.instagram.com/hrc.ribeiraopreto/" }] },
   { titulo: "Realização", logos: [{ src: `${IMG}/logo-rockribeirao.png`, alt: "Rock Ribeirão Produções", href: "https://www.instagram.com/rockribeirao/" }] },
   { titulo: "Hotéis parceiros", wide: true, logos: [
-    { src: `${IMG}/logo-matiz.png`, alt: "Matiz Hotel Vilabom Ribeirão Preto", href: "https://www.instagram.com/matizhotelvilabom/" },
-    { src: `${IMG}/logo-hotel-jp.png`, alt: "Hotel JP Ribeirão Preto", href: "https://www.instagram.com/hoteljpribeiraopreto/" },
+    { src: `${IMG}/logo-matiz.png`, alt: "Matiz Hotel Vilabom Ribeirão Preto", href: "https://www.instagram.com/matizribeiraopreto/" },
+    { src: `${IMG}/logo-hotel-jp.png`, alt: "Hotel JP Ribeirão Preto", href: "https://www.instagram.com/hoteljprp/" },
   ] },
   { titulo: "Promoção", logos: [{ src: `${IMG}/logo-kiss.png`, alt: "Kiss FM 105,3", href: "https://www.instagram.com/kissfmribeirao/" }] },
   { titulo: "Apoio", wide: true, logos: [
