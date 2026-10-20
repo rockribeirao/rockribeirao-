@@ -23,9 +23,9 @@ type Night = {
 };
 
 const FACTS: Record<string, string[]> = {
-  guns: ["Tributo ao Guns N' Roses desde 1991", "Contratado pela Geffen para o show de lançamento dos discos Use Your Illusion, na Avenida Paulista", "Domingão do Faustão: final do quadro O Melhor Imitador do Brasil (2009) e elogio do apresentador (2015)", "Programa da Eliana, Fantástico, SBT, MTV e Band", "Mais de 300 cidades no Brasil e shows na Argentina e no Paraguai", "Show 100% ao vivo"],
-  lost80s: ["Banda de hard rock e glam rock com o repertório dos anos 80", "No vocal, Rane Oliveira, vencedor do concurso A Voz do Rock e produtor da banda", "Rane tem quatro discos próprios: Come on Baby, Warriors and Dreamers, Midnight Sun e Dust to Dust", "Primeiro single autoral: You Can't Stop My Rock", "De volta ao Hard Rock Cafe Ribeirão Preto depois do show de dezembro de 2024", "Convidado especial: Kiko Shred, de Americana (SP), que já tocou com Tim Ripper Owens, Blaze Bayley, Udo Dirkschneider e André Matos e fez turnê pela América Latina"],
-  radio: ["Clássicos do rock com a voz de Nando Fernandes, de São Paulo", "Ex-vocalista do Hangar, com quem gravou o álbum The Reason of Your Conviction", "Em 2012, à frente do Radio Show, fez a turnê brasileira do baixista Rudy Sarzo", "Vocal nas turnês brasileiras do baterista Vinny Appice (2018, 2019 e 2023)", "Em 2023 cantou Simple Man com o Lynyrd Skynyrd, em São Paulo"],
+  guns: ["Tributo ao Guns N' Roses desde 1991, contratado pela Geffen para o lançamento dos discos Use Your Illusion", "Domingão do Faustão, Programa da Eliana e Fantástico", "Mais de 300 cidades e shows na Argentina"],
+  lost80s: ["Hard rock e glam rock com o repertório dos anos 80", "No vocal, Rane Oliveira, vencedor de A Voz do Rock", "Convidado: Kiko Shred, que já tocou com Tim Ripper Owens, Blaze Bayley e André Matos"],
+  radio: ["Clássicos do rock com Nando Fernandes, ex-Hangar", "Turnês brasileiras com o baixista Rudy Sarzo e o baterista Vinny Appice", "Cantou com o Lynyrd Skynyrd em 2023"],
 };
 
 const NIGHTS: Night[] = [
@@ -159,21 +159,26 @@ export default function HardRockWeekend() {
           </div>
         </section>
 
-        {NIGHTS.map((n) => (
-          <section key={n.key} id={n.key} className="artist">
-            <div className="aban">
-              <img src={`${IMG}/banda-${n.key}.webp`} alt="" loading="lazy" />
-              <div className="adate"><b>{n.date}</b><span>{n.weekday}</span></div>
-            </div>
-            <div className="atext">
-              <h2>{n.band}</h2>
-              <p className="asub">{n.sub} · {n.style}</p>
-              <ul className="facts">{FACTS[n.key].map((f) => <li key={f}>{f}</li>)}</ul>
-              <div className="hotel"><img src={HOTEL_LOGO[n.hotel]} alt={n.hotel} /><p><b>Hotel parceiro:</b> {n.hotel}. Vem de fora? Hospede-se por lá.</p></div>
-              <a className="btn" href={n.link} target="_blank" rel="noopener noreferrer">Comprar ingresso · {n.date}</a>
-            </div>
-          </section>
-        ))}
+        <section id="guns">
+          <h2>Quem toca</h2>
+          <div className="bands">
+            {NIGHTS.map((n) => (
+              <article key={n.key} className="band">
+                <div className="aban">
+                  <img src={`${IMG}/banda-${n.key}.webp`} alt="" loading="lazy" />
+                  <div className="adate"><b>{n.date}</b><span>{n.weekday.split(" · ")[0]}</span></div>
+                </div>
+                <div className="bbody">
+                  <h3>{n.band}</h3>
+                  <p className="asub">{n.sub}</p>
+                  <ul className="facts">{FACTS[n.key].map((f) => <li key={f}>{f}</li>)}</ul>
+                  <div className="hotel"><img src={HOTEL_LOGO[n.hotel]} alt={n.hotel} /><p><b>Hotel parceiro:</b> {n.hotel}</p></div>
+                  <a className="btn" href={n.link} target="_blank" rel="noopener noreferrer">Comprar ingresso · {n.date}</a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
 
         <section id="acao">
           <h2>Ação dos 30 primeiros</h2>
@@ -301,19 +306,23 @@ const CSS = `
 .hrw .night h3 small{display:block;font-family:var(--f-b);font-weight:600;font-size:13px;letter-spacing:.06em;color:var(--mut);text-transform:none;margin-top:3px}
 .hrw .bio{margin:0;color:var(--mut);font-size:15px}
 .hrw .hotel{margin:0;font-size:14px;color:var(--mut);border-left:3px solid var(--pink);padding-left:10px}.hrw .hotel b{color:var(--txt)}
-.hrw .artist{display:block}
-.hrw .aban{position:relative;border-radius:10px;overflow:hidden;margin-bottom:24px;aspect-ratio:16/6;background:var(--card)}
+.hrw .bands{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.hrw .band{background:var(--card);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+.hrw .aban{position:relative;aspect-ratio:16/9;background:var(--card)}
 .hrw .aban img{width:100%;height:100%;object-fit:cover;display:block}
-.hrw .aban::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,7,16,.85) 0%,rgba(11,7,16,.3) 45%,rgba(11,7,16,0) 70%),linear-gradient(0deg,rgba(11,7,16,.5),transparent 40%)}
-.hrw .adate{position:absolute;left:24px;bottom:18px;z-index:1}
-.hrw .adate b{display:block;font-family:var(--f-d);font-weight:400;font-size:clamp(48px,9vw,96px);line-height:.9;color:var(--pink)}
-.hrw .adate span{font-family:var(--f-d);text-transform:uppercase;color:var(--txt);font-size:16px}
-.hrw .asub{margin:0 0 16px;color:var(--mut);font-weight:600;letter-spacing:.04em}
-.hrw .facts{margin:0 0 16px;padding-left:20px;display:grid;gap:8px;color:var(--mut);max-width:70ch}
+.hrw .aban::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(11,7,16,.85),transparent 60%)}
+.hrw .adate{position:absolute;left:14px;bottom:10px;z-index:1;display:flex;align-items:baseline;gap:8px}
+.hrw .adate b{font-family:var(--f-d);font-weight:400;font-size:40px;line-height:1;color:var(--pink)}
+.hrw .adate span{font-family:var(--f-d);text-transform:uppercase;color:var(--txt);font-size:15px}
+.hrw .bbody{padding:16px;display:flex;flex-direction:column;gap:10px;flex:1}
+.hrw .band h3{margin:0;font-family:var(--f-d);font-weight:400;font-size:26px;text-transform:uppercase;line-height:1.05}
+.hrw .band .btn{margin-top:auto;width:100%}
+.hrw .asub{margin:-4px 0 0;color:var(--mut);font-weight:600;letter-spacing:.04em}
+.hrw .facts{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--mut);font-size:14px}
 .hrw .facts li::marker{color:var(--pink)}
 .hrw .atext .hotel{margin-bottom:18px}
 .hrw div.hotel{display:flex;align-items:center;gap:14px;border-left:0;padding-left:0}
-.hrw div.hotel img{height:84px;width:auto;border-radius:8px;flex:none}
+.hrw div.hotel img{height:48px;width:auto;border-radius:8px;flex:none}
 .hrw div.hotel p{margin:0}
 .hrw .hlogos{display:flex;gap:10px;flex-wrap:wrap}
 .hrw .hlogos img{height:60px;width:auto;border-radius:8px}
@@ -343,8 +352,9 @@ const CSS = `
 .hrw .lg.wide a img[src*="logo-matiz"],.hrw .lg.wide a img[src*="logo-hotel"]{border-radius:8px;height:84px;max-width:none}
 .hrw footer{padding-block:32px;color:var(--mut);font-size:13px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .hrw footer p{margin:0}
-@media (max-width:860px){
-  .hrw .aban{aspect-ratio:16/9}
+@media (max-width:900px){
+  .hrw .bands{grid-template-columns:1fr}
+  
   .hrw .nights,.hrw .steps{grid-template-columns:1fr}
   .hrw .night{flex-direction:row}
   .hrw .night>img{width:42%;aspect-ratio:auto;height:auto;flex:none}
