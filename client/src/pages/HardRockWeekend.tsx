@@ -19,23 +19,26 @@ const WHATSAPP_RESERVA_DIGITS = "16992922458";
 
 type Night = {
   key: string; date: string; weekday: string; band: string; sub: string; style: string;
-  perk: string; link: string; art: string; alt: string; hotel: string;
+  bio: string; perk: string; link: string; art: string; alt: string; hotel: string;
 };
 
 const NIGHTS: Night[] = [
   {
     key: "guns", date: "19/11", weekday: "Quinta · Véspera de feriado", band: "Guns Cover Brazil", sub: "Tributo Guns N' Roses", style: "Hard rock",
+    bio: "Tributo ao Guns N' Roses desde 1991, quando foi contratado pela Geffen para o show de lançamento dos discos Use Your Illusion, na Avenida Paulista. Já passou pelo Domingão do Faustão (em 2009 foi à final do quadro O Melhor Imitador do Brasil, e em 2015 foi elogiado pelo apresentador), pelo Programa da Eliana e pelo Fantástico, e tocou em mais de 300 cidades e na Argentina. Show 100% ao vivo.",
     perk: "Os 30 primeiros que chegarem até 19h30 ganham ingresso para a sexta-feira, 20/11.",
     link: `${BASE_SHOW}/hard-rock-weekend--tributo-guns-n-roses-com-guns-cover-brazil-no-hard-rock-cafe-ribeirao-preto/3626191`,
     art: `${IMG}/guns-cover-brazil.webp`, alt: "Arte do show Guns Cover Brazil, tributo Guns N' Roses, Hard Rock Weekend", hotel: "Matiz Hotel Vilabom",
   },
   {
     key: "lost80s", date: "20/11", weekday: "Sexta", band: "Lost80s", sub: "Feat. Kiko Shred", style: "Glam rock especial anos 80",
+    bio: "Glam rock dos anos 80 ao vivo, com o guitarrista Kiko Shred, de Americana (SP). Kiko tem quatro discos lançados, é conhecido lá fora por tocar com Tim Ripper Owens e Michael Vescera e já levou a guitarra a palcos do México, Equador, Colômbia, Chile e Peru.",
     perk: "Os 30 primeiros que chegarem até 19h30 ganham ingresso para o sábado, 21/11.",
     link: `${BASE_SHOW}/hard-rock-weekend--lost80s-feat-kiko-shred-glam-rock-especial-anos-80-no-hard-rock-cafe-ribeirao/3626203`, art: `${IMG}/lost80s.webp`, alt: "Arte do show Lost80s feat. Kiko Shred, glam rock anos 80, Hard Rock Weekend", hotel: "Hotel JP",
   },
   {
     key: "radio", date: "21/11", weekday: "Sábado", band: "Radio Show", sub: "Feat. Nando Fernandes", style: "Rock",
+    bio: "Clássicos do rock com a voz de Nando Fernandes, nome conhecido do rock nacional. Nando já gravou com o Hangar, fez a turnê brasileira do baixista Rudy Sarzo à frente do Radio Show, cantou nas turnês brasileiras do baterista Vinny Appice e dividiu o palco com o Lynyrd Skynyrd em 2023, em São Paulo.",
     perk: "Fechamento do fim de semana no Hard Rock Cafe.",
     link: `${BASE_SHOW}/hard-rock-weekend--radio-show-feat-nando-fernandes-classicos-do-rock-no-hard-rock-cafe-ribeirao/3626225`, art: `${IMG}/radio-show.webp`, alt: "Arte do show Radio Show feat. Nando Fernandes, Hard Rock Weekend", hotel: "Hotel JP",
   },
@@ -129,7 +132,9 @@ export default function HardRockWeekend() {
                 <div className="body">
                   <div className="date"><span className="d">{n.date}</span><span className="w">{n.weekday}</span></div>
                   <h3>{n.band} <small>{n.sub} · {n.style}</small></h3>
+                  <p className="bio">{n.bio}</p>
                   <p className="perk">{n.perk}</p>
+                  <p className="hotel"><b>Hotel parceiro:</b> {n.hotel}. Vem de fora? Hospede-se por lá.</p>
                   <a className="btn" href={n.link} target="_blank" rel="noopener noreferrer">Comprar ingresso · {n.date}</a>
                 </div>
               </article>
@@ -260,6 +265,8 @@ const CSS = `
 .hrw .date .d{font-size:36px;color:var(--pink);line-height:1}.hrw .date .w{font-size:15px;color:var(--mut)}
 .hrw .night h3{margin:0;font-family:var(--f-d);font-weight:400;font-size:26px;text-transform:uppercase}
 .hrw .night h3 small{display:block;font-family:var(--f-b);font-weight:600;font-size:13px;letter-spacing:.06em;color:var(--mut);text-transform:none;margin-top:3px}
+.hrw .bio{margin:0;color:var(--mut);font-size:15px}
+.hrw .hotel{margin:0;font-size:14px;color:var(--mut);border-left:3px solid var(--pink);padding-left:10px}.hrw .hotel b{color:var(--txt)}
 .hrw .perk{margin:0;background:var(--line);border-radius:5px;padding:10px 12px;font-size:15px}
 .hrw .night .btn{margin-top:auto;width:100%}
 .hrw .steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:s}
