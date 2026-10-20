@@ -5,6 +5,7 @@ import { SiteMenuDesktop, SiteMenuMobile } from "@/components/SiteMenu";
 const SECTIONS = [
   { href: "#ingressos", label: "Ingressos" },
   { href: "#noites", label: "Os shows" },
+  { href: "#guns", label: "Quem toca" },
   { href: "#acao", label: "Ação dos 30 primeiros" },
   { href: "#servico", label: "Serviço" },
 ];
@@ -14,31 +15,34 @@ const SECTIONS = [
 
 const IMG = "/hardrockweekend";
 const BASE_SHOW = "https://www.sympla.com.br/evento";
-const WHATSAPP_RESERVA = "(16) 99292-2458";
-const WHATSAPP_RESERVA_DIGITS = "16992922458";
+const TEL_RESERVA = "(16) 3170-1722";
+const TEL_RESERVA_DIGITS = "1631701722";
 
 type Night = {
   key: string; date: string; weekday: string; band: string; sub: string; style: string;
-  bio: string; perk: string; link: string; art: string; alt: string; hotel: string;
+  perk: string; link: string; art: string; alt: string; hotel: string;
+};
+
+const FACTS: Record<string, string[]> = {
+  guns: ["Tributo ao Guns N' Roses desde 1991", "Contratado pela Geffen para o show de lançamento dos discos Use Your Illusion, na Avenida Paulista", "Domingão do Faustão: final do quadro O Melhor Imitador do Brasil (2009) e elogio do apresentador (2015)", "Programa da Eliana, Fantástico, SBT, MTV e Band", "Mais de 300 cidades no Brasil e shows na Argentina e no Paraguai", "Show 100% ao vivo"],
+  lost80s: ["Glam rock dos anos 80 ao vivo", "Kiko Shred é de Americana (SP), guitarrista, compositor e professor", "Quatro discos lançados, dois deles solo (The Stride, 2017)", "Conhecido lá fora por tocar com Tim Ripper Owens e Michael Vescera", "Shows no México, Equador, Colômbia, Chile e Peru"],
+  radio: ["Clássicos do rock com a voz de Nando Fernandes, de São Paulo", "Ex-vocalista do Hangar, com quem gravou o álbum The Reason of Your Conviction", "Em 2012, à frente do Radio Show, fez a turnê brasileira do baixista Rudy Sarzo", "Vocal nas turnês brasileiras do baterista Vinny Appice (2018, 2019 e 2023)", "Em 2023 cantou Simple Man com o Lynyrd Skynyrd, em São Paulo"],
 };
 
 const NIGHTS: Night[] = [
   {
     key: "guns", date: "19/11", weekday: "Quinta · Véspera de feriado", band: "Guns Cover Brazil", sub: "Tributo Guns N' Roses", style: "Hard rock",
-    bio: "Tributo ao Guns N' Roses desde 1991, quando foi contratado pela Geffen para o show de lançamento dos discos Use Your Illusion, na Avenida Paulista. Já passou pelo Domingão do Faustão (em 2009 foi à final do quadro O Melhor Imitador do Brasil, e em 2015 foi elogiado pelo apresentador), pelo Programa da Eliana e pelo Fantástico, e tocou em mais de 300 cidades e na Argentina. Show 100% ao vivo.",
     perk: "Os 30 primeiros que chegarem até 19h30 ganham ingresso para a sexta-feira, 20/11.",
     link: `${BASE_SHOW}/hard-rock-weekend--tributo-guns-n-roses-com-guns-cover-brazil-no-hard-rock-cafe-ribeirao-preto/3626191`,
     art: `${IMG}/guns-cover-brazil.webp`, alt: "Arte do show Guns Cover Brazil, tributo Guns N' Roses, Hard Rock Weekend", hotel: "Matiz Hotel Vilabom",
   },
   {
     key: "lost80s", date: "20/11", weekday: "Sexta", band: "Lost80s", sub: "Feat. Kiko Shred", style: "Glam rock especial anos 80",
-    bio: "Glam rock dos anos 80 ao vivo, com o guitarrista Kiko Shred, de Americana (SP). Kiko tem quatro discos lançados, é conhecido lá fora por tocar com Tim Ripper Owens e Michael Vescera e já levou a guitarra a palcos do México, Equador, Colômbia, Chile e Peru.",
     perk: "Os 30 primeiros que chegarem até 19h30 ganham ingresso para o sábado, 21/11.",
     link: `${BASE_SHOW}/hard-rock-weekend--lost80s-feat-kiko-shred-glam-rock-especial-anos-80-no-hard-rock-cafe-ribeirao/3626203`, art: `${IMG}/lost80s.webp`, alt: "Arte do show Lost80s feat. Kiko Shred, glam rock anos 80, Hard Rock Weekend", hotel: "Hotel JP",
   },
   {
     key: "radio", date: "21/11", weekday: "Sábado", band: "Radio Show", sub: "Feat. Nando Fernandes", style: "Rock",
-    bio: "Clássicos do rock com a voz de Nando Fernandes, nome conhecido do rock nacional. Nando já gravou com o Hangar, fez a turnê brasileira do baixista Rudy Sarzo à frente do Radio Show, cantou nas turnês brasileiras do baterista Vinny Appice e dividiu o palco com o Lynyrd Skynyrd em 2023, em São Paulo.",
     perk: "Fechamento do fim de semana no Hard Rock Cafe.",
     link: `${BASE_SHOW}/hard-rock-weekend--radio-show-feat-nando-fernandes-classicos-do-rock-no-hard-rock-cafe-ribeirao/3626225`, art: `${IMG}/radio-show.webp`, alt: "Arte do show Radio Show feat. Nando Fernandes, Hard Rock Weekend", hotel: "Hotel JP",
   },
@@ -72,7 +76,7 @@ export default function HardRockWeekend() {
   }, []);
 
   const copiar = () => {
-    navigator.clipboard?.writeText(WHATSAPP_RESERVA_DIGITS).then(
+    navigator.clipboard?.writeText(TEL_RESERVA_DIGITS).then(
       () => { setCopiado(true); setTimeout(() => setCopiado(false), 2500); },
       () => {}
     );
@@ -132,7 +136,6 @@ export default function HardRockWeekend() {
                 <div className="body">
                   <div className="date"><span className="d">{n.date}</span><span className="w">{n.weekday}</span></div>
                   <h3>{n.band} <small>{n.sub} · {n.style}</small></h3>
-                  <p className="bio">{n.bio}</p>
                   <p className="perk">{n.perk}</p>
                   <p className="hotel"><b>Hotel parceiro:</b> {n.hotel}. Vem de fora? Hospede-se por lá.</p>
                   <a className="btn" href={n.link} target="_blank" rel="noopener noreferrer">Comprar ingresso · {n.date}</a>
@@ -141,6 +144,19 @@ export default function HardRockWeekend() {
             ))}
           </div>
         </section>
+
+        {NIGHTS.map((n) => (
+          <section key={n.key} id={n.key} className="artist">
+            <div className="adate"><b>{n.date}</b><span>{n.weekday}</span></div>
+            <div className="atext">
+              <h2>{n.band}</h2>
+              <p className="asub">{n.sub} · {n.style}</p>
+              <ul className="facts">{FACTS[n.key].map((f) => <li key={f}>{f}</li>)}</ul>
+              <p className="hotel"><b>Hotel parceiro:</b> {n.hotel}.</p>
+              <a className="btn" href={n.link} target="_blank" rel="noopener noreferrer">Comprar ingresso · {n.date}</a>
+            </div>
+          </section>
+        ))}
 
         <section id="acao">
           <h2>Ação dos 30 primeiros</h2>
@@ -168,7 +184,7 @@ export default function HardRockWeekend() {
             </div>
             <div>
               <h4>Reserva de mesa</h4>
-              <p>WhatsApp <strong>{WHATSAPP_RESERVA}</strong><button className="copy" type="button" onClick={copiar}>{copiado ? "Copiado" : "Copiar"}</button></p>
+              <p>Telefone <strong><a href={`tel:+55${TEL_RESERVA_DIGITS}`}>{TEL_RESERVA}</a></strong><button className="copy" type="button" onClick={copiar}>{copiado ? "Copiado" : "Copiar"}</button></p>
               <p>Somente após a compra do ingresso. Reservas mantidas até 19h30.</p>
             </div>
             <div>
@@ -183,7 +199,7 @@ export default function HardRockWeekend() {
           <h2>Perguntas frequentes</h2>
           <details><summary>Preciso comprar um ingresso para cada noite?</summary><p>Sim, cada noite tem o seu ingresso no Sympla. Quem chegar entre os 30 primeiros na quinta ou na sexta, até 19h30, ganha o ingresso da noite seguinte.</p></details>
           <details><summary>A que horas começam os shows?</summary><p>A casa abre às 18h e os shows começam às 21h nas três noites.</p></details>
-          <details><summary>Posso reservar mesa sem ingresso?</summary><p>Não. A reserva é feita pelo WhatsApp somente depois da compra do ingresso e fica mantida até 19h30.</p></details>
+          <details><summary>Posso reservar mesa sem ingresso?</summary><p>Não. A reserva é feita por telefone somente depois da compra do ingresso e fica mantida até 19h30.</p></details>
           <details><summary>Venda e consumo de bebidas para menores?</summary><p>Venda e consumo de bebidas alcoólicas são proibidos para menores de 18 anos.</p></details>
         </section>
 
@@ -267,6 +283,13 @@ const CSS = `
 .hrw .night h3 small{display:block;font-family:var(--f-b);font-weight:600;font-size:13px;letter-spacing:.06em;color:var(--mut);text-transform:none;margin-top:3px}
 .hrw .bio{margin:0;color:var(--mut);font-size:15px}
 .hrw .hotel{margin:0;font-size:14px;color:var(--mut);border-left:3px solid var(--pink);padding-left:10px}.hrw .hotel b{color:var(--txt)}
+.hrw .artist{display:grid;grid-template-columns:minmax(120px,220px) 1fr;gap:32px;align-items:start}
+.hrw .adate b{display:block;font-family:var(--f-d);font-weight:400;font-size:clamp(56px,9vw,96px);line-height:.9;color:var(--pink)}
+.hrw .adate span{font-family:var(--f-d);text-transform:uppercase;color:var(--mut);font-size:16px}
+.hrw .asub{margin:0 0 16px;color:var(--mut);font-weight:600;letter-spacing:.04em}
+.hrw .facts{margin:0 0 16px;padding-left:20px;display:grid;gap:8px;color:var(--mut);max-width:70ch}
+.hrw .facts li::marker{color:var(--pink)}
+.hrw .atext .hotel{margin-bottom:18px}
 .hrw .perk{margin:0;background:var(--line);border-radius:5px;padding:10px 12px;font-size:15px}
 .hrw .night .btn{margin-top:auto;width:100%}
 .hrw .steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:s}
@@ -292,6 +315,7 @@ const CSS = `
 .hrw footer{padding-block:32px;color:var(--mut);font-size:13px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .hrw footer p{margin:0}
 @media (max-width:860px){
+  .hrw .artist{grid-template-columns:1fr;gap:12px}
   .hrw .nights,.hrw .steps{grid-template-columns:1fr}
   .hrw .night{flex-direction:row}
   .hrw .night>img{width:42%;aspect-ratio:auto;height:auto;flex:none}

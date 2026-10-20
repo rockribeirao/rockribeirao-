@@ -16,8 +16,8 @@ const IMG = "/halloween";
 
 const SYMPLA_LITHIUM = "https://www.sympla.com.br/evento/lithium-com-dri-santana-no-hard-rock-cafe-ribeirao-preto/3576546";
 const SYMPLA_CAARU = "https://www.sympla.com.br/evento/caaru-rock-xamanico-no-hard-rock-cafe-ribeirao-preto/3576589";
-const WHATSAPP_RESERVA = "(16) 99292-2458";
-const WHATSAPP_RESERVA_DIGITS = "16992922458";
+const TEL_RESERVA = "(16) 3170-1722";
+const TEL_RESERVA_DIGITS = "1631701722";
 const SHOW_START = new Date("2026-10-30T21:00:00-03:00").getTime();
 
 const galeria: { n: string; portrait?: boolean }[] = [
@@ -136,7 +136,7 @@ export default function Halloween() {
   }, [foto]);
 
   const copiar = () => {
-    navigator.clipboard?.writeText(WHATSAPP_RESERVA_DIGITS).then(
+    navigator.clipboard?.writeText(TEL_RESERVA_DIGITS).then(
       () => { setCopiado(true); setTimeout(() => setCopiado(false), 2500); },
       () => {}
     );
@@ -276,7 +276,7 @@ export default function Halloween() {
             </div>
             <div>
               <h4>Reserva de mesa</h4>
-              <p>WhatsApp <strong>{WHATSAPP_RESERVA}</strong><button className="copy" type="button" onClick={copiar}>{copiado ? "Copiado" : "Copiar"}</button></p>
+              <p>Telefone <strong><a href={`tel:+55${TEL_RESERVA_DIGITS}`}>{TEL_RESERVA}</a></strong><button className="copy" type="button" onClick={copiar}>{copiado ? "Copiado" : "Copiar"}</button></p>
               <p>Somente após a compra do ingresso. Reservas mantidas até 19h30.</p>
             </div>
             <div>
@@ -296,7 +296,7 @@ export default function Halloween() {
         <section>
           <h2>Perguntas frequentes</h2>
           <details><summary>Preciso ir fantasiado?</summary><p>Não é obrigatório, mas a noite fica melhor assim. Na sexta, 30/10, os 30 primeiros que chegarem fantasiados até as 19h30 ganham um ingresso para o sábado. No sábado, 31/10, quem vier fantasiado concorre aos gift cards do concurso.</p></details>
-          <details><summary>Posso reservar mesa sem ingresso?</summary><p>Não. A reserva é feita pelo WhatsApp somente depois da compra do ingresso e fica mantida até 19h30.</p></details>
+          <details><summary>Posso reservar mesa sem ingresso?</summary><p>Não. A reserva é feita por telefone somente depois da compra do ingresso e fica mantida até 19h30.</p></details>
           <details><summary>Posso levar as crianças?</summary><p>Pode. A classificação é livre nas duas noites, e crianças de até 6 anos, acompanhadas, não pagam. Venda e consumo de bebidas alcoólicas proibidos para menores de 18 anos.</p></details>
         </section>
 
