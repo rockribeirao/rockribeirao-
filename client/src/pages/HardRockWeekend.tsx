@@ -91,7 +91,12 @@ export default function HardRockWeekend() {
         )}
 
         <header className="hero">
-          <div className="glow" aria-hidden="true" />
+          <div className="glow" aria-hidden="true">
+            <picture>
+              <source media="(max-width:700px)" srcSet={`${IMG}/hero-mobile.webp`} />
+              <img src={`${IMG}/hero-desktop.webp`} alt="" fetchPriority="high" />
+            </picture>
+          </div>
           <div className="titlerow">
             <h1>
               <span className="kicker">3 noites de rock no feriadão · 19, 20 e 21/11</span>
@@ -220,7 +225,9 @@ const CSS = `
 .hrw .mobilemenu{display:none}
 .hrw section[id],.hrw #ingressos{scroll-margin-top:16px}
 .hrw .hero{padding-block:32px 36px;display:grid;gap:20px;position:relative;isolation:isolate}
-.hrw .glow{position:absolute;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);z-index:-1;pointer-events:none;background:radial-gradient(ellipse 50% 70% at 15% 0%,rgba(124,58,237,.5),transparent 70%),radial-gradient(ellipse 45% 70% at 90% 10%,rgba(255,92,170,.4),transparent 70%)}
+.hrw .glow{position:absolute;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);z-index:-1;pointer-events:none;overflow:hidden}
+.hrw .glow img{width:100%;height:100%;object-fit:cover;object-position:70% 40%;display:block}
+.hrw .glow::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,7,16,.9) 0%,rgba(11,7,16,.55) 50%,rgba(11,7,16,.2) 100%),linear-gradient(0deg,var(--bg) 0%,rgba(11,7,16,0) 35%)}
 .hrw .titlerow{display:flex;align-items:center;justify-content:space-between;gap:16px}
 .hrw h1{margin:0;font-weight:400;line-height:.95;min-width:0}
 .hrw h1 .kicker{display:block;font-weight:700;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--pink);margin-bottom:10px}
@@ -284,6 +291,8 @@ const CSS = `
 }
 @media (max-width:700px){
   .hrw .hero{padding-block:16px 24px;gap:14px}
+  .hrw .glow img{object-position:50% 30%}
+  .hrw .glow::after{background:linear-gradient(180deg,rgba(11,7,16,.45) 0%,rgba(11,7,16,.75) 45%,var(--bg) 100%)}
   .hrw .tickets{grid-template-columns:1fr;gap:10px}
   .hrw .ticket{gap:3px;padding:12px}
   .hrw .tband{margin-bottom:4px}
