@@ -5,13 +5,14 @@ import type { CSSProperties } from "react";
 // páginas, sempre na mesma ordem e cada uma na sua cor.
 //   Rock Ribeirão = vermelho · Todos no Rock = lilás · Halloween = laranja · Rock Rising = branco
 
-export type PageKey = "rr" | "tnr" | "hw" | "rise";
+export type PageKey = "rr" | "tnr" | "hw" | "rise" | "hrw";
 
 export const PAGE_COLOR: Record<PageKey, string> = {
   rr: "#e8411f",
   tnr: "#b090e0",
   hw: "#ff8c00",
   rise: "#ffffff",
+  hrw: "#ff5caa",
 };
 
 const PAGE_LABEL: Record<PageKey, string> = {
@@ -19,6 +20,7 @@ const PAGE_LABEL: Record<PageKey, string> = {
   tnr: "Todos no Rock",
   hw: "Halloween",
   rise: "Rock Rising",
+  hrw: "Hard Rock Weekend",
 };
 
 const ORDER: PageKey[] = ["rr", "tnr", "hw", "rise"];
@@ -40,6 +42,7 @@ function pageHref(key: PageKey): string {
     case "tnr": return "https://todosnorock.com.br";
     case "hw": return `${base}/halloween`;
     case "rise": return `${base}/rockrising`;
+    case "hrw": return `${base}/hardrockweekend`;
   }
 }
 

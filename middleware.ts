@@ -85,6 +85,30 @@ export default async function middleware(request: Request) {
     return new Response(page, { status: response.status, headers: response.headers });
   }
 
+  // Hard Rock Weekend page on rockribeirao.com.br gets its own link preview.
+  if (!isFestivalDomain && pathname === "/hardrockweekend" && contentType.includes("text/html")) {
+    let page = await response.text();
+    const title = "Hard Rock Weekend — 3 noites de rock no feriadão | Hard Rock Cafe Ribeirão Preto";
+    const desc = "19/11 Tributo Guns N' Roses, 20/11 Lost80s feat. Kiko Shred e 21/11 Radio Show feat. Nando Fernandes. Shows a partir das 21h. Ingressos no Sympla.";
+    const img = "https://www.rockribeirao.com.br/hardrockweekend/hardrockweekend-share.jpg";
+    page = page.replace(/<title>.*?<\/title>/i, `<title>${title}</title>`);
+    page = page.replace(/<meta[^>]+(?:property="og:|name="twitter:)[^>]*>\s*/gi, "");
+    page = page.replace(/<\/head>/i, `
+    <meta property="og:title" content="${title}" />
+    <meta property="og:description" content="${desc}" />
+    <meta property="og:image" content="${img}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="https://www.rockribeirao.com.br/hardrockweekend" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="${title}" />
+    <meta name="twitter:description" content="${desc}" />
+    <meta name="twitter:image" content="${img}" />
+  </head>`);
+    return new Response(page, { status: response.status, headers: response.headers });
+  }
+
   // Only touch actual HTML documents, pass everything else through untouched.
   if (!isFestivalDomain || !contentType.includes("text/html")) {
     return response;

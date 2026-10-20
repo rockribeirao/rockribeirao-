@@ -6,6 +6,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { lazy, Suspense } from "react";
 import Halloween from "./pages/Halloween";
+import HardRockWeekend from "./pages/HardRockWeekend";
 
 // Halloween stays in the main bundle (ad landing page, must open fast);
 // the other pages load on demand so they don't slow it down.
@@ -33,6 +34,7 @@ function Router() {
       <Route path={"/"} component={Home} />
       <Route path={"/todos-no-rock"} component={TodosNoRock} />
       <Route path={"/halloween"} component={Halloween} />
+      <Route path={"/hardrockweekend"} component={HardRockWeekend} />
       <Route path={"/rockrising"} component={RockRising} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
