@@ -151,7 +151,7 @@ export default function HardRockWeekend() {
                   <div className="date"><span className="d">{n.date}</span><span className="w">{n.weekday}</span></div>
                   <h3>{n.band} <small>{n.sub}</small></h3>
                   <ul className="facts">{FACTS[n.key].map((f) => <li key={f}>{f}</li>)}</ul>
-                  <div className="hotel"><img src={HOTEL_LOGO[n.hotel]} alt={n.hotel} /><p><b>Hotel parceiro:</b> {n.hotel}</p></div>
+                  <div className="hotel"><img src={HOTEL_LOGO[n.hotel]} alt={n.hotel} /><p><b>Hotel parceiro</b></p></div>
                   <a className="btn" href={n.link} target="_blank" rel="noopener noreferrer">Comprar ingresso · {n.date}</a>
                 </div>
               </article>
@@ -190,9 +190,10 @@ export default function HardRockWeekend() {
             </div>
             <div>
               <h4>Hotéis parceiros</h4>
-              <p className="hlogos"><img src={`${IMG}/logo-matiz.png`} alt="Matiz Hotel Vilabom" /><img src={`${IMG}/logo-hotel-jp.png`} alt="Hotel JP" /></p>
-              <p><strong>Matiz Hotel Vilabom</strong> na quinta.</p>
-              <p><strong>Hotel JP</strong> na sexta e no sábado.</p>
+              <div className="hlogos">
+                <figure><img src={`${IMG}/logo-matiz.png`} alt="Matiz Hotel Vilabom" /><figcaption>Quinta, 19/11</figcaption></figure>
+                <figure><img src={`${IMG}/logo-hotel-jp.png`} alt="Hotel JP" /><figcaption>Sexta e sábado, 20 e 21/11</figcaption></figure>
+              </div>
             </div>
           </div>
         </section>
@@ -303,7 +304,9 @@ const CSS = `
 .hrw div.hotel{display:flex;align-items:center;gap:14px;border-left:0;padding-left:0}
 .hrw div.hotel img{height:52px;width:auto;max-width:140px;object-fit:contain;flex:none}
 .hrw div.hotel p{margin:0}
-.hrw .hlogos{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.hrw .hlogos{display:grid;gap:16px}
+.hrw .hlogos figure{margin:0;display:grid;gap:4px;justify-items:start}
+.hrw .hlogos figcaption{font-size:13px;color:var(--mut)}
 .hrw .hlogos img{height:52px;width:auto;max-width:150px;object-fit:contain}
 .hrw .about{display:grid;gap:14px;max-width:70ch;color:var(--mut);font-size:17px}.hrw .about p{margin:0}
 .hrw .perk{margin:0;background:var(--line);border-radius:5px;padding:10px 12px;font-size:15px}
