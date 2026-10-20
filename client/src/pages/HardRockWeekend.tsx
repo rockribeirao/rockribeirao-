@@ -48,9 +48,15 @@ const NIGHTS: Night[] = [
 ];
 
 type Logo = { src: string; alt: string; href: string };
+const HOTEL_LOGO: Record<string, string> = { "Matiz Hotel Vilabom": `${IMG}/logo-matiz.png`, "Hotel JP": `${IMG}/logo-hotel-jp.png` };
+
 const grupos: { titulo: string; wide?: boolean; logos: Logo[] }[] = [
   { titulo: "Local", logos: [{ src: `${IMG}/logo-hardrock.png`, alt: "Hard Rock Cafe Ribeirão Preto", href: "https://www.instagram.com/hrc.ribeiraopreto/" }] },
   { titulo: "Realização", logos: [{ src: `${IMG}/logo-rockribeirao.png`, alt: "Rock Ribeirão Produções", href: "https://www.instagram.com/rockribeirao/" }] },
+  { titulo: "Hotéis parceiros", wide: true, logos: [
+    { src: `${IMG}/logo-matiz.png`, alt: "Matiz Hotel Vilabom Ribeirão Preto", href: "https://www.instagram.com/matizhotelvilabom/" },
+    { src: `${IMG}/logo-hotel-jp.png`, alt: "Hotel JP Ribeirão Preto", href: "https://www.instagram.com/hoteljpribeiraopreto/" },
+  ] },
   { titulo: "Promoção", logos: [{ src: `${IMG}/logo-kiss.png`, alt: "Kiss FM 105,3", href: "https://www.instagram.com/kissfmribeirao/" }] },
   { titulo: "Apoio", wide: true, logos: [
     { src: `${IMG}/logo-school.png`, alt: "School of Rock Ribeirão Preto", href: "https://www.instagram.com/schoolofrock_ribeiraopreto/" },
@@ -163,7 +169,7 @@ export default function HardRockWeekend() {
               <h2>{n.band}</h2>
               <p className="asub">{n.sub} · {n.style}</p>
               <ul className="facts">{FACTS[n.key].map((f) => <li key={f}>{f}</li>)}</ul>
-              <p className="hotel"><b>Hotel parceiro:</b> {n.hotel}.</p>
+              <div className="hotel"><img src={HOTEL_LOGO[n.hotel]} alt={n.hotel} /><p><b>Hotel parceiro:</b> {n.hotel}. Vem de fora? Hospede-se por lá.</p></div>
               <a className="btn" href={n.link} target="_blank" rel="noopener noreferrer">Comprar ingresso · {n.date}</a>
             </div>
           </section>
@@ -200,6 +206,7 @@ export default function HardRockWeekend() {
             </div>
             <div>
               <h4>Hotéis parceiros</h4>
+              <p className="hlogos"><img src={`${IMG}/logo-matiz.png`} alt="Matiz Hotel Vilabom" /><img src={`${IMG}/logo-hotel-jp.png`} alt="Hotel JP" /></p>
               <p><strong>Matiz Hotel Vilabom</strong> na quinta.</p>
               <p><strong>Hotel JP</strong> na sexta e no sábado.</p>
             </div>
@@ -305,6 +312,11 @@ const CSS = `
 .hrw .facts{margin:0 0 16px;padding-left:20px;display:grid;gap:8px;color:var(--mut);max-width:70ch}
 .hrw .facts li::marker{color:var(--pink)}
 .hrw .atext .hotel{margin-bottom:18px}
+.hrw div.hotel{display:flex;align-items:center;gap:14px;border-left:0;padding-left:0}
+.hrw div.hotel img{height:64px;width:auto;border-radius:6px;background:#fff;flex:none}
+.hrw div.hotel p{margin:0}
+.hrw .hlogos{display:flex;gap:10px;flex-wrap:wrap}
+.hrw .hlogos img{height:56px;width:auto;border-radius:6px;background:#fff}
 .hrw .about{display:grid;gap:14px;max-width:70ch;color:var(--mut);font-size:17px}.hrw .about p{margin:0}
 .hrw .perk{margin:0;background:var(--line);border-radius:5px;padding:10px 12px;font-size:15px}
 .hrw .night .btn{margin-top:auto;width:100%}
@@ -328,6 +340,7 @@ const CSS = `
 .hrw .lg .row{display:flex;flex-wrap:wrap;align-items:center;gap:20px}
 .hrw .lg a{display:block;transition:opacity .2s}.hrw .lg a:hover{opacity:.75}
 .hrw .lg img{height:56px;width:auto;max-width:150px;object-fit:contain}
+.hrw .lg.wide a img[src*="logo-matiz"],.hrw .lg.wide a img[src*="logo-hotel"]{border-radius:6px;background:#fff;height:64px}
 .hrw footer{padding-block:32px;color:var(--mut);font-size:13px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .hrw footer p{margin:0}
 @media (max-width:860px){
