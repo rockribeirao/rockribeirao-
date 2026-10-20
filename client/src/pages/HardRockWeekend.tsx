@@ -313,10 +313,10 @@ const CSS = `
 .hrw .facts li::marker{color:var(--pink)}
 .hrw .atext .hotel{margin-bottom:18px}
 .hrw div.hotel{display:flex;align-items:center;gap:14px;border-left:0;padding-left:0}
-.hrw div.hotel img{height:64px;width:auto;border-radius:6px;background:#fff;flex:none}
+.hrw div.hotel img{height:84px;width:auto;border-radius:8px;flex:none}
 .hrw div.hotel p{margin:0}
 .hrw .hlogos{display:flex;gap:10px;flex-wrap:wrap}
-.hrw .hlogos img{height:56px;width:auto;border-radius:6px;background:#fff}
+.hrw .hlogos img{height:60px;width:auto;border-radius:8px}
 .hrw .about{display:grid;gap:14px;max-width:70ch;color:var(--mut);font-size:17px}.hrw .about p{margin:0}
 .hrw .perk{margin:0;background:var(--line);border-radius:5px;padding:10px 12px;font-size:15px}
 .hrw .night .btn{margin-top:auto;width:100%}
@@ -340,7 +340,7 @@ const CSS = `
 .hrw .lg .row{display:flex;flex-wrap:wrap;align-items:center;gap:20px}
 .hrw .lg a{display:block;transition:opacity .2s}.hrw .lg a:hover{opacity:.75}
 .hrw .lg img{height:56px;width:auto;max-width:150px;object-fit:contain}
-.hrw .lg.wide a img[src*="logo-matiz"],.hrw .lg.wide a img[src*="logo-hotel"]{border-radius:6px;background:#fff;height:64px}
+.hrw .lg.wide a img[src*="logo-matiz"],.hrw .lg.wide a img[src*="logo-hotel"]{border-radius:8px;height:84px;max-width:none}
 .hrw footer{padding-block:32px;color:var(--mut);font-size:13px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .hrw footer p{margin:0}
 @media (max-width:860px){
