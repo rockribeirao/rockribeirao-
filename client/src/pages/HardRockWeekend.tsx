@@ -151,7 +151,7 @@ export default function HardRockWeekend() {
                   <div className="date"><span className="d">{n.date}</span><span className="w">{n.weekday}</span></div>
                   <h3>{n.band} <small>{n.sub}</small></h3>
                   <ul className="facts">{FACTS[n.key].map((f) => <li key={f}>{f}</li>)}</ul>
-                  <div className="hotel"><img src={HOTEL_LOGO[n.hotel]} alt={n.hotel} /><p><b>Hotel parceiro</b></p></div>
+                  <div className="hotel"><p><b>Hotel parceiro</b></p><img src={HOTEL_LOGO[n.hotel]} alt={n.hotel} /></div>
                   <a className="btn" href={n.link} target="_blank" rel="noopener noreferrer">Comprar ingresso · {n.date}</a>
                 </div>
               </article>
@@ -301,7 +301,7 @@ const CSS = `
 .hrw .facts{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--mut);font-size:14px}
 .hrw .facts li::marker{color:var(--pink)}
 .hrw .atext .hotel{margin-bottom:18px}
-.hrw div.hotel{display:flex;align-items:center;gap:14px;border-left:0;padding-left:0}
+.hrw div.hotel{display:flex;flex-direction:column;align-items:flex-start;gap:8px;border-left:0;padding-left:0}
 .hrw div.hotel img{height:52px;width:auto;max-width:140px;object-fit:contain;flex:none}
 .hrw div.hotel p{margin:0}
 .hrw .hlogos{display:grid;gap:16px}
