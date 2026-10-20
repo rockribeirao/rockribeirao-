@@ -5,7 +5,7 @@ import { SiteMenuDesktop, SiteMenuMobile } from "@/components/SiteMenu";
 const SECTIONS = [
   { href: "#ingressos", label: "Ingressos" },
   { href: "#sobre", label: "O evento" },
-  { href: "#guns", label: "Os shows" },
+  { href: "#noites", label: "Os shows" },
   { href: "#servico", label: "Serviço" },
 ];
 
@@ -142,35 +142,14 @@ export default function HardRockWeekend() {
 
         <section id="noites">
           <h2>Os shows</h2>
-          <p className="sec-lede">Quinta, sexta e sábado de rock ao vivo. Cada noite tem o seu ingresso.</p>
+          <p className="sec-lede">Quinta, sexta e sábado de rock ao vivo. Cada noite tem o seu ingresso no Sympla.</p>
           <div className="nights">
             {NIGHTS.map((n) => (
               <article className="night" key={n.key}>
                 <img src={n.art} alt={n.alt} loading="lazy" />
                 <div className="body">
                   <div className="date"><span className="d">{n.date}</span><span className="w">{n.weekday}</span></div>
-                  <h3>{n.band} <small>{n.sub} · {n.style}</small></h3>
-                  <p className="perk">{n.perk}</p>
-                  <p className="hotel"><b>Hotel parceiro:</b> {n.hotel}. Vem de fora? Hospede-se por lá.</p>
-                  <a className="btn" href={n.link} target="_blank" rel="noopener noreferrer">Comprar ingresso · {n.date}</a>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section id="guns">
-          <h2>Quem toca</h2>
-          <div className="bands">
-            {NIGHTS.map((n) => (
-              <article key={n.key} className="band">
-                <div className="aban">
-                  <img src={`${IMG}/banda-${n.key}.webp`} alt="" loading="lazy" />
-                  <div className="adate"><b>{n.date}</b><span>{n.weekday.split(" · ")[0]}</span></div>
-                </div>
-                <div className="bbody">
-                  <h3>{n.band}</h3>
-                  <p className="asub">{n.sub}</p>
+                  <h3>{n.band} <small>{n.sub}</small></h3>
                   <ul className="facts">{FACTS[n.key].map((f) => <li key={f}>{f}</li>)}</ul>
                   <div className="hotel"><img src={HOTEL_LOGO[n.hotel]} alt={n.hotel} /><p><b>Hotel parceiro:</b> {n.hotel}</p></div>
                   <a className="btn" href={n.link} target="_blank" rel="noopener noreferrer">Comprar ingresso · {n.date}</a>
@@ -299,7 +278,7 @@ const CSS = `
 .hrw .nights{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .hrw .night{background:var(--card);border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
 .hrw .night>img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover}
-.hrw .night .body{padding:18px;display:grid;gap:12px;flex:1;align-content:start}
+.hrw .night .body{padding:18px;display:flex;flex-direction:column;gap:12px;flex:1}
 .hrw .date{display:flex;align-items:baseline;gap:10px;font-family:var(--f-d);text-transform:uppercase}
 .hrw .date .d{font-size:36px;color:var(--pink);line-height:1}.hrw .date .w{font-size:15px;color:var(--mut)}
 .hrw .night h3{margin:0;font-family:var(--f-d);font-weight:400;font-size:26px;text-transform:uppercase}
