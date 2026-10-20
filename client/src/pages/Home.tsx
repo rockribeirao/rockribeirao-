@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { SiteMenuDesktop, SiteMenuMobile, PAGE_COLOR } from "@/components/SiteMenu";
 
 const HOME_SECTIONS = [
+  { href: "#destaques", label: "Destaques" },
   { href: "#shows", label: "Próximos shows" },
   { href: "#proof", label: "Credibilidade" },
   { href: "#gallery", label: "Galeria" },
@@ -365,7 +366,7 @@ export default function Home() {
       </section>
 
       {/* DESTAQUES */}
-      <section className="py-12" style={{ background: "#0d0614", borderTop: "2px solid #cc2200", borderBottom: "2px solid #cc2200" }}>
+      <section id="destaques" className="py-12" style={{ background: "#0d0614", borderTop: "2px solid #cc2200", borderBottom: "2px solid #cc2200" }}>
         <div className="container">
           <h2 className="font-display text-4xl mb-6" style={{ color: "#cc2200" }}>DESTAQUES</h2>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 20, maxWidth: 1100, margin: "0 auto" }}>
