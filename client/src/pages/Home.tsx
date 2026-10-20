@@ -259,40 +259,9 @@ export default function Home() {
       </header>
 
       <main>
-      {/* Hero */}
-      <section className="relative py-40 overflow-hidden" style={{
-        backgroundImage: `linear-gradient(135deg, rgba(6,2,14,0.78) 0%, rgba(40,0,80,0.55) 50%, rgba(6,2,14,0.82) 100%), url(${BASE}/rr-hero-bg.jpg.jpg)`,
-        backgroundSize: "cover", backgroundPosition: "center",
-      }}>
-        <div className="container relative z-10 text-center">
-          <div className="mb-8 flex justify-center">
-            <img src={`${BASE}/Logo%20do%20hero.png`} alt="Rock Ribeirão Logo" className="h-32 md:h-40 object-contain drop-shadow-lg" />
-          </div>
-          <h1 className="font-display text-6xl md:text-7xl mb-6 leading-tight" style={{ color: "#ff3311" }}>
-            OS MAIORES SHOWS DE ROCK DE RIBEIRÃO PRETO
-          </h1>
-          <p className="font-heading text-xl md:text-2xl text-white mb-8 max-w-3xl mx-auto">
-            Os principais nomes do rock passam por aqui
-          </p>
-          <div className="flex flex-col md:flex-row gap-4 justify-center items-center mb-6">
-            <Button onClick={() => document.getElementById("shows")?.scrollIntoView({ behavior: "smooth" })}
-              className="text-white font-heading text-lg px-10 py-7 h-auto rounded-none"
-              style={{ background: "#cc2200" }}>
-              VER PRÓXIMOS SHOWS <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
-            <a href="https://www.sympla.com.br/produtor/rockribeirao" target="_blank" rel="noopener noreferrer"
-              className="font-heading text-lg px-10 py-5 transition"
-              style={{ border: "2px solid #cc2200", color: "#ff6644" }}>
-              COMPRAR INGRESSOS
-            </a>
-          </div>
-          <p className="text-sm mt-8" style={{ color: "#a190c4" }}>⭐ Experiências musicais autênticas em Ribeirão Preto e região</p>
-        </div>
-      </section>
-
       {/* Carrossel de Destaques */}
       {featuredShows.length > 0 && (
-        <section className="py-16" style={{ background: "#06020e" }}>
+        <section className="py-8 md:py-10" style={{ background: "#06020e" }}>
           <div className="container">
             <div style={{ position: "relative", maxWidth: 1400, margin: "0 auto" }}>
               <div style={{ overflow: "hidden" }}>
@@ -363,6 +332,37 @@ export default function Home() {
           </div>
         </section>
       )}
+
+      {/* Hero */}
+      <section className="relative py-40 overflow-hidden" style={{
+        backgroundImage: `linear-gradient(135deg, rgba(6,2,14,0.78) 0%, rgba(40,0,80,0.55) 50%, rgba(6,2,14,0.82) 100%), url(${BASE}/rr-hero-bg.jpg.jpg)`,
+        backgroundSize: "cover", backgroundPosition: "center",
+      }}>
+        <div className="container relative z-10 text-center">
+          <div className="mb-8 flex justify-center">
+            <img src={`${BASE}/Logo%20do%20hero.png`} alt="Rock Ribeirão Logo" className="h-32 md:h-40 object-contain drop-shadow-lg" />
+          </div>
+          <h1 className="font-display text-6xl md:text-7xl mb-6 leading-tight" style={{ color: "#ff3311" }}>
+            OS MAIORES SHOWS DE ROCK DE RIBEIRÃO PRETO
+          </h1>
+          <p className="font-heading text-xl md:text-2xl text-white mb-8 max-w-3xl mx-auto">
+            Os principais nomes do rock passam por aqui
+          </p>
+          <div className="flex flex-col md:flex-row gap-4 justify-center items-center mb-6">
+            <Button onClick={() => document.getElementById("shows")?.scrollIntoView({ behavior: "smooth" })}
+              className="text-white font-heading text-lg px-10 py-7 h-auto rounded-none"
+              style={{ background: "#cc2200" }}>
+              VER PRÓXIMOS SHOWS <ArrowRight className="ml-2 w-5 h-5" />
+            </Button>
+            <a href="https://www.sympla.com.br/produtor/rockribeirao" target="_blank" rel="noopener noreferrer"
+              className="font-heading text-lg px-10 py-5 transition"
+              style={{ border: "2px solid #cc2200", color: "#ff6644" }}>
+              COMPRAR INGRESSOS
+            </a>
+          </div>
+          <p className="text-sm mt-8" style={{ color: "#a190c4" }}>⭐ Experiências musicais autênticas em Ribeirão Preto e região</p>
+        </div>
+      </section>
 
       {/* DESTAQUES */}
       <section className="py-12" style={{ background: "#0d0614", borderTop: "2px solid #cc2200", borderBottom: "2px solid #cc2200" }}>
