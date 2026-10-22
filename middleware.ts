@@ -48,7 +48,7 @@ const SITE = "https://www.rockribeirao.com.br";
 
 // Páginas dos projetos: nome e descrição usados na prévia do link.
 const PROJETOS: Record<string, [string, string]> = {
-  "todos-no-rock": ["Festival Todos no Rock", "Rock autoral em praça pública, com bandas, oficinas e estrutura de festival grande. Gratuito e acessível. Lei Rouanet e ProAC aprovados."],
+  "todos-no-rock": ["Festival Todos no Rock", "Rock ao vivo em praça pública: bandas autorais e tributos aos grandes nomes, oficinas e estrutura de festival grande. Gratuito. Lei Rouanet e ProAC aprovados."],
   "todos-no-samba": ["Festival Todos no Samba", "Um dia de samba em praça pública, com grupos da região, oficinas e uma vitrine da economia criativa local. Lei Rouanet aprovada."],
   "todos-no-sertanejo": ["Festival Todos no Sertanejo", "As raízes e as vertentes da música sertaneja em praça pública, com bandas regionais, oficinas e vitrine da economia criativa. Lei Rouanet aprovada."],
   "acustico-br-rock-banda": ["Acústico BR Rock Banda", "Os grandes clássicos do rock nacional em formato acústico com banda, com participação especial de Fernando Quesada. Lei Rouanet e ProAC aprovados."],
