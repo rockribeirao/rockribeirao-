@@ -113,7 +113,6 @@ export const historicoHardRock: HistoricoShow[] = [
   ["2025-10-26", "Halloween Party School Of Rock & Influx English School"],
   ["2025-10-30", "Cães de Aluguel – Especial Halloween"],
   ["2025-10-31", "The Four Horsemen: Tributo ao Metallica - Show de Halloween"],
-  ["2025-10-31", "Are You Experienced? The Hendrix Tribute by John Campbell", true],
   ["2025-11-02", "Underground Fest - Hard Rock Cafe Ribeirão em Estado Bruto"],
   ["2025-11-07", "Evanescence Experience"],
   ["2025-11-08", "Caaru – Energia Ancestral"],
