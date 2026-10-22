@@ -19,6 +19,46 @@ const FESTIVAL_HOSTS = ["todosnorock.com.br", "www.todosnorock.com.br"];
 const FESTIVAL_OG_IMAGE =
   "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public/tnr-og-image-share.jpg";
 
+
+// Link preview (title, description, image) for a page of rockribeirao.com.br.
+async function withPreview(response: Response, title: string, desc: string, img: string, url: string) {
+  let page = await response.text();
+  page = page.replace(/<title>.*?<\/title>/i, `<title>${title}</title>`);
+  page = page.replace(/<meta[^>]+(?:property="og:|name="twitter:)[^>]*>\s*/gi, "");
+  page = page.replace(/<meta[^>]+name="description"[^>]*>\s*/gi, "");
+  page = page.replace(/<\/head>/i, `
+    <meta name="description" content="${desc}" />
+    <meta property="og:title" content="${title}" />
+    <meta property="og:description" content="${desc}" />
+    <meta property="og:image" content="${img}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="${url}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="${title}" />
+    <meta name="twitter:description" content="${desc}" />
+    <meta name="twitter:image" content="${img}" />
+  </head>`);
+  return new Response(page, { status: response.status, headers: response.headers });
+}
+
+const SITE = "https://www.rockribeirao.com.br";
+
+// Páginas dos projetos: nome e descrição usados na prévia do link.
+const PROJETOS: Record<string, [string, string]> = {
+  "todos-no-rock": ["Festival Todos no Rock", "Rock autoral em praça pública, com bandas, oficinas e estrutura de festival grande. Gratuito e acessível. Lei Rouanet e ProAC aprovados."],
+  "todos-no-samba": ["Festival Todos no Samba", "Um dia de samba em praça pública, com grupos da região, oficinas e uma vitrine da economia criativa local. Lei Rouanet aprovada."],
+  "todos-no-sertanejo": ["Festival Todos no Sertanejo", "As raízes e as vertentes da música sertaneja em praça pública, com bandas regionais, oficinas e vitrine da economia criativa. Lei Rouanet aprovada."],
+  "acustico-br-rock-banda": ["Acústico BR Rock Banda", "Os grandes clássicos do rock nacional em formato acústico com banda, com participação especial de Fernando Quesada. Lei Rouanet e ProAC aprovados."],
+  "rock-simphony": ["Rock Simphony", "Banda de rock e orquestra no mesmo palco: clássicos do rock nacional e internacional em arranjos sinfônicos inéditos. ProAC aprovado."],
+  "estacao-do-samba": ["Estação do Samba", "Domingos de roda de samba, com mestres de percussão, grupo anfitrião e convidados, além de oficinas abertas ao público. Lei Rouanet aprovada."],
+  "especial-de-natal": ["Especial de Natal", "Dez dias de Natal na praça: música, teatro, dança, cenografia iluminada e show de abertura com artista nacional. Lei Rouanet aprovada."],
+  "agrocult": ["AgroCult", "Agro, cultura e identidade nacional: concerto sinfônico, exposição fotográfica e simpósio sobre a cultura do campo. Lei Rouanet, Artigo 18."],
+  "raizes-da-cerveja": ["Raízes da Cerveja", "Programa paulista de formação e patrimônio da cultura cervejeira: exposição, apresentações artísticas, palestras e oficinas. Lei Rouanet aprovada."],
+};
+
 export default async function middleware(request: Request) {
   const host = request.headers.get("host") || "";
   const isFestivalDomain = FESTIVAL_HOSTS.includes(host);
@@ -45,7 +85,6 @@ export default async function middleware(request: Request) {
     <link rel="preload" as="image" type="image/webp" href="/halloween/halloween-hero-mobile.webp" media="(max-width:700px)" fetchpriority="high" />
     <link rel="preload" as="image" type="image/webp" href="/halloween/halloween-hero-desktop.webp" media="(min-width:701px)" fetchpriority="high" />
     <link rel="preload" as="image" href="/halloween/logo-hardrock.png" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;600;700&family=Creepster&display=swap" />
     <meta property="og:title" content="${title}" />
     <meta property="og:description" content="${desc}" />
     <meta property="og:image" content="${img}" />
@@ -107,6 +146,21 @@ export default async function middleware(request: Request) {
     <meta name="twitter:image" content="${img}" />
   </head>`);
     return new Response(page, { status: response.status, headers: response.headers });
+  }
+
+  // Página do Hard Rock e páginas dos projetos: prévia própria do link.
+  if (!isFestivalDomain && contentType.includes("text/html")) {
+    if (pathname === "/hardrock") {
+      return withPreview(response, "Rock Ribeirão no Hard Rock Cafe Ribeirão Preto — agenda e história",
+        "Próximos shows com ingresso no Sympla e a história de mais de 200 shows e mais de 60 mil pessoas no Hard Rock Cafe Ribeirão Preto.",
+        `${SITE}/site/share-hardrock.jpg`, `${SITE}/hardrock`);
+    }
+    const m = pathname.match(/^\/projetos\/([a-z0-9-]+)$/);
+    if (m && PROJETOS[m[1]]) {
+      const [name, desc] = PROJETOS[m[1]];
+      return withPreview(response, `${name} | Rock Ribeirão Produções`, desc,
+        `${SITE}/projetos/${m[1]}/share.jpg`, `${SITE}/projetos/${m[1]}`);
+    }
   }
 
   // Only touch actual HTML documents, pass everything else through untouched.
