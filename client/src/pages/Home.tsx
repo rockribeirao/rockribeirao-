@@ -14,6 +14,11 @@ const DESTAQUES = [
 
 const SIZES = { festivais: "clamp(52px, 7.6vw, 116px)", shows: "clamp(44px, 5.6vw, 84px)", formacao: "clamp(40px, 4.6vw, 68px)" } as const;
 
+const arrow = (side: "left" | "right"): React.CSSProperties => ({
+  position: "absolute", [side]: 12, top: "50%", transform: "translateY(-50%)", width: 44, height: 44, borderRadius: "50%",
+  background: "rgba(6,2,14,0.7)", border: "0.5px solid #a190c4", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer",
+});
+
 export default function Home() {
   const slides = getFutureShows().filter((s) => s.bannerImage);
   const [i, setI] = useState(0);
@@ -22,7 +27,7 @@ export default function Home() {
   useEffect(() => {
     if (n <= 1) return;
     if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
-    const t = setInterval(() => setI((x) => (x + 1) % n), 6000);
+    const t = setInterval(() => setI((x) => (x + 1) % n), 5000);
     return () => clearInterval(t);
   }, [n]);
 
@@ -34,32 +39,53 @@ export default function Home() {
       <RRHeader current="rr" />
       <main>
         {cur && (
-          <section id="ingressos" className="s-black" style={{ padding: "28px 0 40px" }} aria-label="Ingressos à venda">
-            <div className="wrap" style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-              <a href={cur.carouselLink || cur.link} style={{ display: "block" }}>
-                <img src={cur.bannerImage} alt={`Banner do show ${cur.name}`} style={{ width: "100%", aspectRatio: "1600 / 838", objectFit: "cover", display: "block" }} />
-              </a>
-              <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 16 }}>
+          <section id="ingressos" className="s-black" style={{ padding: "32px 0 40px" }} aria-label="Ingressos à venda">
+            <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 24px" }}>
+              {/* Carrossel: o show atual no centro e os vizinhos aparecendo nas laterais, esmaecidos. */}
+              <div style={{ position: "relative" }}>
+                <div style={{ overflow: "hidden" }}>
+                  <div style={{ display: "flex", transform: `translateX(calc(-${(i % n) * 80}% + 11%))`, transition: "transform 0.5s ease" }}>
+                    {slides.map((s, k) => {
+                      const on = k === i % n;
+                      const href = s.carouselLink || s.link;
+                      return (
+                        <a key={s.id} href={href} target={href && !href.startsWith("/") ? "_blank" : undefined} rel="noopener noreferrer"
+                          aria-hidden={!on} tabIndex={on ? 0 : -1}
+                          style={{ flex: "0 0 78%", marginRight: "2%", display: "block", aspectRatio: "1600 / 838", borderRadius: 16, overflow: "hidden",
+                            opacity: on ? 1 : 0.4, transform: on ? "scale(1)" : "scale(0.94)", transition: "opacity 0.5s ease, transform 0.5s ease" }}>
+                          <img src={s.bannerImage} alt={`Banner do show ${s.name}`} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                        </a>
+                      );
+                    })}
+                  </div>
+                </div>
+                {n > 1 && (
+                  <>
+                    <button type="button" onClick={() => setI((x) => (x - 1 + n) % n)} aria-label="Show anterior" style={arrow("left")}><ChevronLeft size={22} /></button>
+                    <button type="button" onClick={() => setI((x) => (x + 1) % n)} aria-label="Próximo show" style={arrow("right")}><ChevronRight size={22} /></button>
+                  </>
+                )}
+              </div>
+              {n > 1 && (
+                <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 16 }}>
+                  {slides.map((s, k) => (
+                    <button key={s.id} type="button" onClick={() => setI(k)} aria-label={`Mostrar ${s.name}`} aria-current={k === i % n}
+                      style={{ width: k === i % n ? 24 : 8, height: 8, borderRadius: 4, padding: 0, background: k === i % n ? "#cc2200" : "#a190c4", border: "none", cursor: "pointer", transition: "all 0.3s" }} />
+                  ))}
+                </div>
+              )}
+              <div style={{ maxWidth: "78%", margin: "20px auto 0", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 16 }} className="rr-carousel-info">
                 <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
                   <h2 className="disp" style={{ fontSize: "clamp(36px, 4.4vw, 60px)" }}>{cur.name}</h2>
                   <span className="muted">
                     {cur.subtitle ? `${cur.subtitle} · ` : ""}{weekday(cur.date)}, {parseDate(cur.date).day} de {MONTHS[parseDate(cur.date).month]}, {cur.time}, {cur.venue}
                   </span>
                 </div>
-                {cur.link && <a className="btn btn-red" href={cur.link}>{cur.linkLabel ? cur.linkLabel.charAt(0) + cur.linkLabel.slice(1).toLowerCase() : "Comprar ingresso"}</a>}
-              </div>
-              {n > 1 && (
-                <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-                  <button type="button" className="btn btn-line" style={{ minHeight: 44, width: 44, padding: 0 }} aria-label="Show anterior" onClick={() => setI((x) => (x - 1 + n) % n)}><ChevronLeft size={20} /></button>
-                  <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-                    {slides.map((s, k) => (
-                      <button key={s.id} type="button" className={k === i % n ? "dot dot-on" : "dot"} aria-label={`Mostrar ${s.name}`} aria-current={k === i % n} onClick={() => setI(k)} />
-                    ))}
-                  </div>
-                  <button type="button" className="btn btn-line" style={{ minHeight: 44, width: 44, padding: 0 }} aria-label="Próximo show" onClick={() => setI((x) => (x + 1) % n)}><ChevronRight size={20} /></button>
-                  <a href="/hardrock#agenda" style={{ marginLeft: "auto", fontWeight: 700, fontSize: 15 }}>Ver toda a agenda</a>
+                <div style={{ display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap" }}>
+                  <a href="/hardrock#agenda" style={{ fontWeight: 700, fontSize: 15 }}>Ver toda a agenda</a>
+                  {cur.link && <a className="btn btn-red" href={cur.link}>{cur.linkLabel ? cur.linkLabel.charAt(0) + cur.linkLabel.slice(1).toLowerCase() : "Comprar ingresso"}</a>}
                 </div>
-              )}
+              </div>
             </div>
           </section>
         )}

@@ -94,3 +94,5 @@
 .rr .dot-on { background: #fff; }
 
 @media (prefers-reduced-motion: reduce) { .rr * { scroll-behavior: auto !important; transition: none !important; animation: none !important; } }
+@media (max-width: 700px) { .rr .rr-carousel-info { max-width: 100% !important; } }
+.rr main { overflow-x: clip; }
