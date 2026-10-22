@@ -110,7 +110,7 @@ export default function Halloween() {
               <source type="image/webp" srcSet={`${IMG}/halloween-hero-desktop.webp`} />
               <img className="ev-hero-img" src={`${IMG}/halloween-hero-desktop.jpg`} alt="Palco do Hard Rock decorado para o Halloween, com abóboras, teias e morcegos" fetchPriority="high" />
             </picture>
-            <a className="ev-hero-logo" href="https://www.instagram.com/hrc.ribeiraopreto/" target="_blank" rel="noopener noreferrer">
+            <a className="ev-hero-logo ev-logo-smoke" href="https://www.instagram.com/hrc.ribeiraopreto/" target="_blank" rel="noopener noreferrer">
               <img src={`${IMG}/logo-hardrock.png`} alt="Hard Rock Cafe Ribeirão Preto" width={408} height={320} />
             </a>
           </div>

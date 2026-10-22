@@ -104,7 +104,7 @@ export default function HardRockWeekend() {
               <source media="(max-width:700px)" srcSet={`${IMG}/hero-mobile.webp`} />
               <img className="ev-hero-img" src={`${IMG}/hero-desktop.webp`} alt="Palco do Hard Rock Cafe com luzes rosa e público" fetchPriority="high" />
             </picture>
-            <a className="ev-hero-logo" href="https://www.instagram.com/hrc.ribeiraopreto/" target="_blank" rel="noopener noreferrer">
+            <a className="ev-hero-logo ev-logo-smoke" href="https://www.instagram.com/hrc.ribeiraopreto/" target="_blank" rel="noopener noreferrer">
               <img src={`${IMG}/logo-hardrock.png`} alt="Hard Rock Cafe Ribeirão Preto" width={408} height={320} />
             </a>
           </div>

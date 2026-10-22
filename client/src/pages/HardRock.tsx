@@ -30,7 +30,7 @@ export default function HardRock() {
           </div>
           <div className="ev-hero-media">
             <img className="ev-hero-img" src="/Guns%20Cover%20Brasil.jpg" alt="Show do Guns N' Roses Cover Brasil no Hard Rock Cafe" />
-            <a className="ev-hero-logo" href="https://www.instagram.com/hrc.ribeiraopreto/" target="_blank" rel="noopener noreferrer">
+            <a className="ev-hero-logo ev-logo-smoke" href="https://www.instagram.com/hrc.ribeiraopreto/" target="_blank" rel="noopener noreferrer">
               <img src="/halloween/logo-hardrock.png" alt="Hard Rock Cafe Ribeirão Preto" width={408} height={320} />
             </a>
           </div>
