@@ -46,10 +46,10 @@ const projHref = (slug: string) =>
 type Item = { key: PageKey; label: string; href: () => string; until?: number };
 const PAGES: Item[] = [
   { key: "rr", label: "Início", href: () => rr("/") },
-  { key: "hr", label: "Hard Rock", href: () => rr("/hardrock") },
   { key: "proj", label: "Projetos", href: () => rr("/#projetos") },
   { key: "tnr", label: "Todos no Rock", href: () => (onFestivalDomain() ? "/" : "https://todosnorock.com.br") },
   { key: "rise", label: "Rock Rising", href: () => rr("/rockrising") },
+  { key: "hr", label: "Hard Rock", href: () => rr("/hardrock") },
   { key: "hw", label: "Halloween", href: () => rr("/halloween"), until: HALLOWEEN_END },
   { key: "hrw", label: "Hard Rock Weekend", href: () => rr("/hardrockweekend"), until: HRW_END },
   { key: "contato", label: "Contato", href: () => rr("/#contato") },
