@@ -169,3 +169,5 @@
 .rr .ev-hero-media .ev-hero-img { min-height: 0; height: 100%; }
 .rr .ev-hero-logo { position: absolute; top: clamp(16px, 3vw, 36px); right: clamp(16px, 3vw, 36px); z-index: 2; display: block; line-height: 0; filter: drop-shadow(0 4px 18px rgba(0,0,0,.55)); }
 .rr .ev-hero-logo img { width: clamp(110px, 13vw, 190px); height: auto; display: block; }
+.rr .ev-hero-logo { top: 50%; left: 50%; right: auto; transform: translate(-50%, -50%); }
+.rr .ev-hero-logo img { width: clamp(180px, 22vw, 320px); }
