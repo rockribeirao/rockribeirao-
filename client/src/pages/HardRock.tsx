@@ -28,7 +28,12 @@ export default function HardRock() {
             <p className="lede">Mais de 200 shows e mais de 60 mil pessoas: tributos, noites temáticas e grandes bandas. A casa abre às 18h e os shows começam às 21h.</p>
             <a className="btn btn-ink" href="#agenda" style={{ alignSelf: "flex-start" }}>Ver a agenda</a>
           </div>
-          <img src="/Guns%20Cover%20Brasil.jpg" alt="Show do Guns N' Roses Cover Brasil no Hard Rock Cafe" style={{ width: "100%", height: "100%", minHeight: 420, objectFit: "cover", display: "block" }} />
+          <div className="ev-hero-media">
+            <img className="ev-hero-img" src="/Guns%20Cover%20Brasil.jpg" alt="Show do Guns N' Roses Cover Brasil no Hard Rock Cafe" />
+            <a className="ev-hero-logo" href="https://www.instagram.com/hrc.ribeiraopreto/" target="_blank" rel="noopener noreferrer">
+              <img src="/halloween/logo-hardrock.png" alt="Hard Rock Cafe Ribeirão Preto" width={408} height={320} />
+            </a>
+          </div>
         </section>
 
         <section id="agenda" className="s s-black">
