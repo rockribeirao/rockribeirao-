@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { RRHeader, RRFooter } from "@/components/RRLayout";
+import { historicoHardRock, HISTORICO_ATE } from "@/data/historicoHardRock";
 import { getFutureShows, getPastHardRockShows, galleryPhotos, parseDate, weekday, MONTH_ABBR } from "@/data/shows";
 
 // Shows que têm página própria de evento.
@@ -13,9 +15,27 @@ function eventPage(subtitle = "", date: string) {
 const isNorthStar = (partnerName?: string) => /north\s*star/i.test(partnerName ?? "");
 const NS_COLOR = "#6030b0";
 
+type Realizado = { iso: string; title: string; ns: boolean };
+
+// Histórico completo: planilha até HISTORICO_ATE + shows de data/shows.ts que já passaram depois disso.
+function historicoCompleto(): Realizado[] {
+  const base: Realizado[] = historicoHardRock.map(([iso, title, ns]) => ({ iso, title, ns: !!ns }));
+  const novos: Realizado[] = getPastHardRockShows()
+    .map((p) => {
+      const { day, month } = parseDate(p.date);
+      const iso = `2026-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+      return { iso, title: p.subtitle ? `${p.name} – ${p.subtitle}` : p.name, ns: isNorthStar(p.partnerName) };
+    })
+    .filter((p) => p.iso > HISTORICO_ATE);
+  return [...base, ...novos].sort((a, b) => (a.iso < b.iso ? 1 : a.iso > b.iso ? -1 : 0));
+}
+
 export default function HardRock() {
   const shows = getFutureShows().filter((s) => s.venue === "Hard Rock Cafe");
-  const past = getPastHardRockShows();
+  const historico = historicoCompleto();
+  const anos = Array.from(new Set(historico.map((h) => h.iso.slice(0, 4))));
+  const [ano, setAno] = useState(anos[0]);
+  const doAno = historico.filter((h) => h.iso.startsWith(ano));
 
   return (
     <div className="rr">
@@ -87,7 +107,7 @@ export default function HardRock() {
             <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: 24 }}>
               <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                 <h2 className="disp" style={{ fontSize: "clamp(48px, 5.6vw, 84px)" }}>Já passou por esse palco</h2>
-                <p className="body" style={{ fontWeight: 600 }}>Os shows de 2026. Desde 2024 foram mais de 200.</p>
+                <p className="body" style={{ fontWeight: 600 }}>Todos os shows da Rock Ribeirão no Hard Rock Cafe desde outubro de 2024.</p>
                 <p style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 14, fontWeight: 700 }}>
                   <span style={{ background: NS_COLOR, color: "#fff", fontSize: 12, fontWeight: 800, padding: "3px 8px", whiteSpace: "nowrap" }}>Parceria North Star</span>
                   show realizado em parceria com a North Star Concerts
@@ -98,16 +118,27 @@ export default function HardRock() {
                 <div><dt className="disp" style={{ fontSize: 56 }}>60 mil+</dt><dd style={{ fontWeight: 700 }}>pessoas</dd></div>
               </dl>
             </div>
-            <ul style={{ listStyle: "none", padding: 0, display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: "0 40px" }}>
-              {past.map((p) => {
-                const d = parseDate(p.date);
+            <div role="tablist" aria-label="Ano" style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+              {anos.map((a) => {
+                const n = historico.filter((h) => h.iso.startsWith(a)).length;
+                const on = a === ano;
                 return (
-                  <li key={p.id} style={{ display: "grid", gridTemplateColumns: "72px 1fr", gap: "4px 16px", padding: "12px 0", borderTop: "2px solid #000", alignItems: "baseline" }}>
-                    <span style={{ fontWeight: 800, fontSize: 15 }}>{String(d.day).padStart(2, "0")} {MONTH_ABBR[d.month]}</span>
+                  <button key={a} type="button" role="tab" aria-selected={on} onClick={() => setAno(a)}
+                    style={{ font: "inherit", fontWeight: 800, fontSize: 17, padding: "10px 18px", cursor: "pointer", border: "2px solid #000", background: on ? "#000" : "transparent", color: on ? "#ffd23f" : "#000" }}>
+                    {a} <span style={{ fontWeight: 600, fontSize: 14, opacity: 0.8 }}>· {n} shows</span>
+                  </button>
+                );
+              })}
+            </div>
+            <ul style={{ listStyle: "none", padding: 0, display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: "0 40px" }}>
+              {doAno.map((h, k) => {
+                const [, m, d] = h.iso.split("-").map(Number);
+                return (
+                  <li key={`${h.iso}-${k}`} style={{ display: "grid", gridTemplateColumns: "72px 1fr", gap: "4px 16px", padding: "12px 0", borderTop: "2px solid #000", alignItems: "baseline" }}>
+                    <span style={{ fontWeight: 800, fontSize: 15 }}>{String(d).padStart(2, "0")} {MONTH_ABBR[m]}</span>
                     <span style={{ display: "flex", flexDirection: "column", gap: 2, minWidth: 0 }}>
-                      <strong className="disp" style={{ fontSize: 26, lineHeight: 1 }}>{p.name}</strong>
-                      {p.subtitle && <span style={{ fontSize: 13, fontWeight: 600 }}>{p.subtitle}</span>}
-                      {isNorthStar(p.partnerName) && <span style={{ alignSelf: "flex-start", marginTop: 4, background: NS_COLOR, color: "#fff", fontSize: 12, fontWeight: 800, padding: "3px 8px" }}>Parceria North Star</span>}
+                      <strong style={{ fontSize: 17, lineHeight: 1.3, fontWeight: 800 }}>{h.title}</strong>
+                      {h.ns && <span style={{ alignSelf: "flex-start", marginTop: 4, background: NS_COLOR, color: "#fff", fontSize: 12, fontWeight: 800, padding: "3px 8px" }}>Parceria North Star</span>}
                     </span>
                   </li>
                 );
