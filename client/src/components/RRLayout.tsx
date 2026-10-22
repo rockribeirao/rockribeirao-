@@ -73,13 +73,16 @@ export function ContactForm({ subject, cityField = false, cta = "Enviar mensagem
   const [state, setState] = useState<"idle" | "sending" | "ok" | "error">("idle");
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    // Guarda o formulário antes do envio: depois do await o React já não aponta mais para ele.
+    const form = e.currentTarget;
     setState("sending");
     try {
-      const data = new FormData(e.currentTarget);
+      const data = new FormData(form);
       data.append("_subject", subject);
       const r = await fetch("https://formspree.io/f/xnjodyqw", { method: "POST", body: data, headers: { Accept: "application/json" } });
-      setState(r.ok ? "ok" : "error");
-      if (r.ok) e.currentTarget.reset();
+      if (!r.ok) { setState("error"); return; }
+      setState("ok");
+      form.reset();
     } catch { setState("error"); }
   }
   return (
