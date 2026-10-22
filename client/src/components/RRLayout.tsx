@@ -1,6 +1,5 @@
 import { useState, type ReactNode } from "react";
-import { Menu, X } from "lucide-react";
-import { SiteMenuDesktop, SiteMenuMobile, PAGE_COLOR, type MenuSection, type PageKey } from "@/components/SiteMenu";
+import { SiteHeader, type PageKey } from "@/components/SiteMenu";
 import { projetos, projetoHref } from "@/data/projetos";
 import "@/styles/rr.css";
 
@@ -10,25 +9,9 @@ const onFestivalDomain = () =>
 /** Link para uma página do rockribeirao.com.br (absoluto quando estamos no todosnorock.com.br). */
 export const rrHref = (path: string) => (onFestivalDomain() ? `https://www.rockribeirao.com.br${path}` : path);
 
-export function RRHeader({ current = "rr", sections, logoHref }: { current?: PageKey; sections: MenuSection[]; logoHref?: string }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <header className="hd">
-      <div className="wrap hd-row">
-        <a href={logoHref ?? rrHref("/")} aria-label="Rock Ribeirão, início" className="shrink-0">
-          <img src="/Logo%20do%20header.png" alt="Rock Ribeirão" style={{ height: 56, width: "auto", objectFit: "contain", display: "block" }} />
-        </a>
-        <SiteMenuDesktop current={current} sections={sections} className="hidden min-[1700px]:flex" />
-        <button type="button" className="min-[1700px]:hidden" style={{ color: PAGE_COLOR[current], background: "none", border: 0, padding: 8, cursor: "pointer" }}
-          aria-label={open ? "Fechar menu" : "Abrir menu"} aria-expanded={open} onClick={() => setOpen((o) => !o)}>
-          {open ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
-        </button>
-      </div>
-      {open && (
-        <div className="min-[1700px]:hidden"><SiteMenuMobile current={current} sections={sections} onNavigate={() => setOpen(false)} rowClassName="wrap" padX={24} /></div>
-      )}
-    </header>
-  );
+/** Cabeçalho padrão (o mesmo menu em todas as páginas). */
+export function RRHeader(props: { current?: PageKey; project?: string; logoHref?: string }) {
+  return <SiteHeader {...props} />;
 }
 
 export function RRFooter({ extra }: { extra?: ReactNode }) {

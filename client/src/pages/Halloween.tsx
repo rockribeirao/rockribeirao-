@@ -1,13 +1,5 @@
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
-import { SiteMenuDesktop, SiteMenuMobile } from "@/components/SiteMenu";
-
-const HW_SECTIONS = [
-  { href: "#ingressos", label: "Ingressos" },
-  { href: "#concurso", label: "Concurso de fantasias" },
-  { href: "#galeria", label: "Fotos" },
-  { href: "#servico", label: "Serviço" },
-];
+import { SiteHeader } from "@/components/SiteMenu";
 
 // Página especial: Halloween do Hard Rock Cafe Ribeirão Preto (30 e 31/10/2026).
 // Visual próprio, separado do resto do site. Imagens em client/public/halloween/.
@@ -114,7 +106,6 @@ export default function Halloween() {
   const cd = useCountdown(SHOW_START);
   const [foto, setFoto] = useState<string | null>(null);
   const [copiado, setCopiado] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const prevTitle = document.title;
@@ -145,17 +136,8 @@ export default function Halloween() {
   return (
     <div className="hw">
       <style>{CSS}</style>
+      <SiteHeader current="hw" />
       <div className="wrap">
-        <nav className="topnav">
-          <a href="/" className="logo"><img src={`${IMG}/logo-rockribeirao.png`} alt="Rock Ribeirão Produções" /></a>
-          <SiteMenuDesktop current="hw" sections={HW_SECTIONS} className="navlinks" />
-          <button type="button" className="menubtn" aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((o) => !o)}>
-            {menuOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
-        </nav>
-        {menuOpen && (
-          <div className="mobilemenu"><SiteMenuMobile current="hw" sections={HW_SECTIONS} onNavigate={() => setMenuOpen(false)} /></div>
-        )}
 
         <header className="hero">
           <div className="sky" aria-hidden="true">

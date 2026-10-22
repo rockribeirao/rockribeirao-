@@ -1,4 +1,4 @@
-import { ArrowLeft } from "lucide-react";
+import { SiteHeader } from "@/components/SiteMenu";
 
 const BASE = "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public";
 
@@ -21,9 +21,7 @@ const s: Record<string, React.CSSProperties> = {
 export default function Acessibilidade() {
   return (
     <div style={s.page}>
-      <nav style={s.nav}>
-        <a href="/" style={s.back}><ArrowLeft size={16} /> Voltar ao início</a>
-      </nav>
+      <SiteHeader />
 
       <img
         src={`${BASE}/acessibilidade-hero.jpg`}

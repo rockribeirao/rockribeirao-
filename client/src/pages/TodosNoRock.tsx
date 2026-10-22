@@ -114,11 +114,10 @@ export default function TodosNoRock() {
     return () => { document.title = previousTitle; if (icon) icon.href = previousHref; };
   }, [isFestivalDomain]);
 
-  const sections = [["festival", "O festival"], ["lineup", "Quem tocou"], ["galeria", "Fotos"], ["edicoes", "Edições"], ["patrocinar", "Patrocinar"]].map(([id, label]) => ({ href: `#${id}`, label }));
 
   return (
     <div className="rr">
-      <RRHeader current="tnr" sections={sections} logoHref={isFestivalDomain ? "https://www.rockribeirao.com.br" : "/"} />
+      <RRHeader current="tnr" logoHref={isFestivalDomain ? "https://www.rockribeirao.com.br" : "/"} />
       <main>
         {/* ABERTURA */}
         <section style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))" }}>

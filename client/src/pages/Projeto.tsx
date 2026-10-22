@@ -28,13 +28,7 @@ export default function Projeto() {
 
   return (
     <div className="rr">
-      <RRHeader sections={[
-        { href: "#projeto", label: "O projeto" },
-        { href: "#programacao", label: "Programação" },
-        { href: "#apresentacao", label: "Apresentação" },
-        { href: "#patrocinar", label: "Patrocinar" },
-        { href: "/#projetos", label: "Todos os projetos" },
-      ]} />
+      <RRHeader current="proj" project={p.slug} />
       <main>
         <section style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))" }}>
           <div className={HERO[p.group]} style={{ padding: "56px clamp(24px, 5vw, 72px) 64px", display: "flex", flexDirection: "column", gap: 24, justifyContent: "flex-end" }}>

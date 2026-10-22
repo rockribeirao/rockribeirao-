@@ -1,13 +1,6 @@
 import { RRHeader, RRFooter } from "@/components/RRLayout";
 import { getFutureShows, getPastHardRockShows, galleryPhotos, parseDate, weekday, MONTH_ABBR } from "@/data/shows";
 
-const SECTIONS = [
-  { href: "#agenda", label: "Agenda" },
-  { href: "#historia", label: "Shows realizados" },
-  { href: "#galeria", label: "Fotos" },
-  { href: "/", label: "Início" },
-];
-
 // Shows que têm página própria de evento.
 function eventPage(subtitle = "", date: string) {
   const { month } = parseDate(date);
@@ -22,7 +15,7 @@ export default function HardRock() {
 
   return (
     <div className="rr">
-      <RRHeader sections={SECTIONS} />
+      <RRHeader current="hr" />
       <main>
         <section style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))" }}>
           <div className="s-red" style={{ padding: "64px clamp(24px, 5vw, 72px)", display: "flex", flexDirection: "column", gap: 24, justifyContent: "flex-end" }}>

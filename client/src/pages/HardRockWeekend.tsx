@@ -1,13 +1,5 @@
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
-import { SiteMenuDesktop, SiteMenuMobile } from "@/components/SiteMenu";
-
-const SECTIONS = [
-  { href: "#ingressos", label: "Ingressos" },
-  { href: "#sobre", label: "O evento" },
-  { href: "#noites", label: "Os shows" },
-  { href: "#servico", label: "Serviço" },
-];
+import { SiteHeader } from "@/components/SiteMenu";
 
 // Página de vendas do Hard Rock Weekend (19, 20 e 21/11/2026, Hard Rock Cafe Ribeirão Preto).
 // Imagens em client/public/hardrockweekend/.
@@ -65,7 +57,6 @@ const grupos: { titulo: string; wide?: boolean; logos: Logo[] }[] = [
 ];
 
 export default function HardRockWeekend() {
-  const [menuOpen, setMenuOpen] = useState(false);
   const [copiado, setCopiado] = useState(false);
 
   useEffect(() => {
@@ -90,17 +81,8 @@ export default function HardRockWeekend() {
   return (
     <div className="hrw">
       <style>{CSS}</style>
+      <SiteHeader current="hrw" />
       <div className="wrap">
-        <nav className="topnav">
-          <a href="/" className="logo"><img src={`${IMG}/logo-rockribeirao.png`} alt="Rock Ribeirão Produções" /></a>
-          <SiteMenuDesktop current="hrw" sections={SECTIONS} className="navlinks" />
-          <button type="button" className="menubtn" aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((o) => !o)}>
-            {menuOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
-        </nav>
-        {menuOpen && (
-          <div className="mobilemenu"><SiteMenuMobile current="hrw" sections={SECTIONS} onNavigate={() => setMenuOpen(false)} /></div>
-        )}
 
         <header className="hero">
           <div className="glow" aria-hidden="true">

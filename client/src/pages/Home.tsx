@@ -4,15 +4,6 @@ import { RRHeader, RRFooter, ContactForm } from "@/components/RRLayout";
 import { getFutureShows, weekday, parseDate } from "@/data/shows";
 import { projetos, projetoHref, GROUPS } from "@/data/projetos";
 
-const SECTIONS = [
-  { href: "#ingressos", label: "Ingressos" },
-  { href: "#destaques", label: "Destaques" },
-  { href: "#projetos", label: "Projetos" },
-  { href: "/hardrock", label: "Hard Rock" },
-  { href: "#patrocine", label: "Patrocine" },
-  { href: "#contato", label: "Contato" },
-];
-
 const MONTHS = ["", "janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
 
 const DESTAQUES = [
@@ -40,7 +31,7 @@ export default function Home() {
 
   return (
     <div className="rr">
-      <RRHeader sections={SECTIONS} />
+      <RRHeader current="rr" />
       <main>
         {cur && (
           <section id="ingressos" className="s-black" style={{ padding: "28px 0 40px" }} aria-label="Ingressos à venda">

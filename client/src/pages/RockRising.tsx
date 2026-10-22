@@ -1,14 +1,6 @@
 import { useEffect, useState, type FormEvent } from "react";
-import { Menu, X, Download } from "lucide-react";
-import { SiteMenuDesktop, SiteMenuMobile } from "@/components/SiteMenu";
-
-const RISE_SECTIONS = [
-  { href: "#inscricao", label: "Inscrição" },
-  { href: "#como", label: "Como funciona" },
-  { href: "#cronograma", label: "Cronograma" },
-  { href: "#premio", label: "Prêmio" },
-  { href: "#patrocinio", label: "Patrocínio" },
-];
+import { Download } from "lucide-react";
+import { SiteHeader } from "@/components/SiteMenu";
 
 // Página especial: Rock Rising 2027 — festival de novos talentos do rock.
 // Realização Rock Ribeirão Produções, parceria Kiss FM 105.3, apoio Fonzare Produções, School of Rock e Dritto.
@@ -68,7 +60,6 @@ const DownloadIcon = () => <Download size={18} strokeWidth={2.5} aria-hidden="tr
 
 export default function RockRising() {
   const contagem = useCountdown(INSCRICOES_ABREM);
-  const [menuOpen, setMenuOpen] = useState(false);
   const [enviado, setEnviado] = useState(false);
 
   useEffect(() => {
@@ -103,21 +94,7 @@ export default function RockRising() {
     <div className="rrs">
       <style>{CSS}</style>
 
-      {/* MENU — mesmo estilo do rockribeirao.com.br */}
-      <header className="head">
-        <div className="wrap head-in">
-          <a href="/" aria-label="Rock Ribeirão Produções — início" className="head-logo">
-            <img src={`${IMG}/logo-rockribeirao-header.png`} alt="Rock Ribeirão Produções" />
-          </a>
-          <SiteMenuDesktop current="rise" sections={RISE_SECTIONS} className="nav" fontSize={14} />
-          <button type="button" className="menubtn" aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((o) => !o)}>
-            {menuOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
-        </div>
-        {menuOpen && (
-          <div className="mnavwrap"><SiteMenuMobile current="rise" sections={RISE_SECTIONS} onNavigate={() => setMenuOpen(false)} padX={24} /></div>
-        )}
-      </header>
+      <SiteHeader current="rise" />
 
       <main>
         {/* HERO */}
