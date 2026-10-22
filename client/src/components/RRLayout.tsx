@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { SiteHeader, type PageKey } from "@/components/SiteMenu";
 import { projetos, projetoHref } from "@/data/projetos";
 import "@/styles/rr.css";
@@ -11,7 +11,38 @@ export const rrHref = (path: string) => (onFestivalDomain() ? `https://www.rockr
 
 /** Cabeçalho padrão (o mesmo menu em todas as páginas). */
 export function RRHeader(props: { current?: PageKey; project?: string; logoHref?: string }) {
+  useScrollToHash();
   return <SiteHeader {...props} />;
+}
+
+/**
+ * Quem chega de outra página por um link com âncora (ex.: /#contato) cai no topo,
+ * porque a página ainda está montando quando o navegador procura a seção.
+ * Aqui esperamos a seção existir e rolamos até ela; repetimos uma vez depois
+ * que as imagens acima dela terminam de carregar e mudam a altura da página.
+ */
+function useScrollToHash() {
+  useEffect(() => {
+    const id = decodeURIComponent(window.location.hash.slice(1));
+    if (!id) return;
+    let tries = 0;
+    let done = false;
+    const go = () => {
+      const el = document.getElementById(id);
+      if (el) { el.scrollIntoView({ block: "start" }); return true; }
+      return false;
+    };
+    const timer = window.setInterval(() => {
+      tries += 1;
+      if (go() || tries > 40) { window.clearInterval(timer); done = true; }
+    }, 50);
+    const again = window.setTimeout(() => { if (done) go(); }, 900);
+    // Se a pessoa rolar a página por conta própria, paramos de interferir.
+    const stop = () => { window.clearInterval(timer); window.clearTimeout(again); };
+    window.addEventListener("wheel", stop, { once: true, passive: true });
+    window.addEventListener("touchmove", stop, { once: true, passive: true });
+    return () => { stop(); window.removeEventListener("wheel", stop); window.removeEventListener("touchmove", stop); };
+  }, []);
 }
 
 export function RRFooter({ extra }: { extra?: ReactNode }) {

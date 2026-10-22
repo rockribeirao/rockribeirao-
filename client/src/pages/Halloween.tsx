@@ -54,7 +54,7 @@ export default function Halloween() {
   useEffect(() => {
     const prevTitle = document.title;
     document.title = "Halloween no Hard Rock Cafe Ribeirão Preto | Rock Ribeirão";
-    window.scrollTo(0, 0);
+    if (!window.location.hash) window.scrollTo(0, 0);
     return () => { document.title = prevTitle; };
   }, []);
 

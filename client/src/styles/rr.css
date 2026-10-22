@@ -25,7 +25,7 @@
 .rr a:focus-visible, .rr button:focus-visible, .rr input:focus-visible, .rr select:focus-visible, .rr textarea:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
 .rr img { max-width: 100%; }
 .rr h1, .rr h2, .rr h3, .rr p, .rr ul, .rr ol, .rr dl, .rr dd, .rr figure { margin: 0; }
-.rr section[id] { scroll-margin-top: 96px; }
+.rr [id] { scroll-margin-top: 96px; }
 .rr .wrap { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
 .rr .disp { font-family: "Archivo", sans-serif; font-stretch: 62%; font-weight: 900; text-transform: uppercase; line-height: .86; letter-spacing: -.005em; }
 .rr .lede { font-size: clamp(18px, 1.6vw, 21px); line-height: 1.55; max-width: 62ch; }

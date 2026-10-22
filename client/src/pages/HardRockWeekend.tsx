@@ -63,7 +63,7 @@ export default function HardRockWeekend() {
   useEffect(() => {
     const prevTitle = document.title;
     document.title = "Hard Rock Weekend: 3 noites de rock no Hard Rock Cafe Ribeirão Preto | Rock Ribeirão";
-    window.scrollTo(0, 0);
+    if (!window.location.hash) window.scrollTo(0, 0);
     return () => { document.title = prevTitle; };
   }, []);
 

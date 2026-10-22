@@ -63,7 +63,7 @@ export default function RockRising() {
   useEffect(() => {
     const prevTitle = document.title;
     document.title = "Rock Rising 2027 — Festival de novos talentos do rock | Rock Ribeirão";
-    window.scrollTo(0, 0);
+    if (!window.location.hash) window.scrollTo(0, 0);
     return () => { document.title = prevTitle; };
   }, []);
 

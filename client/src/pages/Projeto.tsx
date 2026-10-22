@@ -18,7 +18,7 @@ export default function Projeto() {
     if (!p) return;
     const prev = document.title;
     document.title = `${p.name} | Rock Ribeirão`;
-    window.scrollTo(0, 0);
+    if (!window.location.hash) window.scrollTo(0, 0);
     return () => { document.title = prev; };
   }, [p]);
 
