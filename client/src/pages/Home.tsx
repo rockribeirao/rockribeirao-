@@ -4,7 +4,7 @@ import { RRHeader, RRFooter, ContactForm } from "@/components/RRLayout";
 import { InstagramFeed } from "@/components/InstagramFeed";
 
 // Feed do Instagram @rockribeirao no Behold (behold.so). Enquanto estiver vazio, a seção não aparece.
-const INSTAGRAM_FEED_ID = "";
+const INSTAGRAM_FEED_ID = "3A411oe3P2c2wNhHqxCd";
 import { getFutureShows, weekday, parseDate } from "@/data/shows";
 import { projetos, projetoHref, GROUPS } from "@/data/projetos";
 
