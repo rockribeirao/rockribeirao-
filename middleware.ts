@@ -152,7 +152,7 @@ export default async function middleware(request: Request) {
   if (!isFestivalDomain && contentType.includes("text/html")) {
     if (pathname === "/hardrock") {
       return withPreview(response, "Rock Ribeirão no Hard Rock Cafe Ribeirão Preto — agenda e história",
-        "Próximos shows com ingresso no Sympla e a história de mais de 200 shows e mais de 60 mil pessoas no Hard Rock Cafe Ribeirão Preto.",
+        "Próximos shows com ingresso no Sympla e a história de mais de 180 shows e mais de 55 mil pessoas no Hard Rock Cafe Ribeirão Preto.",
         `${SITE}/site/share-hardrock.jpg`, `${SITE}/hardrock`);
     }
     const m = pathname.match(/^\/projetos\/([a-z0-9-]+)$/);

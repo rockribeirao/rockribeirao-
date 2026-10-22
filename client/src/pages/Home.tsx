@@ -127,7 +127,7 @@ export default function Home() {
             <h2 className="disp" style={{ fontSize: "clamp(44px, 5vw, 72px)" }}>O que a gente faz</h2>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 36 }}>
               {[
-                ["Shows", "Produção completa: artistas, palco, divulgação, bilheteria e acerto final. Mais de 200 shows no Hard Rock Cafe."],
+                ["Shows", "Produção completa: artistas, palco, divulgação, bilheteria e acerto final. Mais de 180 shows no Hard Rock Cafe."],
                 ["Festivais", "Festivais gratuitos de rock, samba e sertanejo em praça pública, com oficinas e acessibilidade."],
                 ["Projetos incentivados", "Nove projetos aprovados na Lei Rouanet e no ProAC, prontos para receber patrocínio."],
                 ["Gestão de projetos culturais", "Para prefeituras e instituições: elaboração, captação, execução e prestação de contas."],
@@ -207,7 +207,7 @@ export default function Home() {
             <img src="/U2%20Cover%20Ribeir%C3%A3o.jpg" alt="Show do U2 Cover Ribeirão no Hard Rock Cafe" style={{ width: "100%", aspectRatio: "3 / 2", objectFit: "cover", display: "block", boxShadow: "14px 14px 0 #cc2200" }} />
             <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
               <h2 className="disp" style={{ fontSize: "clamp(44px, 5vw, 72px)" }}>Rock Ribeirão no Hard Rock Cafe</h2>
-              <p className="body muted">Mais de 200 shows e mais de 60 mil pessoas. Veja a agenda, compre ingressos e confira tudo que já passou por esse palco.</p>
+              <p className="body muted">Mais de 180 shows e mais de 55 mil pessoas. Veja a agenda, compre ingressos e confira tudo que já passou por esse palco.</p>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
                 <a className="btn btn-red" href="/hardrock">Agenda e história</a>
               </div>

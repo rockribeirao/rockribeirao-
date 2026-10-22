@@ -47,7 +47,7 @@ export default function HardRock() {
             <h1 className="disp" style={{ fontSize: "clamp(64px, 8.4vw, 132px)" }}>Rock Ribeirão no Hard Rock</h1>
             <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 24 }}>
               <div style={{ display: "flex", flexDirection: "column", gap: 24, alignItems: "flex-start" }}>
-                <p className="lede">Mais de 200 shows e mais de 60 mil pessoas: tributos, noites temáticas e grandes bandas. A casa abre às 18h e os shows começam às 21h.</p>
+                <p className="lede">Mais de 180 shows e mais de 55 mil pessoas: tributos, noites temáticas e grandes bandas. A casa abre às 18h e os shows começam às 21h.</p>
                 <a className="btn btn-ink" href="#agenda">Ver a agenda</a>
               </div>
               <a className="ev-titlelogo" href="https://www.instagram.com/hrc.ribeiraopreto/" target="_blank" rel="noopener noreferrer">
@@ -114,8 +114,8 @@ export default function HardRock() {
                 </p>
               </div>
               <dl style={{ display: "flex", gap: 40 }}>
-                <div><dt className="disp" style={{ fontSize: 56 }}>200+</dt><dd style={{ fontWeight: 700 }}>shows</dd></div>
-                <div><dt className="disp" style={{ fontSize: 56 }}>60 mil+</dt><dd style={{ fontWeight: 700 }}>pessoas</dd></div>
+                <div><dt className="disp" style={{ fontSize: 56 }}>180+</dt><dd style={{ fontWeight: 700 }}>shows</dd></div>
+                <div><dt className="disp" style={{ fontSize: 56 }}>55 mil+</dt><dd style={{ fontWeight: 700 }}>pessoas</dd></div>
               </dl>
             </div>
             <div role="tablist" aria-label="Ano" style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
