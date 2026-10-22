@@ -141,7 +141,7 @@ export default function TodosNoRock() {
                   <a className="btn btn-line" href={pdfHref} download={pdfName("todos-no-rock")}><DownloadIcon />Baixar apresentação</a>
                 </div>
               </div>
-              <img src={`${BASE}/tnr-logo-oficial.png`} alt="Festival Todos no Rock, edição Sertãozinho" style={{ width: "clamp(140px, 15vw, 260px)", height: "auto", display: "block", flex: "0 0 auto" }} />
+              <img src={`${BASE}/tnr-logo-oficial.png`} alt="Festival Todos no Rock, edição Sertãozinho" style={{ width: "clamp(170px, 19vw, 330px)", height: "auto", display: "block", flex: "0 0 auto" }} />
             </div>
           </div>
           <img src={`${BASE}/tnr-hero-bg.jpg.jpg`} alt="Público em frente ao palco do Festival Todos no Rock" style={{ width: "100%", height: "100%", minHeight: 420, objectFit: "cover", display: "block" }} />
