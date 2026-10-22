@@ -1,54 +1,29 @@
 import { useEffect, useState } from "react";
+import { Instagram } from "lucide-react";
+import { RRHeader, RRFooter, ContactForm, DownloadIcon } from "@/components/RRLayout";
+import { CONTRAPARTIDAS, projetoHref, projetoAsset, pdfName } from "@/data/projetos";
 
 declare global {
   interface Window { __bhldScript?: boolean; }
+}
+declare module "react" {
   namespace JSX {
     interface IntrinsicElements {
       "behold-widget": React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement> & { "feed-id": string }, HTMLElement>;
     }
   }
 }
-import { SiteMenuDesktop, SiteMenuMobile, PAGE_COLOR } from "@/components/SiteMenu";
-import { MapPin, Calendar, ArrowLeft, Instagram, Menu, X, Music, Users, Route, Building } from "lucide-react";
 
 const BASE = "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public";
+const MINT = "#5dcaa5";
+const LILAC = "#b9a4f0";
 
 const lineup = [
-  {
-    order: "13h30",
-    name: "School of Rock",
-    image: `${BASE}/tnr-banda-school-of-rock.jpg.jpg`,
-    instagram: "https://www.instagram.com/schoolofrock_ribeiraopreto/",
-    dj: false,
-  },
-  {
-    order: "14h55",
-    name: "Santíssima Trindade",
-    image: `${BASE}/tnr-banda-santissima-trindade.jpg`,
-    instagram: "https://www.instagram.com/bandasantissimatrindadeoficial/",
-    dj: false,
-  },
-  {
-    order: "17h10",
-    name: "O Épicco",
-    image: `${BASE}/tnr-banda-o-epicco.jpg.jpg`,
-    instagram: "https://www.instagram.com/oepiccooficial/",
-    dj: false,
-  },
-  {
-    order: "19h15",
-    name: "Dirty Jack",
-    image: `${BASE}/tnr-banda-dirty-jack.jpg.jpg`,
-    instagram: "https://www.instagram.com/dirtyjack.acdccover/",
-    dj: false,
-  },
-  {
-    order: "22h00",
-    name: "Rotor",
-    image: `${BASE}/tnr-banda-rotor.jpg.jpg`,
-    instagram: "https://www.instagram.com/bandarotor/",
-    dj: false,
-  },
+  { order: "13h30", name: "School of Rock", image: `${BASE}/tnr-banda-school-of-rock.jpg.jpg`, instagram: "https://www.instagram.com/schoolofrock_ribeiraopreto/" },
+  { order: "14h55", name: "Santíssima Trindade", image: `${BASE}/tnr-banda-santissima-trindade.jpg`, instagram: "https://www.instagram.com/bandasantissimatrindadeoficial/" },
+  { order: "17h10", name: "O Épicco", image: `${BASE}/tnr-banda-o-epicco.jpg.jpg`, instagram: "https://www.instagram.com/oepiccooficial/" },
+  { order: "19h15", name: "Dirty Jack", image: `${BASE}/tnr-banda-dirty-jack.jpg.jpg`, instagram: "https://www.instagram.com/dirtyjack.acdccover/" },
+  { order: "22h00", name: "Rotor", image: `${BASE}/tnr-banda-rotor.jpg.jpg`, instagram: "https://www.instagram.com/bandarotor/" },
 ];
 
 const apoio = [
@@ -57,9 +32,7 @@ const apoio = [
   { src: `${BASE}/apoio-iron.png`, alt: "Iron Suplementos", link: "https://www.instagram.com/iron.suplementos25/" },
   { src: `${BASE}/apoio-memo.png`, alt: "Choppeiras Memo", link: "https://www.instagram.com/chopeirasmemo/", height: 38 },
 ];
-const hotelOficial = [
-  { src: `${BASE}/hotel-comfort.png`, alt: "Comfort Hotel Sertãozinho", link: "https://www.instagram.com/comfortsertaozinho/" },
-];
+const hotelOficial = [{ src: `${BASE}/hotel-comfort.png`, alt: "Comfort Hotel Sertãozinho", link: "https://www.instagram.com/comfortsertaozinho/", height: 90 }];
 const promocao = [
   { src: `${BASE}/kiss.png`, alt: "Kiss FM 105.3", link: "https://www.instagram.com/kissfmribeirao/", height: 76 },
   { src: `${BASE}/dritto.png`, alt: "Dritto Mídia", link: "https://www.instagram.com/drittomidiaooh/", height: 38 },
@@ -77,531 +50,318 @@ const economiaCriativa = [
 ];
 
 const galeria = [
-  { src: `${BASE}/tnr-galeria-19.jpg`, alt: "Banda e equipe posando para a foto com o público ao fundo" },
-  { src: `${BASE}/tnr-galeria-20.jpg`, alt: "Vista do palco e do público à noite" },
-  { src: `${BASE}/tnr-galeria-62.jpg`, alt: "Vocalista cantando de braços abertos no palco do festival" },
-  { src: `${BASE}/tnr-galeria-35.jpg`, alt: "Banda da School of Rock posando no palco do festival" },
-  { src: `${BASE}/tnr-galeria-36.jpg`, alt: "Guitarrista da School of Rock no palco" },
-  { src: `${BASE}/tnr-galeria-37.jpg`, alt: "Vocalista da School of Rock cantando no palco" },
-  { src: `${BASE}/tnr-galeria-21.jpg`, alt: "Vocalista cantando no palco do festival" },
-  { src: `${BASE}/tnr-galeria-22.jpg`, alt: "Baixista no palco do festival" },
-  { src: `${BASE}/tnr-galeria-23.jpg`, alt: "Baixista da banda Dirty Jack no palco" },
-  { src: `${BASE}/tnr-galeria-24.jpg`, alt: "Guitarrista da banda Dirty Jack em ação" },
-  { src: `${BASE}/tnr-galeria-25.jpg`, alt: "Vocalista da banda Dirty Jack no palco" },
-  { src: `${BASE}/tnr-galeria-26.jpg`, alt: "Banda tocando sob as luzes roxas do palco" },
-  { src: `${BASE}/tnr-galeria-27.jpg`, alt: "Guitarrista no palco do festival" },
-  { src: `${BASE}/tnr-galeria-28.jpg`, alt: "Vocalista cantando no palco do festival" },
-  { src: `${BASE}/tnr-galeria-29.jpg`, alt: "Trombonista em apresentação no festival" },
-  { src: `${BASE}/tnr-galeria-30.jpg`, alt: "Vocalista cantando no palco do festival" },
-  { src: `${BASE}/tnr-galeria-31.jpg`, alt: "Guitarrista e vocalista no palco do festival" },
-  { src: `${BASE}/tnr-galeria-61.jpg`, alt: "DJ segurando um disco de vinil diante do palco" },
-  { src: `${BASE}/tnr-galeria-33.jpg`, alt: "Apresentador do festival com o microfone no palco" },
-  { src: `${BASE}/tnr-galeria-38.jpg`, alt: "Vocalista e guitarrista lado a lado no palco" },
-  { src: `${BASE}/tnr-galeria-40.jpg`, alt: "Guitarrista da banda Dirty Jack no palco" },
-  { src: `${BASE}/tnr-galeria-44.jpg`, alt: "Baixista e vocalista no palco do festival" },
-  { src: `${BASE}/tnr-galeria-46.jpg`, alt: "Comida servida na área de gastronomia do festival" },
-  { src: `${BASE}/tnr-galeria-34.jpg`, alt: "Coruja em atração do festival" },
-  { src: `${BASE}/tnr-galeria-01.jpg`, alt: "Intérprete de Libras traduzindo o show no palco" },
-  { src: `${BASE}/tnr-galeria-02.jpg`, alt: "Tatuadora trabalhando na Vitrine da Economia Criativa" },
-  { src: `${BASE}/tnr-galeria-03.jpg`, alt: "Crochê e panos de prato bordados na Vitrine da Economia Criativa" },
-  { src: `${BASE}/tnr-galeria-04.jpg`, alt: "Bolsas e necessaires artesanais na Vitrine da Economia Criativa" },
-  { src: `${BASE}/tnr-galeria-06.jpg`, alt: "Público no Festival Todos no Rock" },
-  { src: `${BASE}/tnr-galeria-07.jpg`, alt: "Público no Festival Todos no Rock" },
-  { src: `${BASE}/tnr-galeria-08.jpg`, alt: "Público no Festival Todos no Rock" },
-  { src: `${BASE}/tnr-galeria-09.jpg`, alt: "Público no Festival Todos no Rock" },
-  { src: `${BASE}/tnr-galeria-10.jpg`, alt: "Público no Festival Todos no Rock" },
-  { src: `${BASE}/tnr-galeria-11.jpg`, alt: "Público no Festival Todos no Rock" },
-  { src: `${BASE}/tnr-galeria-12.jpg`, alt: "Público no Festival Todos no Rock" },
-  { src: `${BASE}/tnr-galeria-13.jpg`, alt: "Público no Festival Todos no Rock" },
-  { src: `${BASE}/tnr-galeria-14.jpg`, alt: "Público no Festival Todos no Rock" },
-  { src: `${BASE}/tnr-galeria-15.jpg`, alt: "Público no Festival Todos no Rock" },
-  { src: `${BASE}/tnr-galeria-16.jpg`, alt: "Público no Festival Todos no Rock" },
-  { src: `${BASE}/tnr-galeria-17.jpg`, alt: "Público no Festival Todos no Rock" },
-  { src: `${BASE}/tnr-galeria-18.jpg`, alt: "Público no Festival Todos no Rock" },
-  { src: `${BASE}/tnr-galeria-48.jpg`, alt: "Criança curtindo o show na grade" },
-  { src: `${BASE}/tnr-galeria-49.jpg`, alt: "Família com a filha pequena no festival" },
-  { src: `${BASE}/tnr-galeria-50.jpg`, alt: "Pai e filha posando no festival" },
-  { src: `${BASE}/tnr-galeria-51.jpg`, alt: "Pai, mãe e filha posando no festival" },
-  { src: `${BASE}/tnr-galeria-52.jpg`, alt: "Casal brindando com canecas no festival" },
-  { src: `${BASE}/tnr-galeria-53.jpg`, alt: "Casal sorrindo no festival" },
-  { src: `${BASE}/tnr-galeria-54.jpg`, alt: "Casal posando no meio do público" },
-  { src: `${BASE}/tnr-galeria-55.jpg`, alt: "Público acompanhando o show" },
-  { src: `${BASE}/tnr-galeria-56.jpg`, alt: "Amigos acompanhando o show" },
-  { src: `${BASE}/tnr-galeria-57.jpg`, alt: "Amigas posando no festival" },
-  { src: `${BASE}/tnr-galeria-58.jpg`, alt: "Amigas sorrindo no festival" },
-  { src: `${BASE}/tnr-galeria-59.jpg`, alt: "Amigos posando no festival" },
-  { src: `${BASE}/tnr-galeria-60.jpg`, alt: "Jovem e adulto fazendo o sinal do rock na grade" },
-];
+  ["19", "Banda e equipe posando para a foto com o público ao fundo"], ["20", "Vista do palco e do público à noite"], ["62", "Vocalista cantando de braços abertos no palco do festival"],
+  ["35", "Banda da School of Rock posando no palco do festival"], ["36", "Guitarrista da School of Rock no palco"], ["37", "Vocalista da School of Rock cantando no palco"],
+  ["21", "Vocalista cantando no palco do festival"], ["22", "Baixista no palco do festival"], ["23", "Baixista da banda Dirty Jack no palco"],
+  ["24", "Guitarrista da banda Dirty Jack em ação"], ["25", "Vocalista da banda Dirty Jack no palco"], ["26", "Banda tocando sob as luzes roxas do palco"],
+  ["27", "Guitarrista no palco do festival"], ["28", "Vocalista cantando no palco do festival"], ["29", "Trombonista em apresentação no festival"],
+  ["30", "Vocalista cantando no palco do festival"], ["31", "Guitarrista e vocalista no palco do festival"], ["61", "DJ segurando um disco de vinil diante do palco"],
+  ["33", "Apresentador do festival com o microfone no palco"], ["38", "Vocalista e guitarrista lado a lado no palco"], ["40", "Guitarrista da banda Dirty Jack no palco"],
+  ["44", "Baixista e vocalista no palco do festival"], ["46", "Comida servida na área de gastronomia do festival"], ["34", "Coruja em atração do festival"],
+  ["01", "Intérprete de Libras traduzindo o show no palco"], ["02", "Tatuadora trabalhando na Vitrine da Economia Criativa"], ["03", "Crochê e panos de prato bordados na Vitrine da Economia Criativa"],
+  ["04", "Bolsas e necessaires artesanais na Vitrine da Economia Criativa"], ["06", "Público no Festival Todos no Rock"], ["07", "Público no Festival Todos no Rock"],
+  ["08", "Público no Festival Todos no Rock"], ["09", "Público no Festival Todos no Rock"], ["10", "Público no Festival Todos no Rock"],
+  ["11", "Público no Festival Todos no Rock"], ["12", "Público no Festival Todos no Rock"], ["13", "Público no Festival Todos no Rock"],
+  ["14", "Público no Festival Todos no Rock"], ["15", "Público no Festival Todos no Rock"], ["16", "Público no Festival Todos no Rock"],
+  ["17", "Público no Festival Todos no Rock"], ["18", "Público no Festival Todos no Rock"], ["48", "Criança curtindo o show na grade"],
+  ["49", "Família com a filha pequena no festival"], ["50", "Pai e filha posando no festival"], ["51", "Pai, mãe e filha posando no festival"],
+  ["52", "Casal brindando com canecas no festival"], ["53", "Casal sorrindo no festival"], ["54", "Casal posando no meio do público"],
+  ["55", "Público acompanhando o show"], ["56", "Amigos acompanhando o show"], ["57", "Amigas posando no festival"],
+  ["58", "Amigas sorrindo no festival"], ["59", "Amigos posando no festival"], ["60", "Jovem e adulto fazendo o sinal do rock na grade"],
+].map(([n, alt]) => ({ src: `${BASE}/tnr-galeria-${n}.jpg`, alt }));
 
-const edicoes = [
-  { city: "Sertãozinho — SP", meta: "26 set 2026 · Cervejaria Marquesa · Lei Rouanet", status: "Realizada", done: true },
-  { city: "Ribeirão Preto — SP", meta: "Data a confirmar · ProAC aprovado", status: "Captação em andamento", done: false },
-  { city: "Monte Alto — SP", meta: "Data a confirmar · Lei Rouanet aprovada", status: "Captação em andamento", done: false },
-];
+type Logo = { src: string; alt: string; link?: string; height?: number };
+function LogoRow({ title, logos }: { title: string; logos: Logo[] }) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 14, alignItems: "center" }}>
+      <h3 style={{ fontSize: 15, fontWeight: 800, color: LILAC }}>{title}</h3>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 32, alignItems: "center", justifyContent: "center" }}>
+        {logos.map((l) => {
+          const img = <img src={l.src} alt={l.alt} style={{ height: l.height || 56, maxWidth: 260, objectFit: "contain" }} />;
+          return l.link ? <a key={l.alt} href={l.link} target="_blank" rel="noopener noreferrer">{img}</a> : <span key={l.alt}>{img}</span>;
+        })}
+      </div>
+    </div>
+  );
+}
 
 export default function TodosNoRock() {
   const [verTodas, setVerTodas] = useState(false);
-  const fotosVisiveis = verTodas ? galeria : galeria.slice(0, 30);
-  const isFestivalDomain =
-    typeof window !== "undefined" &&
-    ["todosnorock.com.br", "www.todosnorock.com.br"].includes(window.location.hostname);
-
-  // When this page is served on todosnorock.com.br, "/" resolves back to this
-  // same page on that domain (see App.tsx), so the link back to the main site
-  // needs to be an absolute URL instead of a relative one.
-  const rockRibeiraoHref = isFestivalDomain ? "https://www.rockribeirao.com.br" : "/";
-
-  // "Voltar" only makes sense if the visitor actually came from rockribeirao.com.br.
-  // Someone landing directly on todosnorock.com.br (ad, social media, direct link)
-  // never left that site, so we frame the link as a credit/intro instead of a return.
-  const halloweenHref = isFestivalDomain ? "https://www.rockribeirao.com.br/halloween" : "/halloween";
-  const rockRisingHref = isFestivalDomain ? "https://www.rockribeirao.com.br/rockrising" : "/rockrising";
-  const navLinkLabel = isFestivalDomain ? "Uma produção Rock Ribeirão" : "rockribeirao.com.br";
-  const footerLinkLabel = isFestivalDomain
-    ? "Conheça a Rock Ribeirão Produções →"
-    : "← Voltar para rockribeirao.com.br";
+  const fotos = verTodas ? galeria : galeria.slice(0, 24);
+  const isFestivalDomain = typeof window !== "undefined" && ["todosnorock.com.br", "www.todosnorock.com.br"].includes(window.location.hostname);
+  const pdf = projetoAsset("todos-no-rock", pdfName("todos-no-rock"));
+  const pdfHref = isFestivalDomain ? pdf : pdf;
 
   useEffect(() => {
     const script = document.createElement("script");
     script.type = "module";
     script.src = "https://w.behold.so/widget.js";
     document.head.appendChild(script);
-    return () => {
-      document.head.removeChild(script);
-    };
+    return () => { document.head.removeChild(script); };
   }, []);
 
-  // On the festival's own domain, use the festival's title and favicon
-  // instead of the ones set for rockribeirao.com.br in index.html.
+  // No domínio do festival, usa título e favicon do festival.
   useEffect(() => {
     if (!isFestivalDomain) return;
-
     const previousTitle = document.title;
     document.title = "Festival Todos no Rock";
-
-    const iconHref = "/favicon-todosnorock.ico";
     const existingIcon = document.querySelector<HTMLLinkElement>("link[rel='icon']");
     const previousHref = existingIcon?.getAttribute("href") ?? "/favicon.ico";
-
     let icon = existingIcon;
-    if (!icon) {
-      icon = document.createElement("link");
-      icon.rel = "icon";
-      document.head.appendChild(icon);
-    }
+    if (!icon) { icon = document.createElement("link"); icon.rel = "icon"; document.head.appendChild(icon); }
     icon.type = "image/x-icon";
-    icon.href = iconHref;
-
-    return () => {
-      document.title = previousTitle;
-      if (icon) icon.href = previousHref;
-    };
+    icon.href = "/favicon-todosnorock.ico";
+    return () => { document.title = previousTitle; if (icon) icon.href = previousHref; };
   }, [isFestivalDomain]);
 
-  const [menuOpen, setMenuOpen] = useState(false);
-  const tnrSections = [["festival", "O festival"], ["lineup", "Quem tocou"], ["galeria", "Fotos"], ["edicoes", "Edições"], ["parceiros", "Parceiros"], ["instagram", "Instagram"]].map(([id, label]) => ({ href: `#${id}`, label }));
-
-  const s: Record<string, React.CSSProperties> = {
-    page: { minHeight: "100vh", backgroundColor: "#06020e", color: "#f0e0ff", fontFamily: "var(--font-sans)" },
-    nav: { background: "#08030f", borderBottom: "0.5px solid #2a1050", padding: "12px 16px", gap: 12, display: "flex", justifyContent: "space-between", alignItems: "center", position: "sticky", top: 0, zIndex: 50 },
-    navBack: { display: "flex", alignItems: "center", gap: 8, color: "#9070c0", fontSize: 13, textDecoration: "none" },
-    navIg: { display: "flex", alignItems: "center", gap: 6, color: "#b090e0", fontSize: 12, textDecoration: "none" },
-    hero: { position: "relative", minHeight: 580, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", padding: "4rem 1.5rem", backgroundImage: `linear-gradient(to bottom, rgba(6,2,14,0.5) 0%, rgba(6,2,14,0.88) 100%), url(${BASE}/tnr-hero-bg.jpg.jpg)`, backgroundSize: "cover", backgroundPosition: "center" },
-    heroMin: { fontSize: 11, letterSpacing: "0.12em", color: "#a190c4", marginBottom: 16 },
-    heroImg: { width: 280, maxWidth: "90%", marginBottom: 24 },
-    heroSub: { fontSize: 15, color: "#9070c0", marginBottom: 24 },
-    tagsWrap: { display: "flex", flexWrap: "wrap", gap: 10, justifyContent: "center", marginBottom: 32 },
-    tag: { display: "flex", alignItems: "center", gap: 6, fontSize: 13, padding: "5px 14px", borderRadius: 20, border: "0.5px solid #a190c4", color: "#c4a0ff", background: "#1a0a2e" },
-    tagGreen: { display: "flex", alignItems: "center", gap: 6, fontSize: 13, padding: "5px 14px", borderRadius: 20, border: "0.5px solid #0F6E56", color: "#5DCAA5", background: "#04342C" },
-    btn: { background: "#6030b0", color: "#f0e0ff", fontSize: 14, fontWeight: 500, padding: "10px 28px", borderRadius: 8, textDecoration: "none", display: "inline-block" },
-    section: { padding: "4rem 1.5rem", maxWidth: 960, margin: "0 auto" },
-    sectionAlt: { background: "#0a0415", borderTop: "0.5px solid #2a1050", padding: "4rem 1.5rem" },
-    secLabel: { fontSize: 11, color: "#a190c4", textTransform: "uppercase" as const, letterSpacing: "0.1em", marginBottom: 12 },
-    partnerGroupLabel: { fontSize: 12, color: "#a190c4", textTransform: "uppercase" as const, letterSpacing: "0.12em", textAlign: "center" as const, marginBottom: 14, fontWeight: 700 },
-    secTitle: { fontSize: 28, fontWeight: 500, color: "#e0c0ff", marginBottom: 16, lineHeight: 1.2 },
-    pillares: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 12 },
-    pilar: { background: "#1a0a2e", border: "0.5px solid #a190c4", borderRadius: 10, padding: "1rem" },
-    pilarTitle: { fontSize: 13, fontWeight: 500, color: "#e0c0ff", marginBottom: 4 },
-    pilarDesc: { fontSize: 12, color: "#a190c4" },
-    bandGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 16, marginBottom: 16 },
-    bandCard: { background: "#1a0a2e", border: "0.5px solid #a190c4", borderRadius: 10, overflow: "hidden", textDecoration: "none", display: "block", transition: "border-color 0.2s" },
-    bandImg: { width: "100%", height: 240, objectFit: "cover" as const },
-    bandBody: { padding: "1rem" },
-    bandOrder: { fontSize: 11, color: "#a190c4", marginBottom: 6 },
-    bandName: { fontSize: 18, fontWeight: 500, color: "#f0e0ff", marginBottom: 0 },
-    bandIg: { display: "flex", alignItems: "center", gap: 4, fontSize: 11, color: "#9070c0", marginTop: 8 },
-    suppGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 16 },
-    suppCard: { background: "#1a0a2e", border: "0.5px solid #a190c4", borderRadius: 10, overflow: "hidden", display: "flex", textDecoration: "none" },
-    suppImg: { width: 120, height: 140, objectFit: "cover" as const, flexShrink: 0 },
-    suppBody: { padding: "1rem" },
-    suppOrder: { fontSize: 11, color: "#a190c4", marginBottom: 6 },
-    suppName: { fontSize: 16, fontWeight: 500, color: "#f0e0ff", marginBottom: 6 },
-    galGrid: { columns: "3 220px", columnGap: 12 },
-    galImg: { width: "100%", display: "block", marginBottom: 12, borderRadius: 10, border: "0.5px solid #2a1050", breakInside: "avoid" as const },
-    edicaoList: { display: "flex", flexDirection: "column" as const, gap: 12 },
-    edicaoItem: { background: "#1a0a2e", border: "0.5px solid #a190c4", borderRadius: 10, padding: "1rem 1.25rem", display: "flex", alignItems: "center", gap: 16 },
-    dot: { width: 10, height: 10, borderRadius: "50%", flexShrink: 0 },
-    leiGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 12, marginBottom: 16 },
-    leiCard: { background: "#1a0a2e", border: "0.5px solid #a190c4", borderRadius: 10, padding: "1.25rem", display: "flex", flexDirection: "column" as const, alignItems: "flex-start", gap: 8 },
-    leiImg: { height: 32, maxWidth: 160, objectFit: "contain" as const,  },
-    leiName: { fontSize: 13, fontWeight: 500, color: "#e0c0ff" },
-    leiDesc: { fontSize: 12, color: "#a190c4", lineHeight: 1.5 },
-    leiBanner: { background: "#12071f", border: "0.5px solid #a190c4", borderRadius: 8, padding: "1rem 1.25rem", fontSize: 13, color: "#a190c4", lineHeight: 1.6 },
-    logoGrid: { display: "flex", flexWrap: "wrap" as const, gap: 24, alignItems: "center", justifyContent: "center", padding: "2rem 0" },
-    logoImg: { height: 56, maxWidth: 180, objectFit: "contain" as const, opacity: 0.95,  },
-    igSection: { background: "#0a0415", borderTop: "0.5px solid #2a1050", padding: "4rem 1.5rem", textAlign: "center" as const },
-    igBox: { background: "#1a0a2e", border: "0.5px solid #6030b0", borderRadius: 12, padding: "2rem", maxWidth: 500, margin: "0 auto" },
-    igHandle: { fontSize: 22, fontWeight: 500, color: "#e0c0ff", marginBottom: 8 },
-    igDesc: { fontSize: 14, color: "#a190c4", marginBottom: 20, lineHeight: 1.6 },
-    footer: { background: "#06020e", borderTop: "0.5px solid #1a0a2e", padding: "2rem 1.5rem", textAlign: "center" as const },
-  };
+  const sections = [["festival", "O festival"], ["lineup", "Quem tocou"], ["galeria", "Fotos"], ["edicoes", "Edições"], ["patrocinar", "Patrocinar"]].map(([id, label]) => ({ href: `#${id}`, label }));
 
   return (
-    <div style={s.page}>
-      <style>{`html{scroll-behavior:smooth}section[id]{scroll-margin-top:100px}`}</style>
-      {/* NAV */}
-      <header className="sticky top-0 z-50 border-b" style={{ background: "#08030f", borderColor: "#2a1050" }}>
-        <div className="container flex items-center justify-between py-4">
-          <a href={rockRibeiraoHref} aria-label={navLinkLabel} className="shrink-0">
-            <img src={`${BASE}/Logo%20do%20header.png`} alt="Rock Ribeirão" className="h-16 w-auto object-contain" />
-          </a>
-          <SiteMenuDesktop current="tnr" sections={tnrSections} className="hidden xl:flex font-heading" />
-          <button type="button" className="xl:hidden p-2" style={{ color: PAGE_COLOR.tnr }} aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((o) => !o)}>
-            {menuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
-          </button>
-        </div>
-        {menuOpen && (
-          <div className="xl:hidden font-heading"><SiteMenuMobile current="tnr" sections={tnrSections} onNavigate={() => setMenuOpen(false)} rowClassName="container" padX={16} /></div>
-        )}
-      </header>
-
+    <div className="rr">
+      <RRHeader current="tnr" sections={sections} logoHref={isFestivalDomain ? "https://www.rockribeirao.com.br" : "/"} />
       <main>
-      {/* HERO */}
-      <section style={s.hero}>
-        <img src={`${BASE}/mic.png`} alt="Ministério da Cultura" style={{ height: 34, objectFit: "contain", marginBottom: 14, opacity: 0.9 }} />
-        <p style={{ ...s.heroMin, marginBottom: 14, color: "#ffffff" }}>apresenta</p>
-        <img src={`${BASE}/tnr-logo-oficial.png`} alt="Festival Todos no Rock" style={s.heroImg} />
-        <p style={s.heroSub}>Rock ao vivo, gratuito e itinerante no interior paulista</p>
-        <div style={s.tagsWrap}>
-          <span style={s.tag}><Calendar size={13} /> Realizado em 26 de setembro de 2026</span>
-          <span style={s.tag}><MapPin size={13} /> Sertãozinho — SP</span>
-          <span style={s.tagGreen}>🎟 Entrada gratuita</span>
-        </div>
-        <p style={{ fontSize: 15, color: "#d0b0f0", marginBottom: 24 }}>Obrigado a todos que fizeram a edição Sertãozinho acontecer!</p>
-        <a href="#galeria" style={s.btn}>Ver como foi ↓</a>
-      </section>
-
-      {/* O FESTIVAL */}
-      <section id="festival" style={s.section}>
-        <p style={s.secLabel}>O festival</p>
-        <h2 style={s.secTitle}>Rock ao vivo para todo mundo</h2>
-        <p style={{ fontSize: 15, color: "#8060a0", lineHeight: 1.7, marginBottom: 32, maxWidth: 640 }}>
-          O Festival Todos no Rock leva rock ao vivo de qualidade para cidades do interior paulista de forma gratuita e acessível, reunindo música, gastronomia e cultura num único espaço ao ar livre.
-        </p>
-        <div style={s.pillares}>
-          {[
-            { icon: <Music size={20} />, title: "Rock ao vivo", desc: "Bandas regionais e tributos a grandes nomes" },
-            { icon: <Route size={20} />, title: "Itinerante", desc: "Uma cidade diferente a cada edição" },
-            { icon: <Users size={20} />, title: "Popular", desc: "Para todos — jovens, adultos e famílias" },
-            { icon: <Building size={20} />, title: "Comunitário", desc: "Valoriza a cultura local e novos talentos" },
-          ].map((p, i) => (
-            <div key={i} style={s.pilar}>
-              <div style={{ color: "#b090e0", marginBottom: 8 }}>{p.icon}</div>
-              <p style={s.pilarTitle}>{p.title}</p>
-              <p style={s.pilarDesc}>{p.desc}</p>
+        {/* ABERTURA */}
+        <section style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))" }}>
+          <div className="s-purple" style={{ padding: "56px clamp(24px, 5vw, 72px) 64px", display: "flex", flexDirection: "column", gap: 22, justifyContent: "flex-end" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+              <img src={`${BASE}/mic.png`} alt="Ministério da Cultura" style={{ height: 34, objectFit: "contain" }} />
+              <span style={{ fontWeight: 700 }}>apresenta</span>
             </div>
-          ))}
-        </div>
-      </section>
+            <h1 style={{ margin: 0 }}>
+              <img src={`${BASE}/tnr-logo-oficial.png`} alt="Festival Todos no Rock" style={{ width: 320, maxWidth: "90%", display: "block" }} />
+            </h1>
+            <p className="disp" style={{ fontSize: "clamp(40px, 5vw, 72px)" }}>Rock ao vivo, gratuito e itinerante no interior paulista</p>
+            <div className="badges">
+              <span className="badge b-ink">Realizado em 26 de setembro de 2026</span>
+              <span className="badge b-ink">Sertãozinho, SP</span>
+              <span className="badge" style={{ background: MINT, color: "#000" }}>Entrada gratuita</span>
+            </div>
+            <p className="lede" style={{ color: "#ece6fb" }}>Obrigado a todos que fizeram a edição Sertãozinho acontecer!</p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+              <a className="btn btn-ink" href="#galeria">Ver como foi</a>
+              <a className="btn btn-line" href={pdfHref} download={pdfName("todos-no-rock")}><DownloadIcon />Baixar apresentação</a>
+            </div>
+          </div>
+          <img src={`${BASE}/tnr-hero-bg.jpg.jpg`} alt="Público em frente ao palco do Festival Todos no Rock" style={{ width: "100%", height: "100%", minHeight: 420, objectFit: "cover", display: "block" }} />
+        </section>
 
-      {/* LINE-UP */}
-      <section id="lineup" style={s.sectionAlt}>
-        <div style={{ maxWidth: 960, margin: "0 auto" }}>
-          <p style={s.secLabel}>Quem tocou · Sertãozinho 2026</p>
-          <h2 style={{ ...s.secTitle, marginBottom: 8 }}>As atrações da edição Sertãozinho</h2>
-          <p style={{ fontSize: 13, color: "#a190c4", marginBottom: 32 }}>26 de setembro de 2026 · Cinco bandas, DJ e muito rock</p>
-
-          {/* CARDS DAS BANDAS */}
-          <div style={s.bandGrid}>
-            {lineup.map((band, i) => (
-              <a key={i} href={band.instagram} target="_blank" rel="noopener noreferrer" style={s.bandCard}
-                onMouseEnter={e => (e.currentTarget.style.borderColor = "#8040d0")}
-                onMouseLeave={e => (e.currentTarget.style.borderColor = "#a190c4")}>
-                <img src={band.image} alt={band.name} style={s.bandImg} />
-                <div style={s.bandBody}>
-                  <p style={s.bandName}>{band.name}</p>
-                  <span style={s.bandIg}><Instagram size={12} /> Ver no Instagram</span>
+        {/* O FESTIVAL */}
+        <section id="festival" className="s s-black">
+          <div className="wrap" style={{ display: "flex", flexDirection: "column", gap: 40 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 18, maxWidth: 760 }}>
+              <h2 className="disp" style={{ fontSize: "clamp(44px, 5vw, 72px)" }}>Rock ao vivo para todo mundo</h2>
+              <p className="body muted">O Festival Todos no Rock leva rock ao vivo de qualidade para cidades do interior paulista de forma gratuita e acessível, reunindo música, gastronomia e cultura num único espaço ao ar livre.</p>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 32 }}>
+              {[["Rock ao vivo", "Bandas regionais e tributos a grandes nomes"], ["Itinerante", "Uma cidade diferente a cada edição"], ["Popular", "Para todos: jovens, adultos e famílias"], ["Comunitário", "Valoriza a cultura local e novos talentos"]].map(([t, d]) => (
+                <div key={t} style={{ paddingTop: 18, borderTop: `3px solid ${LILAC}`, display: "flex", flexDirection: "column", gap: 8 }}>
+                  <h3 style={{ fontSize: 22 }}>{t}</h3>
+                  <p className="muted">{d}</p>
                 </div>
-              </a>
-            ))}
-          </div>
-
-          {/* DJ E ZÉ DO ROCK */}
-          <div style={{ ...s.suppGrid, marginTop: 16 }}>
-            <a href="https://www.instagram.com/therodmac_/" target="_blank" rel="noopener noreferrer" style={s.suppCard}
-              onMouseEnter={e => (e.currentTarget.style.borderColor = "#6030b0")}
-              onMouseLeave={e => (e.currentTarget.style.borderColor = "#a190c4")}>
-              <img src={`${BASE}/tnr-dj-rod-mac.jpg.jpg`} alt="DJ Rod Mac" style={s.suppImg} />
-              <div style={s.suppBody}>
-                <p style={s.suppOrder}>Entre os shows</p>
-                <p style={s.suppName}>DJ Rod Mac</p>
-                <p style={{ fontSize: 12, color: "#a190c4", marginBottom: 8 }}>Vinil · Rock britânico clássico</p>
-                <span style={s.bandIg}><Instagram size={12} /> Ver no Instagram</span>
-              </div>
-            </a>
-            <a href="https://www.instagram.com/zedorockoficial/" target="_blank" rel="noopener noreferrer" style={s.suppCard}
-              onMouseEnter={e => (e.currentTarget.style.borderColor = "#6030b0")}
-              onMouseLeave={e => (e.currentTarget.style.borderColor = "#a190c4")}>
-              <img src={`${BASE}/tnr-ze-do-rock.jpg.jpg`} alt="Zé do Rock" style={s.suppImg} />
-              <div style={s.suppBody}>
-                <p style={s.suppOrder}>Apresentação oficial</p>
-                <p style={s.suppName}>Zé do Rock</p>
-                <p style={{ fontSize: 12, color: "#a190c4", marginBottom: 8 }}>Apresentador oficial do festival</p>
-                <span style={s.bandIg}><Instagram size={12} /> Ver no Instagram</span>
-              </div>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* VITRINE DA ECONOMIA CRIATIVA */}
-      <section style={{ background: "#0d0618", borderTop: "0.5px solid #2a1050", borderBottom: "0.5px solid #2a1050", padding: "4rem 1.5rem" }}>
-        <div style={{ maxWidth: 960, margin: "0 auto" }}>
-          <p style={s.secLabel}>Vitrine da Economia Criativa</p>
-          <h2 style={s.secTitle}>Quem empreende com criatividade também sobe ao palco</h2>
-          <p style={{ fontSize: 14, color: "#a190c4", lineHeight: 1.7, marginBottom: 12 }}>
-            O Festival Todos no Rock reserva um espaço especial para valorizar esse universo: a <strong style={{ color: "#e0c0ff" }}>Vitrine da Economia Criativa</strong>. Nela, empreendedores locais expõem e vendem seus produtos gratuitamente, sem cobrança de taxas, em um ambiente pensado para dar visibilidade ao talento da nossa região — moda, produtos culturais, instrumentos musicais feitos por luthiers locais e gastronomia autoral, entre outros segmentos.
-          </p>
-          <p style={{ fontSize: 14, color: "#a190c4", lineHeight: 1.7, marginBottom: 32 }}>
-            Mais do que um festival de música, o Todos no Rock é também uma plataforma para fortalecer quem empreende com criatividade em Sertãozinho e região.
-          </p>
-          <p style={s.partnerGroupLabel}>Expositores 2026</p>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 16 }}>
-            {economiaCriativa.map((ex) => (
-              <a key={ex.name} href={ex.link} target="_blank" rel="noopener noreferrer" style={s.bandCard}
-                onMouseEnter={e => (e.currentTarget.style.borderColor = "#5DCAA5")}
-                onMouseLeave={e => (e.currentTarget.style.borderColor = "#a190c4")}>
-                <img src={ex.src} alt={`${ex.name} — ${ex.segment}`} loading="lazy" style={{ width: "100%", aspectRatio: "800 / 1131", objectFit: "cover", display: "block" }} />
-                <div style={s.bandBody}>
-                  <p style={{ ...s.bandName, fontSize: 16 }}>{ex.name}</p>
-                  <p style={{ fontSize: 12, color: "#a190c4", marginTop: 4 }}>{ex.segment}</p>
-                  <span style={s.bandIg}><Instagram size={12} /> Ver no Instagram</span>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* GALERIA */}
-      <section id="galeria" style={s.sectionAlt}>
-        <div style={{ maxWidth: 960, margin: "0 auto" }}>
-          <p style={s.secLabel}>Como foi · Sertãozinho 2026</p>
-          <h2 style={{ ...s.secTitle, marginBottom: 8 }}>Um dia inteiro de rock</h2>
-          <p style={{ fontSize: 14, color: "#a190c4", lineHeight: 1.7, marginBottom: 32 }}>
-            Bandas no palco, tradução em Libras, Vitrine da Economia Criativa e um público que fez a festa. Veja alguns dos melhores momentos.
-          </p>
-          <div style={s.galGrid}>
-            {fotosVisiveis.map((f, i) => (
-              <img key={i} src={f.src} alt={f.alt} loading="lazy" style={s.galImg} />
-            ))}
-          </div>
-          {!verTodas && galeria.length > 30 && (
-            <div style={{ textAlign: "center", marginTop: 8 }}>
-              <button type="button" onClick={() => setVerTodas(true)} style={{ ...s.btn, border: "none", cursor: "pointer", fontFamily: "inherit" }}>
-                Ver mais fotos ({galeria.length - 30})
-              </button>
-            </div>
-          )}
-          <p style={{ fontSize: 12, color: "#a190c4", marginTop: 16, textAlign: "center" }}>
-            Siga <a href="https://www.instagram.com/todosnorock/" target="_blank" rel="noopener noreferrer" style={{ color: "#c4a0ff" }}>@todosnorock</a> para ver mais fotos e vídeos.
-          </p>
-        </div>
-      </section>
-
-      {/* LEVE O FESTIVAL */}
-      <section style={{ ...s.section, textAlign: "center" }}>
-        <div style={{ maxWidth: 600, margin: "0 auto" }}>
-          <p style={s.secLabel}>Próximas edições</p>
-          <h2 style={{ ...s.secTitle, textAlign: "center" }}>Leve o festival para sua cidade</h2>
-          <p style={{ fontSize: 14, color: "#a190c4", lineHeight: 1.6, marginBottom: 28 }}>
-            O Todos no Rock é gratuito, itinerante e viabilizado por incentivo cultural. Prefeituras, secretarias de cultura e empresas interessadas em trazer o festival para sua cidade ou em apoiar as próximas edições (Lei Rouanet e ProAC) podem entrar em contato.
-          </p>
-          <a href="mailto:rtodeschini@rockribeirao.com.br" style={s.btn}>Fale com a gente →</a>
-        </div>
-      </section>
-
-      {/* EDIÇÕES */}
-      <section id="edicoes" style={s.section}>
-        <p style={s.secLabel}>Festival itinerante</p>
-        <h2 style={{ ...s.secTitle, marginBottom: 32 }}>Edições</h2>
-        <div style={s.edicaoList}>
-          {edicoes.map((e, i) => (
-            <div key={i} style={{ ...s.edicaoItem, border: `0.5px solid ${e.done ? "#2a6050" : "#a190c4"}` }}>
-              <div style={{ ...s.dot, background: e.done ? "#5DCAA5" : "#7F77DD" }} />
-              <div style={{ flex: 1 }}>
-                <p style={{ fontSize: 15, fontWeight: 500, color: "#e0c0ff", marginBottom: 3 }}>{e.city}</p>
-                <p style={{ fontSize: 12, color: "#a190c4" }}>{e.meta}</p>
-              </div>
-              <span style={{ fontSize: 10, padding: "3px 10px", borderRadius: 20, background: e.done ? "#085041" : "#26215C", color: e.done ? "#5DCAA5" : "#AFA9EC" }}>
-                {e.status}
-              </span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* INCENTIVO CULTURAL */}
-      <section style={s.sectionAlt}>
-        <div style={{ maxWidth: 960, margin: "0 auto" }}>
-          <p style={s.secLabel}>Incentivo cultural</p>
-          <h2 style={{ ...s.secTitle, marginBottom: 24 }}>Viabilizado pela cultura</h2>
-          <div style={s.leiGrid}>
-            <div style={s.leiCard}>
-              <img src={`${BASE}/rouanet.png`} alt="Lei Rouanet" style={s.leiImg} />
-              <p style={s.leiName}>Lei Rouanet</p>
-              <p style={s.leiDesc}>Lei Federal nº 8.313/91 · Ministério da Cultura</p>
-            </div>
-            <div style={s.leiCard}>
-              <span style={{ fontSize: 28 }}>🎭</span>
-              <p style={s.leiName}>ProAC</p>
-              <p style={s.leiDesc}>Programa de Ação Cultural · Governo do Estado de SP</p>
-            </div>
-          </div>
-          <div style={s.leiBanner}>
-            Empresas que apoiam o festival pela <strong style={{ color: "#b090e0" }}>Lei Rouanet</strong> podem deduzir até 100% do valor no <strong style={{ color: "#b090e0" }}>Imposto de Renda</strong>. Pelo <strong style={{ color: "#b090e0" }}>ProAC ICMS</strong>, empresas que recolhem ICMS no Estado de São Paulo podem abater o valor do imposto estadual.
-          </div>
-        </div>
-      </section>
-
-      {/* É TUDO TOISS */}
-      <section style={{ background: "linear-gradient(135deg, #1a0a2e 0%, #0d0618 100%)", borderTop: "2px solid #6030b0", borderBottom: "2px solid #6030b0", padding: "4rem 1.5rem" }}>
-        <div style={{ maxWidth: 960, margin: "0 auto" }}>
-          <div style={{ background: "#12071f", border: "0.5px solid #6030b0", borderRadius: 16, overflow: "hidden", display: "grid", gridTemplateColumns: "auto 1fr", gap: 0 }}>
-            {/* Faixa lateral */}
-            <div style={{ background: "linear-gradient(to bottom, #6030b0, #a190c4)", width: 8, flexShrink: 0 }} />
-            <div style={{ padding: "2.5rem" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 20, flexWrap: "wrap" }}>
-                <img src={`${BASE}/toiss.png`} alt="É Tudo Toiss" style={{ height: 64, objectFit: "contain" }} />
-                <div>
-                  <p style={{ fontSize: 10, letterSpacing: "0.1em", color: "#a190c4", marginBottom: 4 }}>AÇÃO SOCIAL · FESTIVAL TODOS NO ROCK SERTÃOZINHO</p>
-                  <h3 style={{ fontSize: 22, fontWeight: 500, color: "#f0e0ff", lineHeight: 1.2 }}>Apoio à Instituição É Tudo Toiss</h3>
-                </div>
-              </div>
-              <p style={{ fontSize: 15, color: "#9070c0", lineHeight: 1.8, marginBottom: 24 }}>
-                O Festival Todos no Rock Sertãozinho teve a satisfação e o orgulho de apoiar a Instituição É Tudo Toiss, que há <strong style={{ color: "#d0a0ff" }}>11 anos</strong> atua em benefício de crianças e famílias carentes na cidade. Contribuir para uma causa tão importante é o que move o espírito de mudança para uma sociedade melhor e mais justa.
-              </p>
-              <div style={{ background: "#1a0a2e", border: "0.5px solid #8040d0", borderRadius: 12, padding: "1.25rem 1.5rem", display: "flex", alignItems: "center", gap: 16, marginBottom: 24, flexWrap: "wrap" }}>
-                <span style={{ fontSize: 36 }}>🛒</span>
-                <div>
-                  <p style={{ fontSize: 16, fontWeight: 500, color: "#f0e0ff", marginBottom: 4 }}>Obrigado a quem trouxe 1kg de alimento!</p>
-                  <p style={{ fontSize: 13, color: "#8060a0" }}>Cada quilo arrecadado no ingresso solidário ajuda quem mais precisa. Gratidão a todo o público de Sertãozinho.</p>
-                </div>
-              </div>
-              <a href="https://www.instagram.com/etudo_toiss/" target="_blank" rel="noopener noreferrer"
-                style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#6030b0", color: "#f0e0ff", fontSize: 13, fontWeight: 500, padding: "8px 20px", borderRadius: 8, textDecoration: "none" }}>
-                <Instagram size={14} /> Conheça a Instituição
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* PARCEIROS */}
-      <section id="parceiros" style={s.sectionAlt}>
-        <div style={{ maxWidth: 960, margin: "0 auto" }}>
-          <p style={{ ...s.secLabel, textAlign: "center", marginBottom: 20 }}>Edição Sertãozinho</p>
-
-          <div style={{ display: "flex", justifyContent: "center", marginBottom: 32 }}>
-            <img src={`${BASE}/rouanet.png`} alt="Lei Rouanet" style={{ height: 56, objectFit: "contain" }} />
-          </div>
-
-          <div style={{ marginBottom: 32 }}>
-            <p style={s.partnerGroupLabel}>Apoio</p>
-            <div style={s.logoGrid}>
-              {apoio.map((logo, i) => (
-                logo.link ? (
-                  <a key={i} href={logo.link} target="_blank" rel="noopener noreferrer">
-                    <img src={logo.src} alt={logo.alt} style={{ ...s.logoImg, height: logo.height || s.logoImg.height }} />
-                  </a>
-                ) : (
-                  <img key={i} src={logo.src} alt={logo.alt} style={{ ...s.logoImg, height: logo.height || s.logoImg.height }} />
-                )
               ))}
             </div>
           </div>
+        </section>
 
-          <div style={{ marginBottom: 32 }}>
-            <p style={s.partnerGroupLabel}>Hotel Oficial</p>
-            <div style={s.logoGrid}>
-              {hotelOficial.map((logo, i) => (
-                logo.link ? (
-                  <a key={i} href={logo.link} target="_blank" rel="noopener noreferrer">
-                    <img src={logo.src} alt={logo.alt} style={{ ...s.logoImg, height: 90, maxWidth: 260 }} />
-                  </a>
-                ) : (
-                  <img key={i} src={logo.src} alt={logo.alt} style={{ ...s.logoImg, height: 90, maxWidth: 260 }} />
-                )
+        {/* LINE-UP */}
+        <section id="lineup" className="s s-black rule-top">
+          <div className="wrap" style={{ display: "flex", flexDirection: "column", gap: 32 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              <p style={{ fontWeight: 800, color: MINT }}>Quem tocou · Sertãozinho 2026</p>
+              <h2 className="disp" style={{ fontSize: "clamp(44px, 5vw, 72px)" }}>As atrações da edição Sertãozinho</h2>
+              <p className="muted">26 de setembro de 2026. Cinco bandas, DJ e muito rock.</p>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 20 }}>
+              {lineup.map((b) => (
+                <a key={b.name} href={b.instagram} target="_blank" rel="noopener noreferrer" style={{ display: "flex", flexDirection: "column", textDecoration: "none", background: "#161616" }}>
+                  <img src={b.image} alt={b.name} loading="lazy" style={{ width: "100%", aspectRatio: "4 / 5", objectFit: "cover", display: "block" }} />
+                  <span style={{ padding: 16, display: "flex", flexDirection: "column", gap: 4 }}>
+                    <span style={{ fontWeight: 800, color: MINT, fontSize: 14 }}>{b.order}</span>
+                    <span className="disp" style={{ fontSize: 32 }}>{b.name}</span>
+                    <span className="muted" style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 14 }}><Instagram size={14} /> Ver no Instagram</span>
+                  </span>
+                </a>
+              ))}
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 20 }}>
+              {[
+                { img: `${BASE}/tnr-dj-rod-mac.jpg.jpg`, role: "Entre os shows", name: "DJ Rod Mac", desc: "Vinil · Rock britânico clássico", link: "https://www.instagram.com/therodmac_/" },
+                { img: `${BASE}/tnr-ze-do-rock.jpg.jpg`, role: "Apresentação oficial", name: "Zé do Rock", desc: "Apresentador oficial do festival", link: "https://www.instagram.com/zedorockoficial/" },
+              ].map((x) => (
+                <a key={x.name} href={x.link} target="_blank" rel="noopener noreferrer" style={{ display: "flex", textDecoration: "none", background: "#161616" }}>
+                  <img src={x.img} alt={x.name} loading="lazy" style={{ width: 130, height: 150, objectFit: "cover", flexShrink: 0 }} />
+                  <span style={{ padding: 16, display: "flex", flexDirection: "column", gap: 4 }}>
+                    <span style={{ fontWeight: 800, color: MINT, fontSize: 14 }}>{x.role}</span>
+                    <span className="disp" style={{ fontSize: 30 }}>{x.name}</span>
+                    <span className="muted" style={{ fontSize: 14 }}>{x.desc}</span>
+                  </span>
+                </a>
               ))}
             </div>
           </div>
+        </section>
 
-          <div style={{ marginBottom: 32 }}>
-            <p style={s.partnerGroupLabel}>Promoção</p>
-            <div style={s.logoGrid}>
-              {promocao.map((logo, i) => (
-                logo.link ? (
-                  <a key={i} href={logo.link} target="_blank" rel="noopener noreferrer">
-                    <img src={logo.src} alt={logo.alt} style={{ ...s.logoImg, height: logo.height || s.logoImg.height }} />
-                  </a>
-                ) : (
-                  <img key={i} src={logo.src} alt={logo.alt} style={{ ...s.logoImg, height: logo.height || s.logoImg.height }} />
-                )
+        {/* VITRINE DA ECONOMIA CRIATIVA */}
+        <section className="s s-yellow">
+          <div className="wrap" style={{ display: "flex", flexDirection: "column", gap: 32 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 16, maxWidth: 820 }}>
+              <p style={{ fontWeight: 800 }}>Vitrine da Economia Criativa</p>
+              <h2 className="disp" style={{ fontSize: "clamp(44px, 5vw, 72px)" }}>Quem empreende com criatividade também sobe ao palco</h2>
+              <p className="body" style={{ fontWeight: 500 }}>O Festival Todos no Rock reserva um espaço especial para valorizar esse universo: a Vitrine da Economia Criativa. Nela, empreendedores locais expõem e vendem seus produtos gratuitamente, sem cobrança de taxas, em um ambiente pensado para dar visibilidade ao talento da região: moda, produtos culturais, instrumentos feitos por luthiers locais e gastronomia autoral, entre outros segmentos.</p>
+              <p className="body" style={{ fontWeight: 500 }}>Mais do que um festival de música, o Todos no Rock é também uma plataforma para fortalecer quem empreende com criatividade em Sertãozinho e região.</p>
+            </div>
+            <h3 style={{ fontSize: 18, fontWeight: 800 }}>Expositores 2026</h3>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 16 }}>
+              {economiaCriativa.map((ex) => (
+                <a key={ex.name} href={ex.link} target="_blank" rel="noopener noreferrer" style={{ display: "flex", flexDirection: "column", textDecoration: "none", background: "#000", color: "#fff" }}>
+                  <img src={ex.src} alt={`${ex.name}, ${ex.segment}`} loading="lazy" style={{ width: "100%", aspectRatio: "800 / 1131", objectFit: "cover", display: "block" }} />
+                  <span style={{ padding: 14, display: "flex", flexDirection: "column", gap: 2 }}>
+                    <span style={{ fontWeight: 800, fontSize: 17 }}>{ex.name}</span>
+                    <span className="muted" style={{ fontSize: 14 }}>{ex.segment}</span>
+                  </span>
+                </a>
               ))}
             </div>
           </div>
+        </section>
 
-          <div>
-            <p style={s.partnerGroupLabel}>Realização</p>
-            <div style={s.logoGrid}>
-              {realizacao.map((logo, i) => (
-                logo.link ? (
-                  <a key={i} href={logo.link} target="_blank" rel="noopener noreferrer">
-                    <img src={logo.src} alt={logo.alt} style={s.logoImg} />
-                  </a>
-                ) : (
-                  <img key={i} src={logo.src} alt={logo.alt} style={s.logoImg} />
-                )
-              ))}
+        {/* GALERIA */}
+        <section id="galeria" className="s s-black">
+          <div className="wrap" style={{ display: "flex", flexDirection: "column", gap: 28 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 12, maxWidth: 760 }}>
+              <p style={{ fontWeight: 800, color: MINT }}>Como foi · Sertãozinho 2026</p>
+              <h2 className="disp" style={{ fontSize: "clamp(44px, 5vw, 72px)" }}>Um dia inteiro de rock</h2>
+              <p className="body muted">Bandas no palco, tradução em Libras, Vitrine da Economia Criativa e um público que fez a festa. Veja alguns dos melhores momentos.</p>
+            </div>
+            <div style={{ columns: "3 240px", columnGap: 12 }}>
+              {fotos.map((f) => <img key={f.src} src={f.src} alt={f.alt} loading="lazy" style={{ width: "100%", display: "block", marginBottom: 12, breakInside: "avoid" }} />)}
+            </div>
+            {!verTodas && galeria.length > 24 && (
+              <button type="button" className="btn btn-purple" style={{ alignSelf: "center" }} onClick={() => setVerTodas(true)}>Ver mais fotos ({galeria.length - 24})</button>
+            )}
+            <p className="muted" style={{ textAlign: "center" }}>Siga <a href="https://www.instagram.com/todosnorock/" target="_blank" rel="noopener noreferrer" style={{ color: LILAC }}>@todosnorock</a> para ver mais fotos e vídeos.</p>
+          </div>
+        </section>
+
+        {/* AÇÃO SOCIAL */}
+        <section className="s s-purple">
+          <div className="wrap" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 48, alignItems: "center" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+              <img src={`${BASE}/toiss.png`} alt="É Tudo Toiss" style={{ height: 72, width: "auto", objectFit: "contain", alignSelf: "flex-start" }} />
+              <p style={{ fontWeight: 800, color: "#ece6fb" }}>Ação social · Festival Todos no Rock Sertãozinho</p>
+              <h2 className="disp" style={{ fontSize: "clamp(40px, 4.6vw, 64px)" }}>Apoio à Instituição É Tudo Toiss</h2>
+              <p className="body" style={{ color: "#ece6fb" }}>O Festival Todos no Rock Sertãozinho teve a satisfação e o orgulho de apoiar a Instituição É Tudo Toiss, que há 11 anos atua em benefício de crianças e famílias carentes na cidade. Contribuir para uma causa tão importante é o que move o espírito de mudança para uma sociedade melhor e mais justa.</p>
+              <a className="btn btn-ink" href="https://www.instagram.com/etudo_toiss/" target="_blank" rel="noopener noreferrer" style={{ alignSelf: "flex-start" }}><Instagram size={16} /> Conheça a Instituição</a>
+            </div>
+            <div style={{ background: "#000", padding: 32, display: "flex", flexDirection: "column", gap: 10 }}>
+              <p className="disp" style={{ fontSize: 44, color: MINT }}>Obrigado a quem trouxe 1 kg de alimento!</p>
+              <p className="muted">Cada quilo arrecadado no ingresso solidário ajuda quem mais precisa. Gratidão a todo o público de Sertãozinho.</p>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* INSTAGRAM FEED */}
-      <section id="instagram" style={s.igSection}>
-        <p style={{ ...s.secLabel, textAlign: "center" }}>Acompanhe o festival</p>
-        <p style={{ fontSize: 20, fontWeight: 500, color: "#e0c0ff", marginBottom: 8 }}>@todosnorock</p>
-        <p style={{ fontSize: 14, color: "#a190c4", marginBottom: 32 }}>Novidades, bastidores e chamadas das bandas</p>
-        <behold-widget feed-id="cdzugaIBMXksgUHHxqH3"></behold-widget>
-        <div style={{ marginTop: 24 }}>
-          <a href="https://www.instagram.com/todosnorock/" target="_blank" rel="noopener noreferrer"
-            style={{ ...s.btn, display: "inline-flex", alignItems: "center", gap: 8 }}>
-            <Instagram size={16} /> Seguir no Instagram
-          </a>
-        </div>
-      </section>
+        {/* EDIÇÕES */}
+        <section id="edicoes" className="s s-black">
+          <div className="wrap" style={{ display: "flex", flexDirection: "column", gap: 28 }}>
+            <h2 className="disp" style={{ fontSize: "clamp(44px, 5vw, 72px)" }}>Edições</h2>
+            <ul style={{ listStyle: "none", padding: 0 }}>
+              <li style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "8px 24px", padding: "20px 0", borderTop: `2px solid ${MINT}` }}>
+                <span className="disp" style={{ fontSize: "clamp(32px, 4vw, 52px)", flex: "1 1 320px" }}>Sertãozinho, SP</span>
+                <span className="muted" style={{ flex: "1 1 260px" }}>26 de setembro de 2026 · Cervejaria Marquesa · Lei Rouanet</span>
+                <span className="badge" style={{ background: MINT, color: "#000" }}>Realizada</span>
+              </li>
+              <li style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "8px 24px", padding: "20px 0", borderTop: `2px solid ${LILAC}`, borderBottom: `2px solid ${LILAC}` }}>
+                <span className="disp" style={{ fontSize: "clamp(32px, 4vw, 52px)", flex: "1 1 320px" }}>Próximas edições</span>
+                <span className="muted" style={{ flex: "1 1 260px" }}>Lei Rouanet e ProAC aprovados · cidade e data definidas com o patrocinador</span>
+                <span className="badge" style={{ background: LILAC, color: "#000" }}>Captação em andamento</span>
+              </li>
+            </ul>
+          </div>
+        </section>
 
+        {/* PATROCINAR */}
+        <section id="patrocinar" className="s s-purple">
+          <div className="wrap" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 56, alignItems: "center" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+              <p style={{ fontWeight: 800, color: MINT }}>Próximas edições</p>
+              <h2 className="disp" style={{ fontSize: "clamp(52px, 6.4vw, 100px)" }}>Leve o Todos no Rock para a sua marca</h2>
+              <p className="lede" style={{ color: "#ece6fb" }}>O festival é gratuito, itinerante e viabilizado por incentivo cultural. Prefeituras, secretarias de cultura e empresas podem trazer o festival para sua cidade ou apoiar as próximas edições. A cidade, o espaço e a data são definidos junto com o patrocinador.</p>
+              <div className="badges"><span className="badge b-rouanet">Lei Rouanet · PRONAC 262753</span><span className="badge b-proac">ProAC ICMS · 35057</span></div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+                <a className="btn btn-ink" href={pdfHref} download={pdfName("todos-no-rock")}><DownloadIcon />Baixar apresentação (PDF)</a>
+                <a className="btn btn-line" href="#contato">Quero patrocinar</a>
+              </div>
+            </div>
+            <img src={projetoAsset("todos-no-rock", "apresentacao-capa.jpg")} alt="Capa da apresentação do Festival Todos no Rock" loading="lazy" style={{ width: "100%", aspectRatio: "16 / 9", objectFit: "cover", display: "block", boxShadow: `14px 14px 0 ${MINT}` }} />
+          </div>
+        </section>
+
+        <section className="s s-black">
+          <div className="wrap" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 56 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+              <h2 className="disp" style={{ fontSize: "clamp(44px, 5vw, 72px)" }}>Sua marca no festival</h2>
+              <p className="body muted">Pela Lei Rouanet, empresas tributadas pelo lucro real destinam parte do Imposto de Renda devido. Pelo ProAC ICMS, empresas que recolhem ICMS no estado de São Paulo destinam parte do imposto estadual.</p>
+              <p className="body" style={{ fontWeight: 700 }}>Exemplos de contrapartidas. O pacote é negociado caso a caso, conforme a cota de patrocínio.</p>
+              <div style={{ display: "flex", gap: 24, alignItems: "center" }}>
+                <img src={`${BASE}/rouanet.png`} alt="Lei Rouanet" style={{ height: 44, objectFit: "contain" }} />
+              </div>
+            </div>
+            <ul className="ruled" style={{ color: MINT }}>{CONTRAPARTIDAS.map((c) => <li key={c} style={{ color: "#fff", borderColor: MINT }}>{c}</li>)}</ul>
+          </div>
+        </section>
+
+        {/* FAMÍLIA TODOS NO… */}
+        <section className="s-tight s-black rule-top">
+          <div className="wrap" style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+            <h2 className="disp" style={{ fontSize: "clamp(36px, 4vw, 56px)" }}>A família Todos no…</h2>
+            <div>
+              {[["todos-no-samba", "Todos no Samba", "Festival de samba e economia criativa"], ["todos-no-sertanejo", "Todos no Sertanejo", "Festival de música sertaneja e economia criativa"]].map(([slug, name, desc], k) => (
+                <a key={slug} href={projetoHref(slug)} style={{ display: "flex", flexWrap: "wrap", alignItems: "baseline", justifyContent: "space-between", gap: "8px 24px", padding: "18px 0", borderTop: `2px solid ${MINT}`, borderBottom: k === 1 ? `2px solid ${MINT}` : undefined, textDecoration: "none" }}>
+                  <span className="disp" style={{ fontSize: "clamp(36px, 4vw, 60px)" }}>{name}</span>
+                  <span className="muted">{desc}</span>
+                </a>
+              ))}
+            </div>
+            <a href={isFestivalDomain ? "https://www.rockribeirao.com.br/#projetos" : "/#projetos"} style={{ color: LILAC, fontWeight: 700 }}>Ver todos os projetos da Rock Ribeirão</a>
+          </div>
+        </section>
+
+        {/* PARCEIROS */}
+        <section id="parceiros" className="s s-black rule-top">
+          <div className="wrap" style={{ display: "flex", flexDirection: "column", gap: 40 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 12, alignItems: "center", textAlign: "center" }}>
+              <h2 className="disp" style={{ fontSize: "clamp(40px, 4.4vw, 64px)" }}>Parceiros da edição Sertãozinho</h2>
+              <img src={`${BASE}/rouanet.png`} alt="Lei Rouanet" style={{ height: 56, objectFit: "contain" }} />
+            </div>
+            <LogoRow title="Apoio" logos={apoio} />
+            <LogoRow title="Hotel oficial" logos={hotelOficial} />
+            <LogoRow title="Promoção" logos={promocao} />
+            <LogoRow title="Realização" logos={realizacao} />
+          </div>
+        </section>
+
+        {/* INSTAGRAM */}
+        <section id="instagram" className="s s-black rule-top" style={{ textAlign: "center" }}>
+          <div className="wrap" style={{ display: "flex", flexDirection: "column", gap: 16, alignItems: "center" }}>
+            <h2 className="disp" style={{ fontSize: "clamp(40px, 4.4vw, 64px)" }}>@todosnorock</h2>
+            <p className="muted">Novidades, bastidores e chamadas das bandas.</p>
+            <div style={{ width: "100%" }}><behold-widget feed-id="cdzugaIBMXksgUHHxqH3"></behold-widget></div>
+            <a className="btn btn-purple" href="https://www.instagram.com/todosnorock/" target="_blank" rel="noopener noreferrer"><Instagram size={16} /> Seguir no Instagram</a>
+          </div>
+        </section>
+
+        {/* CONTATO */}
+        <section id="contato" className="s s-black rule-top">
+          <div className="wrap" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 56 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+              <h2 className="disp" style={{ fontSize: "clamp(44px, 5vw, 72px)" }}>Quero o Todos no Rock na minha cidade</h2>
+              <p style={{ fontSize: 19, lineHeight: 1.8, fontWeight: 700 }}><a href="mailto:sac@rockribeirao.com.br" style={{ color: LILAC }}>sac@rockribeirao.com.br</a><br /><a href="https://wa.me/551631850610">WhatsApp (16) 3185-0610</a></p>
+            </div>
+            <ContactForm subject="Patrocínio: Festival Todos no Rock" cityField cta="Quero patrocinar" />
+          </div>
+        </section>
       </main>
-
-      {/* FOOTER */}
-      <footer style={s.footer}>
-        <img src={`${BASE}/Logo%20do%20header.png`} alt="Rock Ribeirão" style={{ display: "block", margin: "0 auto 12px", height: 40, opacity: 0.7 }} />
-        <p style={{ fontSize: 12, color: "#a190c4", marginBottom: 4 }}>© 2026 Festival Todos no Rock · Rock Ribeirão Produções</p>
-        <p style={{ fontSize: 12, color: "#a190c4", marginBottom: 12 }}>CNPJ: 48.549.855/0001-00</p>
-        <a href={rockRibeiraoHref} style={{ fontSize: 12, color: "#a190c4", textDecoration: "none" }}>{footerLinkLabel}</a>
-        <p style={{ marginTop: 10 }}><a href="/acessibilidade" style={{ fontSize: 12, color: "#a190c4", textDecoration: "underline" }}>Declaração de Acessibilidade</a></p>
-      </footer>
+      <RRFooter extra={<p className="muted" style={{ marginTop: 32 }}>© 2026 Festival Todos no Rock · Rock Ribeirão Produções · <a href="/acessibilidade">Declaração de Acessibilidade</a></p>} />
     </div>
   );
 }

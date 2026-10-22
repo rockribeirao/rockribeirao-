@@ -14,6 +14,8 @@ const Home = lazy(() => import("./pages/Home"));
 const TodosNoRock = lazy(() => import("./pages/TodosNoRock"));
 const Acessibilidade = lazy(() => import("./pages/Acessibilidade"));
 const RockRising = lazy(() => import("./pages/RockRising"));
+const HardRock = lazy(() => import("./pages/HardRock"));
+const Projeto = lazy(() => import("./pages/Projeto"));
 
 const FESTIVAL_HOSTS = ["todosnorock.com.br", "www.todosnorock.com.br"];
 
@@ -36,6 +38,9 @@ function Router() {
       <Route path={"/halloween"} component={Halloween} />
       <Route path={"/hardrockweekend"} component={HardRockWeekend} />
       <Route path={"/rockrising"} component={RockRising} />
+      <Route path={"/hardrock"} component={HardRock} />
+      <Route path={"/projetos/:slug"} component={Projeto} />
+      <Route path={"/acessibilidade"} component={Acessibilidade} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>

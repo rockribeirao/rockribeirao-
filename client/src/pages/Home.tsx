@@ -1,650 +1,215 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Calendar, MapPin, Mail, Instagram, ArrowRight, Star, ChevronLeft, ChevronRight, Menu, X } from "lucide-react";
-import { useState, useEffect } from "react";
-import { SiteMenuDesktop, SiteMenuMobile, PAGE_COLOR } from "@/components/SiteMenu";
+import { useEffect, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { RRHeader, RRFooter, ContactForm } from "@/components/RRLayout";
+import { getFutureShows, weekday, parseDate } from "@/data/shows";
+import { projetos, projetoHref, GROUPS } from "@/data/projetos";
 
-const HOME_SECTIONS = [
+const SECTIONS = [
+  { href: "#ingressos", label: "Ingressos" },
   { href: "#destaques", label: "Destaques" },
-  { href: "#shows", label: "Próximos shows" },
-  { href: "#proof", label: "Credibilidade" },
-  { href: "#gallery", label: "Galeria" },
-  { href: "#about", label: "Sobre" },
-  { href: "#contact", label: "Contato" },
-];
-import { toast } from "sonner";
-
-const BASE = "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/client/public";
-
-interface Show {
-  id: number;
-  name: string;
-  subtitle?: string;
-  subtitleColor?: string;
-  date: string;
-  month: string;
-  time: string;
-  venue: string;
-  realized?: boolean;
-  partnership?: boolean;
-  partnerName?: string;
-  hotelPartner?: string;
-  link?: string;
-  linkLabel?: string;
-  carouselLink?: string;
-  image?: string;
-  bannerImage?: string;
-  free?: boolean;
-  hideFreeBadge?: boolean;
-}
-
-const upcomingShows: Show[] = [
-  { id: 37, name: "DECK 66", subtitle: "ROCK DE PESO", date: "03/06", month: "Junho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/deck66-rock-de-peso-no-hard-rock-cafe-ribeirao-preto/3432663", image: `${BASE}/Deck%2066.jpeg` },
-  { id: 38, name: "U2 COVER RIBEIRÃO", subtitle: "JOGO DO BRASIL + SHOW", date: "13/06", month: "Junho", time: "22h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/jogo-do-brasil-e-u2-cover-ribeirao-no-hard-rock-cafe-ribeirao/3432680", image: `${BASE}/U2.jpeg` },
-  { id: 39, name: "FAIXA ADICIONAL", subtitle: "FLASHBACK", date: "19/06", month: "Junho", time: "20h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/jogo-do-brasil-e-faixa-adicional-flashback-no-hard-rock-cafe-ribeirao/3432705", image: `${BASE}/Faixa%20Adicional.jpeg` },
-  { id: 40, name: "JACK TEQUILA", subtitle: "POP ROCK NACIONAL", date: "20/06", month: "Junho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/jack-tequila-os-hits-do-pop-rock-nacional-no-hard-rock-cafe-rp/3442280", image: `${BASE}/JT-Jun.jpeg`, partnership: true, partnerName: "Hotel JP" },
-  { id: 41, name: "PARADISE", subtitle: "POP ROCK", date: "26/06", month: "Junho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/paradise-pop-rock-eletrizante-no-hard-rock-cafe-ribeirao-preto/3442288", image: `${BASE}/Paradise-Jun.jpeg` },
-  { id: 42, name: "BLACK JACK", subtitle: "A ENERGIA DO HARD ROCK", date: "27/06", month: "Junho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/black-jack-a-energia-do-hard-rock-no-hard-rock-cafe-ribeirao/3442174", image: `${BASE}/BJ-Jun.jpeg`, partnership: true, partnerName: "Matiz Hotel Vilabom" },
-  { id: 43, name: "LIVE BY NIGHT", date: "03/07", month: "Julho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/live-by-night-no-hard-rock-cafe-ribeirao-preto/3469487", image: `${BASE}/Live%20By%20NIght202607.jpeg`, partnership: true, partnerName: "Hotel JP" },
-  { id: 44, name: "BLAYMORPHED", subtitle: "TRIBUTO PEARL JAM", date: "04/07", month: "Julho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/blaymorphed-a-voz-de-eddie-vedder-no-hard-rock-cafe-ribeirao/3469786", image: `${BASE}/Blay202607.jpeg`, partnership: true, partnerName: "North Star" },
-  { id: 45, name: "HARD STAFF", subtitle: "CLASSIC ROCK", date: "10/07", month: "Julho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/hardstuff-classic-rock-no-hard-rock-cafe-ribeirao-preto/3469430", image: `${BASE}/Hard%20Staff202607.jpeg` },
-  { id: 52, name: "MR DAM", subtitle: "ESPECIAL QUEEN", date: "11/07", month: "Julho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/mr-dam-especial-queen-no-hard-rock-cafe-ribeirao-preto/3490022", image: `${BASE}/MrDam20260711.png` },
-  { id: 46, name: "RAMONES", subtitle: "BANDA TEENAGE LOBOTOMY", date: "12/07", month: "Julho", time: "19h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/teenage-lobotomy-dia-mundial-do-rock-no-hard-rock-cafe-ribeirao/3469799", image: `${BASE}/Ramones202607.jpeg`, partnership: true, partnerName: "North Star" },
-  { id: 47, name: "CAARU", subtitle: "ROCK XAMÂNICO", date: "17/07", month: "Julho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/caaru-rock-xamanico-no-hard-rock-cafe-ribeirao-preto/3469532", image: `${BASE}/Caaru202607.jpeg` },
-  { id: 48, name: "AURAH", date: "18/07", month: "Julho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/aurah-rock-hits-no-hard-rock-cafe-ribeirao-preto/3469549", image: `${BASE}/Aurah202607.jpeg`, partnership: true, partnerName: "Hotel JP" },
-  { id: 49, name: "BLACK DOG", subtitle: "TRIBUTO LED ZEPPELIN - ATRAÇÃO INTERNACIONAL", date: "24/07", month: "Julho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/black-dog-tributo-led-zeppelin-no-hard-rock-cafe-ribeirao-preto/3469712", image: `${BASE}/Black%20Dog202607.jpeg`, partnership: true, partnerName: "Hotel JP" },
-  { id: 50, name: "OS VIRGENS", date: "25/07", month: "Julho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/os-virgens-uma-viagem-musical-no-hard-rock-cafe-ribeirao-preto/3469816", image: `${BASE}/Os%20virgens202607.jpeg` },
-  { id: 51, name: "MACH 5", date: "31/07", month: "Julho", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/mach5-os-classicos-do-pop-rock-no-hard-rock-cafe-ribeirao/3469728", image: `${BASE}/MACH20260731.jpeg`, partnership: true, partnerName: "Taiwan Hotel" },
-  { id: 58, name: "SCHOOL OF ROCK", subtitle: "ESPECIAL JOÃO ROCK 2026", date: "02/08", month: "Agosto", time: "12h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/school-of-rock-especial-joao-rock-2026-no-hard-rock-cafe-ribeirao-preto/3512450", image: `${BASE}/SOR20260802.jpeg` },
-  { id: 53, name: "WHISKEY RIVER", date: "01/08", month: "Agosto", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/whiskey-river-no-hard-rock-cafe-ribeirao-preto/3504573", image: `${BASE}/Whiskey%20River%2020260801.jpeg` },
-  { id: 54, name: "ROCKERS23", subtitle: "ESPECIAL ROLLING STONES E BARÃO VERMELHO", date: "08/08", month: "Agosto", time: "21h30", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/rockers23-especial-rolling-stones-e-barao-vermelho-no-hard-rock-cafe-ribeirao/3504683", image: `${BASE}/Rockers23%2020260808.jpeg`, partnership: true, partnerName: "North Star", hotelPartner: "Hotel Transamerica" },
-  { id: 55, name: "U2 COVER RIBEIRÃO", subtitle: "ONE NIGHT OF U2", date: "15/08", month: "Agosto", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/u2-cover-ribeirao-one-night-of-u2-no-hard-rock-cafe-ribeirao/3504601", image: `${BASE}/U2%20Cover%20Ribeirao%2020260815.jpeg` },
-  { id: 56, name: "PARADISE", subtitle: "POP ROCK", date: "28/08", month: "Agosto", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/paradise-coldplay-imagine-dragons-e-mais-no-hard-rock-cafe-rp/3504631", image: `${BASE}/Paradise%2020260828.jpeg` },
-  { id: 57, name: "MANCHESTER", subtitle: "OASIS COVER", date: "29/08", month: "Agosto", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/manchester-oasis-cover-o-maior-tributo-ao-oasis-no-hrc-ribeirao/3504705", image: `${BASE}/Manchester%20Oasis%2020260829.jpeg`, partnership: true, partnerName: "North Star", hotelPartner: "Hotel JP" },
-  { id: 59, name: "MAD HOUDINI", subtitle: "ESPECIAL DURAN DURAN E A-HA", date: "05/09", month: "Setembro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/mad-houdini-especial-duran-duran-e-a-ha-no-hard-rock-cafe-ribeirao/3541489", image: `${BASE}/MadHoudini%2020260905.jpeg`, partnership: true, partnerName: "Hotel JP" },
-  { id: 60, name: "OS VIRGENS", subtitle: "SHOW ACÚSTICO", date: "11/09", month: "Setembro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/os-virgens-show-acustico-no-hard-rock-cafe-ribeirao-preto/3541514", image: `${BASE}/Os%20Virgens%2020260911.jpeg` },
-  { id: 65, name: "CREEDENCE 4EVER", subtitle: "TRIBUTO CREEDENCE CLEARWATER REVIVAL", date: "12/09", month: "Setembro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/creedence-4ever-tributo-creedence-clearwater-revival-no-hard-rock-cafe-ribeirao-preto/3571530", image: `${BASE}/Creedence4Ever%2020260912.jpg`, partnership: true, partnerName: "North Star" },
-  { id: 61, name: "DIRTY JACK", subtitle: "TRIBUTO AC/DC", date: "25/09", month: "Setembro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/dirty-jack-tributo-acdc-no-hard-rock-cafe-ribeirao-preto/3541500", image: `${BASE}/DirtyJack%2020260925.jpeg`, bannerImage: `${BASE}/DirtyJack-banner%2020260925.jpg`, partnership: true, partnerName: "Taiwan Hotel" },
-  { id: 66, name: "POP MIND", subtitle: "HITS DO POP ROCK", date: "02/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/pop-mind-hits-do-pop-rock-no-hard-rock-cafe-ribeirao-preto/3575880", image: `${BASE}/PopMind%2020261002.jpg`, bannerImage: `${BASE}/PopMind-banner%2020261002.jpg`, partnership: true, partnerName: "Hotel JP" },
-  { id: 67, name: "JACK FAST", subtitle: "DE VOLTA AO HARD ROCK CAFE", date: "03/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/jack-fast-de-volta-ao-hard-rock-cafe-ribeirao-preto/3575885", image: `${BASE}/JackFast%2020261003.jpg`, bannerImage: `${BASE}/JackFast-banner%2020261003.jpeg`, partnership: true, partnerName: "Hotel JP" },
-  { id: 68, name: "OÁZ", subtitle: "", date: "09/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/oAz-no-hard-rock-cafe-ribeirao-preto/3575893", image: `${BASE}/Oaz%2020261009.jpg`, bannerImage: `${BASE}/Oaz-banner%2020261009.jpg`, partnership: true, partnerName: "Taiwan Hotel" },
-  { id: 69, name: "U2 COVER RIBEIRÃO", subtitle: "TRIBUTO U2", date: "10/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/u2-cover-ribeirao-one-night-of-u2-no-hard-rock-cafe-ribeirao/3576564", image: `${BASE}/U2CoverRibeirao%2020261010.jpg`, bannerImage: `${BASE}/U2CoverRibeirao-banner%2020261010.jpg` },
-  { id: 70, name: "CHILDREN OF THE BEAST", subtitle: "TRIBUTO IRON MAIDEN", date: "16/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/children-of-the-beast-o-tributo-oficial-do-iron-maiden-no-hrc-ribeirao/3576580", image: `${BASE}/ChildrenOfTheBeast%2020261016.jpg`, bannerImage: `${BASE}/ChildrenOfTheBeast-banner%2020261016.jpg`, partnership: true, partnerName: "Taiwan Hotel" },
-  { id: 71, name: "RENATO QUASE RUSSO", subtitle: "TRIBUTO LEGIÃO URBANA — ESPECIAL 30 ANOS RENATO RUSSO", subtitleColor: "#d4a017", date: "17/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/tributo-legiao-urbana-por-renato-quase-russo-no-hard-rock-cafe-ribeirao-preto/3576573", image: `${BASE}/RenatoQuaseRusso%2020261017.jpg`, bannerImage: `${BASE}/RenatoQuaseRusso-banner%2020261017.jpg`, partnership: true, partnerName: "Matiz Hotel" },
-  { id: 72, name: "AURAH", subtitle: "POP ROCK", date: "23/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/aurah-rock-hits-no-hard-rock-cafe-ribeirao-preto/3576598", image: `${BASE}/Aurah%2020261023.jpg`, bannerImage: `${BASE}/Aurah-banner%2020261023.jpg`, partnership: true, partnerName: "Hotel JP" },
-  { id: 73, name: "LITHIUM", subtitle: "ESPECIAL HALLOWEEN", subtitleColor: "#ff8c00", date: "30/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/lithium-com-dri-santana-no-hard-rock-cafe-ribeirao-preto/3576546", image: `${BASE}/Lithium%2020261030.jpg`, bannerImage: `${BASE}/Lithium-banner%2020261030.jpg`, carouselLink: "/halloween" },
-  { id: 74, name: "CAARU", subtitle: "ROCK XAMÂNICO — ESPECIAL HALLOWEEN", subtitleColor: "#ff8c00", date: "31/10", month: "Outubro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/caaru-rock-xamanico-no-hard-rock-cafe-ribeirao-preto/3576589", image: `${BASE}/Caaru%2020261031.jpg`, bannerImage: `${BASE}/Caaru-banner%2020261031.jpg`, partnership: true, partnerName: "Transamerica", carouselLink: "/halloween" },
-  { id: 131, name: "LIVE BY NIGHT", subtitle: "FITA K7 — ESPECIAL ANOS 80", date: "06/11", month: "Novembro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/fita-k7--especial-anos-80-com-live-by-night-no-hard-rock-cafe-ribeirao-preto/3626120", image: `${BASE}/LiveByNight%2020261106.jpg`, bannerImage: `${BASE}/LiveByNight-banner%2020261106.jpg`, partnership: true, partnerName: "Taiwan Hotel" },
-  { id: 132, name: "SEATTLE NIGHTS", subtitle: "NIRVANA ACÚSTICO E CLÁSSICOS DO GRUNGE", date: "07/11", month: "Novembro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/seattle-nights--nirvana-acustico-e-classicos-do-grunge-no-hard-rock-cafe-ribeirao-preto/3625284", image: `${BASE}/SeattleNights%2020261107.jpg`, bannerImage: `${BASE}/SeattleNights-banner%2020261107.jpg`, partnership: true, partnerName: "North Star", hotelPartner: "Matiz Hotel Vilabom" },
-  { id: 133, name: "PAUL & FRIENDS", subtitle: "ABERTURA DO BEAT TRIO", date: "13/11", month: "Novembro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/paul--friends-com-abertura-do-beat-trio-no-hard-rock-cafe-ribeirao-preto/3625307", image: `${BASE}/PaulFriends%2020261113.jpg`, bannerImage: `${BASE}/PaulFriends-banner%2020261113.jpg`, partnership: true, partnerName: "North Star", hotelPartner: "Hotel JP" },
-  { id: 134, name: "ROTOR", subtitle: "TRIBUTO BON JOVI — GIN SHEWOLF NIGHT'S", date: "14/11", month: "Novembro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/gin-shewolf-night-----tributo-bon-jovi-com-rotor-no-hard-rock-cafe-ribeirao/3626153", image: `${BASE}/Rotor%2020261114.jpg`, bannerImage: `${BASE}/Rotor-banner%2020261114.jpg`, partnership: true, partnerName: "Transamerica" },
-  { id: 135, name: "GUNS COVER BRAZIL", subtitle: "HARD ROCK WEEKEND — TRIBUTO GUNS N' ROSES", date: "19/11", month: "Novembro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/hard-rock-weekend--tributo-guns-n-roses-com-guns-cover-brazil-no-hard-rock-cafe-ribeirao-preto/3626191", image: `${BASE}/GunsCoverBrazil%2020261119.jpg`, bannerImage: `${BASE}/GunsCoverBrazil-banner%2020261119.jpg`, partnership: true, partnerName: "Matiz Hotel Vilabom" },
-  { id: 136, name: "LOST80S", subtitle: "HARD ROCK WEEKEND — FEAT. KIKO SHRED — GLAM ROCK ESPECIAL ANOS 80", date: "20/11", month: "Novembro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/hard-rock-weekend--lost80s-feat-kiko-shred-glam-rock-especial-anos-80-no-hard-rock-cafe-ribeirao/3626203", image: `${BASE}/Lost80s%2020261120.jpg`, bannerImage: `${BASE}/Lost80s-banner%2020261120.jpg`, partnership: true, partnerName: "Hotel JP" },
-  { id: 137, name: "RADIO SHOW", subtitle: "HARD ROCK WEEKEND — FEAT. NANDO FERNANDES", date: "21/11", month: "Novembro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/hard-rock-weekend--radio-show-feat-nando-fernandes-classicos-do-rock-no-hard-rock-cafe-ribeirao/3626225", image: `${BASE}/RadioShow%2020261121.jpg`, bannerImage: `${BASE}/RadioShow-banner%2020261121.jpg`, partnership: true, partnerName: "Hotel JP" },
-  { id: 138, name: "SUPERNOVA", subtitle: "DO ROCK IN RIO AO HARD ROCK", date: "28/11", month: "Novembro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/supernova-do-rock-in-rio-ao-hard-rock-cafe-ribeirao-preto/3626253", image: `${BASE}/Supernova%2020261128.jpg`, bannerImage: `${BASE}/Supernova-banner%2020261128.jpg`, partnership: true, partnerName: "Hotel JP" },
-  { id: 62, name: "FESTIVAL TODOS NO ROCK", subtitle: "SCHOOL OF ROCK, ROTOR, DIRTY JACK, O ÉPICCO E SANTÍSSIMA TRINDADE", date: "26/09", month: "Setembro", time: "13h", venue: "Sertãozinho", image: `${BASE}/TodosNoRock-card%2020260926.jpg`, bannerImage: `${BASE}/TodosNoRock-banner%2020260926.jpg`, link: "https://www.sympla.com.br/evento/todos-no-rock-marquesa-open-bar/3569023", linkLabel: "COMPRAR CAMAROTE", carouselLink: "https://www.sympla.com.br/evento/todos-no-rock-marquesa-open-bar/3569023", free: true, hideFreeBadge: true },
-  { id: 63, name: "DYNAMITE", subtitle: "TRIBUTO SCORPIONS", date: "26/09", month: "Setembro", time: "21h", venue: "Hard Rock Cafe", link: "https://www.sympla.com.br/evento/dynamite-tributo-scorpions-no-hard-rock-cafe-ribeirao-preto/3541522", image: `${BASE}/Dynamite%2020260926.jpeg`, bannerImage: `${BASE}/Dynamite-banner%2020260926.jpg`, partnership: true, partnerName: "Hotel JP" },
+  { href: "#projetos", label: "Projetos" },
+  { href: "/hardrock", label: "Hard Rock" },
+  { href: "#patrocine", label: "Patrocine" },
+  { href: "#contato", label: "Contato" },
 ];
 
-const realizedShows2026: Show[] = [
-  { id: 101, name: "DIRTY JACK", subtitle: "AC/DC & WHITESNAKE COVER BRASIL", date: "16/01", month: "Janeiro", time: "21h", venue: "Hard Rock Cafe", realized: true },
-  { id: 102, name: "AURAH", date: "17/01", month: "Janeiro", time: "21h", venue: "Hard Rock Cafe", realized: true },
-  { id: 103, name: "PRI BORGES", subtitle: "ESPECIAL JANIS JOPLIN", date: "23/01", month: "Janeiro", time: "21h", venue: "Hard Rock Cafe", realized: true },
-  { id: 104, name: "JACK FAST", date: "24/01", month: "Janeiro", time: "21h", venue: "Hard Rock Cafe", realized: true },
-  { id: 105, name: "GUNS N' ROSES COVER BRAZIL", date: "30/01", month: "Janeiro", time: "21h", venue: "Hard Rock Cafe", realized: true },
-  { id: 106, name: "MID SEASON SHOW", subtitle: "SCHOOL OF ROCK", date: "31/01", month: "Janeiro", time: "21h", venue: "Hard Rock Cafe", realized: true },
-  { id: 107, name: "BETO BRUNO & STARS FROM SCHOOL OF ROCK", date: "07/02", month: "Fevereiro", time: "21h", venue: "Hard Rock Cafe", realized: true, partnership: true, partnerName: "North Star Concerts" },
-  { id: 108, name: "MOJOBOX", date: "13/02", month: "Fevereiro", time: "21h", venue: "Hard Rock Cafe", realized: true, partnership: true, partnerName: "North Star Concerts" },
-  { id: 109, name: "BANDA 365", date: "15/02", month: "Fevereiro", time: "21h", venue: "Hard Rock Cafe", realized: true, partnership: true, partnerName: "North Star Concerts" },
-  { id: 110, name: "VIOLÕES EM FÚRIA", date: "22/02", month: "Fevereiro", time: "21h", venue: "Hard Rock Cafe", realized: true, partnership: true, partnerName: "North Star Concerts" },
-  { id: 111, name: "NIRVANA COVER BRASIL", date: "28/02", month: "Fevereiro", time: "21h", venue: "Hard Rock Cafe", realized: true, partnership: true, partnerName: "North Star Concerts" },
-  { id: 112, name: "CREEDENCE 4EVER", date: "07/03", month: "Março", time: "21h", venue: "Hard Rock Cafe", realized: true, partnership: true, partnerName: "North Star Concerts" },
-  { id: 113, name: "FENÍCIA", subtitle: "ESPECIAL DIA DAS MULHERES", date: "08/03", month: "Março", time: "21h", venue: "Hard Rock Cafe", realized: true },
-  { id: 114, name: "MR. DAM", subtitle: "ESPECIAL QUEEN", date: "14/03", month: "Março", time: "21h", venue: "Hard Rock Cafe", realized: true },
-  { id: 115, name: "NIRVANA COVER BRASIL", date: "29/03", month: "Março", time: "21h", venue: "Hard Rock Cafe", realized: true, partnership: true, partnerName: "North Star Concerts" },
-  { id: 116, name: "POP MIND", subtitle: "HITS DO POP ROCK", date: "02/04", month: "Abril", time: "21h", venue: "Hard Rock Cafe", realized: true },
-  { id: 117, name: "AURAH", date: "04/04", month: "Abril", time: "21h", venue: "Hard Rock Cafe", realized: true },
-  { id: 118, name: "ROTOR", subtitle: "ESPECIAL BON JOVI", date: "17/04", month: "Abril", time: "21h", venue: "Hard Rock Cafe", realized: true },
-  { id: 119, name: "U2 COVER RIBEIRÃO", date: "18/04", month: "Abril", time: "21h", venue: "Hard Rock Cafe", realized: true },
-  { id: 120, name: "PARADISE", subtitle: "TRIBUTO COLDPLAY E IMAGINE DRAGONS", date: "24/04", month: "Abril", time: "21h", venue: "Hard Rock Cafe", realized: true },
-  { id: 121, name: "MAMA PUNCH", subtitle: "KNOCKOUT HITS", date: "02/05", month: "Maio", time: "21h", venue: "Hard Rock Cafe", realized: true },
-  { id: 122, name: "AEROGUNS", subtitle: "GUNS N' ROSES + AEROSMITH", date: "08/05", month: "Maio", time: "21h", venue: "Hard Rock Cafe", realized: true },
-  { id: 123, name: "ECHOS", subtitle: "PINK FLOYD EXPERIENCE", date: "09/05", month: "Maio", time: "21h", venue: "Hard Rock Cafe", realized: true, partnership: true, partnerName: "North Star Concerts" },
-  { id: 124, name: "CAVEIRAS ROCK", subtitle: "ROCK NACIONAL ANOS 80", date: "14/05", month: "Maio", time: "21h", venue: "Hard Rock Cafe", realized: true },
-  { id: 125, name: "ELTON JOHN ROCKET MAN EXPERIENCE", date: "15/05", month: "Maio", time: "21h", venue: "Hard Rock Cafe", realized: true },
-  { id: 126, name: "SPINE SHIVER", subtitle: "SOUTHERN ROCK EXPERIENCE", date: "16/05", month: "Maio", time: "21h", venue: "Hard Rock Cafe", realized: true },
-  { id: 127, name: "SCHOOL OF ROCK", subtitle: "MID SEASON", date: "24/05", month: "Maio", time: "12h", venue: "Hard Rock Cafe", realized: true },
-  { id: 128, name: "RENATO QUASE RUSSO", subtitle: "TRIBUTO AO LEGIÃO URBANA", date: "30/05", month: "Maio", time: "21h", venue: "Hard Rock Cafe", realized: true },
-  { id: 129, name: "ROTOR", subtitle: "ESPECIAL BON JOVI", date: "06/06", month: "Junho", time: "21h", venue: "Hard Rock Cafe", realized: true },
-  { id: 130, name: "SCHOOL OF ROCK", subtitle: "SHOW DE TEMPORADA", date: "14/06", month: "Junho", time: "12h", venue: "Vila Dionísio", realized: true },
+const MONTHS = ["", "janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
+
+const DESTAQUES = [
+  { href: "/rockrising", img: "/rockrising/rockrising-destaque-home.jpg", alt: "Rock Rising 2027, festival de novos talentos do rock", title: "Rock Rising 2027", text: "Festival de novas bandas. Inscrições a partir de 15 de janeiro, final em 21 de março.", cta: "Conhecer o festival", color: "#ffffff", until: null as number | null },
+  { href: "/halloween", img: "/halloween/halloween-destaque-home.jpg", alt: "Halloween no Hard Rock Cafe Ribeirão Preto", title: "Halloween no Hard Rock", text: "30 e 31 de outubro, a partir das 21h, no Hard Rock Cafe Ribeirão Preto.", cta: "Ver a programação", color: "#ff8c1a", until: new Date("2026-11-01T06:00:00-03:00").getTime() },
+  { href: "/hardrockweekend", img: "/hardrockweekend/hardrockweekend-destaque-home.jpg", alt: "Hard Rock Weekend, 19, 20 e 21 de novembro", title: "Hard Rock Weekend", text: "Guns Cover Brazil, Lost80s e Radio Show. 19, 20 e 21 de novembro, a partir das 21h.", cta: "Garantir ingresso", color: "#ff5fa2", until: new Date("2026-11-22T06:00:00-03:00").getTime() },
 ];
 
-const northStarArtists = new Set([
-  "BETO BRUNO & STARS FROM SCHOOL OF ROCK", "MOJOBOX", "BANDA 365", "VIOLÕES EM FÚRIA",
-  "NIRVANA COVER BRASIL", "CREEDENCE 4EVER", "THE NIROS", "RELIVE", "PURPLE BRAZIL TRIBUTE",
-  "PAUL MCCARTNEY TRIBUTE", "OLD CROW", "MANCHESTER (OASIS COVER)", "LUANA CAMARAH",
-  "JOHN CAMPBELL – ARE YOU EXPERIENCED?", "HEY JUDE", "FEVER", "COLDPLAYERS", "MALVADA",
-  "ECHOS", "OZZMOZZY", "BLAYMORPHED",
-]);
-
-const proofOfWork = [
-  "5 MINUTOS", "AEROGUNS", "AURAH", "BALANCE", "BANDA 365",
-  "BETO BRUNO & STARS FROM SCHOOL OF ROCK", "BIG HEADS", "BLACK JACK",
-  "BLUES ON THE ROCK", "BLAYMORPHED", "CAARU", "CAVEIRAS ROCK", "CHAVALA",
-  "CHILDREN OF THE BEAST", "COLDPLAYERS", "CREEDENCE 4EVER", "DAMA DE FERRO",
-  "DECK 66", "DIA MUNDIAL DO ROCK DA KISS FM", "DIRTY JACK", "DOMA", "DYNAMITE",
-  "ECHOS", "EDU TRINNES & AEROSMITH CRAZY COVER", "ELTON JOHN ROCKET MAN EXPERIENCE",
-  "EVANESCENCE EXPERIENCE", "FAIXA ADICIONAL", "FENÍCIA", "FEVER",
-  "GUNS N' ROSES COVER BRAZIL", "HARD STAFF", "HEY JUDE", "JACK FAST", "JACK TEQUILA",
-  "JOHN CAMPBELL – ARE YOU EXPERIENCED?", "KILOTONES", "KISS ROCK FESTIVAL",
-  "LED ZEPPELIN EXPERIENCE", "LIVE BY NIGHT", "LOST 80'S", "LUANA CAMARAH",
-  "MAD HOUDINI", "MALVADA", "MAMA PUNCH", "MANCHESTER", "MARIA ORFINA",
-  "MASTER OF REALITY", "MAXINOVA", "MIEX", "MOJOBOX", "MONROE", "MR. DAM", "MR DAM",
-  "NIRVANA COVER BRASIL", "OLD CROW", "OPERA QUEEN", "OS VIRGENS", "OZZMOZZY",
-  "PARADISE", "PAUL MCCARTNEY TRIBUTE", "PEPPER HEAD", "PLAYLIST", "POP MIND",
-  "PRI BORGES", "PURPLE BRAZIL TRIBUTE", "RADIO DRIVE", "RAMONES", "RELIVE",
-  "RENATO QUASE RUSSO", "REPRISE INÉDITA", "ROCK STORY", "ROCKERS23", "ROCKSAURO",
-  "ROTOR", "SCHOOL OF ROCK", "SPINE SHIVER", "THE NIROS", "TREN", "TRI REVIEW",
-  "U2 COVER RIBEIRÃO", "UNDERGROUND FEST", "UNIDADE 2", "VIOLÕES EM FÚRIA", "WHISKEY RIVER",
-];
-
-const galleryPhotos = [
-  { src: `${BASE}/Guns%20Cover%20Brasil.jpg`, alt: "Guns N Roses Cover Brasil" },
-  { src: `${BASE}/Luana%20Camarah.jpg`, alt: "Luana Camarah" },
-  { src: `${BASE}/Ozzmozzy.jpg`, alt: "Ozzmozzy" },
-  { src: `${BASE}/U2%20Cover%20Ribeir%C3%A3o.jpg`, alt: "U2 Cover Ribeirão" },
-  { src: `${BASE}/Manchester%20Oasis.jpg`, alt: "Manchester Oasis" },
-  { src: `${BASE}/Viol%C3%B5es%20em%20F%C3%BAria.jpg`, alt: "Violões em Fúria" },
-  { src: `${BASE}/Nirvana%20Cover%20Brasil.jpg`, alt: "Nirvana Cover Brasil" },
-  { src: `${BASE}/Malvada.jpg`, alt: "Malvada" },
-  { src: `${BASE}/Coldplayers.jpg`, alt: "Coldplayers" },
-  { src: `${BASE}/365.jpg`, alt: "Banda 365" },
-  { src: `${BASE}/Beto%20Bruno.jpg`, alt: "Beto Bruno" },
-  { src: `${BASE}/Caaru.jpg`, alt: "Caaru" },
-  { src: `${BASE}/Creedence%204Ever.jpg`, alt: "Creedence 4Ever" },
-  { src: `${BASE}/Os%20Virgens.jpg`, alt: "Os Virgens" },
-  { src: `${BASE}/The%20Four%20Horsemen.jpg`, alt: "The Four Horsemen" },
-];
+const SIZES = { festivais: "clamp(52px, 7.6vw, 116px)", shows: "clamp(44px, 5.6vw, 84px)", formacao: "clamp(40px, 4.6vw, 68px)" } as const;
 
 export default function Home() {
-  const [email, setEmail] = useState("");
-  const [selectedMonth, setSelectedMonth] = useState("Todos");
-
-  const handleNewsletterSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email) { toast.error("Por favor, insira seu email"); return; }
-    try {
-      const formData = new FormData();
-      formData.append("email", email);
-      const response = await fetch("https://formspree.io/f/xnjodyqw", {
-        method: "POST", body: formData, headers: { "Accept": "application/json" },
-      });
-      if (response.ok) { toast.success("Email registrado com sucesso!"); setEmail(""); }
-      else { toast.error("Erro ao registrar email"); }
-    } catch (error) { toast.error("Erro ao registrar email. Tente novamente."); console.error(error); }
-  };
-
-  const parseDate = (dateStr: string) => {
-    const [day, month] = dateStr.split("/").map(Number);
-    return { day, month };
-  };
-
-  const isShowPassed = (dateStr: string) => {
-    const showDate = parseDate(dateStr);
-    const today = new Date();
-    const currentDay = today.getDate();
-    const currentMonth = today.getMonth() + 1;
-    const currentYear = today.getFullYear();
-    const showYear = 2026;
-    if (currentYear > showYear) return true;
-    if (currentYear < showYear) return false;
-    if (currentMonth > showDate.month) return true;
-    if (currentMonth < showDate.month) return false;
-    return currentDay > showDate.day;
-  };
-
-  const futureShows = upcomingShows.filter(show => !isShowPassed(show.date) && (show.link || show.free));
-  const passedShows = upcomingShows.filter(show => isShowPassed(show.date));
-  const allRealizedShows = [...realizedShows2026, ...passedShows];
-
-  const availableMonths = new Set(futureShows.map(show => show.month));
-  const allMonths = ["Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro"];
-  const months = ["Todos", ...allMonths.filter(m => availableMonths.has(m))];
-
-  const sortedShows = [...futureShows].sort((a, b) => {
-    const dateA = parseDate(a.date);
-    const dateB = parseDate(b.date);
-    if (dateA.month !== dateB.month) return dateA.month - dateB.month;
-    return dateA.day - dateB.day;
-  });
-
-  const featuredShows = sortedShows.filter(show => show.bannerImage);
-  const [carouselIndex, setCarouselIndex] = useState(0);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const slides = getFutureShows().filter((s) => s.bannerImage);
+  const [i, setI] = useState(0);
+  const n = slides.length;
 
   useEffect(() => {
-    if (featuredShows.length <= 1) return;
-    const timer = setInterval(() => {
-      setCarouselIndex(i => (i + 1) % featuredShows.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [featuredShows.length]);
+    if (n <= 1) return;
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+    const t = setInterval(() => setI((x) => (x + 1) % n), 6000);
+    return () => clearInterval(t);
+  }, [n]);
 
-  const goToSlide = (i: number) => setCarouselIndex(i);
-  const goPrev = () => setCarouselIndex(i => (i - 1 + featuredShows.length) % featuredShows.length);
-  const goNext = () => setCarouselIndex(i => (i + 1) % featuredShows.length);
-
-  const finalShows = selectedMonth === "Todos"
-    ? sortedShows
-    : sortedShows.filter(show => show.month === selectedMonth).sort((a, b) => {
-        const dateA = parseDate(a.date);
-        const dateB = parseDate(b.date);
-        return dateA.day - dateB.day;
-      });
+  const cur = slides[n ? i % n : 0];
+  const destaques = DESTAQUES.filter((d) => !d.until || Date.now() < d.until);
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#06020e" }}>
-
-      {/* Header */}
-      <header className="sticky top-0 z-50 border-b" style={{ background: "#08030f", borderColor: "#2a1050" }}>
-        <div className="container flex items-center justify-between py-4">
-          <img src={`${BASE}/Logo%20do%20header.png`} alt="Rock Ribeirão" className="h-16 w-auto object-contain" />
-          <SiteMenuDesktop current="rr" sections={HOME_SECTIONS} className="hidden md:flex font-heading" />
-          <button type="button" className="md:hidden p-2" style={{ color: PAGE_COLOR.rr }} aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((o) => !o)}>
-            {menuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
-          </button>
-        </div>
-        {menuOpen && (
-          <div className="md:hidden font-heading"><SiteMenuMobile current="rr" sections={HOME_SECTIONS} onNavigate={() => setMenuOpen(false)} rowClassName="container" padX={16} /></div>
-        )}
-      </header>
-
+    <div className="rr">
+      <RRHeader sections={SECTIONS} />
       <main>
-      {/* Carrossel de Destaques */}
-      {featuredShows.length > 0 && (
-        <section className="py-8 md:py-10" style={{ background: "#06020e" }}>
-          <div className="container">
-            <div style={{ position: "relative", maxWidth: 1400, margin: "0 auto" }}>
-              <div style={{ overflow: "hidden" }}>
-                <div style={{
-                  display: "flex",
-                  transform: `translateX(calc(-${carouselIndex * 80}% + 11%))`,
-                  transition: "transform 0.5s ease",
-                }}>
-                  {featuredShows.map((show, i) => (
-                    <a
-                      key={show.id}
-                      href={show.carouselLink || show.link}
-                      target={show.carouselLink?.startsWith("/") ? undefined : "_blank"}
-                      rel="noopener noreferrer"
-                      style={{
-                        flex: "0 0 78%",
-                        marginRight: "2%",
-                        position: "relative",
-                        display: "block",
-                        aspectRatio: "1600 / 838",
-                        borderRadius: 16,
-                        overflow: "hidden",
-                        opacity: i === carouselIndex ? 1 : 0.4,
-                        transform: i === carouselIndex ? "scale(1)" : "scale(0.94)",
-                        transition: "opacity 0.5s ease, transform 0.5s ease",
-                      }}
-                    >
-                      <img src={show.bannerImage} alt={show.name} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-                    </a>
-                  ))}
+        {cur && (
+          <section id="ingressos" className="s-black" style={{ padding: "28px 0 40px" }} aria-label="Ingressos à venda">
+            <div className="wrap" style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+              <a href={cur.carouselLink || cur.link} style={{ display: "block" }}>
+                <img src={cur.bannerImage} alt={`Banner do show ${cur.name}`} style={{ width: "100%", aspectRatio: "1600 / 838", objectFit: "cover", display: "block" }} />
+              </a>
+              <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 16 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                  <h2 className="disp" style={{ fontSize: "clamp(36px, 4.4vw, 60px)" }}>{cur.name}</h2>
+                  <span className="muted">
+                    {cur.subtitle ? `${cur.subtitle} · ` : ""}{weekday(cur.date)}, {parseDate(cur.date).day} de {MONTHS[parseDate(cur.date).month]}, {cur.time}, {cur.venue}
+                  </span>
                 </div>
+                {cur.link && <a className="btn btn-red" href={cur.link}>{cur.linkLabel ? cur.linkLabel.charAt(0) + cur.linkLabel.slice(1).toLowerCase() : "Comprar ingresso"}</a>}
               </div>
-
-              {featuredShows.length > 1 && (
-                <>
-                  <button onClick={goPrev} aria-label="Show anterior"
-                    style={{
-                      position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)",
-                      width: 44, height: 44, borderRadius: "50%", background: "rgba(6,2,14,0.7)",
-                      border: "0.5px solid #a190c4", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center",
-                      cursor: "pointer",
-                    }}>
-                    <ChevronLeft size={22} />
-                  </button>
-                  <button onClick={goNext} aria-label="Próximo show"
-                    style={{
-                      position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)",
-                      width: 44, height: 44, borderRadius: "50%", background: "rgba(6,2,14,0.7)",
-                      border: "0.5px solid #a190c4", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center",
-                      cursor: "pointer",
-                    }}>
-                    <ChevronRight size={22} />
-                  </button>
-
-                  <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 16 }}>
-                    {featuredShows.map((_, i) => (
-                      <button key={i} onClick={() => goToSlide(i)} aria-label={`Ir para o destaque ${i + 1}`}
-                        style={{
-                          width: i === carouselIndex ? 24 : 8, height: 8, borderRadius: 4,
-                          background: i === carouselIndex ? "#cc2200" : "#a190c4",
-                          border: "none", cursor: "pointer", transition: "all 0.3s",
-                        }} />
+              {n > 1 && (
+                <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+                  <button type="button" className="btn btn-line" style={{ minHeight: 44, width: 44, padding: 0 }} aria-label="Show anterior" onClick={() => setI((x) => (x - 1 + n) % n)}><ChevronLeft size={20} /></button>
+                  <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+                    {slides.map((s, k) => (
+                      <button key={s.id} type="button" className={k === i % n ? "dot dot-on" : "dot"} aria-label={`Mostrar ${s.name}`} aria-current={k === i % n} onClick={() => setI(k)} />
                     ))}
                   </div>
-                </>
+                  <button type="button" className="btn btn-line" style={{ minHeight: 44, width: 44, padding: 0 }} aria-label="Próximo show" onClick={() => setI((x) => (x + 1) % n)}><ChevronRight size={20} /></button>
+                  <a href="/hardrock#agenda" style={{ marginLeft: "auto", fontWeight: 700, fontSize: 15 }}>Ver toda a agenda</a>
+                </div>
               )}
+            </div>
+          </section>
+        )}
+
+        <section id="destaques" className="s-tight s-black rule-top">
+          <div className="wrap" style={{ display: "flex", flexDirection: "column", gap: 28 }}>
+            <h2 className="disp" style={{ fontSize: "clamp(40px, 4.4vw, 64px)" }}>Destaques</h2>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 20 }}>
+              {destaques.map((d) => (
+                <a key={d.href} href={d.href} style={{ display: "flex", flexDirection: "column", textDecoration: "none", color: "#fff", background: "#161616", borderTop: `4px solid ${d.color}` }}>
+                  <img src={d.img} alt={d.alt} style={{ width: "100%", aspectRatio: "1584 / 672", objectFit: "cover", display: "block" }} />
+                  <span style={{ display: "flex", flexDirection: "column", gap: 8, padding: 20, flexGrow: 1 }}>
+                    <span className="disp" style={{ fontSize: 36, color: d.color }}>{d.title}</span>
+                    <span className="muted" style={{ fontSize: 15 }}>{d.text}</span>
+                    <span style={{ fontWeight: 800, fontSize: 15, marginTop: "auto", paddingTop: 8, color: d.color }}>{d.cta}</span>
+                  </span>
+                </a>
+              ))}
             </div>
           </div>
         </section>
-      )}
 
-      {/* Hero */}
-      <section className="relative py-40 overflow-hidden" style={{
-        backgroundImage: `linear-gradient(135deg, rgba(6,2,14,0.78) 0%, rgba(40,0,80,0.55) 50%, rgba(6,2,14,0.82) 100%), url(${BASE}/rr-hero-bg.jpg.jpg)`,
-        backgroundSize: "cover", backgroundPosition: "center",
-      }}>
-        <div className="container relative z-10 text-center">
-          <div className="mb-8 flex justify-center">
-            <img src={`${BASE}/Logo%20do%20hero.png`} alt="Rock Ribeirão Logo" className="h-32 md:h-40 object-contain drop-shadow-lg" />
-          </div>
-          <h1 className="font-display text-6xl md:text-7xl mb-6 leading-tight" style={{ color: "#ff3311" }}>
-            OS MAIORES SHOWS DE ROCK DE RIBEIRÃO PRETO
-          </h1>
-          <p className="font-heading text-xl md:text-2xl text-white mb-8 max-w-3xl mx-auto">
-            Os principais nomes do rock passam por aqui
-          </p>
-          <div className="flex flex-col md:flex-row gap-4 justify-center items-center mb-6">
-            <Button onClick={() => document.getElementById("shows")?.scrollIntoView({ behavior: "smooth" })}
-              className="text-white font-heading text-lg px-10 py-7 h-auto rounded-none"
-              style={{ background: "#cc2200" }}>
-              VER PRÓXIMOS SHOWS <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
-            <a href="https://www.sympla.com.br/produtor/rockribeirao" target="_blank" rel="noopener noreferrer"
-              className="font-heading text-lg px-10 py-5 transition"
-              style={{ border: "2px solid #cc2200", color: "#ff6644" }}>
-              COMPRAR INGRESSOS
-            </a>
-          </div>
-          <p className="text-sm mt-8" style={{ color: "#a190c4" }}>⭐ Experiências musicais autênticas em Ribeirão Preto e região</p>
-        </div>
-      </section>
-
-      {/* DESTAQUES */}
-      <section id="destaques" className="py-12" style={{ background: "#0d0614", borderTop: "2px solid #cc2200", borderBottom: "2px solid #cc2200" }}>
-        <div className="container">
-          <h2 className="font-display text-4xl mb-6" style={{ color: "#cc2200" }}>DESTAQUES</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 20, maxWidth: 1100, margin: "0 auto" }}>
-
-            {/* Rock Rising */}
-            <a href="/rockrising" style={{ display: "flex", flexDirection: "column", background: "#140a0c", border: "0.5px solid #e8173a", borderRadius: 12, overflow: "hidden", textDecoration: "none" }}>
-              <img src="/rockrising/rockrising-destaque-home.jpg" alt="Rock Rising 2027, festival de novos talentos do rock, em parceria com a Kiss FM" style={{ width: "100%", aspectRatio: "1584 / 672", objectFit: "cover", display: "block" }} />
-              <div style={{ padding: "1.1rem 1.25rem", display: "flex", flexDirection: "column", flex: 1 }}>
-                <p style={{ fontSize: 9, letterSpacing: "0.1em", color: "#ff4d63", marginBottom: 4 }}>INSCRIÇÕES A PARTIR DE 15/01 · GRANDE FINAL 21/03/2027</p>
-                <h3 style={{ fontSize: 17, fontWeight: 500, color: "#ffffff", marginBottom: 8 }}>Rock Rising 2027</h3>
-                <div style={{ display: "flex", flexDirection: "column", gap: 3, marginBottom: 10 }}>
-                  <span style={{ fontSize: 12, color: "#bdbdbd" }}>🎸 Festival de novos talentos do rock</span>
-                  <span style={{ fontSize: 12, color: "#bdbdbd" }}>🏆 Música produzida por Fábio Fonzare, tocando na Kiss FM Ribeirão Preto</span>
-                  <span style={{ fontSize: 12, color: "#bdbdbd" }}>📍 Grande final em Ribeirão Preto · entrada gratuita</span>
-                </div>
-                <span style={{ display: "inline-block", alignSelf: "flex-start", marginTop: "auto", background: "#e8173a", color: "#fff", fontSize: 12, fontWeight: 600, padding: "7px 16px", borderRadius: 8 }}>
-                  Conhecer o festival →
-                </span>
+        <section className="s s-red">
+          <div className="wrap" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 48, alignItems: "center" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
+              <h1 className="disp" style={{ fontSize: "clamp(56px, 7.4vw, 112px)" }}>Rock, samba, sertanejo e orquestra. A gente monta o palco onde o público está.</h1>
+              <p className="lede">Somos uma produtora cultural do interior de São Paulo. Fazemos shows, festivais gratuitos e projetos aprovados nas leis de incentivo, da ideia ao palco e do palco à prestação de contas.</p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+                <a className="btn btn-ink" href="#projetos">Ver os projetos</a>
+                <a className="btn btn-line" href="#contato">Falar com a gente</a>
               </div>
-            </a>
+            </div>
+            <img src="/site/S01.jpg" alt="Multidão em praça pública diante de um palco iluminado ao anoitecer" style={{ width: "100%", aspectRatio: "4 / 5", objectFit: "cover", display: "block", boxShadow: "14px 14px 0 #000" }} />
+          </div>
+        </section>
 
-            {/* Halloween */}
-            <a href="/halloween" style={{ display: "flex", flexDirection: "column", background: "#1a0a2e", border: "0.5px solid #ff8c00", borderRadius: 12, overflow: "hidden", textDecoration: "none" }}>
-              <img src="/halloween/halloween-destaque-home.jpg" alt="Halloween no Hard Rock Cafe Ribeirão Preto" style={{ width: "100%", aspectRatio: "1584 / 672", objectFit: "cover", objectPosition: "center 40%", display: "block" }} />
-              <div style={{ padding: "1.1rem 1.25rem", display: "flex", flexDirection: "column", flex: 1 }}>
-                <p style={{ fontSize: 9, letterSpacing: "0.1em", color: "#ff8c00", marginBottom: 4 }}>30 E 31 DE OUTUBRO</p>
-                <h3 style={{ fontSize: 17, fontWeight: 500, color: "#ffb84d", marginBottom: 8 }}>Halloween no Hard Rock Cafe</h3>
-                <div style={{ display: "flex", flexDirection: "column", gap: 3, marginBottom: 10 }}>
-                  <span style={{ fontSize: 12, color: "#a08cc0" }}>📅 30 e 31 de outubro de 2026</span>
-                  <span style={{ fontSize: 12, color: "#a08cc0" }}>🕐 A partir das 21h</span>
-                  <span style={{ fontSize: 12, color: "#a08cc0" }}>📍 Hard Rock Cafe Ribeirão Preto</span>
+        <section className="s s-black">
+          <div className="wrap" style={{ display: "flex", flexDirection: "column", gap: 48 }}>
+            <h2 className="disp" style={{ fontSize: "clamp(44px, 5vw, 72px)" }}>O que a gente faz</h2>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 36 }}>
+              {[
+                ["Shows", "Produção completa: artistas, palco, divulgação, bilheteria e acerto final. Mais de 200 shows no Hard Rock Cafe."],
+                ["Festivais", "Festivais gratuitos de rock, samba e sertanejo em praça pública, com oficinas e acessibilidade."],
+                ["Projetos incentivados", "Nove projetos aprovados na Lei Rouanet e no ProAC, prontos para receber patrocínio."],
+                ["Gestão de projetos culturais", "Para prefeituras e instituições: elaboração, captação, execução e prestação de contas."],
+              ].map(([t, d]) => (
+                <div key={t} style={{ display: "flex", flexDirection: "column", gap: 12, paddingTop: 18, borderTop: "3px solid #fff" }}>
+                  <h3 style={{ fontSize: 22 }}>{t}</h3>
+                  <p className="muted">{d}</p>
                 </div>
-                <span style={{ display: "inline-block", alignSelf: "flex-start", marginTop: "auto", background: "#ff8c00", color: "#140a1f", fontSize: 12, fontWeight: 600, padding: "7px 16px", borderRadius: 8 }}>
-                  Ver programação completa →
-                </span>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="projetos" className="s s-yellow">
+          <div className="wrap" style={{ display: "flex", flexDirection: "column", gap: 40 }}>
+            <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: 20 }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+                <p style={{ fontSize: 20, fontWeight: 800 }}>Rock Ribeirão apresenta</p>
+                <h2 className="disp" style={{ fontSize: "clamp(48px, 6vw, 88px)" }}>Projetos para patrocinar</h2>
               </div>
-            </a>
-
-            {/* Hard Rock Weekend */}
-            <a href="/hardrockweekend" style={{ display: "flex", flexDirection: "column", background: "#140a1f", border: "0.5px solid #ff5caa", borderRadius: 12, overflow: "hidden", textDecoration: "none" }}>
-              <img src="/hardrockweekend/hardrockweekend-destaque-home.jpg" alt="Hard Rock Weekend, 19, 20 e 21 de novembro no Hard Rock Cafe Ribeirão Preto" style={{ width: "100%", aspectRatio: "1584 / 672", objectFit: "cover", display: "block" }} />
-              <div style={{ padding: "1.1rem 1.25rem", display: "flex", flexDirection: "column", flex: 1 }}>
-                <p style={{ fontSize: 9, letterSpacing: "0.1em", color: "#ff5caa", marginBottom: 4 }}>19, 20 E 21 DE NOVEMBRO</p>
-                <h3 style={{ fontSize: 17, fontWeight: 500, color: "#ffffff", marginBottom: 8 }}>Hard Rock Weekend</h3>
-                <div style={{ display: "flex", flexDirection: "column", gap: 3, marginBottom: 10 }}>
-                  <span style={{ fontSize: 12, color: "#c4b3d8" }}>🎸 Guns Cover Brazil · Lost80s · Radio Show</span>
-                  <span style={{ fontSize: 12, color: "#c4b3d8" }}>🕐 Shows a partir das 21h</span>
-                  <span style={{ fontSize: 12, color: "#c4b3d8" }}>📍 Hard Rock Cafe Ribeirão Preto</span>
-                </div>
-                <span style={{ display: "inline-block", alignSelf: "flex-start", marginTop: "auto", background: "#d4204a", color: "#fff", fontSize: 12, fontWeight: 600, padding: "7px 16px", borderRadius: 8 }}>
-                  Garantir ingresso →
-                </span>
-              </div>
-            </a>
-
-          </div>
-        </div>
-      </section>
-
-      {/* Próximos Shows */}
-      <section id="shows" className="py-24" style={{ background: "linear-gradient(to bottom, #0a0020, #06020e)" }}>
-        <div className="container">
-          <div className="mb-16">
-            <h2 className="font-display text-6xl mb-4" style={{ color: "#cc2200" }}>PRÓXIMOS SHOWS</h2>
-            <p style={{ color: "#9070c0" }} className="text-lg">Garanta seu ingresso antes de esgotar</p>
-            <div className="w-24 h-1 mt-4" style={{ background: "linear-gradient(to right, #cc2200, #6030b0)" }} />
-          </div>
-          <div className="mb-12 flex gap-3 overflow-x-auto pb-4">
-            {months.map((month) => (
-              <button key={month} onClick={() => setSelectedMonth(month)}
-                aria-pressed={selectedMonth === month}
-                className="px-6 py-3 font-heading text-sm whitespace-nowrap transition rounded-none"
-                style={{
-                  background: selectedMonth === month ? "#cc2200" : "#1a0a2e",
-                  color: selectedMonth === month ? "#fff" : "#b090e0",
-                  border: selectedMonth === month ? "none" : "0.5px solid #a190c4",
-                }}>
-                {month}
-              </button>
-            ))}
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {finalShows.map((show) => (
-              <div key={show.id} className="group relative overflow-hidden flex flex-col h-full"
-                style={{ background: "#1a0a2e", border: "0.5px solid #a190c4", borderRadius: 8, transition: "border-color 0.2s" }}
-                onMouseEnter={e => (e.currentTarget.style.borderColor = "#cc2200")}
-                onMouseLeave={e => (e.currentTarget.style.borderColor = "#a190c4")}>
-                {show.image && (
-                  <div className="w-full h-80 flex items-center justify-center overflow-hidden" style={{ background: "#12071f" }}>
-                    <img src={show.image} alt={show.name} className="w-full h-full object-contain group-hover:scale-105 transition-transform" />
-                  </div>
-                )}
-                <div className="p-6 flex-1 flex flex-col">
-                  <div className="flex-1">
-                    <div className="flex items-start justify-between gap-2 mb-3">
-                      <div className="flex-1 min-w-0">
-                        <h3 className="font-display text-lg mb-1 leading-tight" style={{ color: "#cc2200" }}>{show.name}</h3>
-                        {show.subtitle && <p className="font-heading text-xs" style={{ color: show.subtitleColor || "#a190c4", fontWeight: show.subtitleColor ? 700 : 400 }}>{show.subtitle}</p>}
-                      </div>
-                      <div className="flex flex-col gap-1 flex-shrink-0">
-                        {show.free && !show.hideFreeBadge && (
-                          <span className="text-xs font-heading px-2 py-1 whitespace-nowrap rounded" style={{ background: "rgba(93,202,165,0.15)", color: "#5DCAA5" }}>GRATUITO</span>
-                        )}
-                        {show.partnership && (
-                          <span className="text-xs font-heading px-2 py-1 whitespace-nowrap" style={{ background: "rgba(96,48,176,0.2)", color: "#b090e0" }}>{show.partnerName}</span>
-                        )}
-                        {show.hotelPartner && (
-                          <span className="text-xs font-heading px-2 py-1 whitespace-nowrap" style={{ background: "rgba(234,179,8,0.15)", color: "#d4a017" }}>{show.hotelPartner}</span>
-                        )}
-                      </div>
-                    </div>
-                    <div className="space-y-2 text-sm">
-                      <div className="flex items-center gap-2">
-                        <Calendar className="w-4 h-4 flex-shrink-0" style={{ color: "#cc2200" }} />
-                        <span className="font-bold" style={{ color: "#e0c0ff" }}>{show.date} • {show.time}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <MapPin className="w-4 h-4 flex-shrink-0" style={{ color: "#cc2200" }} />
-                        <span style={{ color: "#9070c0" }}>{show.venue}</span>
-                      </div>
-                    </div>
-                  </div>
-                  {show.link && (
-                    <a href={show.link} target="_blank" rel="noopener noreferrer"
-                      className="mt-6 w-full text-white font-heading py-3 px-4 text-center transition text-lg font-bold"
-                      style={{ background: "#cc2200", display: "block" }}
-                      onMouseEnter={e => (e.currentTarget.style.background = "#aa1800")}
-                      onMouseLeave={e => (e.currentTarget.style.background = "#cc2200")}>
-                      {show.linkLabel || "COMPRAR INGRESSO"}
-                    </a>
-                  )}
-                  {show.free && !show.link && (
-                    <div className="mt-6 w-full font-heading py-3 px-4 text-center text-lg font-bold rounded"
-                      style={{ background: "rgba(93,202,165,0.15)", border: "1px solid #5DCAA5", color: "#5DCAA5" }}>
-                      EVENTO GRATUITO
-                    </div>
-                  )}
-                </div>
+              <p style={{ maxWidth: "34ch", fontWeight: 600 }}>Todos aprovados e prontos para captação. Cada um tem página própria e apresentação para baixar.</p>
+            </div>
+            {(Object.keys(GROUPS) as (keyof typeof GROUPS)[]).map((g) => (
+              <div key={g} style={{ display: "flex", flexDirection: "column" }}>
+                <h3 style={{ marginBottom: 6, fontSize: 18, fontWeight: 800 }}>{GROUPS[g].title}</h3>
+                {projetos.filter((p) => p.group === g).map((p) => (
+                  <a key={p.slug} className="bill-row" href={projetoHref(p.slug)}>
+                    <span className="disp bill-name" style={{ fontSize: SIZES[g] }}>{p.billName}</span>
+                    <span style={{ display: "flex", flexDirection: "column", gap: 10, paddingBottom: 6 }}>
+                      <span className="badges">
+                        {p.laws.filter((l) => l.kind === "rouanet" || l.kind === "proac").map((l) => (
+                          <span key={l.label} className={`badge ${l.kind === "rouanet" ? "b-rouanet" : "b-proac"}`}>{l.kind === "rouanet" ? "Lei Rouanet" : "ProAC ICMS"}</span>
+                        ))}
+                      </span>
+                      <span style={{ fontSize: 16, lineHeight: 1.5, fontWeight: 500 }}>{p.card}</span>
+                    </span>
+                  </a>
+                ))}
               </div>
             ))}
+            <p className="disp" style={{ fontSize: "clamp(28px, 3vw, 40px)", borderTop: "6px solid #000", paddingTop: 18 }}>Local: onde a sua marca estiver.</p>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Prova Social */}
-      <section id="proof" className="py-20" style={{ background: "#0a0415", borderTop: "0.5px solid #2a1050" }}>
-        <div className="container">
-          <div className="mb-12">
-            <h2 className="font-display text-5xl mb-4" style={{ color: "#cc2200" }}>SHOWS QUE JÁ PASSARAM POR AQUI</h2>
-            <div className="w-24 h-1" style={{ background: "linear-gradient(to right, #cc2200, #6030b0)" }} />
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
-            {Array.from(new Set([...proofOfWork, ...allRealizedShows.map(s => s.name.toUpperCase())])).sort().map((show, idx) => (
-              <div key={idx} className="flex flex-col items-start gap-1 p-3 min-w-0"
-                style={{ background: "#12071f", border: "0.5px solid #2a1050" }}>
-                <div className="flex items-center gap-2 w-full min-w-0">
-                  <Star className="w-5 h-5 flex-shrink-0" style={{ color: "#cc2200" }} />
-                  <span className="font-heading text-sm truncate" style={{ color: "#c0a0e0" }}>{show}</span>
+        <section id="patrocine" className="s s-purple">
+          <div className="wrap" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 56 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+              <h2 className="disp" style={{ fontSize: "clamp(48px, 5.6vw, 84px)" }}>Seu imposto pode virar um festival com a sua marca</h2>
+              <p className="lede" style={{ color: "#ece6fb" }}>Parte do imposto que sua empresa já paga pode ir para um projeto cultural. Você escolhe o projeto e a gente ajusta cidade, data e formato ao seu público.</p>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
+                <div style={{ background: "#000", padding: 24, display: "flex", flexDirection: "column", gap: 10 }}>
+                  <span className="badge b-rouanet" style={{ alignSelf: "flex-start" }}>Lei Rouanet</span>
+                  <p style={{ color: "#d6d6d6", fontSize: 16 }}>Imposto de Renda. Para empresas no lucro real, até 4% do IR devido. Pessoas físicas também podem apoiar.</p>
                 </div>
-                {northStarArtists.has(show) && (
-                  <span className="text-xs font-heading px-1 py-0.5 whitespace-nowrap rounded"
-                    style={{ background: "rgba(96,48,176,0.2)", color: "#b090e0" }}>North Star</span>
-                )}
+                <div style={{ background: "#000", padding: 24, display: "flex", flexDirection: "column", gap: 10 }}>
+                  <span className="badge b-proac" style={{ alignSelf: "flex-start" }}>ProAC ICMS</span>
+                  <p style={{ color: "#d6d6d6", fontSize: 16 }}>ICMS paulista. Para empresas contribuintes de ICMS no estado de São Paulo.</p>
+                </div>
               </div>
-            ))}
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+              <h3 style={{ fontSize: 22 }}>Como funciona</h3>
+              <ol style={{ listStyle: "none", padding: 0, display: "flex", flexDirection: "column" }}>
+                {["Conversamos sobre a sua marca e o seu público.", "Você escolhe o projeto, a cidade e a data.", "O aporte é feito pela lei de incentivo.", "O evento acontece e você recebe o relatório com fotos, público e alcance."].map((t, k, a) => (
+                  <li key={k} style={{ display: "grid", gridTemplateColumns: "56px 1fr", gap: 16, padding: "18px 0", borderTop: "2px solid #fff", borderBottom: k === a.length - 1 ? "2px solid #fff" : undefined }}>
+                    <span className="disp" style={{ fontSize: 44 }}>{k + 1}</span><span>{t}</span>
+                  </li>
+                ))}
+              </ol>
+              <a className="btn btn-paper" href="#contato" style={{ alignSelf: "flex-start" }}>Quero patrocinar</a>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Galeria */}
-      <section id="gallery" className="py-20" style={{
-        background: "linear-gradient(135deg, #06020e 0%, #1a0030 50%, #06020e 100%)",
-        borderTop: "0.5px solid #2a1050"
-      }}>
-        <div className="container">
-          <div className="mb-12">
-            <h2 className="font-display text-5xl mb-4" style={{ color: "#cc2200" }}>GALERIA</h2>
-            <p style={{ color: "#a190c4" }}>Crédito: Rafael Cautella</p>
-            <div className="w-24 h-1 mt-4" style={{ background: "linear-gradient(to right, #cc2200, #6030b0)" }} />
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {galleryPhotos.map((photo, idx) => (
-              <div key={idx} className="group relative overflow-hidden aspect-square cursor-pointer">
-                <img src={photo.src} alt={photo.alt} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
-                <div className="absolute inset-0 transition-colors" style={{ background: "transparent" }}
-                  onMouseEnter={e => (e.currentTarget.style.background = "rgba(0,0,0,0.3)")}
-                  onMouseLeave={e => (e.currentTarget.style.background = "transparent")} />
+        <section className="s s-black">
+          <div className="wrap" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 48, alignItems: "center" }}>
+            <img src="/U2%20Cover%20Ribeir%C3%A3o.jpg" alt="Show do U2 Cover Ribeirão no Hard Rock Cafe" style={{ width: "100%", aspectRatio: "3 / 2", objectFit: "cover", display: "block", boxShadow: "14px 14px 0 #cc2200" }} />
+            <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
+              <h2 className="disp" style={{ fontSize: "clamp(44px, 5vw, 72px)" }}>Rock Ribeirão no Hard Rock Cafe</h2>
+              <p className="body muted">Mais de 200 shows e mais de 60 mil pessoas. Veja a agenda, compre ingressos e confira tudo que já passou por esse palco.</p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+                <a className="btn btn-red" href="/hardrock">Agenda e história</a>
               </div>
-            ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Newsletter */}
-      <section className="py-20" style={{ background: "#0a0415", borderTop: "0.5px solid #2a1050" }}>
-        <div className="container max-w-2xl">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-5xl mb-4" style={{ color: "#cc2200" }}>RECEBA ANTES OS PRÓXIMOS SHOWS</h2>
-            <p style={{ color: "#a190c4" }} className="text-lg">Inscreva-se na newsletter e fique por dentro de todas as novidades</p>
+        <section id="contato" className="s s-black rule-top">
+          <div className="wrap" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 56 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+              <h2 className="disp" style={{ fontSize: "clamp(48px, 5.6vw, 84px)" }}>Vamos fazer acontecer?</h2>
+              <p className="body muted">Patrocínio, contratação de shows ou elaboração de projetos culturais.</p>
+              <p style={{ fontSize: 19, lineHeight: 1.8, fontWeight: 700 }}><a href="mailto:sac@rockribeirao.com.br">sac@rockribeirao.com.br</a><br /><a href="https://wa.me/551631850610">WhatsApp (16) 3185-0610</a></p>
+            </div>
+            <ContactForm subject="Contato pelo site Rock Ribeirão" />
           </div>
-          <form onSubmit={handleNewsletterSubmit} className="flex flex-col md:flex-row gap-3">
-            <Input type="email" placeholder="Seu email" aria-label="Seu email" value={email} onChange={(e) => setEmail(e.target.value)} className="flex-1 py-3 px-4 text-base" />
-            <button type="submit" className="text-white font-heading py-3 px-8 transition text-lg font-bold whitespace-nowrap"
-              style={{ background: "#cc2200" }}>
-              QUERO RECEBER
-            </button>
-          </form>
-        </div>
-      </section>
-
-      {/* Sobre */}
-      <section id="about" className="py-20" style={{ background: "linear-gradient(to bottom, #0a0020, #06020e)", borderTop: "0.5px solid #2a1050" }}>
-        <div className="container max-w-3xl">
-          <h2 className="font-display text-5xl mb-8" style={{ color: "#cc2200" }}>SOBRE NÓS</h2>
-          <div className="space-y-6 text-lg" style={{ color: "#9070c0" }}>
-            <p>Produzimos os principais shows de rock em Ribeirão Preto, conectando o público aos grandes clássicos ao vivo.</p>
-            <p><strong style={{ color: "#b090e0" }}>Em parceria com a North Star Concerts.</strong></p>
-            <p><strong style={{ color: "#b090e0" }}>Com presença de marcas como</strong> Kiss FM 105.3 – Ribeirão Preto, School of Rock Ribeirão Preto, Viva Mídia e Dritto Mídia Out of Home.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Final */}
-      <section className="py-20" style={{ background: "rgba(96,48,176,0.1)", borderTop: "0.5px solid #a190c4" }}>
-        <div className="container text-center">
-          <h2 className="font-display text-5xl mb-8" style={{ color: "#cc2200" }}>GARANTA SEU INGRESSO ANTES DE ESGOTAR</h2>
-          <Button onClick={() => document.getElementById("shows")?.scrollIntoView({ behavior: "smooth" })}
-            className="text-white font-heading text-xl px-12 py-8 h-auto rounded-none"
-            style={{ background: "#cc2200" }}>
-            VER TODOS OS SHOWS <ArrowRight className="ml-2 w-6 h-6" />
-          </Button>
-        </div>
-      </section>
-
-      {/* PARCEIROS */}
-      <section style={{ background: "#0a0415", borderTop: "0.5px solid #2a1050", padding: "3rem 1.5rem" }}>
-        <div className="container">
-          <p style={{ fontSize: 11, color: "#a190c4", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 24, textAlign: "center" }}>Parceiros e apoiadores</p>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 32, alignItems: "center", justifyContent: "center" }}>
-            {[
-              { src: `${BASE}/kiss.png`, alt: "Kiss FM 105.3" },
-              { src: `${BASE}/school.png`, alt: "School of Rock Ribeirão Preto" },
-              { src: `${BASE}/dritto.png`, alt: "Dritto Mídia Out of Home" },
-              { src: `${BASE}/viva-midia.png`, alt: "Viva Mídia" },
-              { src: `${BASE}/north-star.png`, alt: "North Star Concerts" },
-            ].map((logo, i) => (
-              <img key={i} src={logo.src} alt={logo.alt} style={{ height: 40, maxWidth: 140, objectFit: "contain", opacity: 0.85 }} />
-            ))}
-          </div>
-        </div>
-      </section>
-
+        </section>
       </main>
-
-      {/* Footer */}
-      <footer id="contact" className="py-12" style={{ background: "#06020e", borderTop: "0.5px solid #1a0a2e" }}>
-        <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-8">
-            <div>
-              <h3 className="font-display text-2xl mb-4" style={{ color: "#cc2200" }}>CONTATO</h3>
-              <a href="mailto:sac@rockribeirao.com.br" className="transition flex items-center gap-2" style={{ color: "#a190c4" }}>
-                <Mail className="w-4 h-4" /> sac@rockribeirao.com.br
-              </a>
-            </div>
-            <div>
-              <h3 className="font-display text-2xl mb-4" style={{ color: "#cc2200" }}>REDES SOCIAIS</h3>
-              <a href="https://instagram.com/rockribeirao" target="_blank" rel="noopener noreferrer"
-                className="transition flex items-center gap-2" style={{ color: "#a190c4" }}>
-                <Instagram className="w-4 h-4" /> @rockribeirao
-              </a>
-            </div>
-          </div>
-          <div className="pt-8 text-center text-sm" style={{ borderTop: "0.5px solid #1a0a2e", color: "#a190c4" }}>
-            <p>© 2026 Rock Ribeirão Produções. Todos os direitos reservados.</p>
-            <p className="mt-1">CNPJ: 48.549.855/0001-00</p>
-          </div>
-        </div>
-      </footer>
+      <RRFooter />
     </div>
   );
 }

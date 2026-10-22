@@ -1,0 +1,96 @@
+/* Rock Ribeirão — sistema visual "cartaz de rua" (Home, Hard Rock, projetos, Todos no Rock) */
+.rr {
+  --ink: #000000;
+  --paper: #ffffff;
+  --red: #cc2200;
+  --red-text: #ff5533;
+  --yellow: #ffd23f;
+  --purple: #6030b0;
+  --lilac: #b9a4f0;
+  --green: #1f6f5c;
+  --mint: #5dcaa5;
+  --muted: #b8b8b8;
+  --line: #2c2c2c;
+  font-family: "Archivo", system-ui, sans-serif;
+  font-stretch: 100%;
+  color: var(--paper);
+  background: var(--ink);
+  font-size: 17px;
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+.rr *, .rr *::before, .rr *::after { box-sizing: border-box; }
+.rr a { color: inherit; }
+.rr a:focus-visible, .rr button:focus-visible, .rr input:focus-visible, .rr select:focus-visible, .rr textarea:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+.rr img { max-width: 100%; }
+.rr h1, .rr h2, .rr h3, .rr p, .rr ul, .rr ol, .rr dl, .rr dd, .rr figure { margin: 0; }
+.rr section[id] { scroll-margin-top: 96px; }
+.rr .wrap { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+.rr .disp { font-family: "Archivo", sans-serif; font-stretch: 62%; font-weight: 900; text-transform: uppercase; line-height: .86; letter-spacing: -.005em; }
+.rr .lede { font-size: clamp(18px, 1.6vw, 21px); line-height: 1.55; max-width: 62ch; }
+.rr .body { max-width: 64ch; }
+.rr .muted { color: var(--muted); }
+
+/* Botões */
+.rr .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 50px; padding: 0 26px; font-family: inherit; font-weight: 800; font-size: 16px; text-decoration: none; border: 0; border-radius: 2px; cursor: pointer; }
+.rr .btn-red { background: var(--red); color: var(--paper); }
+.rr .btn-red:hover { background: #a81c00; }
+.rr .btn-line { background: transparent; color: inherit; box-shadow: inset 0 0 0 2px currentColor; }
+.rr .btn-line:hover { background: var(--paper); color: var(--ink); box-shadow: none; }
+.rr .btn-ink { background: var(--ink); color: var(--paper); }
+.rr .btn-ink:hover { background: #262626; }
+.rr .btn-paper { background: var(--paper); color: var(--ink); }
+.rr .btn-purple { background: var(--purple); color: var(--paper); }
+
+/* Faixas de cor */
+.rr .s { padding: 96px 0; }
+.rr .s-tight { padding: 56px 0; }
+.rr .s-black { background: var(--ink); color: var(--paper); }
+.rr .s-red { background: var(--red); color: var(--paper); }
+.rr .s-yellow { background: var(--yellow); color: var(--ink); }
+.rr .s-purple { background: var(--purple); color: var(--paper); }
+.rr .s-paper { background: var(--paper); color: var(--ink); }
+.rr .rule-top { border-top: 1px solid var(--line); }
+
+/* Selos */
+.rr .badges { display: flex; flex-wrap: wrap; gap: 8px; }
+.rr .badge { display: inline-block; font-size: 13px; font-weight: 800; padding: 6px 11px; border-radius: 2px; line-height: 1.2; }
+.rr .b-rouanet { background: var(--red); color: var(--paper); }
+.rr .b-proac { background: var(--green); color: var(--paper); }
+.rr .b-free { background: var(--paper); color: var(--ink); }
+.rr .b-ink { background: var(--ink); color: var(--paper); }
+
+/* Formulário */
+.rr .form { display: flex; flex-direction: column; gap: 16px; }
+.rr .field { display: flex; flex-direction: column; gap: 6px; font-size: 15px; font-weight: 700; }
+.rr .field input, .rr .field select, .rr .field textarea { min-height: 50px; padding: 0 14px; font-family: inherit; font-size: 16px; color: var(--paper); background: #151515; border: 1px solid #444; border-radius: 2px; }
+.rr .field textarea { padding: 12px 14px; min-height: 110px; }
+
+/* Cabeçalho */
+.rr .hd { position: sticky; top: 0; z-index: 50; background: var(--ink); border-bottom: 1px solid var(--line); }
+.rr .hd-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 12px; padding-bottom: 12px; }
+
+/* Rodapé */
+.rr .ft { border-top: 1px solid var(--line); padding: 56px 0 40px; font-size: 15px; }
+.rr .ft-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; }
+.rr .ft h3 { font-size: 15px; margin: 0 0 12px; color: var(--paper); }
+.rr .ft ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.rr .ft a { color: var(--muted); text-decoration: none; }
+.rr .ft a:hover { color: var(--paper); text-decoration: underline; }
+.rr .ft-base { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+
+/* Line-up de projetos (Home) */
+.rr .bill-row { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 16px 40px; align-items: end; padding: 22px 0; border-top: 2px solid #000; text-decoration: none; color: #000; }
+.rr .bill-row:hover .bill-name { text-decoration: underline; text-decoration-thickness: 6px; text-underline-offset: 8px; }
+@media (max-width: 760px) { .rr .bill-row { grid-template-columns: 1fr; } .rr .s { padding: 72px 0; } }
+
+/* Listas com régua */
+.rr .ruled { list-style: none; padding: 0; }
+.rr .ruled li { padding: 16px 0; border-top: 2px solid currentColor; }
+.rr .ruled li:last-child { border-bottom: 2px solid currentColor; }
+
+.rr .dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid #fff; background: transparent; padding: 0; cursor: pointer; }
+.rr .dot-on { background: #fff; }
+
+@media (prefers-reduced-motion: reduce) { .rr * { scroll-behavior: auto !important; transition: none !important; animation: none !important; } }
