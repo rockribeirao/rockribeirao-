@@ -78,16 +78,16 @@ export default function Home() {
                   ))}
                 </div>
               )}
-              <div style={{ maxWidth: "78%", margin: "20px auto 0", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 16 }} className="rr-carousel-info">
-                <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+              <div className="rr-carousel-info">
+                <div style={{ display: "flex", flexDirection: "column", gap: 4, minWidth: 0 }}>
                   <h2 className="disp" style={{ fontSize: "clamp(36px, 4.4vw, 60px)" }}>{cur.name}</h2>
                   <span className="muted">
                     {cur.subtitle ? `${cur.subtitle} · ` : ""}{weekday(cur.date)}, {parseDate(cur.date).day} de {MONTHS[parseDate(cur.date).month]}, {cur.time}, {cur.venue}
                   </span>
                 </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap" }}>
-                  <a href="/hardrock#agenda" style={{ fontWeight: 700, fontSize: 15 }}>Ver toda a agenda</a>
+                <div className="rr-carousel-cta">
                   {cur.link && <a className="btn btn-red" href={cur.link}>{cur.linkLabel ? cur.linkLabel.charAt(0) + cur.linkLabel.slice(1).toLowerCase() : "Comprar ingresso"}</a>}
+                  <a href="/hardrock#agenda" style={{ fontWeight: 700, fontSize: 15 }}>Ver toda a agenda</a>
                 </div>
               </div>
             </div>

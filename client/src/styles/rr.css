@@ -94,7 +94,7 @@
 .rr .dot-on { background: #fff; }
 
 @media (prefers-reduced-motion: reduce) { .rr * { scroll-behavior: auto !important; transition: none !important; animation: none !important; } }
-@media (max-width: 700px) { .rr .rr-carousel-info { max-width: 100% !important; } }
+
 .rr main { overflow-x: clip; }
 
 /* ===== Páginas de evento (Halloween, Hard Rock Weekend, Rock Rising) =====
@@ -182,3 +182,9 @@
 .rr .ev-titlelogo.ink img { filter: invert(1); }
 /* Tablet e notebook pequeno: a faixa fica estreita, então o botão do ingresso desce para baixo do nome */
 @media (min-width: 521px) and (max-width: 1180px) { .rr .ev-ticket { grid-template-columns: 64px minmax(0, 1fr); } .rr .ev-ticket .go { grid-column: 2 / -1; justify-self: start; } }
+/* Informação abaixo do carrossel: o botão de compra fica sempre no mesmo lugar (canto superior direito),
+   seja qual for o tamanho do nome do show */
+.rr .rr-carousel-info { max-width: 78%; margin: 20px auto 0; display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 16px 32px; align-items: start; }
+.rr .rr-carousel-cta { display: flex; flex-direction: column; align-items: stretch; gap: 12px; text-align: center; padding-top: 6px; }
+.rr .rr-carousel-cta .btn { width: 100%; }
+@media (max-width: 700px) { .rr .rr-carousel-info { max-width: 100%; grid-template-columns: 1fr; } .rr .rr-carousel-cta { order: -1; padding-top: 0; } }
