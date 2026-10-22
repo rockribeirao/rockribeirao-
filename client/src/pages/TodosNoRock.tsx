@@ -350,7 +350,7 @@ export default function TodosNoRock() {
         </section>
 
         {/* CONTATO */}
-        <section id="contato" className="s s-black rule-top">
+        <section id="contato" data-contato className="s s-black rule-top">
           <div className="wrap" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 56 }}>
             <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
               <h2 className="disp" style={{ fontSize: "clamp(44px, 5vw, 72px)" }}>Quero o Todos no Rock na minha cidade</h2>

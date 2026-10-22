@@ -55,6 +55,20 @@ const PAGES: Item[] = [
   { key: "contato", label: "Contato", href: () => rr("/#contato") },
 ];
 
+
+// "Contato" leva ao formulário da própria página, quando ela tem um (marcado com data-contato).
+// Nas páginas sem formulário, segue o link normal para o formulário da página inicial.
+function goToContact(e: React.MouseEvent<HTMLAnchorElement>) {
+  const el = document.querySelector<HTMLElement>("[data-contato]");
+  if (!el) return;
+  e.preventDefault();
+  // Espera o menu do celular fechar (ele muda a altura do topo) antes de rolar.
+  // Rola direto e corrige uma vez depois, caso fotos carregando no caminho mudem a altura da página.
+  window.setTimeout(() => el.scrollIntoView({ block: "start" }), 60);
+  window.setTimeout(() => el.scrollIntoView({ block: "start" }), 700);
+  if (el.id) history.replaceState(null, "", `#${el.id}`);
+}
+
 const CSS = `
 .sitehd{position:sticky;top:0;z-index:60;background:#000;border-bottom:1px solid #262626;font-family:"Archivo",system-ui,sans-serif;font-stretch:100%;-webkit-font-smoothing:antialiased}
 .sitehd *{box-sizing:border-box}
@@ -131,7 +145,7 @@ export function SiteHeader({ current, project, logoHref }: { current?: PageKey; 
                 </li>
               ) : (
                 <li key={p.key}>
-                  <a href={p.href()} className={`sh-link${isOn(p.key) ? " sh-on" : ""}`} style={style(p.key)} aria-current={isOn(p.key) ? "page" : undefined}>{p.label}</a>
+                  <a href={p.href()} onClick={p.key === "contato" ? goToContact : undefined} className={`sh-link${isOn(p.key) ? " sh-on" : ""}`} style={style(p.key)} aria-current={isOn(p.key) ? "page" : undefined}>{p.label}</a>
                 </li>
               )
             )}
@@ -145,7 +159,7 @@ export function SiteHeader({ current, project, logoHref }: { current?: PageKey; 
         <nav className="sh-mob" aria-label="Menu do site (celular)" onClick={() => setOpen(false)}>
           {items.map((p) => (
             <div key={p.key}>
-              <a href={p.href()} className={isOn(p.key) && p.key !== "proj" ? "sh-on" : undefined} style={style(p.key)}>{p.label}</a>
+              <a href={p.href()} onClick={p.key === "contato" ? goToContact : undefined} className={isOn(p.key) && p.key !== "proj" ? "sh-on" : undefined} style={style(p.key)}>{p.label}</a>
               {p.key === "proj" && PROJETOS.map(([slug, name]) => (
                 <a key={slug} href={projHref(slug)} className={`sh-sub${project === slug ? " sh-on" : ""}`} style={style("proj")}>{name}</a>
               ))}

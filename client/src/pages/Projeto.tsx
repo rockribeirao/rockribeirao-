@@ -121,7 +121,7 @@ export default function Projeto() {
           </div>
         </section>
 
-        <section id="patrocinar" className="s s-black rule-top">
+        <section id="patrocinar" data-contato className="s s-black rule-top">
           <div className="wrap" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 56 }}>
             <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
               <h2 className="disp" style={{ fontSize: "clamp(44px, 5vw, 72px)" }}>Leve o {p.shortName} para a sua marca</h2>

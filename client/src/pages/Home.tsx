@@ -215,7 +215,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="contato" className="s s-black rule-top">
+        <section id="contato" data-contato className="s s-black rule-top">
           <div className="wrap" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 56 }}>
             <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
               <h2 className="disp" style={{ fontSize: "clamp(48px, 5.6vw, 84px)" }}>Vamos fazer acontecer?</h2>

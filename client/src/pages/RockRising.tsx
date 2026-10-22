@@ -255,7 +255,7 @@ export default function RockRising() {
         </section>
 
         {/* PATROCÍNIO */}
-        <section id="patrocinio" className="s s-purple">
+        <section id="patrocinio" data-contato className="s s-purple">
           <div className="wrap" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 56 }}>
             <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
               <p className="kick" style={{ color: "#b9a4f0" }}>Para marcas · Patrocínios até 15/12/2026</p>
