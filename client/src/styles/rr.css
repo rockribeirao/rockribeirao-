@@ -176,7 +176,9 @@
   background: radial-gradient(closest-side, rgba(0,0,0,.78), rgba(0,0,0,.5) 50%, rgba(0,0,0,.18) 78%, rgba(0,0,0,0)); filter: blur(16px); }
 /* Logo do parceiro ao lado do título, dentro da faixa colorida da abertura */
 .rr .ev-titlerow { display: flex; flex-wrap: nowrap; align-items: center; justify-content: space-between; gap: 16px 28px; }
-.rr .ev-titlerow .ev-h1 { font-size: clamp(46px, 6.8vw, 112px); flex: 1 1 auto; min-width: 0; }
+.rr .ev-titlerow .ev-h1 { font-size: clamp(46px, 5.6vw, 108px); flex: 1 1 auto; min-width: 0; }
 .rr .ev-titlelogo { flex: 0 0 auto; display: block; line-height: 0; }
-.rr .ev-titlelogo img { width: clamp(86px, 13vw, 210px); height: auto; display: block; }
+.rr .ev-titlelogo img { width: clamp(86px, 10vw, 190px); height: auto; display: block; }
 .rr .ev-titlelogo.ink img { filter: invert(1); }
+/* Tablet e notebook pequeno: a faixa fica estreita, então o botão do ingresso desce para baixo do nome */
+@media (min-width: 521px) and (max-width: 1180px) { .rr .ev-ticket { grid-template-columns: 64px minmax(0, 1fr); } .rr .ev-ticket .go { grid-column: 2 / -1; justify-self: start; } }

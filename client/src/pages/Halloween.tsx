@@ -112,7 +112,7 @@ export default function Halloween() {
               <source media="(max-width:700px)" type="image/webp" srcSet={`${IMG}/halloween-hero-mobile.webp`} />
               <source media="(max-width:700px)" srcSet={`${IMG}/halloween-hero-mobile.jpg`} />
               <source type="image/webp" srcSet={`${IMG}/halloween-hero-desktop.webp`} />
-              <img className="ev-hero-img" src={`${IMG}/halloween-hero-desktop.jpg`} alt="Palco do Hard Rock decorado para o Halloween, com abóboras, teias e morcegos" fetchPriority="high" />
+              <img className="ev-hero-img" src={`${IMG}/halloween-hero-desktop.jpg`} alt="Banda tocando no palco do Halloween, com cantora ruiva, abóboras iluminadas e público fantasiado" fetchPriority="high" />
           </picture>
         </section>
 

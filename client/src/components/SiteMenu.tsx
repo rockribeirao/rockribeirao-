@@ -74,7 +74,7 @@ const CSS = `
 .sitehd *{box-sizing:border-box}
 .sitehd .sh-row{max-width:1240px;margin:0 auto;padding:0 24px;height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
 .sitehd .sh-logo{display:block;flex-shrink:0;line-height:0}
-.sitehd .sh-logo img{height:52px;width:auto;display:block}
+.sitehd .sh-logo img{height:54px;width:auto;display:block}
 .sitehd .sh-nav{display:flex;align-items:center;gap:22px;margin:0;padding:0;list-style:none}
 .sitehd .sh-nav li{position:relative;margin:0}
 .sitehd a.sh-link,.sitehd button.sh-link{display:inline-flex;align-items:center;gap:4px;font:inherit;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;text-decoration:none;color:#e6e6e6;background:none;border:0;padding:8px 0;cursor:pointer;border-bottom:2px solid transparent}
@@ -95,7 +95,7 @@ const CSS = `
   .sitehd .sh-burger{display:block}
   .sitehd .sh-mob{display:block;border-top:1px solid #262626;padding:8px 0 16px;max-height:calc(100vh - 76px);overflow-y:auto}
   .sitehd .sh-row{height:68px}
-  .sitehd .sh-logo img{height:44px}
+  .sitehd .sh-logo img{height:42px}
 }
 @media (prefers-reduced-motion:reduce){.sitehd *{transition:none !important}}
 `;
@@ -124,7 +124,7 @@ export function SiteHeader({ current, project, logoHref }: { current?: PageKey; 
       <style>{CSS}</style>
       <div className="sh-row">
         <a href={logoHref ?? rr("/")} className="sh-logo" aria-label="Rock Ribeirão Produções, início">
-          <img src="/Logo%20do%20header.png" alt="Rock Ribeirão Produções" />
+          <img src="/site/logo-header-rr.png" alt="Rock Ribeirão Produções" />
         </a>
         <nav aria-label="Menu do site">
           <ul className="sh-nav">
