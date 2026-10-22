@@ -126,19 +126,22 @@ export default function TodosNoRock() {
               <img src={`${BASE}/mic.png`} alt="Ministério da Cultura" style={{ height: 34, objectFit: "contain" }} />
               <span style={{ fontWeight: 700 }}>apresenta</span>
             </div>
-            <h1 style={{ margin: 0 }}>
-              <img src={`${BASE}/tnr-logo-oficial.png`} alt="Festival Todos no Rock" style={{ width: 320, maxWidth: "90%", display: "block" }} />
-            </h1>
+            <h1 className="sr-only">Festival Todos no Rock</h1>
             <p className="disp" style={{ fontSize: "clamp(40px, 5vw, 72px)" }}>Rock ao vivo, gratuito e itinerante no interior paulista</p>
-            <div className="badges">
-              <span className="badge b-ink">Realizado em 26 de setembro de 2026</span>
-              <span className="badge b-ink">Sertãozinho, SP</span>
-              <span className="badge" style={{ background: MINT, color: "#000" }}>Entrada gratuita</span>
-            </div>
-            <p className="lede" style={{ color: "#ece6fb" }}>Obrigado a todos que fizeram a edição Sertãozinho acontecer!</p>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
-              <a className="btn btn-ink" href="#galeria">Ver como foi</a>
-              <a className="btn btn-line" href={pdfHref} download={pdfName("todos-no-rock")}><DownloadIcon />Baixar apresentação</a>
+            <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: "20px 24px" }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: 22, flex: "1 1 220px", minWidth: 0 }}>
+                <div className="badges">
+                  <span className="badge b-ink">Realizado em 26 de setembro de 2026</span>
+                  <span className="badge b-ink">Sertãozinho, SP</span>
+                  <span className="badge" style={{ background: MINT, color: "#000" }}>Entrada gratuita</span>
+                </div>
+                <p className="lede" style={{ color: "#ece6fb" }}>Obrigado a todos que fizeram a edição Sertãozinho acontecer!</p>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+                  <a className="btn btn-ink" href="#galeria">Ver como foi</a>
+                  <a className="btn btn-line" href={pdfHref} download={pdfName("todos-no-rock")}><DownloadIcon />Baixar apresentação</a>
+                </div>
+              </div>
+              <img src={`${BASE}/tnr-logo-oficial.png`} alt="Festival Todos no Rock, edição Sertãozinho" style={{ width: "clamp(140px, 15vw, 260px)", height: "auto", display: "block", flex: "0 0 auto" }} />
             </div>
           </div>
           <img src={`${BASE}/tnr-hero-bg.jpg.jpg`} alt="Público em frente ao palco do Festival Todos no Rock" style={{ width: "100%", height: "100%", minHeight: 420, objectFit: "cover", display: "block" }} />
