@@ -83,11 +83,16 @@ export default function HardRockWeekend() {
         {/* ABERTURA */}
         <section className="ev-hero">
           <div className="ev-hero-txt s-acc">
-            <h1 style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-              <span className="kick">3 noites de rock no feriadão · 19, 20 e 21/11</span>
-              <span className="disp ev-h1">Hard Rock Weekend</span>
-              <span className="kick" style={{ fontSize: 20 }}>no Hard Rock Cafe Ribeirão Preto</span>
-            </h1>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              <p className="kick">3 noites de rock no feriadão · 19, 20 e 21/11</p>
+              <div className="ev-titlerow">
+                <h1 className="disp ev-h1">Hard Rock<br />Weekend <span className="sr-only">no Hard Rock Cafe Ribeirão Preto</span></h1>
+              <a className="ev-titlelogo ink" href="https://www.instagram.com/hrc.ribeiraopreto/" target="_blank" rel="noopener noreferrer">
+                <img src={`${IMG}/logo-hardrock.png`} alt="Hard Rock Cafe Ribeirão Preto" width={408} height={320} />
+              </a>
+              </div>
+              <p className="kick" style={{ fontSize: 20 }} aria-hidden="true">no Hard Rock Cafe Ribeirão Preto</p>
+            </div>
             <div className="ev-tickets" id="ingressos">
               {NIGHTS.map((n) => (
                 <a key={n.key} className="ev-ticket" href={n.link} target="_blank" rel="noopener noreferrer">
@@ -99,15 +104,10 @@ export default function HardRockWeekend() {
             </div>
             <p style={{ fontWeight: 700 }}>Ingressos pelo Sympla · Casa abre às 18h, shows a partir das 21h</p>
           </div>
-          <div className="ev-hero-media">
-            <picture>
+          <picture>
               <source media="(max-width:700px)" srcSet={`${IMG}/hero-mobile.webp`} />
               <img className="ev-hero-img" src={`${IMG}/hero-desktop.webp`} alt="Palco do Hard Rock Cafe com luzes rosa e público" fetchPriority="high" />
-            </picture>
-            <a className="ev-hero-logo ev-logo-smoke" href="https://www.instagram.com/hrc.ribeiraopreto/" target="_blank" rel="noopener noreferrer">
-              <img src={`${IMG}/logo-hardrock.png`} alt="Hard Rock Cafe Ribeirão Preto" width={408} height={320} />
-            </a>
-          </div>
+          </picture>
         </section>
 
         {/* SOBRE */}

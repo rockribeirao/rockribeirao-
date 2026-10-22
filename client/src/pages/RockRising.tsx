@@ -94,7 +94,12 @@ export default function RockRising() {
         <section id="topo" className="ev-hero">
           <div className="ev-hero-txt s-red">
             <p className="kick" style={{ display: "flex", alignItems: "center", gap: 10 }}><span className="rise-live" aria-hidden="true" />Festival de novos talentos do rock · Estado de SP</p>
-            <h1 className="disp ev-h1">Rock<br />Rising</h1>
+            <div className="ev-titlerow">
+              <h1 className="disp ev-h1">Rock<br />Rising</h1>
+              <a className="ev-titlelogo" href="https://www.instagram.com/kissfmribeirao/" target="_blank" rel="noopener noreferrer" aria-label="Kiss FM 105.3 no Instagram">
+                <img src={`${IMG}/logo-kiss-1053.png`} alt="Kiss FM 105.3" width={586} height={600} />
+              </a>
+            </div>
             <p className="lede">Sua banda no ar na <b>Kiss FM 105.3 Ribeirão Preto</b>. Inscreva-se, conquiste o voto do público e suba no palco da grande final em Ribeirão Preto.</p>
             <div className="ev-count" role="timer" aria-label="Contagem regressiva para a abertura das inscrições">
               <span>As inscrições abrem em</span>
@@ -105,12 +110,7 @@ export default function RockRising() {
               <a href="#patrocinio" className="btn btn-line">Seja patrocinador</a>
             </div>
           </div>
-          <div className="ev-hero-media">
-            <img className="ev-hero-img" src={`${IMG}/palco.jpg`} alt="Banda tocando no palco sob luzes, com a plateia à frente" fetchPriority="high" />
-            <a className="ev-hero-logo" href="https://www.instagram.com/kissfmribeirao/" target="_blank" rel="noopener noreferrer" aria-label="Kiss FM 105.3 no Instagram">
-              <img src={`${IMG}/logo-kiss-1053.png`} alt="Kiss FM 105.3" width={586} height={600} />
-            </a>
-          </div>
+          <img className="ev-hero-img" src={`${IMG}/palco.jpg`} alt="Banda tocando no palco sob luzes, com a plateia à frente" fetchPriority="high" />
         </section>
 
         {/* FAIXA */}

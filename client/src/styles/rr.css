@@ -174,3 +174,9 @@
 /* Fumaça escura atrás do logo do Hard Rock, para destacar sobre a foto */
 .rr .ev-logo-smoke::before { content: ""; position: absolute; inset: -55% -45%; z-index: -1; pointer-events: none; border-radius: 50%;
   background: radial-gradient(closest-side, rgba(0,0,0,.78), rgba(0,0,0,.5) 50%, rgba(0,0,0,.18) 78%, rgba(0,0,0,0)); filter: blur(16px); }
+/* Logo do parceiro ao lado do título, dentro da faixa colorida da abertura */
+.rr .ev-titlerow { display: flex; flex-wrap: nowrap; align-items: center; justify-content: space-between; gap: 16px 28px; }
+.rr .ev-titlerow .ev-h1 { font-size: clamp(46px, 6.8vw, 112px); flex: 1 1 auto; min-width: 0; }
+.rr .ev-titlelogo { flex: 0 0 auto; display: block; line-height: 0; }
+.rr .ev-titlelogo img { width: clamp(86px, 13vw, 210px); height: auto; display: block; }
+.rr .ev-titlelogo.ink img { filter: invert(1); }

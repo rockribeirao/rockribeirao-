@@ -79,10 +79,15 @@ export default function Halloween() {
         {/* ABERTURA */}
         <section className="ev-hero">
           <div className="ev-hero-txt s-acc">
-            <h1 style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-              <span className="disp ev-h1">Halloween</span>
-              <span className="kick" style={{ fontSize: 20 }}>no Hard Rock Cafe Ribeirão Preto</span>
-            </h1>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              <div className="ev-titlerow">
+                <h1 className="disp ev-h1">Halloween <span className="sr-only">no Hard Rock Cafe Ribeirão Preto</span></h1>
+              <a className="ev-titlelogo ink" href="https://www.instagram.com/hrc.ribeiraopreto/" target="_blank" rel="noopener noreferrer">
+                <img src={`${IMG}/logo-hardrock.png`} alt="Hard Rock Cafe Ribeirão Preto" width={408} height={320} />
+              </a>
+              </div>
+              <p className="kick" style={{ fontSize: 20 }} aria-hidden="true">no Hard Rock Cafe Ribeirão Preto</p>
+            </div>
             <div className="ev-tickets" id="ingressos">
               <a className="ev-ticket" href={SYMPLA_LITHIUM} target="_blank" rel="noopener noreferrer">
                 <span className="d">30/10</span>
@@ -103,17 +108,12 @@ export default function Halloween() {
             </div>
             <p style={{ fontWeight: 700 }}>Classificação livre · Até 6 anos não paga</p>
           </div>
-          <div className="ev-hero-media">
-            <picture>
+          <picture>
               <source media="(max-width:700px)" type="image/webp" srcSet={`${IMG}/halloween-hero-mobile.webp`} />
               <source media="(max-width:700px)" srcSet={`${IMG}/halloween-hero-mobile.jpg`} />
               <source type="image/webp" srcSet={`${IMG}/halloween-hero-desktop.webp`} />
               <img className="ev-hero-img" src={`${IMG}/halloween-hero-desktop.jpg`} alt="Palco do Hard Rock decorado para o Halloween, com abóboras, teias e morcegos" fetchPriority="high" />
-            </picture>
-            <a className="ev-hero-logo ev-logo-smoke" href="https://www.instagram.com/hrc.ribeiraopreto/" target="_blank" rel="noopener noreferrer">
-              <img src={`${IMG}/logo-hardrock.png`} alt="Hard Rock Cafe Ribeirão Preto" width={408} height={320} />
-            </a>
-          </div>
+          </picture>
         </section>
 
         {/* OS SHOWS */}
