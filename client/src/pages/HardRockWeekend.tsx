@@ -83,9 +83,6 @@ export default function HardRockWeekend() {
         {/* ABERTURA */}
         <section className="ev-hero">
           <div className="ev-hero-txt s-acc">
-            <a href="https://www.instagram.com/hrc.ribeiraopreto/" target="_blank" rel="noopener noreferrer" style={{ alignSelf: "flex-start" }}>
-              <img src={`${IMG}/logo-hardrock.png`} alt="Hard Rock Cafe Ribeirão Preto" width={200} height={157} style={{ height: 80, width: "auto", display: "block", filter: "invert(1)" }} />
-            </a>
             <h1 style={{ display: "flex", flexDirection: "column", gap: 10 }}>
               <span className="kick">3 noites de rock no feriadão · 19, 20 e 21/11</span>
               <span className="disp ev-h1">Hard Rock Weekend</span>
@@ -102,10 +99,15 @@ export default function HardRockWeekend() {
             </div>
             <p style={{ fontWeight: 700 }}>Ingressos pelo Sympla · Casa abre às 18h, shows a partir das 21h</p>
           </div>
-          <picture>
-            <source media="(max-width:700px)" srcSet={`${IMG}/hero-mobile.webp`} />
-            <img className="ev-hero-img" src={`${IMG}/hero-desktop.webp`} alt="Palco do Hard Rock Cafe com luzes rosa e público" fetchPriority="high" />
-          </picture>
+          <div className="ev-hero-media">
+            <picture>
+              <source media="(max-width:700px)" srcSet={`${IMG}/hero-mobile.webp`} />
+              <img className="ev-hero-img" src={`${IMG}/hero-desktop.webp`} alt="Palco do Hard Rock Cafe com luzes rosa e público" fetchPriority="high" />
+            </picture>
+            <a className="ev-hero-logo" href="https://www.instagram.com/hrc.ribeiraopreto/" target="_blank" rel="noopener noreferrer">
+              <img src={`${IMG}/logo-hardrock.png`} alt="Hard Rock Cafe Ribeirão Preto" width={408} height={320} />
+            </a>
+          </div>
         </section>
 
         {/* SOBRE */}

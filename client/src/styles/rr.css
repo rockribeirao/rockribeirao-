@@ -164,3 +164,8 @@
 .rr .ev-steps li::before { content: "0" counter(st); font-family: "Archivo", sans-serif; font-stretch: 62%; font-weight: 900; font-size: 64px; line-height: .9; }
 .rr .ev-steps b { font-size: 21px; }
 .rr .ev-age { font-size: 14px; color: var(--muted); text-align: center; }
+.rr .ev-hero-media { position: relative; min-height: 420px; }
+.rr .ev-hero-media picture, .rr .ev-hero-media > img.ev-hero-img { position: absolute; inset: 0; }
+.rr .ev-hero-media .ev-hero-img { min-height: 0; height: 100%; }
+.rr .ev-hero-logo { position: absolute; top: clamp(16px, 3vw, 36px); right: clamp(16px, 3vw, 36px); z-index: 2; display: block; line-height: 0; filter: drop-shadow(0 4px 18px rgba(0,0,0,.55)); }
+.rr .ev-hero-logo img { width: clamp(110px, 13vw, 190px); height: auto; display: block; }

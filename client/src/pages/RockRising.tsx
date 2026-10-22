@@ -32,7 +32,7 @@ const faixaBase = ["Inscrições 15/01", "Grave sua música", "Toque na Kiss FM 
 type Logo = { src: string; alt: string; href: string; cls: string };
 const grupos: { titulo: string; logos: Logo[] }[] = [
   { titulo: "Realização", logos: [{ src: `${IMG}/logo-rockribeirao.png`, alt: "Rock Ribeirão Produções", href: "https://www.instagram.com/rockribeirao/", cls: "lg-rr" }] },
-  { titulo: "Parceria", logos: [{ src: `${IMG}/logo-kiss.png`, alt: "Kiss FM 105.3 Ribeirão Preto", href: "https://www.instagram.com/kissfmribeirao/", cls: "lg-kiss" }] },
+  { titulo: "Parceria", logos: [{ src: `${IMG}/logo-kiss-1053.png`, alt: "Kiss FM 105.3 Ribeirão Preto", href: "https://www.instagram.com/kissfmribeirao/", cls: "lg-kiss" }] },
   { titulo: "Apoio", logos: [
     { src: `${IMG}/logo-fonzare.png`, alt: "Fonzare Produções", href: "https://www.instagram.com/fabiofonzare/", cls: "lg-fz" },
     { src: `${IMG}/logo-school.png`, alt: "School of Rock Ribeirão Preto", href: "https://www.instagram.com/schoolofrock_ribeiraopreto/", cls: "lg-sor" },
@@ -94,12 +94,7 @@ export default function RockRising() {
         <section id="topo" className="ev-hero">
           <div className="ev-hero-txt s-red">
             <p className="kick" style={{ display: "flex", alignItems: "center", gap: 10 }}><span className="rise-live" aria-hidden="true" />Festival de novos talentos do rock · Estado de SP</p>
-            <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 20, flexWrap: "wrap" }}>
-              <h1 className="disp ev-h1">Rock<br />Rising</h1>
-              <a href="https://www.instagram.com/kissfmribeirao/" target="_blank" rel="noopener noreferrer" aria-label="Kiss FM 105.3 no Instagram">
-                <img src={`${IMG}/logo-kiss.png`} alt="Kiss FM 105.3" style={{ width: 110, height: 110, objectFit: "contain", display: "block" }} />
-              </a>
-            </div>
+            <h1 className="disp ev-h1">Rock<br />Rising</h1>
             <p className="lede">Sua banda no ar na <b>Kiss FM 105.3 Ribeirão Preto</b>. Inscreva-se, conquiste o voto do público e suba no palco da grande final em Ribeirão Preto.</p>
             <div className="ev-count" role="timer" aria-label="Contagem regressiva para a abertura das inscrições">
               <span>As inscrições abrem em</span>
@@ -110,7 +105,12 @@ export default function RockRising() {
               <a href="#patrocinio" className="btn btn-line">Seja patrocinador</a>
             </div>
           </div>
-          <img className="ev-hero-img" src={`${IMG}/palco.jpg`} alt="Banda tocando no palco sob luzes, com a plateia à frente" fetchPriority="high" />
+          <div className="ev-hero-media">
+            <img className="ev-hero-img" src={`${IMG}/palco.jpg`} alt="Banda tocando no palco sob luzes, com a plateia à frente" fetchPriority="high" />
+            <a className="ev-hero-logo" href="https://www.instagram.com/kissfmribeirao/" target="_blank" rel="noopener noreferrer" aria-label="Kiss FM 105.3 no Instagram">
+              <img src={`${IMG}/logo-kiss-1053.png`} alt="Kiss FM 105.3" width={586} height={600} />
+            </a>
+          </div>
         </section>
 
         {/* FAIXA */}
