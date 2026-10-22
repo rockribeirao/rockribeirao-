@@ -6,9 +6,9 @@ import { projetos, projetoHref, GROUPS } from "@/data/projetos";
 
 const MONTHS = ["", "janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
 
-const DESTAQUES = [
+const DESTAQUES: { href: string; img: string; alt: string; title: string; text: string; cta: string; color: string; until: number | null; pos?: string }[] = [
   { href: "/rockrising", img: "/rockrising/rockrising-destaque-home.jpg", alt: "Rock Rising 2027, festival de novos talentos do rock", title: "Rock Rising 2027", text: "Festival de novas bandas. Inscrições a partir de 15 de janeiro, final em 21 de março.", cta: "Conhecer o festival", color: "#ffffff", until: null as number | null },
-  { href: "/halloween", img: "/halloween/halloween-destaque-home.jpg", alt: "Halloween no Hard Rock Cafe Ribeirão Preto", title: "Halloween no Hard Rock", text: "30 e 31 de outubro, a partir das 21h, no Hard Rock Cafe Ribeirão Preto.", cta: "Ver a programação", color: "#ff8c1a", until: new Date("2026-11-01T06:00:00-03:00").getTime() },
+  { href: "/halloween", img: "/halloween/halloween-destaque-home.jpg", alt: "Halloween no Hard Rock Cafe Ribeirão Preto", title: "Halloween no Hard Rock", text: "30 e 31 de outubro, a partir das 21h, no Hard Rock Cafe Ribeirão Preto.", cta: "Ver a programação", color: "#ff8c1a", pos: "center 30%", until: new Date("2026-11-01T06:00:00-03:00").getTime() },
   { href: "/hardrockweekend", img: "/hardrockweekend/hardrockweekend-destaque-home.jpg", alt: "Hard Rock Weekend, 19, 20 e 21 de novembro", title: "Hard Rock Weekend", text: "Guns Cover Brazil, Lost80s e Radio Show. 19, 20 e 21 de novembro, a partir das 21h.", cta: "Garantir ingresso", color: "#ff5fa2", until: new Date("2026-11-22T06:00:00-03:00").getTime() },
 ];
 
@@ -96,7 +96,7 @@ export default function Home() {
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 20 }}>
               {destaques.map((d) => (
                 <a key={d.href} href={d.href} style={{ display: "flex", flexDirection: "column", textDecoration: "none", color: "#fff", background: "#161616", borderTop: `4px solid ${d.color}` }}>
-                  <img src={d.img} alt={d.alt} style={{ width: "100%", aspectRatio: "1584 / 672", objectFit: "cover", display: "block" }} />
+                  <img src={d.img} alt={d.alt} style={{ width: "100%", aspectRatio: "1584 / 672", objectFit: "cover", objectPosition: d.pos ?? "center", display: "block" }} />
                   <span style={{ display: "flex", flexDirection: "column", gap: 8, padding: 20, flexGrow: 1 }}>
                     <span className="disp" style={{ fontSize: 36, color: d.color }}>{d.title}</span>
                     <span className="muted" style={{ fontSize: 15 }}>{d.text}</span>

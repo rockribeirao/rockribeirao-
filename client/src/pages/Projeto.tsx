@@ -6,6 +6,8 @@ import NotFound from "@/pages/NotFound";
 
 const HERO = { festivais: "s-red", shows: "s-yellow", formacao: "s-purple" } as const;
 const ACCENT = { festivais: "#cc2200", shows: "#ffd23f", formacao: "#b9a4f0" } as const;
+// Enquadramento da foto de abertura quando o centro da imagem não é o ponto principal.
+const CAPA_POS: Record<string, string> = { "raizes-da-cerveja": "72% center" };
 const BADGE = { rouanet: "b-rouanet", proac: "b-proac", free: "b-free", info: "b-free" } as const;
 
 export default function Projeto() {
@@ -44,7 +46,7 @@ export default function Projeto() {
               <a className="btn btn-line" href="#patrocinar">Quero patrocinar</a>
             </div>
           </div>
-          <img src={projetoAsset(p.slug, "capa.jpg")} alt={p.alts.capa} style={{ width: "100%", height: "100%", minHeight: 420, objectFit: "cover", display: "block" }} />
+          <img src={projetoAsset(p.slug, "capa.jpg")} alt={p.alts.capa} style={{ width: "100%", height: "100%", minHeight: 420, objectFit: "cover", objectPosition: CAPA_POS[p.slug] ?? "center", display: "block" }} />
         </section>
 
         <section id="projeto" className="s s-black">

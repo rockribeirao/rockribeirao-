@@ -173,7 +173,7 @@ export default function TodosNoRock() {
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 20 }}>
               {lineup.map((b) => (
                 <a key={b.name} href={b.instagram} target="_blank" rel="noopener noreferrer" style={{ display: "flex", flexDirection: "column", textDecoration: "none", background: "#161616" }}>
-                  <img src={b.image} alt={b.name} loading="lazy" style={{ width: "100%", aspectRatio: "4 / 5", objectFit: "cover", display: "block" }} />
+                  <img src={b.image} alt={b.name} loading="lazy" style={{ width: "100%", aspectRatio: "1 / 1", objectFit: "cover", display: "block" }} />
                   <span style={{ padding: 16, display: "flex", flexDirection: "column", gap: 4 }}>
                     <span style={{ fontWeight: 800, color: MINT, fontSize: 14 }}>{b.order}</span>
                     <span className="disp" style={{ fontSize: 32 }}>{b.name}</span>

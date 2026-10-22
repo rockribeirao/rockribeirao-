@@ -144,7 +144,7 @@ export default function RockRising() {
                 </div>
               </div>
             </div>
-            <img src={`${IMG}/estudio.jpg`} alt="Cantora gravando em estúdio, vista da técnica" loading="lazy" style={{ width: "100%", aspectRatio: "4 / 5", objectFit: "cover", display: "block", boxShadow: `14px 14px 0 ${ACC}` }} />
+            <img src={`${IMG}/estudio.jpg`} alt="Cantora gravando em estúdio, vista da técnica" loading="lazy" style={{ width: "100%", aspectRatio: "4 / 3", objectFit: "cover", display: "block", boxShadow: `14px 14px 0 ${ACC}` }} />
           </div>
         </section>
 
@@ -216,7 +216,7 @@ export default function RockRising() {
             <p className="lede muted">5 finalistas ao vivo · Júri técnico escolhe a vencedora</p>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 20, marginTop: 12 }}>
               <article style={{ display: "flex", flexDirection: "column", background: "#141414" }}>
-                <img src={`${IMG}/ze-do-rock.jpg`} alt="Zé do Rock com o microfone no palco" loading="lazy" style={{ width: "100%", aspectRatio: "16 / 10", objectFit: "cover", objectPosition: "center 30%", display: "block" }} />
+                <img src={`${IMG}/ze-do-rock.jpg`} alt="Zé do Rock com o microfone no palco" loading="lazy" style={{ width: "100%", aspectRatio: "4 / 3", objectFit: "cover", objectPosition: "center 15%", display: "block" }} />
                 <div style={{ padding: 22, display: "flex", flexDirection: "column", gap: 8 }}>
                   <span className="kick acc" style={{ fontSize: 13 }}>Apresentação</span>
                   <span className="disp" style={{ fontSize: 44 }}>Zé do Rock</span>
@@ -224,7 +224,7 @@ export default function RockRising() {
                 </div>
               </article>
               <article style={{ display: "flex", flexDirection: "column", background: "#141414" }}>
-                <img src={`${IMG}/epicco.jpg`} alt="Vocalista do Épicco no palco" loading="lazy" style={{ width: "100%", aspectRatio: "16 / 10", objectFit: "cover", objectPosition: "center 22%", display: "block" }} />
+                <img src={`${IMG}/epicco.jpg`} alt="Vocalista do Épicco no palco" loading="lazy" style={{ width: "100%", aspectRatio: "4 / 3", objectFit: "cover", objectPosition: "center 12%", display: "block" }} />
                 <div style={{ padding: 22, display: "flex", flexDirection: "column", gap: 8 }}>
                   <span className="kick acc" style={{ fontSize: 13 }}>Show de encerramento*</span>
                   <span className="disp" style={{ fontSize: 44 }}>Épicco</span>
