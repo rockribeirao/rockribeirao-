@@ -25,15 +25,17 @@ export default function HardRock() {
           <div className="s-red" style={{ padding: "64px clamp(24px, 5vw, 72px)", display: "flex", flexDirection: "column", gap: 24, justifyContent: "flex-end" }}>
             <p style={{ fontSize: 19, fontWeight: 800 }}>Hard Rock Cafe Ribeirão Preto</p>
             <h1 className="disp" style={{ fontSize: "clamp(64px, 8.4vw, 132px)" }}>Rock Ribeirão no Hard Rock</h1>
-            <p className="lede">Mais de 200 shows e mais de 60 mil pessoas: tributos, noites temáticas e grandes bandas. A casa abre às 18h e os shows começam às 21h.</p>
-            <a className="btn btn-ink" href="#agenda" style={{ alignSelf: "flex-start" }}>Ver a agenda</a>
+            <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 24 }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: 24, alignItems: "flex-start" }}>
+                <p className="lede">Mais de 200 shows e mais de 60 mil pessoas: tributos, noites temáticas e grandes bandas. A casa abre às 18h e os shows começam às 21h.</p>
+                <a className="btn btn-ink" href="#agenda">Ver a agenda</a>
+              </div>
+              <a className="ev-titlelogo" href="https://www.instagram.com/hrc.ribeiraopreto/" target="_blank" rel="noopener noreferrer">
+                <img src="/halloween/logo-hardrock.png" alt="Hard Rock Cafe Ribeirão Preto" width={408} height={320} />
+              </a>
+            </div>
           </div>
-          <div className="ev-hero-media">
-            <img className="ev-hero-img" src="/Guns%20Cover%20Brasil.jpg" alt="Show do Guns N' Roses Cover Brasil no Hard Rock Cafe" />
-            <a className="ev-hero-logo ev-logo-smoke" href="https://www.instagram.com/hrc.ribeiraopreto/" target="_blank" rel="noopener noreferrer">
-              <img src="/halloween/logo-hardrock.png" alt="Hard Rock Cafe Ribeirão Preto" width={408} height={320} />
-            </a>
-          </div>
+          <img className="ev-hero-img" src="/Guns%20Cover%20Brasil.jpg" alt="Show do Guns N' Roses Cover Brasil no Hard Rock Cafe" />
         </section>
 
         <section id="agenda" className="s s-black">
