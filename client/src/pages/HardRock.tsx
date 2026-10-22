@@ -9,6 +9,10 @@ function eventPage(subtitle = "", date: string) {
   return null;
 }
 
+// Shows feitos em parceria com a North Star Concerts (campo partnerName em data/shows.ts).
+const isNorthStar = (partnerName?: string) => /north\s*star/i.test(partnerName ?? "");
+const NS_COLOR = "#6030b0";
+
 export default function HardRock() {
   const shows = getFutureShows().filter((s) => s.venue === "Hard Rock Cafe");
   const past = getPastHardRockShows();
@@ -77,6 +81,10 @@ export default function HardRock() {
               <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                 <h2 className="disp" style={{ fontSize: "clamp(48px, 5.6vw, 84px)" }}>Já passou por esse palco</h2>
                 <p className="body" style={{ fontWeight: 600 }}>Os shows de 2026. Desde 2024 foram mais de 200.</p>
+                <p style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 14, fontWeight: 700 }}>
+                  <span style={{ background: NS_COLOR, color: "#fff", fontSize: 12, fontWeight: 800, padding: "3px 8px", whiteSpace: "nowrap" }}>Parceria North Star</span>
+                  show realizado em parceria com a North Star Concerts
+                </p>
               </div>
               <dl style={{ display: "flex", gap: 40 }}>
                 <div><dt className="disp" style={{ fontSize: 56 }}>200+</dt><dd style={{ fontWeight: 700 }}>shows</dd></div>
@@ -92,6 +100,7 @@ export default function HardRock() {
                     <span style={{ display: "flex", flexDirection: "column", gap: 2, minWidth: 0 }}>
                       <strong className="disp" style={{ fontSize: 26, lineHeight: 1 }}>{p.name}</strong>
                       {p.subtitle && <span style={{ fontSize: 13, fontWeight: 600 }}>{p.subtitle}</span>}
+                      {isNorthStar(p.partnerName) && <span style={{ alignSelf: "flex-start", marginTop: 4, background: NS_COLOR, color: "#fff", fontSize: 12, fontWeight: 800, padding: "3px 8px" }}>Parceria North Star</span>}
                     </span>
                   </li>
                 );
