@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { RRHeader, RRFooter, ContactForm } from "@/components/RRLayout";
+import { InstagramFeed } from "@/components/InstagramFeed";
+
+// Feed do Instagram @rockribeirao no Behold (behold.so). Enquanto estiver vazio, a seção não aparece.
+const INSTAGRAM_FEED_ID = "";
 import { getFutureShows, weekday, parseDate } from "@/data/shows";
 import { projetos, projetoHref, GROUPS } from "@/data/projetos";
 
@@ -214,6 +218,8 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {INSTAGRAM_FEED_ID && <InstagramFeed feedId={INSTAGRAM_FEED_ID} handle="rockribeirao" text="Agenda, bastidores e os melhores momentos dos shows." />}
 
         <section id="contato" data-contato className="s s-black rule-top">
           <div className="wrap" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 56 }}>
