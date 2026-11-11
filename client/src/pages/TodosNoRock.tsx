@@ -18,6 +18,9 @@ const BASE = "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/
 const MINT = "#5dcaa5";
 const LILAC = "#b9a4f0";
 
+// Link do Google Forms de inscrição no workshop. Preencher quando o formulário estiver criado.
+const WORKSHOP_FORM_URL = "";
+
 const lineup = [
   { order: "13h30", name: "School of Rock", image: `${BASE}/tnr-banda-school-of-rock.jpg.jpg`, instagram: "https://www.instagram.com/schoolofrock_ribeiraopreto/" },
   { order: "14h55", name: "Santíssima Trindade", image: `${BASE}/tnr-banda-santissima-trindade.jpg`, instagram: "https://www.instagram.com/bandasantissimatrindadeoficial/" },
@@ -145,6 +148,30 @@ export default function TodosNoRock() {
             </div>
           </div>
           <img src={`${BASE}/tnr-hero-bg.jpg.jpg`} alt="Público em frente ao palco do Festival Todos no Rock" style={{ width: "100%", height: "100%", minHeight: 420, objectFit: "cover", display: "block" }} />
+        </section>
+
+        {/* WORKSHOP DE GESTÃO CULTURAL */}
+        <section id="workshop" className="s s-purple">
+          <div className="wrap" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 48, alignItems: "center" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
+              <p style={{ fontWeight: 800, color: "#ece6fb" }}>Workshop gratuito · Projeto Todos no Rock</p>
+              <h2 className="disp" style={{ fontSize: "clamp(44px, 5vw, 72px)" }}>Workshop de Gestão Cultural para Empreendedores e Artistas</h2>
+              <div className="badges">
+                <span className="badge b-ink">Terça-feira, 24 de novembro</span>
+                <span className="badge b-ink">19h</span>
+                <span className="badge" style={{ background: MINT, color: "#000" }}>Inscrições gratuitas</span>
+              </div>
+              <p className="body" style={{ color: "#ece6fb" }}>Participe virtualmente ou presencialmente na Secretaria Municipal de Cultura de Sertãozinho, com Camilo Calandreli, gestor cultural.</p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center" }}>
+                {WORKSHOP_FORM_URL ? (
+                  <a className="btn btn-ink" href={WORKSHOP_FORM_URL} target="_blank" rel="noopener noreferrer">Quero me inscrever</a>
+                ) : (
+                  <span className="badge b-ink">Link de inscrição em breve</span>
+                )}
+              </div>
+            </div>
+            <img src={`${BASE}/tnr-workshop-gestao-cultural.jpg`} alt="Arte do Workshop de Gestão Cultural para Empreendedores e Artistas, terça-feira 24 de novembro às 19h, Secretaria Municipal de Cultura de Sertãozinho" style={{ width: "100%", maxWidth: 520, height: "auto", display: "block", justifySelf: "center", boxShadow: `14px 14px 0 ${MINT}` }} />
+          </div>
         </section>
 
         {/* O FESTIVAL */}
