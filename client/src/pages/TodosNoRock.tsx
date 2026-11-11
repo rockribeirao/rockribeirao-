@@ -86,7 +86,16 @@ function LogoRow({ title, logos }: { title: string; logos: Logo[] }) {
   );
 }
 
-/** Inscrição no workshop: enviada pelo mesmo Formspree do formulário de contato do site. */
+/** Inscrição no workshop: enviada direto para o Google Forms (conta rockribeirao.com.br); as respostas ficam na aba "Respostas" do formulário. */
+const WORKSHOP_FORM_ACTION = "https://docs.google.com/forms/d/e/1FAIpQLSeH4I1IiwF9yztpsJ8_sEnn8ruYuCmhr44FMl4b3yQBI5WSxQ/formResponse";
+const WORKSHOP_ENTRIES: Record<string, string> = {
+  nome: "entry.1139608307",
+  email: "entry.1402312928",
+  whatsapp: "entry.1691680644",
+  cidade: "entry.243778525",
+  perfil: "entry.983310483",
+  participacao: "entry.1721977840",
+};
 function WorkshopForm() {
   const [state, setState] = useState<"idle" | "sending" | "ok" | "error">("idle");
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -95,9 +104,10 @@ function WorkshopForm() {
     setState("sending");
     try {
       const data = new FormData(form);
-      data.append("_subject", "Inscrição: Workshop de Gestão Cultural (24/11)");
-      const r = await fetch("https://formspree.io/f/xnjodyqw", { method: "POST", body: data, headers: { Accept: "application/json" } });
-      if (!r.ok) { setState("error"); return; }
+      const body = new URLSearchParams();
+      for (const [campo, entry] of Object.entries(WORKSHOP_ENTRIES)) body.append(entry, String(data.get(campo) ?? ""));
+      // O Google não devolve resposta legível para outro domínio (no-cors); só falha se a rede falhar.
+      await fetch(WORKSHOP_FORM_ACTION, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body });
       setState("ok");
       form.reset();
     } catch { setState("error"); }
@@ -110,7 +120,7 @@ function WorkshopForm() {
       <label className="field">WhatsApp (com DDD)<input name="whatsapp" type="tel" autoComplete="tel" required /></label>
       <label className="field">Cidade<input name="cidade" type="text" autoComplete="address-level2" required /></label>
       <label className="field">Você é<select name="perfil" required defaultValue=""><option value="" disabled>Selecione</option><option>Empreendedor(a)</option><option>Artista</option><option>Empreendedor(a) e artista</option><option>Outro</option></select></label>
-      <label className="field">Como pretende participar?<select name="participacao" required defaultValue=""><option value="" disabled>Selecione</option><option>Presencial (Secretaria de Cultura de Sertãozinho)</option><option>Virtual</option></select></label>
+      <label className="field">Como pretende participar?<select name="participacao" required defaultValue=""><option value="" disabled>Selecione</option><option value="Presencial">Presencial (Secretaria Municipal de Cultura de Sertãozinho)</option><option value="Virtual">Virtual</option></select></label>
       <label style={{ display: "flex", gap: 10, alignItems: "flex-start", fontSize: 14 }}><input name="autorizacao" type="checkbox" value="sim" required style={{ marginTop: 3 }} />Autorizo o uso dos meus dados para a organização do workshop e contato sobre o evento.</label>
       <button type="submit" className="btn btn-purple" style={{ alignSelf: "flex-start" }} disabled={state === "sending"}>{state === "sending" ? "Enviando…" : "Quero me inscrever"}</button>
       <p role="status" aria-live="polite" style={{ fontWeight: 700 }}>
