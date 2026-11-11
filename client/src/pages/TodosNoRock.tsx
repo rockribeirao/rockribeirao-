@@ -18,8 +18,6 @@ const BASE = "https://raw.githubusercontent.com/rockribeirao/rockribeirao-/main/
 const MINT = "#5dcaa5";
 const LILAC = "#b9a4f0";
 
-// Link do Google Forms de inscrição no workshop. Preencher quando o formulário estiver criado.
-const WORKSHOP_FORM_URL = "";
 
 const lineup = [
   { order: "13h30", name: "School of Rock", image: `${BASE}/tnr-banda-school-of-rock.jpg.jpg`, instagram: "https://www.instagram.com/schoolofrock_ribeiraopreto/" },
@@ -85,6 +83,41 @@ function LogoRow({ title, logos }: { title: string; logos: Logo[] }) {
         })}
       </div>
     </div>
+  );
+}
+
+/** Inscrição no workshop: enviada pelo mesmo Formspree do formulário de contato do site. */
+function WorkshopForm() {
+  const [state, setState] = useState<"idle" | "sending" | "ok" | "error">("idle");
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    setState("sending");
+    try {
+      const data = new FormData(form);
+      data.append("_subject", "Inscrição: Workshop de Gestão Cultural (24/11)");
+      const r = await fetch("https://formspree.io/f/xnjodyqw", { method: "POST", body: data, headers: { Accept: "application/json" } });
+      if (!r.ok) { setState("error"); return; }
+      setState("ok");
+      form.reset();
+    } catch { setState("error"); }
+  }
+  return (
+    <form className="form" onSubmit={onSubmit} style={{ background: "#000", padding: 24 }}>
+      <h3 className="disp" style={{ fontSize: 32, color: MINT }}>Inscreva-se gratuitamente</h3>
+      <label className="field">Nome completo<input name="nome" type="text" autoComplete="name" required /></label>
+      <label className="field">E-mail<input name="email" type="email" autoComplete="email" required /></label>
+      <label className="field">WhatsApp (com DDD)<input name="whatsapp" type="tel" autoComplete="tel" required /></label>
+      <label className="field">Cidade<input name="cidade" type="text" autoComplete="address-level2" required /></label>
+      <label className="field">Você é<select name="perfil" required defaultValue=""><option value="" disabled>Selecione</option><option>Empreendedor(a)</option><option>Artista</option><option>Empreendedor(a) e artista</option><option>Outro</option></select></label>
+      <label className="field">Como pretende participar?<select name="participacao" required defaultValue=""><option value="" disabled>Selecione</option><option>Presencial (Secretaria de Cultura de Sertãozinho)</option><option>Virtual</option></select></label>
+      <label style={{ display: "flex", gap: 10, alignItems: "flex-start", fontSize: 14 }}><input name="autorizacao" type="checkbox" value="sim" required style={{ marginTop: 3 }} />Autorizo o uso dos meus dados para a organização do workshop e contato sobre o evento.</label>
+      <button type="submit" className="btn btn-purple" style={{ alignSelf: "flex-start" }} disabled={state === "sending"}>{state === "sending" ? "Enviando…" : "Quero me inscrever"}</button>
+      <p role="status" aria-live="polite" style={{ fontWeight: 700 }}>
+        {state === "ok" && "Inscrição recebida! Entraremos em contato com as informações do workshop."}
+        {state === "error" && "Não foi possível enviar. Tente pelo WhatsApp (16) 3185-0610."}
+      </p>
+    </form>
   );
 }
 
@@ -162,15 +195,11 @@ export default function TodosNoRock() {
                 <span className="badge" style={{ background: MINT, color: "#000" }}>Inscrições gratuitas</span>
               </div>
               <p className="body" style={{ color: "#ece6fb" }}>Participe virtualmente ou presencialmente na Secretaria Municipal de Cultura de Sertãozinho, com Camilo Calandreli, gestor cultural.</p>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center" }}>
-                {WORKSHOP_FORM_URL ? (
-                  <a className="btn btn-ink" href={WORKSHOP_FORM_URL} target="_blank" rel="noopener noreferrer">Quero me inscrever</a>
-                ) : (
-                  <span className="badge b-ink">Link de inscrição em breve</span>
-                )}
-              </div>
+              <WorkshopForm />
             </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 28, alignItems: "center" }}>
             <img src={`${BASE}/tnr-workshop-gestao-cultural.jpg`} alt="Arte do Workshop de Gestão Cultural para Empreendedores e Artistas, terça-feira 24 de novembro às 19h, Secretaria Municipal de Cultura de Sertãozinho" style={{ width: "100%", maxWidth: 520, height: "auto", display: "block", justifySelf: "center", boxShadow: `14px 14px 0 ${MINT}` }} />
+            </div>
           </div>
         </section>
 
