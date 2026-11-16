@@ -55,7 +55,7 @@ const PROJETOS: Record<string, [string, string]> = {
   "rock-simphony": ["Rock Simphony", "Banda de rock e orquestra no mesmo palco: clássicos do rock nacional e internacional em arranjos sinfônicos inéditos. ProAC aprovado."],
   "estacao-do-samba": ["Estação do Samba", "Domingos de roda de samba, com mestres de percussão, grupo anfitrião e convidados, além de oficinas abertas ao público. Lei Rouanet aprovada."],
   "especial-de-natal": ["Especial de Natal", "Dez dias de Natal na praça: música, teatro, dança, cenografia iluminada e show de abertura com artista nacional. Lei Rouanet aprovada."],
-  "agrocult": ["AgroCult", "Agro, cultura e identidade nacional: concerto sinfônico, exposição fotográfica e simpósio cultural. Gratuito. Lei Rouanet, PRONAC 262630."],
+  "agrocult": ["AgroCult", "Agro, cultura e identidade nacional: concerto sinfônico, exposição fotográfica e simpósio cultural. Ribeirão Preto, 26 e 28 de abril de 2027, com o concerto no Theatro Pedro II. Gratuito."],
   "raizes-da-cerveja": ["Raízes da Cerveja", "Programa paulista de formação e patrimônio da cultura cervejeira: exposição, apresentações artísticas, palestras e oficinas. Lei Rouanet aprovada."],
 };
 

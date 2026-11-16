@@ -18,6 +18,8 @@ export type Projeto = {
   laws: Law[];
   lawText: string;
   alts: { capa: string; a: string; b: string };
+  /** Quando a cidade e as datas já estão definidas. Sem isso, a página diz que são definidas com o patrocinador. */
+  local?: { city: string; dates: { t: string; d: string; l: string }[]; note: string; imgs: { src: string; alt: string }[] };
 };
 
 export const GROUPS = {
@@ -122,11 +124,20 @@ export const projetos: Projeto[] = [
     slug: "agrocult", group: "formacao",
     name: "AgroCult", shortName: "AgroCult", billName: "AgroCult",
     card: "Concerto sinfônico, exposição e simpósio que celebram o agro como potência cultural brasileira.",
-    tagline: "Agro, cultura e identidade nacional: concerto sinfônico, exposição fotográfica e simpósio cultural, com todas as atividades gratuitas.",
+    tagline: "Agro, cultura e identidade nacional: concerto sinfônico, exposição fotográfica e simpósio cultural, com todas as atividades gratuitas. Ribeirão Preto, 26 e 28 de abril de 2027.",
     aboutTitle: "O agro é potência cultural",
+    local: {
+      city: "Ribeirão Preto",
+      dates: [
+        { t: "Concerto “Sinfonia da Terra”", d: "Segunda-feira, 26 de abril de 2027", l: "Theatro Pedro II, Ribeirão Preto" },
+        { t: "Simpósio cultural", d: "Quarta-feira, 28 de abril de 2027", l: "Ribeirão Preto · local a definir" },
+      ],
+      note: "O concerto acontece no Theatro Pedro II, um dos principais teatros de ópera do país, patrimônio histórico de Ribeirão Preto.",
+      imgs: [{ src: "theatro-interno.jpg", alt: "Plateia, balcões e palco do Theatro Pedro II" }, { src: "theatro-fachada.jpg", alt: "Fachada do Theatro Pedro II" }],
+    },
     about: "Antes de ser potência econômica, o agro brasileiro foi, e continua sendo, uma potência cultural: foi no campo que nasceram as tradições, as músicas, as festas e os valores que formam a identidade nacional. O AgroCult valoriza essa trajetória num grande encontro entre cultura, memória, música e desenvolvimento regional, com atividades abertas e gratuitas.",
     facts: [{ v: "1.000+", k: "participantes presenciais" }, { v: "Gratuito", k: "todas as atividades, acessíveis" }, { v: "12", k: "painéis na exposição “Memória da Terra”" }, { v: "4", k: "rodas de conversa no simpósio" }],
-    items: [{ t: "Concerto “Sinfonia da Terra”", d: "Orquestra sinfônica com solistas líricos, valorizando a cultura erudita brasileira e a identidade do campo." }, { t: "Exposição “Memória da Terra”", d: "12 painéis em acrílico contando a trajetória de famílias do agronegócio: uma galeria viva da história rural brasileira." }, { t: "Simpósio cultural", d: "4 rodas de conversa com especialistas, produtores rurais e lideranças sobre agro, cultura, identidade nacional e desenvolvimento regional." }, { t: "Cotas de patrocínio", d: "Ouro (R$ 300 mil), Prata (R$ 150 mil) e Bronze (R$ 100 mil). Os detalhes de cada cota estão na apresentação." }],
+    items: [{ t: "Concerto “Sinfonia da Terra”", d: "Orquestra Sinfônica de Ribeirão Preto com solistas líricos, no Theatro Pedro II, valorizando a cultura erudita brasileira e a identidade do campo." }, { t: "Exposição “Memória da Terra”", d: "12 painéis em acrílico contando a trajetória de famílias do agronegócio regional: uma galeria viva da história rural brasileira." }, { t: "Simpósio cultural", d: "4 rodas de conversa com especialistas, produtores rurais e lideranças sobre agro, cultura, identidade nacional e desenvolvimento regional." }, { t: "Cotas de patrocínio", d: "Ouro (R$ 300 mil), Prata (R$ 150 mil) e Bronze (R$ 100 mil). Os detalhes de cada cota estão na apresentação." }],
     laws: [{ label: "Lei Rouanet · PRONAC 262630", kind: "rouanet" }, { label: "Sem custo adicional", kind: "info" }, { label: "Gratuito", kind: "free" }],
     lawText: "O investimento é feito pela Lei Rouanet (Lei nº 8.313/1991), com parte do imposto que a empresa já deve: empresas do Lucro Real podem destinar até 4% do IR devido. O valor é depositado na conta oficial do projeto e a empresa recebe o Recibo de Mecenato para o abatimento.",
     alts: { capa: "Orquestra se apresentando ao ar livre diante de plantações ao pôr do sol", a: "Exposição fotográfica com retratos de famílias do campo", b: "Roda de conversa em simpósio cultural" },

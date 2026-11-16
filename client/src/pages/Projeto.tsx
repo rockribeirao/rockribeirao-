@@ -54,7 +54,7 @@ export default function Projeto() {
             <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
               <h2 className="disp" style={{ fontSize: "clamp(44px, 5vw, 72px)" }}>{p.aboutTitle}</h2>
               <p className="body">{p.about}</p>
-              <p className="body muted">A cidade, o espaço e a data são definidos junto com o patrocinador, para o projeto chegar onde estão o público e os clientes da sua marca.</p>
+              {!p.local && <p className="body muted">A cidade, o espaço e a data são definidos junto com o patrocinador, para o projeto chegar onde estão o público e os clientes da sua marca.</p>}
             </div>
             <dl style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: "0 32px", alignSelf: "start" }}>
               {p.facts.map((f) => (
@@ -85,6 +85,28 @@ export default function Projeto() {
           </div>
         </section>
 
+        {p.local && (
+          <section id="local" className="s s-black rule-top">
+            <div className="wrap" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 48, alignItems: "center" }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
+                <p style={{ fontSize: 17, fontWeight: 800, color: ACCENT[p.group] }}>Onde e quando</p>
+                <h2 className="disp" style={{ fontSize: "clamp(44px, 5vw, 72px)" }}>{p.local.city}</h2>
+                {p.local.dates.map((d) => (
+                  <div key={d.t} style={{ paddingTop: 16, borderTop: `3px solid ${ACCENT[p.group]}`, display: "flex", flexDirection: "column", gap: 4 }}>
+                    <p style={{ fontSize: 16, fontWeight: 800, color: ACCENT[p.group] }}>{d.t}</p>
+                    <p style={{ fontSize: 22, fontWeight: 800 }}>{d.d}</p>
+                    <p className="muted">{d.l}</p>
+                  </div>
+                ))}
+                <p className="body muted">{p.local.note}</p>
+              </div>
+              <div style={{ display: "grid", gap: 16 }}>
+                {p.local.imgs.map((im) => <img key={im.src} src={projetoAsset(p.slug, im.src)} alt={im.alt} loading="lazy" style={{ width: "100%", aspectRatio: "3 / 2", objectFit: "cover", display: "block" }} />)}
+              </div>
+            </div>
+          </section>
+        )}
+
         <section id="apresentacao" className="s s-yellow">
           <div className="wrap" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 48, alignItems: "center" }}>
             <img src={projetoAsset(p.slug, "apresentacao-capa.jpg")} alt={`Capa da apresentação do ${p.name}`} loading="lazy" style={{ width: "100%", aspectRatio: "16 / 9", objectFit: "cover", display: "block", boxShadow: "12px 12px 0 #000" }} />
@@ -103,7 +125,7 @@ export default function Projeto() {
               <p className="body" style={{ color: "#ece6fb" }}>{p.lawText}</p>
               <p className="body" style={{ color: "#ece6fb", fontWeight: 700 }}>Exemplos de contrapartidas. O pacote é negociado caso a caso, conforme a cota de patrocínio.</p>
             </div>
-            <ul className="ruled">{CONTRAPARTIDAS.map((c) => <li key={c}>{c}</li>)}</ul>
+            <ul className="ruled">{CONTRAPARTIDAS.filter((c) => !p.local || !c.startsWith("Escolha da cidade")).map((c) => <li key={c}>{c}</li>)}</ul>
           </div>
         </section>
 
