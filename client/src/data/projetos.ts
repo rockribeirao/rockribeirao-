@@ -140,7 +140,7 @@ export const projetos: Projeto[] = [
     items: [{ t: "Concerto “Sinfonia da Terra”", d: "Orquestra Sinfônica de Ribeirão Preto com solistas líricos, no Theatro Pedro II, valorizando a cultura erudita brasileira e a identidade do campo." }, { t: "Exposição “Memória da Terra”", d: "12 painéis em acrílico contando a trajetória de famílias do agronegócio regional: uma galeria viva da história rural brasileira." }, { t: "Simpósio cultural", d: "4 rodas de conversa com especialistas, produtores rurais e lideranças sobre agro, cultura, identidade nacional e desenvolvimento regional." }, { t: "Cotas de patrocínio", d: "Ouro (R$ 300 mil), Prata (R$ 150 mil) e Bronze (R$ 100 mil). Os detalhes de cada cota estão na apresentação." }],
     laws: [{ label: "Lei Rouanet · PRONAC 262630", kind: "rouanet" }, { label: "Sem custo adicional", kind: "info" }, { label: "Gratuito", kind: "free" }],
     lawText: "O investimento é feito pela Lei Rouanet (Lei nº 8.313/1991), com parte do imposto que a empresa já deve: empresas do Lucro Real podem destinar até 4% do IR devido. O valor é depositado na conta oficial do projeto e a empresa recebe o Recibo de Mecenato para o abatimento.",
-    alts: { capa: "Orquestra se apresentando ao ar livre diante de plantações ao pôr do sol", a: "Exposição fotográfica com retratos de famílias do campo", b: "Roda de conversa em simpósio cultural" },
+    alts: { capa: "Orquestra sinfônica e soprano no palco de um teatro histórico, com feixes de trigo e flores à frente", a: "Exposição fotográfica com retratos de famílias do campo", b: "Roda de conversa em simpósio cultural" },
   },
   {
     slug: "raizes-da-cerveja", group: "formacao",
