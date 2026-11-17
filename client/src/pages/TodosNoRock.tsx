@@ -204,7 +204,7 @@ export default function TodosNoRock() {
                 <span className="badge b-ink">19h</span>
                 <span className="badge" style={{ background: MINT, color: "#000" }}>Inscrições gratuitas</span>
               </div>
-              <p className="body" style={{ color: "#ece6fb" }}>Participe virtualmente ou presencialmente na Secretaria Municipal de Cultura de Sertãozinho, com Camilo Calandreli, gestor cultural.</p>
+              <p className="body" style={{ color: "#ece6fb" }}>Participe virtualmente ou presencialmente na Secretaria Municipal de Cultura de Sertãozinho.</p>
               <WorkshopForm />
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 28, alignItems: "center" }}>
