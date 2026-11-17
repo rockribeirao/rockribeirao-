@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { ROCK_RISING_NO_AR } from "@/lib/noAr";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { RRHeader, RRFooter, ContactForm } from "@/components/RRLayout";
 import { InstagramFeed } from "@/components/InstagramFeed";
@@ -10,8 +11,8 @@ import { projetos, projetoHref, GROUPS } from "@/data/projetos";
 
 const MONTHS = ["", "janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
 
-const DESTAQUES: { href: string; img: string; alt: string; title: string; text: string; cta: string; color: string; until: number | null; pos?: string }[] = [
-  { href: "/rockrising", img: "/rockrising/rockrising-destaque-home.jpg", alt: "Rock Rising 2027, festival de novos talentos do rock", title: "Rock Rising 2027", text: "Festival de novas bandas. Inscrições a partir de 15 de janeiro, final em 21 de março.", cta: "Conhecer o festival", color: "#ffffff", until: null as number | null },
+const DESTAQUES: { off?: boolean; href: string; img: string; alt: string; title: string; text: string; cta: string; color: string; until: number | null; pos?: string }[] = [
+  { off: !ROCK_RISING_NO_AR, href: "/rockrising", img: "/rockrising/rockrising-destaque-home.jpg", alt: "Rock Rising 2027, festival de novos talentos do rock", title: "Rock Rising 2027", text: "Festival de novas bandas. Inscrições a partir de 15 de janeiro, final em 21 de março.", cta: "Conhecer o festival", color: "#ffffff", until: null as number | null },
   { href: "/halloween", img: "/halloween/halloween-destaque-home.jpg", alt: "Halloween no Hard Rock Cafe Ribeirão Preto", title: "Halloween no Hard Rock", text: "30 e 31 de outubro, a partir das 21h, no Hard Rock Cafe Ribeirão Preto.", cta: "Ver a programação", color: "#ff8c1a", pos: "center 30%", until: new Date("2026-11-01T06:00:00-03:00").getTime() },
   { href: "/hardrockweekend", img: "/hardrockweekend/hardrockweekend-destaque-home.jpg", alt: "Hard Rock Weekend, 19, 20 e 21 de novembro", title: "Hard Rock Weekend", text: "Guns Cover Brazil, Lost80s e Radio Show. 19, 20 e 21 de novembro, a partir das 21h.", cta: "Garantir ingresso", color: "#ff5fa2", until: new Date("2026-11-22T06:00:00-03:00").getTime() },
 ];
@@ -36,7 +37,7 @@ export default function Home() {
   }, [n]);
 
   const cur = slides[n ? i % n : 0];
-  const destaques = DESTAQUES.filter((d) => !d.until || Date.now() < d.until);
+  const destaques = DESTAQUES.filter((d) => !d.off && (!d.until || Date.now() < d.until));
 
   return (
     <div className="rr">

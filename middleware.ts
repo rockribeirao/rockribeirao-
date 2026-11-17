@@ -1,3 +1,5 @@
+// Rock Rising fora do ar (mesma chave de client/src/lib/noAr.ts).
+const ROCK_RISING_NO_AR = false;
 // Vercel Edge Middleware
 //
 // WhatsApp, Facebook, Twitter, etc. read the <title> and <meta og:...> tags
@@ -101,7 +103,7 @@ export default async function middleware(request: Request) {
   }
 
   // Rock Rising page on rockribeirao.com.br gets its own link preview.
-  if (!isFestivalDomain && pathname === "/rockrising" && contentType.includes("text/html")) {
+  if (ROCK_RISING_NO_AR && !isFestivalDomain && pathname === "/rockrising" && contentType.includes("text/html")) {
     let page = await response.text();
     const title = "Rock Rising 2027 — Festival de novos talentos do rock";
     const desc = "Inscrições a partir de 15/01/2027. Votação popular no site e grande final em Ribeirão Preto em 21/03. Realização Rock Ribeirão Produções, parceria Kiss FM 105.3.";

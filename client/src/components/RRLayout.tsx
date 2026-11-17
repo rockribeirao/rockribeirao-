@@ -1,4 +1,5 @@
 import { useEffect, useState, type ReactNode } from "react";
+import { ROCK_RISING_NO_AR } from "@/lib/noAr";
 import { SiteHeader, type PageKey } from "@/components/SiteMenu";
 import { projetos, projetoHref } from "@/data/projetos";
 import "@/styles/rr.css";
@@ -72,7 +73,7 @@ export function RRFooter({ extra }: { extra?: ReactNode }) {
             </ul>
             <h3 style={{ marginTop: 24 }}>Festivais</h3>
             <ul>
-              <li><a href={rrHref("/rockrising")}>Rock Rising</a></li>
+              {ROCK_RISING_NO_AR && <li><a href={rrHref("/rockrising")}>Rock Rising</a></li>}
               <li><a href="https://todosnorock.com.br">Todos no Rock</a></li>
             </ul>
           </div>

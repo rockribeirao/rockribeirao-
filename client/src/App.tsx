@@ -1,7 +1,8 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
+import { Redirect, Route, Switch } from "wouter";
+import { ROCK_RISING_NO_AR } from "./lib/noAr";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { lazy, Suspense } from "react";
@@ -37,7 +38,7 @@ function Router() {
       <Route path={"/todos-no-rock"} component={TodosNoRock} />
       <Route path={"/halloween"} component={Halloween} />
       <Route path={"/hardrockweekend"} component={HardRockWeekend} />
-      <Route path={"/rockrising"} component={RockRising} />
+      <Route path={"/rockrising"}>{ROCK_RISING_NO_AR ? <RockRising /> : <Redirect to="/" replace />}</Route>
       <Route path={"/hardrock"} component={HardRock} />
       <Route path={"/projetos/:slug"} component={Projeto} />
       <Route path={"/acessibilidade"} component={Acessibilidade} />

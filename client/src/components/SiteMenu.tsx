@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
+import { ROCK_RISING_NO_AR } from "@/lib/noAr";
 
 // Menu único do site. É o mesmo em todas as páginas (rockribeirao.com.br e todosnorock.com.br):
 // cada página leva para todas as outras. A página atual aparece marcada na cor dela.
@@ -43,12 +44,12 @@ const rr = (path: string) => (onFestivalDomain() ? `https://www.rockribeirao.com
 const projHref = (slug: string) =>
   slug === "todos-no-rock" ? (onFestivalDomain() ? "/" : "https://todosnorock.com.br") : rr(`/projetos/${slug}`);
 
-type Item = { key: PageKey; label: string; href: () => string; until?: number };
+type Item = { key: PageKey; label: string; href: () => string; until?: number; off?: boolean };
 const PAGES: Item[] = [
   { key: "rr", label: "Início", href: () => rr("/") },
   { key: "proj", label: "Projetos", href: () => rr("/#projetos") },
   { key: "tnr", label: "Todos no Rock", href: () => (onFestivalDomain() ? "/" : "https://todosnorock.com.br") },
-  { key: "rise", label: "Rock Rising", href: () => rr("/rockrising") },
+  { key: "rise", label: "Rock Rising", href: () => rr("/rockrising"), off: !ROCK_RISING_NO_AR },
   { key: "hr", label: "Hard Rock", href: () => rr("/hardrock") },
   { key: "hw", label: "Halloween", href: () => rr("/halloween"), until: HALLOWEEN_END },
   { key: "hrw", label: "Hard Rock Weekend", href: () => rr("/hardrockweekend"), until: HRW_END },
@@ -105,7 +106,7 @@ export function SiteHeader({ current, project, logoHref }: { current?: PageKey; 
   const [open, setOpen] = useState(false);
   const [drop, setDrop] = useState(false);
   const dropRef = useRef<HTMLLIElement>(null);
-  const items = PAGES.filter((p) => !p.until || Date.now() < p.until);
+  const items = PAGES.filter((p) => !p.off && (!p.until || Date.now() < p.until));
 
   useEffect(() => {
     if (!drop) return;
